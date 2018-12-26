@@ -110,30 +110,117 @@
                 <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
                     <div class="form-example-wrap">
                         <div class="cmp-tb-hd">
-                            <h2>Basic Example</h2>
+                            <h2>Datos del Cliente</h2>
                             
                         </div>
-                        <div class="form-example-int">
-                            <div class="form-group">
-                                <label>Nombre:</label>
-                                <div class="nk-int-st">
-                                    <input type="text" class="form-control input-sm" placeholder="Ingrese su nombre.">
+
+                        <div class="row">
+                            <div class="col-lg-6 col-md-6 col-sm-6 col-xs-12">
+                                <div class="form-example-int">
+                                    <div class="form-group">
+                                        <label>Nombre:</label>
+                                        <div class="nk-int-st">
+                                        <input type="text" class="form-control input-sm" placeholder="Ingrese su nombre.">
+                                        </div>
+                                    </div>
                                 </div>
                             </div>
+                            <div class="col-lg-6 col-md-6 col-sm-6 col-xs-12">
+                                <div class="form-example-int">
+                                    <div class="form-group">
+                                        <label>Apellido:</label>
+                                        <div class="nk-int-st">
+                                        <input type="text" class="form-control input-sm" placeholder="Ingrese su apellido.">
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+
                         </div>
+                        
+                        
                         <div class="form-example-int mg-t-15">
                             <div class="form-group">
-                                <label>Contraseña:</label>
+                                <label>Dirección:</label>
                                 <div class="nk-int-st">
-                                    <input type="text" class="form-control input-sm" placeholder="Ingrese su contraseña.">
+                                    <input type="text" class="form-control input-sm" placeholder="Ingrese su dirección.">
                                 </div>
                             </div>
                         </div>
+                        
+                        
+                        <!-- FILA PARA DATOS CORTOS -->
+                        <div class="row">
+                            <div class="col-lg-4 col-md-4 col-sm-4 col-xs-12">
+                                <div class="form-example-int mg-t-15">
+                                    <div class="form-group">
+                                        <label>DUI:</label>
+                                        <div class="nk-int-st">
+                                           <input type="text" class="form-control input-sm" data-mask="99999999-9" placeholder="Ingrese su dui.">
+                                        </div>
+                                     </div>                            
+                                </div>
+                            </div>
+
+                             <div class="col-lg-4 col-md-4 col-sm-4 col-xs-12">
+                                <div class="form-example-int mg-t-15">
+                                    <div class="form-group">
+                                        <label>NIT:</label>
+                                        <div class="nk-int-st">
+                                           <input type="text" class="form-control input-sm" data-mask="9999-999999-999-9" placeholder="Ingrese su dui.">
+                                        </div>
+                                     </div>                            
+                                </div>
+                            </div>
+                        </div>
+                         <!-- FIN DE FILA PARA DATOS CORTOS -->
+                        <div class="row">
+                            <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
+                                <div class="floating-numner form-rlt-mg">
+                                    <p>Observaciones:</p>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
+                                <div class="form-group">
+                                    <div class="nk-int-st">
+                                        <textarea class="form-control" rows="5" placeholder="Escriba aquí las observaciones deseadas acerca del cliente..."></textarea>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-lg-4 col-md-4 col-sm-4 col-xs-12">
+                                <div class="form-example-int mg-t-15">
+                                    <div class="form-group">
+                                        <label>Teléfono:</label>
+                                        <div class="nk-int-st">
+                                           <input type="text" class="form-control input-sm" data-mask="9999-9999" placeholder="Ingrese su dui.">
+                                        </div>
+                                     </div>                            
+                                </div>
+                            </div>
+
+                             <div class="col-lg-4 col-md-4 col-sm-4 col-xs-12">
+                                <div class="form-example-int mg-t-15">
+                                    <div class="form-group">
+                                        <label>Celular:</label>
+                                        <div class="nk-int-st">
+                                           <input type="text" class="form-control input-sm" data-mask="9999-9999" placeholder="Ingrese su dui.">
+                                        </div>
+                                     </div>                            
+                                </div>
+                            </div>
+                        </div>
+                       
                         <div class="form-example-int mg-t-15">
                             <div class="fm-checkbox">
                                 <label><input type="checkbox" class="i-checks"> <i></i> Estado.</label>
                             </div>
                         </div>
+
+                        
                         <div class="form-example-int mg-t-15">
                             <button class="btn btn-success notika-btn-success">Guardar.</button>
                         </div>
@@ -207,6 +294,9 @@
     <!-- plugins JS
 		============================================ -->
     <script src="js/plugins.js"></script>
+        <!-- Input Mask JS
+		============================================ -->
+    <script src="js/jasny-bootstrap.min.js"></script>
     <!-- main JS
 		============================================ -->
     <script src="js/main.js"></script>
