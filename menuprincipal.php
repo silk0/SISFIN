@@ -4,9 +4,9 @@
             <div class="row">
                 <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
                     <ul class="nav nav-tabs notika-menu-wrap menu-it-icon-pro">
-                        <li class="active"><a data-toggle="tab" href="#Home"><i class="notika-icon notika-house"></i> Comercio</a>
+                        <li class="active"><a data-toggle="tab" href="#Home"><i class="notika-icon notika-support"></i> Clientes</a>
                         </li>
-                        <li><a data-toggle="tab" href="#mailbox"><i class="notika-icon notika-mail"></i> Activo Fijo</a>
+                        <li><a data-toggle="tab" href="#mailbox"><i class="notika-icon notika-house"></i> Activo Fijo</a>
                         </li>
                         <li><a data-toggle="tab" href="#Interface"><i class="notika-icon notika-edit"></i> Cuentas X Cobrar</a>
                         </li>
@@ -14,7 +14,7 @@
                         </li>
                         <li><a data-toggle="tab" href="#Tables"><i class="notika-icon notika-windows"></i> Tables</a>
                         </li>
-                        <li><a data-toggle="tab" href="#Forms"><i class="notika-icon notika-form"></i> Forms</a>
+                        <li><a data-toggle="tab" href="#Forms"><i class="notika-icon notika-form"></i> Inventario</a>
                         </li>
                         <li><a data-toggle="tab" href="#Appviews"><i class="notika-icon notika-app"></i> Appviews</a>
                         </li>
@@ -24,6 +24,14 @@
                     <div class="tab-content custom-menu-content">
                         <div id="Home" class="tab-pane in active notika-tab-menu-bg animated flipInX">
                             <ul class="notika-main-menu-dropdown">
+                                <li><a href="ingresoCliente.php">Registrar Cliente</a>
+                                </li>
+                                <li><a href="verCliente.php">Mostrar Clientes</a>
+                                </li>
+                                <li><a href="fiadores.php">Fiadores</a>
+                                </li>
+                                <li><a href="carteras.php">Carteras de Clientes</a>
+                                </li>                               
                                 <li><a href="index.html">Dashboard One</a>
                                 </li>
                                 <li><a href="index-2.html">Dashboard Two</a>
