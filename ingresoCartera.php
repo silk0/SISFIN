@@ -120,7 +120,7 @@
                                     <div class="form-group">
                                         <label>Cartera:</label>
                                         <div class="nk-int-st">
-                                        <input type="text" class="form-control input-sm" placeholder="Ingrese su nombre de cartera.">
+                                        <input type="text" class="form-control input-sm" placeholder="Ingrese  nombre de cartera.">
                                         </div>
                                     </div>
                                 </div>
