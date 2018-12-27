@@ -4,7 +4,7 @@
 <head>
     <meta charset="utf-8">
     <meta http-equiv="x-ua-compatible" content="ie=edge">
-    <title>Data Table | Notika - Notika Admin Template</title>
+    <title>Mostrar Fiadores |SISFIN</title>
     <meta name="description" content="">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <!-- favicon
@@ -90,7 +90,7 @@
 									</div>
 									<div class="breadcomb-ctn">
 										<h2>Fiadores</h2>
-										<p>Esta tabla <span class="bread-ntd">muestra los fiadores resgistrados.</span></p>
+										<p>Esta tabla <span class="bread-ntd">muestra los fiadores registrados.</span></p>
 									</div>
 								</div>
 							</div>
@@ -121,11 +121,14 @@
                                 <thead>
                                     <tr>
                                         <th>Nombre</th>
-                                        <th>Edad</th>
-                                        <th>Lugar de Trabajo</th>
-                                        <th>Celular</th>
+                                        <th>Apellido</th>
+                                        <th>Dirección</th>
                                         <th>Teléfono</th>
-                                        <th>Salario</th>
+                                        <th>Celular</th>
+                                        <th>Lugar de Trabajo</th>
+                                       
+                                       
+                                       
                                     </tr>
                                 </thead>
                                 <tbody>
@@ -181,12 +184,12 @@
                                 </tbody>
                                 <tfoot>
                                     <tr>
-                                        <th>Name</th>
-                                        <th>Position</th>
-                                        <th>Office</th>
-                                        <th>Age</th>
-                                        <th>Start date</th>
-                                        <th>Salary</th>
+                                        <th>Nombre</th>
+                                        <th>Apellido</th>
+                                        <th>Dirección</th>
+                                        <th>Teléfono</th>
+                                        <th>Celular</th>
+                                        <th>Lugar de Trabajo</th>
                                     </tr>
                                 </tfoot>
                             </table>
