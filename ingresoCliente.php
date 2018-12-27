@@ -155,7 +155,7 @@ function go(){
                                 </div>
                             </div>
 
-                             <div class="col-lg-4 col-md-4 col-sm-4 col-xs-10" style="margin-left:190px">
+                             <div class="col-lg-4 col-md-4 col-sm-4 col-xs-10">
                                 <div class="form-example-int mg-t-15">
                                     <div class="form-group">
                                         <label>NIT:</label>
@@ -193,7 +193,7 @@ function go(){
                                 </div>
                             </div>
 
-                             <div class="col-lg-4 col-md-4 col-sm-4 col-xs-12" style="margin-left:190px">
+                             <div class="col-lg-4 col-md-4 col-sm-4 col-xs-12" >
                                 <div class="form-example-int mg-t-15">
                                     <div class="form-group">
                                         <label>Celular:</label>
@@ -203,9 +203,7 @@ function go(){
                                      </div>                            
                                 </div>
                             </div>
-                        </div>
-                        
-                            <div class="col-lg-8 col-md-4 col-sm-4 col-xs-12">
+                            <div class="col-lg-4 col-md-4 col-sm-4 col-xs-12">
                                 <div class="form-example-int mg-t-15">
                                     <div class="form-group">
                                         <label>E-mail:</label>
@@ -215,6 +213,9 @@ function go(){
                                      </div>                            
                                 </div>
                             </div>
+                        </div>
+                        
+                            
                         <div class="row">
                             <div class="col-lg-8 col-md-12 col-sm-12 col-xs-12">
                                 <div class="floating-numner form-rlt-mg">
