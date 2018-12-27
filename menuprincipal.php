@@ -18,16 +18,17 @@
                         </li>
                         <li><a data-toggle="tab" href="#Appviews"><i class="notika-icon notika-app"></i> Appviews</a>
                         </li>
-                        <!-- <li><a data-toggle="tab" href="#Page"><i class="notika-icon notika-support"></i> Pages</a>
-                        </li> -->
+                        
                     </ul>
                     <div class="tab-content custom-menu-content">
                         <div id="Home" class="tab-pane in active notika-tab-menu-bg animated flipInX">
                             <ul class="notika-main-menu-dropdown">
                                 <li><a href="ingresoCliente.php">Registrar Cliente</a>
                                 </li>
-                                <li><a href="verCliente.php">Mostrar Clientes</a>
-                                </li>                             
+                                <li><a href="listaClientes.php">Mostrar Clientes</a>
+                                </li>
+                                <li><a href="fiadores.php">Fiadores</a>
+                                </li>
                                 <li><a href="carteras.php">Carteras de Clientes</a>
                                 </li>                               
                                 <li><a href="index.html">Dashboard One</a>

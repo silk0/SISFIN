@@ -56,7 +56,13 @@
 		============================================ -->
     <script src="js/vendor/modernizr-2.8.3.min.js"></script>
 </head>
+<SCRIPT  language=JavaScript> 
+function go(){
+    //validacion respectiva me da hueva
+        document.form.submit();  
+} 
 
+</script> 
 <body>
     <!--[if lt IE 8]>
             <p class="browserupgrade">You are using an <strong>outdated</strong> browser. Please <a href="http://browsehappy.com/">upgrade your browser</a> to improve your experience.</p>
@@ -113,14 +119,14 @@
                             <h2>Datos del Cliente</h2>
                             
                         </div>
-
+                        <form name="form" method="post" action="ingresoCliente.php?bandera=1">
                         <div class="row">
                             <div class="col-lg-6 col-md-6 col-sm-6 col-xs-12">
                                 <div class="form-example-int">
                                     <div class="form-group">
                                         <label>Nombre:</label>
                                         <div class="nk-int-st">
-                                        <input type="text" class="form-control input-sm" placeholder="Ingrese su nombre.">
+                                        <input type="text" name="nombre" class="form-control input-sm" placeholder="Ingrese su nombre." required>
                                         </div>
                                     </div>
                                 </div>
@@ -130,52 +136,87 @@
                                     <div class="form-group">
                                         <label>Apellido:</label>
                                         <div class="nk-int-st">
-                                        <input type="text" class="form-control input-sm" placeholder="Ingrese su apellido.">
+                                        <input type="text" name="apellido" class="form-control input-sm" placeholder="Ingrese su apellido." required>
                                         </div>
                                     </div>
                                 </div>
                             </div>
 
                         </div>
-                        
-                        
-                        <div class="form-example-int mg-t-15">
-                            <div class="form-group">
-                                <label>Dirección:</label>
-                                <div class="nk-int-st">
-                                    <input type="text" class="form-control input-sm" placeholder="Ingrese su dirección.">
-                                </div>
-                            </div>
-                        </div>
-                        
-                        
-                        <!-- FILA PARA DATOS CORTOS -->
                         <div class="row">
                             <div class="col-lg-4 col-md-4 col-sm-4 col-xs-12">
                                 <div class="form-example-int mg-t-15">
                                     <div class="form-group">
                                         <label>DUI:</label>
                                         <div class="nk-int-st">
-                                           <input type="text" class="form-control input-sm" data-mask="99999999-9" placeholder="Ingrese su dui.">
+                                           <input type="text" name="dui" class="form-control input-sm" data-mask="99999999-9" placeholder="Ingrese su DUI." required>
                                         </div>
                                      </div>                            
                                 </div>
                             </div>
 
-                             <div class="col-lg-4 col-md-4 col-sm-4 col-xs-12">
+                             <div class="col-lg-4 col-md-4 col-sm-4 col-xs-10" style="margin-left:190px">
                                 <div class="form-example-int mg-t-15">
                                     <div class="form-group">
                                         <label>NIT:</label>
                                         <div class="nk-int-st">
-                                           <input type="text" class="form-control input-sm" data-mask="9999-999999-999-9" placeholder="Ingrese su dui.">
+                                           <input type="text" name="nit" class="form-control input-sm" data-mask="9999-999999-999-9" placeholder="Ingrese su NIT." required>
                                         </div>
                                      </div>                            
                                 </div>
                             </div>
                         </div>
+                        
+                        <div class="form-example-int mg-t-15">
+                            <div class="form-group">
+                                <label>Dirección:</label>
+                                <div class="nk-int-st">
+                                    <input type="text" name="direc" class="form-control input-sm" placeholder="Ingrese su dirección." required>
+                                </div>
+                            </div>
+                        </div>
+                        
+                        
+                        <!-- FILA PARA DATOS CORTOS -->
+                        
                          <!-- FIN DE FILA PARA DATOS CORTOS -->
+                      
                         <div class="row">
-                            <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
+                            <div class="col-lg-4 col-md-4 col-sm-4 col-xs-12">
+                                <div class="form-example-int mg-t-15">
+                                    <div class="form-group">
+                                        <label>Teléfono:</label>
+                                        <div class="nk-int-st">
+                                           <input type="text" name="telefono" class="form-control input-sm" data-mask="9999-9999" placeholder="Ingrese Telefono." required>
+                                        </div>
+                                     </div>                            
+                                </div>
+                            </div>
+
+                             <div class="col-lg-4 col-md-4 col-sm-4 col-xs-12" style="margin-left:190px">
+                                <div class="form-example-int mg-t-15">
+                                    <div class="form-group">
+                                        <label>Celular:</label>
+                                        <div class="nk-int-st">
+                                           <input type="text" name="celular" class="form-control input-sm" data-mask="9999-9999" placeholder="Ingrese Celular." required>
+                                        </div>
+                                     </div>                            
+                                </div>
+                            </div>
+                        </div>
+                        
+                            <div class="col-lg-8 col-md-4 col-sm-4 col-xs-12">
+                                <div class="form-example-int mg-t-15">
+                                    <div class="form-group">
+                                        <label>E-mail:</label>
+                                        <div class="nk-int-st">
+                                           <input type="text" name="email" class="form-control input-sm" placeholder="Ingrese el E-mail">
+                                        </div>
+                                     </div>                            
+                                </div>
+                            </div>
+                        <div class="row">
+                            <div class="col-lg-8 col-md-12 col-sm-12 col-xs-12">
                                 <div class="floating-numner form-rlt-mg">
                                     <p>Observaciones:</p>
                                 </div>
@@ -185,45 +226,23 @@
                             <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
                                 <div class="form-group">
                                     <div class="nk-int-st">
-                                        <textarea class="form-control" rows="5" placeholder="Escriba aquí las observaciones deseadas acerca del cliente..."></textarea>
+                                        <textarea class="form-control" name="observ" rows="5" placeholder="Escriba aquí las observaciones deseadas acerca del cliente..."></textarea required>
                                     </div>
                                 </div>
                             </div>
                         </div>
-                        <div class="row">
-                            <div class="col-lg-4 col-md-4 col-sm-4 col-xs-12">
-                                <div class="form-example-int mg-t-15">
-                                    <div class="form-group">
-                                        <label>Teléfono:</label>
-                                        <div class="nk-int-st">
-                                           <input type="text" class="form-control input-sm" data-mask="9999-9999" placeholder="Ingrese su dui.">
-                                        </div>
-                                     </div>                            
-                                </div>
-                            </div>
-
-                             <div class="col-lg-4 col-md-4 col-sm-4 col-xs-12">
-                                <div class="form-example-int mg-t-15">
-                                    <div class="form-group">
-                                        <label>Celular:</label>
-                                        <div class="nk-int-st">
-                                           <input type="text" class="form-control input-sm" data-mask="9999-9999" placeholder="Ingrese su dui.">
-                                        </div>
-                                     </div>                            
-                                </div>
-                            </div>
-                        </div>
-                       
                         <div class="form-example-int mg-t-15">
                             <div class="fm-checkbox">
-                                <label><input type="checkbox" class="i-checks"> <i></i> Estado.</label>
+                                <label><input type="checkbox" name="estado" class="i-checks"> <i></i> Estado.</label>
+                                <label for="">Checkee para activar</label>
                             </div>
                         </div>
 
                         
                         <div class="form-example-int mg-t-15">
-                            <button class="btn btn-success notika-btn-success">Guardar.</button>
+                            <button class="btn btn-success notika-btn-success" onclick="go();">Guardar.</button>
                         </div>
+                        </form>
                     </div>
                 </div>
             </div>
@@ -306,3 +325,32 @@
 </body>
 
 </html>
+<?php
+include "config/conexion.php";
+$accion = $_REQUEST['bandera'];
+if($accion==1){
+$nombre   = $_POST['nombre'];
+$apellido   = $_POST['apellido'];
+$direccion   = $_POST['direc'];
+$dui  = $_POST['dui'];
+$nit   = $_POST['nit'];
+$email   = $_POST['email'];
+$tel   = $_POST['telefono'];
+$cel  = $_POST['celular'];
+$observ  = $_POST['observ'];
+    $consulta  = "INSERT INTO tclientes VALUES('null','4','" .$nombre. "','" .$apellido. "','" .$direccion. "','" .$dui. "','" .$nit. "','" .$email. "','" .$tel. "','" .$observ. "','" .$cel. "')";
+    $resultado = $conexion->query($consulta);
+      if ($resultado) {
+          msg("Se agregaron los datos correctamente");
+      } else {
+          msg("Error al insertar los datos");
+      }
+}
+function msg($texto)
+{
+    echo "<script type='text/javascript'>";
+    echo "alert('$texto');";
+    echo "document.location.href='ingresoCliente.php';";
+    echo "</script>";
+}
+?>
