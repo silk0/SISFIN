@@ -119,7 +119,7 @@ function go(){
                             <h2>Datos del Proveedor</h2>
                             
                         </div>
-                        <form name="form" method="post" action="ingresoCliente.php?bandera=1">
+                        <form name="form" method="post" action="ingresarProveedor.php?bandera=1">
                         <div class="row">
                             <div class="col-lg-8 col-md-8 col-sm-8 col-xs-12">
                                 <div class="form-example-int">
@@ -310,15 +310,15 @@ include "config/conexion.php";
 $accion = $_REQUEST['bandera'];
 if($accion==1){
 $nombre   = $_POST['nombre'];
-$apellido   = $_POST['apellido'];
 $direccion   = $_POST['direc'];
+$tel   = $_POST['telefono'];
+$repre  = $_POST['representante'];
 $dui  = $_POST['dui'];
 $nit   = $_POST['nit'];
-$email   = $_POST['email'];
-$tel   = $_POST['telefono'];
 $cel  = $_POST['celular'];
-$observ  = $_POST['observ'];
-    $consulta  = "INSERT INTO tclientes VALUES('null','4','" .$nombre. "','" .$apellido. "','" .$direccion. "','" .$dui. "','" .$nit. "','" .$email. "','" .$tel. "','" .$observ. "','" .$cel. "')";
+$email   = $_POST['email'];
+
+    $consulta  = "INSERT INTO tproveedor VALUES('null'," .$nombre. "','" .$direccion. "','" .$tel. "','" .$repre. "','" .$dui. "','" .$nit. "','" .$cel. "','" .$email. "')";
     $resultado = $conexion->query($consulta);
       if ($resultado) {
           msg("Se agregaron los datos correctamente");
@@ -330,7 +330,7 @@ function msg($texto)
 {
     echo "<script type='text/javascript'>";
     echo "alert('$texto');";
-    echo "document.location.href='ingresoCliente.php';";
+    echo "document.location.href='ingresarProveedor.php';";
     echo "</script>";
 }
 ?>
