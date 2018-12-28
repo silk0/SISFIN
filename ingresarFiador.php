@@ -119,7 +119,7 @@ function go(){
                             <h2>Datos del Fiador.</h2>
                             
                         </div>
-                        <form name="form" method="post" action="ingresoFiador.php?bandera=1">
+                        <form name="form" method="post" action="ingresarFiador.php?bandera=1">
                         <div class="row">
                             <div class="col-lg-6 col-md-6 col-sm-6 col-xs-12">
                                 <div class="form-example-int">
@@ -239,15 +239,7 @@ function go(){
                             </div>
 
                         </div>
-                         
-                        <div class="form-example-int mg-t-15">
-                            <div class="fm-checkbox">
-                                <label><input type="checkbox" name="estado" class="i-checks"> <i></i> Estado.</label>
-                                <label for="">Checkee para activar</label>
-                            </div>
-                        </div>
-
-                        
+                       
                         <div class="form-example-int mg-t-15">
                             <button class="btn btn-success notika-btn-success" onclick="go();">Guardar.</button>
                         </div>
@@ -361,7 +353,7 @@ function msg($texto)
 {
     echo "<script type='text/javascript'>";
     echo "alert('$texto');";
-    echo "document.location.href='ingresoFiador.php';";
+    echo "document.location.href='ingresarFiador.php';";
     echo "</script>";
 }
 ?>
