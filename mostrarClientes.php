@@ -71,6 +71,29 @@ function go(){
     //validacion respectiva me da hueva
         document.form.submit();  
 } 
+function edit(id,nom,ape)
+        {
+            alert("llega");
+         // document.getElementById("baccion2").value=id;
+          document.getElementById("nombrem").value=nom;
+          document.getElementById("apellidom").value=ape;
+         // document.getElementById("marc").value=marca;
+         // document.getElementById("num").value=num;
+         // document.getElementById("descr").value=des;
+         // document.getElementById("donad").value=don;
+         //$("#baccion2").val(id);
+          //document.getElementById("tipou").value=tip;
+          //document.getElementById("esteq").value=estado;
+         //$("#nomb").val(nom);
+        //$("#marc").val(marca);
+          //$("#num").val(num);
+          //$("#donad").val(don);
+          //$("#descr").val(des);
+          $("#ModalInfo").modal();
+        //Ya manda todos los datos correcatamente
+          
+          
+        }
 
 </script> 
 <body>
@@ -102,8 +125,8 @@ function go(){
 										<i class="notika-icon notika-form"></i>
 									</div>
 									<div class="breadcomb-ctn">
-										<h2>Rgistro de cliente.</h2>
-										<p>Formulario de datos personales <span class="bread-ntd">para un nuevo cliente.</span></p>
+										<h2>Lista de clientes.</h2>
+										<p>Datos personales de clientes <span class="bread-ntd">para un nuevo cliente.</span></p>
 									</div>
 								</div>
 							</div>
@@ -126,9 +149,7 @@ function go(){
                 <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
                     <div class="data-table-list">
                         <div class="basic-tb-hd">
-                            <h2>Fiadores</h2>
-                            <p>En esta tabla puede acceder a las diferentes opciones para cada fiador.</p>
-                        </div>
+                             </div>
                         <div class="table-responsive">
                             <table id="data-table-basic" class="table table-striped">
                                 <thead>
@@ -136,25 +157,34 @@ function go(){
                                         
                                         <th>Nombre</th>
                                         <th>Apellido</th>
-                                        <th>Dirección</th>
+                                       
+                                        <th>Profecion</th>
                                         <th>Teléfono</th>
-                                        
-                                       
-                                       
+                                        <th>Celular</th>
+                                        <th>E-mail</th>
+                                        <th>Opciones</th>
                                        
                                     </tr>
                                 </thead>
                                 <tbody>
                       <?php
 include "config/conexion.php";
-$result = $conexion->query("SELECT * from tclientes ORDER BY id_cliente");
+$result = $conexion->query("SELECT * from tclientes INNER JOIN  ORDER BY id_cliente");
 if ($result) {
     while ($fila = $result->fetch_object()) {
         echo "<tr>";
         echo "<td>" . $fila->nombre . "</td>";
         echo "<td>" . $fila->apellido . "</td>";
-        echo "<td>" . $fila->direccion . "</td>";
+        echo "<td>" . $fila->profecion . "</td>";  
         echo "<td>" . $fila->telefono . "</td>";
+        echo "<td>" . $fila->celular . "</td>";
+        echo "<td>" . $fila->correo . "</td>";
+        echo "<td>
+        <div class='button-icon-btn'>
+        <button class='btn btn-info info-icon-notika btn-reco-mg btn-button-mg' onclick=\"edit('$fila->id_cliente','$fila->nombre','$fila->apellido')\";><i class='notika-icon notika-search'></i></button>
+        <button class='btn btn-lightgreen lightgreen-icon-notika btn-reco-mg btn-button-mg'><i class='notika-icon notika-menus'></i></button>
+        </div>
+        </td>";
         echo "</tr>";
 
     }
@@ -169,7 +199,126 @@ if ($result) {
         </div>
     </div>
     <!-- Data Table area End-->
+ <!-- MODAL PARA FIADOR -->
+ <div class="modal animated shake" id="ModalInfo" role="dialog">
+                                    <div class="modal-dialog modal-large">
+                                        <div class="modal-content">
+                                            <div class="modal-header">
+                                                <button type="button" class="close" data-dismiss="modal">&times;</button>
+                                            </div>
+                                            <div class="modal-body">
+                                          
 
+        <h1>Datos del cliente</h1>
+<div class="row">
+                            <div class="col-lg-6 col-md-6 col-sm-6 col-xs-12">
+                                <div class="form-example-int">
+                                    <div class="form-group">
+                                        <label>Nombre:</label>
+                                        <div class="nk-int-st">
+                                        <input type="text" name="nombrem" id="nombrem" class="form-control input-sm" >
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-lg-6 col-md-6 col-sm-6 col-xs-12">
+                                <div class="form-example-int">
+                                    <div class="form-group">
+                                        <label>Apellido:</label>
+                                        <div class="nk-int-st">
+                                        <input type="text" name="apellidom" id="apellidom" class="form-control input-sm">
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+
+                        </div>
+                        <div class="row">
+                            <div class="col-lg-3 col-md-3 col-sm-3 col-xs-12">
+                                <div class="form-example-int mg-t-15">
+                                    <div class="form-group">
+                                        <label>DUI:</label>
+                                        <div class="nk-int-st">
+                                           <input type="text" name="dui" class="form-control input-sm">
+                                        </div>
+                                     </div>                            
+                                </div>
+                            </div>
+
+                             <div class="col-lg-3 col-md-3 col-sm-3 col-xs-10">
+                                <div class="form-example-int mg-t-15">
+                                    <div class="form-group">
+                                        <label>NIT:</label>
+                                        <div class="nk-int-st">
+                                           <input type="text" name="nit" class="form-control input-sm">
+                                        </div>
+                                     </div>                            
+                                </div>
+                            </div>
+                            <div class="col-lg-3 col-md-3 col-sm-3 col-xs-10">
+                                <div class="form-example-int mg-t-15">
+                                    <div class="form-group">
+                                        <label>Fiador</label>
+                                        <div class="nk-int-st">
+                                           <input type="text" name="nit" class="form-control input-sm">
+                                        </div>
+                                     </div>                            
+                                </div>
+                            </div>
+                            </div>
+                            <div class="form-example-int mg-t-15">
+                            <div class="form-group">
+                                <label>Dirección:</label>
+                                <div class="nk-int-st">
+                                    <input type="text" name="direc" class="form-control input-sm">
+                                </div>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-lg-4 col-md-4 col-sm-4 col-xs-12">
+                                <div class="form-example-int mg-t-15">
+                                    <div class="form-group">
+                                        <label>Teléfono:</label>
+                                        <div class="nk-int-st">
+                                           <input type="text" name="telefono" class="form-control input-sm">
+                                        </div>
+                                     </div>                            
+                                </div>
+                            </div>
+
+                             <div class="col-lg-4 col-md-4 col-sm-4 col-xs-12" >
+                                <div class="form-example-int mg-t-15">
+                                    <div class="form-group">
+                                        <label>Celular:</label>
+                                        <div class="nk-int-st">
+                                           <input type="text" name="celular" class="form-control input-sm">
+                                        </div>
+                                     </div>                            
+                                </div>
+                            </div>
+                            <div class="col-lg-4 col-md-4 col-sm-4 col-xs-12">
+                                <div class="form-example-int mg-t-15">
+                                    <div class="form-group">
+                                        <label>E-mail:</label>
+                                        <div class="nk-int-st">
+                                           <input type="text" name="email" class="form-control input-sm">
+                                        </div>
+                                     </div>                            
+                                </div>
+                            </div>
+                        </div>
+
+
+
+                                            </div>
+                                            <div class="modal-footer">
+                                                <button type="button" class="btn btn-default" data-dismiss="modal">Save changes</button>
+                                                <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+            <!-- FIN PARA MODAL DE FIADOR -->
     <!-- Start Footer area-->
     <?php include "footer.php";?>
     <!-- End Footer area-->

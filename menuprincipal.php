@@ -4,7 +4,7 @@
             <div class="row">
                 <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
                     <ul class="nav nav-tabs notika-menu-wrap menu-it-icon-pro">
-                        <li class="active"><a data-toggle="tab" href="#Home"><i class="notika-icon notika-support"></i> Clientes</a>
+                        <li><a data-toggle="tab" href="#home"><i class="notika-icon notika-support"></i> Clientes</a>
                         </li>
                         <li><a data-toggle="tab" href="#mailbox"><i class="notika-icon notika-house"></i> Activo Fijo</a>
                         </li>
@@ -25,7 +25,7 @@
                             <ul class="notika-main-menu-dropdown">
                                 <li><a href="ingresoCliente.php">Registrar Cliente</a>
                                 </li>
-                                <li><a href="listaClientes.php">Mostrar Clientes</a>
+                                <li><a href="mostrarClientes.php">Mostrar Clientes</a>
                                 </li>
                                 <li><a href="fiadores.php">Fiadores</a>
                                 </li>
@@ -109,7 +109,7 @@
                         </div>
                         <div id="Appviews" class="tab-pane notika-tab-menu-bg animated flipInX">
                             <ul class="notika-main-menu-dropdown">
-                                <li><a href="ingresoProveedores.php">Registrar</a>
+                                <li><a href="ingresarProveedor.php">Registrar</a>
                                 </li>
                                 <li><a href="mostrarProveedores.php">Mostrar</a>
                                 </li>

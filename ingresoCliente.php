@@ -7,6 +7,9 @@
     <title>Ingreso de Clientes | SISFIN</title>
     <meta name="description" content="">
     <meta name="viewport" content="width=device-width, initial-scale=1">
+    <!-- bootstrap select CSS
+		============================================ -->
+        <link rel="stylesheet" href="css/bootstrap-select/bootstrap-select.css">
     <!-- favicon
 		============================================ -->
     <link rel="shortcut icon" type="image/x-icon" href="img/favicon.ico">
@@ -126,7 +129,7 @@ function go(){
                                     <div class="form-group">
                                         <label>Nombre:</label>
                                         <div class="nk-int-st">
-                                        <input type="text" name="nombre" class="form-control input-sm" placeholder="Ingrese su nombre." required>
+                                        <input type="text" name="nombre" class="form-control input-sm" placeholder="Ingrese su nombre." >
                                         </div>
                                     </div>
                                 </div>
@@ -136,7 +139,7 @@ function go(){
                                     <div class="form-group">
                                         <label>Apellido:</label>
                                         <div class="nk-int-st">
-                                        <input type="text" name="apellido" class="form-control input-sm" placeholder="Ingrese su apellido." required>
+                                        <input type="text" name="apellido" class="form-control input-sm" placeholder="Ingrese su apellido.">
                                         </div>
                                     </div>
                                 </div>
@@ -149,7 +152,7 @@ function go(){
                                     <div class="form-group">
                                         <label>DUI:</label>
                                         <div class="nk-int-st">
-                                           <input type="text" name="dui" class="form-control input-sm" data-mask="99999999-9" placeholder="Ingrese su DUI." required>
+                                           <input type="text" name="dui" class="form-control input-sm" data-mask="99999999-9" placeholder="Ingrese su DUI.">
                                         </div>
                                      </div>                            
                                 </div>
@@ -160,7 +163,7 @@ function go(){
                                     <div class="form-group">
                                         <label>NIT:</label>
                                         <div class="nk-int-st">
-                                           <input type="text" name="nit" class="form-control input-sm" data-mask="9999-999999-999-9" placeholder="Ingrese su NIT." required>
+                                           <input type="text" name="nit" class="form-control input-sm" data-mask="9999-999999-999-9" placeholder="Ingrese su NIT.">
                                         </div>
                                      </div>                            
                                 </div>
@@ -170,7 +173,7 @@ function go(){
                                     <div class="form-group">
                                         <label>Fiador:</label>
                                         <div class="nk-int-st">
-                                           <input type="text" name="fiador" class="form-control input-sm"  placeholder="Nombre del fiador." readonly required>
+                                           <input type="text" name="fiador" class="form-control input-sm"  placeholder="Nombre del fiador." readonly>
                                            
                                         </div>
                                      </div>                            
@@ -233,6 +236,42 @@ function go(){
                                 </div>
                             </div>
                         </div>
+                        <!-- salrios-->
+                        <div class="row">
+                            <div class="col-lg-4 col-md-4 col-sm-4 col-xs-12">
+                                
+                                <label>Tipo de Ingreso</label>
+                               
+                                <div class="bootstrap-select fm-cmp-mg">
+                                    <select class="selectpicker" data-live-search="true" name="tipo">
+											<option>Salario</option>
+											<option>Remesa</option>
+											
+										</select>
+                                </div>
+                            </div>
+
+                             <div class="col-lg-4 col-md-4 col-sm-4 col-xs-12" >
+                                <div class="form-example-int mg-t-15">
+                                    <div class="form-group">
+                                        <label>Profecion u oficio</label>
+                                        <div class="nk-int-st">
+                                           <input type="text" name="profecion" class="form-control input-sm" data-mask="9999-9999" placeholder="Ingrese Profecion u oficio" required>
+                                        </div>
+                                     </div>                            
+                                </div>
+                            </div>
+                            <div class="col-lg-4 col-md-4 col-sm-4 col-xs-12">
+                                <div class="form-example-int mg-t-15">
+                                    <div class="form-group">
+                                        <label>Salario</label>
+                                        <div class="nk-int-st">
+                                           <input type="text" name="salario" class="form-control input-sm" placeholder="Ingrese salario">
+                                        </div>
+                                     </div>                            
+                                </div>
+                            </div>
+                        </div>
                         
                             
                         <div class="row">
@@ -273,9 +312,85 @@ function go(){
                                                 <button type="button" class="close" data-dismiss="modal">&times;</button>
                                             </div>
                                             <div class="modal-body">
-                                                <h2>Modal title</h2>
-                                                <p>Curabitur blandit mollis lacus. Nulla sit amet est. Suspendisse nisl elit, rhoncus eget, elementum ac, condimentum eget, diam. Donec mi odio, faucibus at, scelerisque quis, convallis in, nisi. Cras sagittis.</p>
-                                            </div>
+                                               <!-- Data Table area Start-->
+    <div class="data-table-area">
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-6 col-md-6 col-sm-6 col-xs-6">
+                    <div class="data-table-list">
+                        <div class="basic-tb-hd">
+                            <h2>Fiadores</h2>
+                            <p>Datos personales de fiador.</p>
+                        </div>
+                        <div class="table-responsive">
+                            <table id="data-table-basic" class="table table-striped">
+                                <thead>
+                                    <tr>
+                                        
+                                        <th>Nombre</th>
+                                        <th>Apellido</th>
+                                        <th>Teléfono</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                
+                                
+                                    <tr>
+                                        <td>Tiger Nixon</td>
+                                        <td>System Architect</td>
+                                        <td>Edinburgh</td>
+                                       
+                                    </tr>
+                                    <tr>
+                                        <td>Garrett Winters</td>
+                                        <td>Accountant</td>
+                                        <td>Tokyo</td>
+                                      
+                                    </tr>
+                                    <tr>
+                                        <td>Ashton Cox</td>
+                                        <td>Junior Technical Author</td>
+                                        <td>San Francisco</td>
+                                       
+                                    </tr>
+                                    <tr>
+                                        <td>Cedric Kelly</td>
+                                        <td>Senior Javascript Developer</td>
+                                        <td>Edinburgh</td>
+                                        
+                                    </tr>
+                                    <tr>
+                                        <td>Airi Satou</td>
+                                        <td>Accountant</td>
+                                        <td>Tokyo</td>
+                                      
+                                    </tr>
+                                    <tr>
+                                        <td>Brielle Williamson</td>
+                                        <td>Integration Specialist</td>
+                                        <td>New York</td>
+                                        
+                                    </tr>
+                                    
+                                </tbody>
+                                <tfoot>
+                                    <tr>
+                                       
+                                        <th>Nombre</th>
+                                        <th>Apellido</th>
+                                        <th>Dirección</th>
+                                       
+                                    </tr>
+                                </tfoot>
+                            </table>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- Data Table area End-->
+</div>
                                             <div class="modal-footer">
                                                 <button type="button" class="btn btn-default" data-dismiss="modal">Save changes</button>
                                                 <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
@@ -360,6 +475,11 @@ function go(){
 	<!-- tawk chat JS
 		============================================ -->
     <!-- <script src="js/tawk-chat.js"></script> -->
+ <!-- bootstrap select JS
+		============================================ -->
+        <script src="js/bootstrap-select/bootstrap-select.js"></script>
+
+    
 </body>
 
 </html>
@@ -375,8 +495,11 @@ $nit   = $_POST['nit'];
 $email   = $_POST['email'];
 $tel   = $_POST['telefono'];
 $cel  = $_POST['celular'];
+$tipo=$_POST['tipo'];
+$prof=$_POST['profecion'];
+$salario=$_POST['salario'];
 $observ  = $_POST['observ'];
-    $consulta  = "INSERT INTO tclientes VALUES('null','4','1','" .$nombre. "','" .$apellido. "','" .$direccion. "','" .$dui. "','" .$nit. "','" .$tel. "','" .$cel. "','" .$email. "','" .$observ. "')";
+    $consulta  = "INSERT INTO tclientes VALUES('null','4','1','" .$nombre. "','" .$apellido. "','" .$direccion. "','" .$dui. "','" .$nit. "','" .$prof. "','" .$tipo. "','" .$salario. "','" .$tel. "','" .$cel. "','" .$email. "','" .$observ. "')";
     $resultado = $conexion->query($consulta);
       if ($resultado) {
           msg("Se agregaron los datos correctamente");
