@@ -119,7 +119,7 @@ function go(){
                             <h2>Datos del Fiador.</h2>
                             
                         </div>
-                        <form name="form" method="post" action="ingresoCliente.php?bandera=1">
+                        <form name="form" method="post" action="ingresoFiador.php?bandera=1">
                         <div class="row">
                             <div class="col-lg-6 col-md-6 col-sm-6 col-xs-12">
                                 <div class="form-example-int">
@@ -155,7 +155,7 @@ function go(){
                                 </div>
                             </div>
 
-                             <div class="col-lg-4 col-md-4 col-sm-4 col-xs-10" style="margin-left:190px">
+                             <div class="col-lg-4 col-md-4 col-sm-4 col-xs-10">
                                 <div class="form-example-int mg-t-15">
                                     <div class="form-group">
                                         <label>NIT:</label>
@@ -203,9 +203,7 @@ function go(){
                                      </div>                            
                                 </div>
                             </div>
-                        </div>
-                        
-                            <div class="col-lg-8 col-md-4 col-sm-4 col-xs-12">
+                            <div class="col-lg-4 col-md-4 col-sm-4 col-xs-12">
                                 <div class="form-example-int mg-t-15">
                                     <div class="form-group">
                                         <label>E-mail:</label>
@@ -215,6 +213,9 @@ function go(){
                                      </div>                            
                                 </div>
                             </div>
+                        </div>
+                        
+                            
                             <div class="row">
                             <div class="col-lg-6 col-md-6 col-sm-6 col-xs-12">
                                 <div class="form-example-int">
@@ -348,7 +349,7 @@ $celular    = $_POST['celular'];
 $trabajo    = $_POST['trabajo'];
 $salario    = $_POST['salario'];
 
-    $consulta  = "INSERT INTO tfiador VALUES('null','4','" .$nombre. "','" .$apellido. "','" .$direccion. "','" .$dui. "','" .$nit. "','" .$email. "','" .$telefono. "','" .$trabajo. "','" .$celular. "','" .$salario. "')";
+    $consulta  = "INSERT INTO tfiador VALUES('null','" .$nombre. "','" .$apellido. "','" .$direccion. "','" .$dui. "','" .$nit. "','" .$email. "','" .$trabajo. "','" .$salario. "','" .$telefono. "','" .$celular. "')";
     $resultado = $conexion->query($consulta);
       if ($resultado) {
           msg("Se agregaron los datos correctamente");
