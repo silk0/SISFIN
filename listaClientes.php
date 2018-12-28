@@ -44,7 +44,10 @@
     <link rel="stylesheet" href="css/wave/waves.min.css">
     <link rel="stylesheet" href="css/wave/button.css">
     <!-- main CSS
+    ============================================ -->
+     <!-- Data Table JS
 		============================================ -->
+    <link rel="stylesheet" href="css/jquery.dataTables.min.css">
     <link rel="stylesheet" href="css/main.css">
     <!-- style CSS
 		============================================ -->
@@ -115,40 +118,33 @@ function go(){
 			</div>
 		</div>
 	</div>
-	<!-- Breadcomb area End-->
-    <!-- Form Examples area start-->
-    <div class="form-example-area">
+  <!-- Breadcomb area End-->
+  <!-- Data Table area Start-->
+  <div class="data-table-area">
         <div class="container">
             <div class="row">
                 <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
-                    <div class="form-example-wrap">
-                        
-                    <div class="col-md-12 col-sm-12 col-xs-12">
-                <div class="x_panel">
-                  <div class="x_title">
-                    <h2>Lista de Equipos</h2>
-                    <ul class="nav navbar-right panel_toolbox">
-                      <li><a class="collapse-link"><i class="fa fa-chevron-up"></i></a>
-                      </li>
-                      </li>
-                    </ul>
-                    <div class="clearfix"></div>
-                  </div>
-                  <div class="x_content">
-                    <p class="text-muted font-13 m-b-30">
-                      
-                    </p>
-                    <table id="datatable" class="table table-striped table-bordered">
-                      <thead>
-                        <tr>
-                        <th>Nombre</th>
-                          <th>Apellido</th>
-                          <th>direccion</th>
-                          <th>telefono</th>
-                         
-                        </tr>
-                      </thead>
-                      <tbody class="tabla_ajax">
+                    <div class="data-table-list">
+                        <div class="basic-tb-hd">
+                            <h2>Fiadores</h2>
+                            <p>En esta tabla puede acceder a las diferentes opciones para cada fiador.</p>
+                        </div>
+                        <div class="table-responsive">
+                            <table id="data-table-basic" class="table table-striped">
+                                <thead>
+                                    <tr>
+                                        
+                                        <th>Nombre</th>
+                                        <th>Apellido</th>
+                                        <th>Dirección</th>
+                                        <th>Teléfono</th>
+                                        
+                                       
+                                       
+                                       
+                                    </tr>
+                                </thead>
+                                <tbody>
                       <?php
 include "config/conexion.php";
 $result = $conexion->query("SELECT * from tclientes ORDER BY id_cliente");
@@ -165,19 +161,15 @@ if ($result) {
 }
 ?>
                       </tbody>
-                    </table>
-                  </div>
-                </div>
-              </div>
-
-
+                            </table>
+                        </div>
                     </div>
                 </div>
             </div>
-            
-            
+        </div>
     </div>
-    <!-- Form Examples area End-->
+    <!-- Data Table area End-->
+
     <!-- Start Footer area-->
     <?php include "footer.php";?>
     <!-- End Footer area-->
@@ -239,7 +231,12 @@ if ($result) {
 		============================================ -->
     <script src="js/todo/jquery.todo.js"></script>
     <!-- plugins JS
+  
+    ============================================ -->
+    <!-- Data Table JS
 		============================================ -->
+    <script src="js/data-table/jquery.dataTables.min.js"></script>
+    <script src="js/data-table/data-table-act.js"></script>
     <script src="js/plugins.js"></script>
         <!-- Input Mask JS
 		============================================ -->
