@@ -7,6 +7,9 @@
     <title>Ingreso de Clientes | SISFIN</title>
     <meta name="description" content="">
     <meta name="viewport" content="width=device-width, initial-scale=1">
+    <!-- bootstrap select CSS
+		============================================ -->
+        <link rel="stylesheet" href="css/bootstrap-select/bootstrap-select.css">
     <!-- favicon
 		============================================ -->
     <link rel="shortcut icon" type="image/x-icon" href="img/favicon.ico">
@@ -233,6 +236,42 @@ function go(){
                                 </div>
                             </div>
                         </div>
+                        <!-- salrios-->
+                        <div class="row">
+                            <div class="col-lg-4 col-md-4 col-sm-4 col-xs-12">
+                                
+                                <label>Tipo de Ingreso</label>
+                               
+                                <div class="bootstrap-select fm-cmp-mg">
+                                    <select class="selectpicker" data-live-search="true">
+											<option>Salario</option>
+											<option>Remesa</option>
+											
+										</select>
+                                </div>
+                            </div>
+
+                             <div class="col-lg-4 col-md-4 col-sm-4 col-xs-12" >
+                                <div class="form-example-int mg-t-15">
+                                    <div class="form-group">
+                                        <label>Profecion u oficio</label>
+                                        <div class="nk-int-st">
+                                           <input type="text" name="profecion" class="form-control input-sm" data-mask="9999-9999" placeholder="Ingrese Celular." required>
+                                        </div>
+                                     </div>                            
+                                </div>
+                            </div>
+                            <div class="col-lg-4 col-md-4 col-sm-4 col-xs-12">
+                                <div class="form-example-int mg-t-15">
+                                    <div class="form-group">
+                                        <label>Salario</label>
+                                        <div class="nk-int-st">
+                                           <input type="text" name="salario" class="form-control input-sm" placeholder="Ingrese el E-mail">
+                                        </div>
+                                     </div>                            
+                                </div>
+                            </div>
+                        </div>
                         
                             
                         <div class="row">
@@ -360,6 +399,11 @@ function go(){
 	<!-- tawk chat JS
 		============================================ -->
     <!-- <script src="js/tawk-chat.js"></script> -->
+ <!-- bootstrap select JS
+		============================================ -->
+        <script src="js/bootstrap-select/bootstrap-select.js"></script>
+
+    
 </body>
 
 </html>
