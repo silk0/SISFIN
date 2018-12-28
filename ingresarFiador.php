@@ -4,7 +4,7 @@
 <head>
     <meta charset="utf-8">
     <meta http-equiv="x-ua-compatible" content="ie=edge">
-    <title>Ingreso de Clientes | SISFIN</title>
+    <title>Ingreso de Fiadores | SISFIN</title>
     <meta name="description" content="">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <!-- favicon
@@ -92,8 +92,8 @@ function go(){
 										<i class="notika-icon notika-form"></i>
 									</div>
 									<div class="breadcomb-ctn">
-										<h2>Rgistro de cliente.</h2>
-										<p>Formulario de datos personales <span class="bread-ntd">para un nuevo cliente.</span></p>
+										<h2>Registro de fiador.</h2>
+										<p>Formulario de datos personales <span class="bread-ntd">para fiadores.</span></p>
 									</div>
 								</div>
 							</div>
@@ -116,7 +116,7 @@ function go(){
                 <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
                     <div class="form-example-wrap">
                         <div class="cmp-tb-hd">
-                            <h2>Datos del Cliente</h2>
+                            <h2>Datos del Fiador.</h2>
                             
                         </div>
                         <form name="form" method="post" action="ingresoCliente.php?bandera=1">
@@ -126,7 +126,7 @@ function go(){
                                     <div class="form-group">
                                         <label>Nombre:</label>
                                         <div class="nk-int-st">
-                                        <input type="text" name="nombre" class="form-control input-sm" placeholder="Ingrese su nombre." required>
+                                        <input type="text" id="nombre" name="nombre" class="form-control input-sm" placeholder="Ingrese su nombre." required>
                                         </div>
                                     </div>
                                 </div>
@@ -136,7 +136,7 @@ function go(){
                                     <div class="form-group">
                                         <label>Apellido:</label>
                                         <div class="nk-int-st">
-                                        <input type="text" name="apellido" class="form-control input-sm" placeholder="Ingrese su apellido." required>
+                                        <input type="text" id="apellido" name="apellido" class="form-control input-sm" placeholder="Ingrese su apellido." required>
                                         </div>
                                     </div>
                                 </div>
@@ -144,53 +144,34 @@ function go(){
 
                         </div>
                         <div class="row">
-                            <div class="col-lg-3 col-md-3 col-sm-3 col-xs-12">
+                            <div class="col-lg-4 col-md-4 col-sm-4 col-xs-12">
                                 <div class="form-example-int mg-t-15">
                                     <div class="form-group">
                                         <label>DUI:</label>
                                         <div class="nk-int-st">
-                                           <input type="text" name="dui" class="form-control input-sm" data-mask="99999999-9" placeholder="Ingrese su DUI." required>
+                                           <input type="text" id="dui"name="dui" class="form-control input-sm" data-mask="99999999-9" placeholder="Ingrese su DUI." required>
                                         </div>
                                      </div>                            
                                 </div>
                             </div>
 
-                             <div class="col-lg-3 col-md-3 col-sm-3 col-xs-10">
+                             <div class="col-lg-4 col-md-4 col-sm-4 col-xs-10" style="margin-left:190px">
                                 <div class="form-example-int mg-t-15">
                                     <div class="form-group">
                                         <label>NIT:</label>
                                         <div class="nk-int-st">
-                                           <input type="text" name="nit" class="form-control input-sm" data-mask="9999-999999-999-9" placeholder="Ingrese su NIT." required>
+                                           <input type="text" id="nit" name="nit" class="form-control input-sm" data-mask="9999-999999-999-9" placeholder="Ingrese su NIT." required>
                                         </div>
                                      </div>                            
                                 </div>
                             </div>
-                            <div class="col-lg-4 col-md-4 col-sm-4 col-xs-10">
-                                <div class="form-example-int mg-t-15">
-                                    <div class="form-group">
-                                        <label>Fiador:</label>
-                                        <div class="nk-int-st">
-                                           <input type="text" name="fiador" class="form-control input-sm"  placeholder="Nombre del fiador." readonly required>
-                                           
-                                        </div>
-                                     </div>                            
-                                </div>
-                            </div>
-
-                            <div class="col-lg-2 col-md-2 col-sm-2 col-xs-10">
-                               <div class="">
-                                   <br>
-									<button data-toggle="modal" data-target="#myModalone" class="btn btn-success success-icon-notika btn-reco-mg btn-button-mg waves-effect"><i class="notika-icon notika-house"></i></button>
-								</div>
-                            </div>
-                            
                         </div>
                         
                         <div class="form-example-int mg-t-15">
                             <div class="form-group">
                                 <label>Dirección:</label>
                                 <div class="nk-int-st">
-                                    <input type="text" name="direc" class="form-control input-sm" placeholder="Ingrese su dirección." required>
+                                    <input type="text" id="direc" name="direc" class="form-control input-sm" placeholder="Ingrese su dirección." required>
                                 </div>
                             </div>
                         </div>
@@ -206,7 +187,7 @@ function go(){
                                     <div class="form-group">
                                         <label>Teléfono:</label>
                                         <div class="nk-int-st">
-                                           <input type="text" name="telefono" class="form-control input-sm" data-mask="9999-9999" placeholder="Ingrese Telefono." required>
+                                           <input type="text" id="telefono" name="telefono" class="form-control input-sm" data-mask="9999-9999" placeholder="Ingrese Telefono." required>
                                         </div>
                                      </div>                            
                                 </div>
@@ -217,46 +198,54 @@ function go(){
                                     <div class="form-group">
                                         <label>Celular:</label>
                                         <div class="nk-int-st">
-                                           <input type="text" name="celular" class="form-control input-sm" data-mask="9999-9999" placeholder="Ingrese Celular." required>
-                                        </div>
-                                     </div>                            
-                                </div>
-                            </div>
-                            <div class="col-lg-4 col-md-4 col-sm-4 col-xs-12">
-                                <div class="form-example-int mg-t-15">
-                                    <div class="form-group">
-                                        <label>E-mail:</label>
-                                        <div class="nk-int-st">
-                                           <input type="text" name="email" class="form-control input-sm" placeholder="Ingrese el E-mail">
+                                           <input type="text" id="celular" name="celular" class="form-control input-sm" data-mask="9999-9999" placeholder="Ingrese Celular." required>
                                         </div>
                                      </div>                            
                                 </div>
                             </div>
                         </div>
                         
-                            
-                        <div class="row">
-                            <div class="col-lg-8 col-md-12 col-sm-12 col-xs-12">
-                                <div class="floating-numner form-rlt-mg">
-                                    <p>Observaciones:</p>
+                            <div class="col-lg-8 col-md-4 col-sm-4 col-xs-12">
+                                <div class="form-example-int mg-t-15">
+                                    <div class="form-group">
+                                        <label>E-mail:</label>
+                                        <div class="nk-int-st">
+                                           <input type="text" id="email" name="email" class="form-control input-sm" placeholder="Ingrese el E-mail">
+                                        </div>
+                                     </div>                            
                                 </div>
                             </div>
-                        </div>
-                        <div class="row">
-                            <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
-                                <div class="form-group">
-                                    <div class="nk-int-st">
-                                        <textarea class="form-control" name="observ" rows="5" placeholder="Escriba aquí las observaciones deseadas acerca del cliente..."></textarea required>
+                            <div class="row">
+                            <div class="col-lg-6 col-md-6 col-sm-6 col-xs-12">
+                                <div class="form-example-int">
+                                    <div class="form-group">
+                                        <label>Trabajo que realiza:</label>
+                                        <div class="nk-int-st">
+                                        <input type="text" id="trabajo" name="trabajo" class="form-control input-sm" placeholder="Ingrese el trabajo que realiza el fiador." required>
+                                        </div>
                                     </div>
                                 </div>
                             </div>
+                            <div class="col-lg-6 col-md-6 col-sm-6 col-xs-12">
+                                <div class="form-example-int">
+                                    <div class="form-group">
+                                        <label>Salario:</label>
+                                        <div class="nk-int-st">
+                                        <input type="text" id="salario" name="salario" class="form-control input-sm" placeholder="Ingrese el salario del fiador." required>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+
                         </div>
-                       <!-- <div class="form-example-int mg-t-15">
+                         
+                        <div class="form-example-int mg-t-15">
                             <div class="fm-checkbox">
                                 <label><input type="checkbox" name="estado" class="i-checks"> <i></i> Estado.</label>
                                 <label for="">Checkee para activar</label>
                             </div>
-                        </div>-->
+                        </div>
+
                         
                         <div class="form-example-int mg-t-15">
                             <button class="btn btn-success notika-btn-success" onclick="go();">Guardar.</button>
@@ -265,25 +254,6 @@ function go(){
                     </div>
                 </div>
             </div>
-            <!-- MODAL PARA FIADOR -->
-                                <div class="modal animated shake" id="myModalone" role="dialog">
-                                    <div class="modal-dialog modal-large">
-                                        <div class="modal-content">
-                                            <div class="modal-header">
-                                                <button type="button" class="close" data-dismiss="modal">&times;</button>
-                                            </div>
-                                            <div class="modal-body">
-                                                <h2>Modal title</h2>
-                                                <p>Curabitur blandit mollis lacus. Nulla sit amet est. Suspendisse nisl elit, rhoncus eget, elementum ac, condimentum eget, diam. Donec mi odio, faucibus at, scelerisque quis, convallis in, nisi. Cras sagittis.</p>
-                                            </div>
-                                            <div class="modal-footer">
-                                                <button type="button" class="btn btn-default" data-dismiss="modal">Save changes</button>
-                                                <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-            <!-- FIN PARA MODAL DE FIADOR -->
             
             
     </div>
@@ -367,16 +337,18 @@ function go(){
 include "config/conexion.php";
 $accion = $_REQUEST['bandera'];
 if($accion==1){
-$nombre   = $_POST['nombre'];
+$nombre     = $_POST['nombre'];
 $apellido   = $_POST['apellido'];
-$direccion   = $_POST['direc'];
-$dui  = $_POST['dui'];
-$nit   = $_POST['nit'];
-$email   = $_POST['email'];
-$tel   = $_POST['telefono'];
-$cel  = $_POST['celular'];
-$observ  = $_POST['observ'];
-    $consulta  = "INSERT INTO tclientes VALUES('null','4','1','" .$nombre. "','" .$apellido. "','" .$direccion. "','" .$dui. "','" .$nit. "','" .$tel. "','" .$cel. "','" .$email. "','" .$observ. "')";
+$direccion  = $_POST['direc'];
+$dui        = $_POST['dui'];
+$nit        = $_POST['nit'];
+$email      = $_POST['email'];
+$telefono   = $_POST['telefono'];
+$celular    = $_POST['celular'];
+$trabajo    = $_POST['trabajo'];
+$salario    = $_POST['salario'];
+
+    $consulta  = "INSERT INTO tfiador VALUES('null','4','" .$nombre. "','" .$apellido. "','" .$direccion. "','" .$dui. "','" .$nit. "','" .$email. "','" .$telefono. "','" .$trabajo. "','" .$celular. "','" .$salario. "')";
     $resultado = $conexion->query($consulta);
       if ($resultado) {
           msg("Se agregaron los datos correctamente");
@@ -388,7 +360,7 @@ function msg($texto)
 {
     echo "<script type='text/javascript'>";
     echo "alert('$texto');";
-    echo "document.location.href='ingresoCliente.php';";
+    echo "document.location.href='ingresoFiador.php';";
     echo "</script>";
 }
 ?>
