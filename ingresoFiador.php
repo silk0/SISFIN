@@ -126,7 +126,7 @@ function go(){
                                     <div class="form-group">
                                         <label>Nombre:</label>
                                         <div class="nk-int-st">
-                                        <input type="text" name="nombre" class="form-control input-sm" placeholder="Ingrese su nombre." required>
+                                        <input type="text" id="nombre" name="nombre" class="form-control input-sm" placeholder="Ingrese su nombre." required>
                                         </div>
                                     </div>
                                 </div>
@@ -136,7 +136,7 @@ function go(){
                                     <div class="form-group">
                                         <label>Apellido:</label>
                                         <div class="nk-int-st">
-                                        <input type="text" name="apellido" class="form-control input-sm" placeholder="Ingrese su apellido." required>
+                                        <input type="text" id="apellido" name="apellido" class="form-control input-sm" placeholder="Ingrese su apellido." required>
                                         </div>
                                     </div>
                                 </div>
@@ -149,7 +149,7 @@ function go(){
                                     <div class="form-group">
                                         <label>DUI:</label>
                                         <div class="nk-int-st">
-                                           <input type="text" name="dui" class="form-control input-sm" data-mask="99999999-9" placeholder="Ingrese su DUI." required>
+                                           <input type="text" id="dui"name="dui" class="form-control input-sm" data-mask="99999999-9" placeholder="Ingrese su DUI." required>
                                         </div>
                                      </div>                            
                                 </div>
@@ -160,7 +160,7 @@ function go(){
                                     <div class="form-group">
                                         <label>NIT:</label>
                                         <div class="nk-int-st">
-                                           <input type="text" name="nit" class="form-control input-sm" data-mask="9999-999999-999-9" placeholder="Ingrese su NIT." required>
+                                           <input type="text" id="nit" name="nit" class="form-control input-sm" data-mask="9999-999999-999-9" placeholder="Ingrese su NIT." required>
                                         </div>
                                      </div>                            
                                 </div>
@@ -171,7 +171,7 @@ function go(){
                             <div class="form-group">
                                 <label>Dirección:</label>
                                 <div class="nk-int-st">
-                                    <input type="text" name="direc" class="form-control input-sm" placeholder="Ingrese su dirección." required>
+                                    <input type="text" id="direc" name="direc" class="form-control input-sm" placeholder="Ingrese su dirección." required>
                                 </div>
                             </div>
                         </div>
@@ -187,18 +187,18 @@ function go(){
                                     <div class="form-group">
                                         <label>Teléfono:</label>
                                         <div class="nk-int-st">
-                                           <input type="text" name="telefono" class="form-control input-sm" data-mask="9999-9999" placeholder="Ingrese Telefono." required>
+                                           <input type="text" id="telefono" name="telefono" class="form-control input-sm" data-mask="9999-9999" placeholder="Ingrese Telefono." required>
                                         </div>
                                      </div>                            
                                 </div>
                             </div>
 
-                             <div class="col-lg-4 col-md-4 col-sm-4 col-xs-12" style="margin-left:190px">
+                             <div class="col-lg-4 col-md-4 col-sm-4 col-xs-12" >
                                 <div class="form-example-int mg-t-15">
                                     <div class="form-group">
                                         <label>Celular:</label>
                                         <div class="nk-int-st">
-                                           <input type="text" name="celular" class="form-control input-sm" data-mask="9999-9999" placeholder="Ingrese Celular." required>
+                                           <input type="text" id="celular" name="celular" class="form-control input-sm" data-mask="9999-9999" placeholder="Ingrese Celular." required>
                                         </div>
                                      </div>                            
                                 </div>
@@ -210,7 +210,7 @@ function go(){
                                     <div class="form-group">
                                         <label>E-mail:</label>
                                         <div class="nk-int-st">
-                                           <input type="text" name="email" class="form-control input-sm" placeholder="Ingrese el E-mail">
+                                           <input type="text" id="email" name="email" class="form-control input-sm" placeholder="Ingrese el E-mail">
                                         </div>
                                      </div>                            
                                 </div>
@@ -221,7 +221,7 @@ function go(){
                                     <div class="form-group">
                                         <label>Trabajo que realiza:</label>
                                         <div class="nk-int-st">
-                                        <input type="text" name="nombre" class="form-control input-sm" placeholder="Ingrese el trabajo que realiza el fiador." required>
+                                        <input type="text" id="trabajo" name="trabajo" class="form-control input-sm" placeholder="Ingrese el trabajo que realiza el fiador." required>
                                         </div>
                                     </div>
                                 </div>
@@ -231,7 +231,7 @@ function go(){
                                     <div class="form-group">
                                         <label>Salario:</label>
                                         <div class="nk-int-st">
-                                        <input type="text" name="apellido" class="form-control input-sm" placeholder="Ingrese el salario del fiador." required>
+                                        <input type="text" id="salario" name="salario" class="form-control input-sm" placeholder="Ingrese el salario del fiador." required>
                                         </div>
                                     </div>
                                 </div>
@@ -337,16 +337,18 @@ function go(){
 include "config/conexion.php";
 $accion = $_REQUEST['bandera'];
 if($accion==1){
-$nombre   = $_POST['nombre'];
+$nombre     = $_POST['nombre'];
 $apellido   = $_POST['apellido'];
-$direccion   = $_POST['direc'];
-$dui  = $_POST['dui'];
-$nit   = $_POST['nit'];
-$email   = $_POST['email'];
-$tel   = $_POST['telefono'];
-$cel  = $_POST['celular'];
-$observ  = $_POST['observ'];
-    $consulta  = "INSERT INTO tclientes VALUES('null','4','" .$nombre. "','" .$apellido. "','" .$direccion. "','" .$dui. "','" .$nit. "','" .$email. "','" .$tel. "','" .$observ. "','" .$cel. "')";
+$direccion  = $_POST['direc'];
+$dui        = $_POST['dui'];
+$nit        = $_POST['nit'];
+$email      = $_POST['email'];
+$telefono   = $_POST['telefono'];
+$celular    = $_POST['celular'];
+$trabajo    = $_POST['trabajo'];
+$salario    = $_POST['salario'];
+
+    $consulta  = "INSERT INTO tfiador VALUES('null','4','" .$nombre. "','" .$apellido. "','" .$direccion. "','" .$dui. "','" .$nit. "','" .$email. "','" .$telefono. "','" .$trabajo. "','" .$celular. "','" .$salario. "')";
     $resultado = $conexion->query($consulta);
       if ($resultado) {
           msg("Se agregaron los datos correctamente");
@@ -358,7 +360,7 @@ function msg($texto)
 {
     echo "<script type='text/javascript'>";
     echo "alert('$texto');";
-    echo "document.location.href='ingresoCliente.php';";
+    echo "document.location.href='ingresoFiador.php';";
     echo "</script>";
 }
 ?>

@@ -120,6 +120,7 @@
                             <table id="data-table-basic" class="table table-striped">
                                 <thead>
                                     <tr>
+                                        
                                         <th>Nombre</th>
                                         <th>Apellido</th>
                                         <th>Dirección</th>
@@ -132,6 +133,8 @@
                                     </tr>
                                 </thead>
                                 <tbody>
+                                
+                                
                                     <tr>
                                         <td>Tiger Nixon</td>
                                         <td>System Architect</td>
@@ -184,6 +187,7 @@
                                 </tbody>
                                 <tfoot>
                                     <tr>
+                                       
                                         <th>Nombre</th>
                                         <th>Apellido</th>
                                         <th>Dirección</th>
