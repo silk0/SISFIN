@@ -169,13 +169,12 @@ function edit(id,nom,ape)
                                 <tbody>
                       <?php
 include "config/conexion.php";
-$result = $conexion->query("SELECT * from tclientes ORDER BY id_cliente");
+$result = $conexion->query("SELECT * from tclientes INNER JOIN  ORDER BY id_cliente");
 if ($result) {
     while ($fila = $result->fetch_object()) {
         echo "<tr>";
         echo "<td>" . $fila->nombre . "</td>";
         echo "<td>" . $fila->apellido . "</td>";
-      
         echo "<td>" . $fila->profecion . "</td>";  
         echo "<td>" . $fila->telefono . "</td>";
         echo "<td>" . $fila->celular . "</td>";
