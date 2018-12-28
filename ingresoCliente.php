@@ -232,13 +232,12 @@ function go(){
                                 </div>
                             </div>
                         </div>
-                        <div class="form-example-int mg-t-15">
+                       <!-- <div class="form-example-int mg-t-15">
                             <div class="fm-checkbox">
                                 <label><input type="checkbox" name="estado" class="i-checks"> <i></i> Estado.</label>
                                 <label for="">Checkee para activar</label>
                             </div>
-                        </div>
-
+                        </div>-->
                         
                         <div class="form-example-int mg-t-15">
                             <button class="btn btn-success notika-btn-success" onclick="go();">Guardar.</button>
@@ -339,7 +338,7 @@ $email   = $_POST['email'];
 $tel   = $_POST['telefono'];
 $cel  = $_POST['celular'];
 $observ  = $_POST['observ'];
-    $consulta  = "INSERT INTO tclientes VALUES('null','4','" .$nombre. "','" .$apellido. "','" .$direccion. "','" .$dui. "','" .$nit. "','" .$email. "','" .$tel. "','" .$observ. "','" .$cel. "')";
+    $consulta  = "INSERT INTO tclientes VALUES('null','4','1','" .$nombre. "','" .$apellido. "','" .$direccion. "','" .$dui. "','" .$nit. "','" .$tel. "','" .$cel. "','" .$email. "','" .$observ. "')";
     $resultado = $conexion->query($consulta);
       if ($resultado) {
           msg("Se agregaron los datos correctamente");
