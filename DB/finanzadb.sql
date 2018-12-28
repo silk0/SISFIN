@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Servidor: 127.0.0.1
--- Tiempo de generación: 27-12-2018 a las 16:29:39
+-- Tiempo de generación: 28-12-2018 a las 01:14:06
 -- Versión del servidor: 10.1.25-MariaDB
 -- Versión de PHP: 7.1.7
 
@@ -54,6 +54,16 @@ CREATE TABLE `tcartera` (
   `nombre` varchar(45) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
+--
+-- Volcado de datos para la tabla `tcartera`
+--
+
+INSERT INTO `tcartera` (`id_categoria`, `nombre`) VALUES
+(1, 'A'),
+(2, 'B'),
+(3, 'c'),
+(4, 'D');
+
 -- --------------------------------------------------------
 
 --
@@ -76,15 +86,16 @@ CREATE TABLE `tclasificacion` (
 CREATE TABLE `tclientes` (
   `id_cliente` int(10) NOT NULL,
   `id_cartera` int(10) NOT NULL,
-  `nombre` varchar(50) NOT NULL,
-  `apellido` varchar(50) NOT NULL,
-  `direccion` varchar(100) NOT NULL,
-  `dui` varchar(15) NOT NULL,
-  `nit` varchar(15) NOT NULL,
-  `correo` varchar(30) NOT NULL,
-  `telefono` varchar(12) NOT NULL,
-  `observaciones` varchar(300) NOT NULL,
-  `contrato_pagare` varchar(2000) NOT NULL
+  `id_fiador` int(10) NOT NULL,
+  `nombre` int(11) NOT NULL,
+  `apellido` int(11) NOT NULL,
+  `direccion` int(11) NOT NULL,
+  `dui` int(11) NOT NULL,
+  `nit` int(11) NOT NULL,
+  `telefono` int(11) NOT NULL,
+  `celular` int(11) NOT NULL,
+  `correo` int(11) NOT NULL,
+  `observaciones` int(11) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 -- --------------------------------------------------------
@@ -171,7 +182,6 @@ CREATE TABLE `testado` (
 
 CREATE TABLE `tfiador` (
   `id_fiador` int(10) NOT NULL,
-  `id_cliente` int(10) NOT NULL,
   `nombre` varchar(50) NOT NULL,
   `apellido` varchar(50) NOT NULL,
   `direccion` varchar(200) NOT NULL,
@@ -325,7 +335,8 @@ ALTER TABLE `tclasificacion`
 --
 ALTER TABLE `tclientes`
   ADD PRIMARY KEY (`id_cliente`),
-  ADD KEY `fk_cartera` (`id_cartera`);
+  ADD KEY `fk_cartera` (`id_cartera`),
+  ADD KEY `fk_fiador` (`id_fiador`);
 
 --
 -- Indices de la tabla `tdepartamento`
@@ -370,8 +381,7 @@ ALTER TABLE `testado`
 -- Indices de la tabla `tfiador`
 --
 ALTER TABLE `tfiador`
-  ADD PRIMARY KEY (`id_fiador`),
-  ADD KEY `fk_cliente` (`id_cliente`);
+  ADD PRIMARY KEY (`id_fiador`);
 
 --
 -- Indices de la tabla `tinstitucion`
@@ -440,7 +450,7 @@ ALTER TABLE `tactivo`
 -- AUTO_INCREMENT de la tabla `tcartera`
 --
 ALTER TABLE `tcartera`
-  MODIFY `id_categoria` int(10) NOT NULL AUTO_INCREMENT;
+  MODIFY `id_categoria` int(10) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
 --
 -- AUTO_INCREMENT de la tabla `tclasificacion`
 --
@@ -535,7 +545,8 @@ ALTER TABLE `tactivo`
 -- Filtros para la tabla `tclientes`
 --
 ALTER TABLE `tclientes`
-  ADD CONSTRAINT `fk_cartera` FOREIGN KEY (`id_cartera`) REFERENCES `tcartera` (`id_categoria`);
+  ADD CONSTRAINT `fk_cartera` FOREIGN KEY (`id_cartera`) REFERENCES `tcartera` (`id_categoria`),
+  ADD CONSTRAINT `fk_fiador` FOREIGN KEY (`id_fiador`) REFERENCES `tfiador` (`id_fiador`);
 
 --
 -- Filtros para la tabla `tdepartamento`
@@ -556,12 +567,6 @@ ALTER TABLE `tdetalle_compra`
 ALTER TABLE `tdetalle_venta`
   ADD CONSTRAINT `fk_producto` FOREIGN KEY (`id_producto`) REFERENCES `tproducto` (`id_producto`),
   ADD CONSTRAINT `fk_ventas` FOREIGN KEY (`id_venta`) REFERENCES `tventas` (`id_venta`);
-
---
--- Filtros para la tabla `tfiador`
---
-ALTER TABLE `tfiador`
-  ADD CONSTRAINT `fk_clientefiador` FOREIGN KEY (`id_cliente`) REFERENCES `tclientes` (`id_cliente`);
 
 --
 -- Filtros para la tabla `tinventario`
