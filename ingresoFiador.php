@@ -119,7 +119,7 @@ function go(){
                             <h2>Datos del Fiador.</h2>
                             
                         </div>
-                        <form name="form" method="post" action="ingresoCliente.php?bandera=1">
+                        <form name="form" method="post" action="ingresoFiador.php?bandera=1">
                         <div class="row">
                             <div class="col-lg-6 col-md-6 col-sm-6 col-xs-12">
                                 <div class="form-example-int">
@@ -348,7 +348,7 @@ $celular    = $_POST['celular'];
 $trabajo    = $_POST['trabajo'];
 $salario    = $_POST['salario'];
 
-    $consulta  = "INSERT INTO tfiador VALUES('null','4','" .$nombre. "','" .$apellido. "','" .$direccion. "','" .$dui. "','" .$nit. "','" .$email. "','" .$telefono. "','" .$trabajo. "','" .$celular. "','" .$salario. "')";
+    $consulta  = "INSERT INTO tfiador VALUES('null','" .$nombre. "','" .$apellido. "','" .$direccion. "','" .$dui. "','" .$nit. "','" .$email. "','" .$telefono. "','" .$trabajo. "','" .$celular. "','" .$salario. "')";
     $resultado = $conexion->query($consulta);
       if ($resultado) {
           msg("Se agregaron los datos correctamente");
