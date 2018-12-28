@@ -1,3 +1,24 @@
+<?php
+$id = $_REQUEST["id"];
+include "config/conexion.php";
+$result = $conexion->query("select * from tfiador where id_fiador=" . $id);
+if ($result) {
+    while ($fila = $result->fetch_object()) {
+        $idR               = $fila->id_fiador;
+        $nombreR           = $fila->nombre;
+        $apellidoR         = $fila->apellido;
+        $direccionR        = $fila->direccion;
+        $duiR              = $fila->dui;
+        $nitR              = $fila->nit;
+        $correoR           = $fila->correo;
+        $trabajoR          = $fila->profecion;
+        $salarioR          = $fila->salario;
+        $telefonoR         = $fila->telefono;
+        $celularR          = $fila->celular;
+       }
+}
+
+?>
 <!doctype html>
 <html class="no-js" lang="">
 
@@ -58,8 +79,8 @@
 </head>
 <SCRIPT  language=JavaScript> 
 function go(){
-    //validacion respectiva me da hueva
         document.form.submit();  
+       
 } 
 
 </script> 
@@ -92,7 +113,7 @@ function go(){
 										<i class="notika-icon notika-form"></i>
 									</div>
 									<div class="breadcomb-ctn">
-										<h2>Registro de fiador.</h2>
+										<h2>Modificación de datos del fiador.</h2>
 										<p>Formulario de datos personales <span class="bread-ntd">para fiadores.</span></p>
 									</div>
 								</div>
@@ -119,15 +140,16 @@ function go(){
                             <h2>Datos del Fiador.</h2>
                             
                         </div>
-                        <form name="form" method="post" action="ingresarFiador.php?bandera=1">
-                       
+                        <form id="form" name="form" method="post" action="editarFiador.php?bandera=1">
+                        <input type="hidden" name="baccion" id="baccion" value="<?php echo $idR; ?>">
+                        
                         <div class="row">
                             <div class="col-lg-6 col-md-6 col-sm-6 col-xs-12">
                                 <div class="form-example-int">
                                     <div class="form-group">
                                         <label>Nombre:</label>
                                         <div class="nk-int-st">
-                                        <input type="text" id="nombre" name="nombre" class="form-control input-sm" placeholder="Ingrese su nombre." required >
+                                        <input type="text" id="nombre" name="nombre" class="form-control input-sm" placeholder="Ingrese su nombre." value="<?php echo $nombreR; ?>" required>
                                         </div>
                                     </div>
                                 </div>
@@ -137,7 +159,7 @@ function go(){
                                     <div class="form-group">
                                         <label>Apellido:</label>
                                         <div class="nk-int-st">
-                                        <input type="text" id="apellido" name="apellido" class="form-control input-sm" placeholder="Ingrese su apellido."  required>
+                                        <input type="text" id="apellido" name="apellido" class="form-control input-sm" placeholder="Ingrese su apellido." value="<?php echo $apellidoR; ?>" required>
                                         </div>
                                     </div>
                                 </div>
@@ -150,7 +172,7 @@ function go(){
                                     <div class="form-group">
                                         <label>DUI:</label>
                                         <div class="nk-int-st">
-                                           <input type="text" id="dui"name="dui" class="form-control input-sm" data-mask="99999999-9" placeholder="Ingrese su DUI." required>
+                                           <input type="text" id="dui"name="dui" class="form-control input-sm" data-mask="99999999-9" placeholder="Ingrese su DUI." value="<?php echo $duiR; ?>" required>
                                         </div>
                                      </div>                            
                                 </div>
@@ -161,7 +183,7 @@ function go(){
                                     <div class="form-group">
                                         <label>NIT:</label>
                                         <div class="nk-int-st">
-                                           <input type="text" id="nit" name="nit" class="form-control input-sm" data-mask="9999-999999-999-9" placeholder="Ingrese su NIT." required>
+                                           <input type="text" id="nit" name="nit" class="form-control input-sm" data-mask="9999-999999-999-9" placeholder="Ingrese su NIT." value="<?php echo $nitR; ?>" required>
                                         </div>
                                      </div>                            
                                 </div>
@@ -172,7 +194,7 @@ function go(){
                             <div class="form-group">
                                 <label>Dirección:</label>
                                 <div class="nk-int-st">
-                                    <input type="text" id="direc" name="direc" class="form-control input-sm" placeholder="Ingrese su dirección." required>
+                                    <input type="text" id="direc" name="direc" class="form-control input-sm" placeholder="Ingrese su dirección." value="<?php echo $direccionR; ?>" required>
                                 </div>
                             </div>
                         </div>
@@ -188,7 +210,7 @@ function go(){
                                     <div class="form-group">
                                         <label>Teléfono:</label>
                                         <div class="nk-int-st">
-                                           <input type="text" id="telefono" name="telefono" class="form-control input-sm" data-mask="9999-9999" placeholder="Ingrese Telefono." required>
+                                           <input type="text" id="telefono" name="telefono" class="form-control input-sm" data-mask="9999-9999" placeholder="Ingrese Telefono." value="<?php echo $telefonoR; ?>"required>
                                         </div>
                                      </div>                            
                                 </div>
@@ -199,7 +221,7 @@ function go(){
                                     <div class="form-group">
                                         <label>Celular:</label>
                                         <div class="nk-int-st">
-                                           <input type="text" id="celular" name="celular" class="form-control input-sm" data-mask="9999-9999" placeholder="Ingrese Celular." required>
+                                           <input type="text" id="celular" name="celular" class="form-control input-sm" data-mask="9999-9999" placeholder="Ingrese Celular." value="<?php echo $celularR; ?>" required>
                                         </div>
                                      </div>                            
                                 </div>
@@ -209,7 +231,7 @@ function go(){
                                     <div class="form-group">
                                         <label>E-mail:</label>
                                         <div class="nk-int-st">
-                                           <input type="text" id="email" name="email" class="form-control input-sm" placeholder="Ingrese el E-mail">
+                                           <input type="text" id="email" name="email" class="form-control input-sm" placeholder="Ingrese el E-mail" value="<?php echo $correoR; ?>">
                                         </div>
                                      </div>                            
                                 </div>
@@ -223,7 +245,7 @@ function go(){
                                     <div class="form-group">
                                         <label>Trabajo que realiza:</label>
                                         <div class="nk-int-st">
-                                        <input type="text" id="trabajo" name="trabajo" class="form-control input-sm" placeholder="Ingrese el trabajo que realiza el fiador." required>
+                                        <input type="text" id="trabajo" name="trabajo" class="form-control input-sm" placeholder="Ingrese el trabajo que realiza el fiador." value="<?php echo $trabajoR; ?>" required>
                                         </div>
                                     </div>
                                 </div>
@@ -233,7 +255,7 @@ function go(){
                                     <div class="form-group">
                                         <label>Salario:</label>
                                         <div class="nk-int-st">
-                                        <input type="text" id="salario" name="salario" class="form-control input-sm" placeholder="Ingrese el salario del fiador." required>
+                                        <input type="text" id="salario" name="salario" class="form-control input-sm" placeholder="Ingrese el salario del fiador." value="<?php echo $salarioR; ?>" required>
                                         </div>
                                     </div>
                                 </div>
@@ -329,32 +351,35 @@ function go(){
 </html>
 <?php
 include "config/conexion.php";
-$accion = $_REQUEST['bandera'];
-if($accion==1){
-$nombre     = $_POST['nombre'];
-$apellido   = $_POST['apellido'];
-$direccion  = $_POST['direc'];
-$dui        = $_POST['dui'];
-$nit        = $_POST['nit'];
-$email      = $_POST['email'];
-$telefono   = $_POST['telefono'];
-$celular    = $_POST['celular'];
-$trabajo    = $_POST['trabajo'];
-$salario    = $_POST['salario'];
+$bandera = $_REQUEST['bandera'];
+$baccion  = $_REQUEST["baccion"];
+if ($bandera==1) {
+$nombre     = $_REQUEST['nombre'];
+$apellido   = $_REQUEST['apellido'];
+$direccion  = $_REQUEST['direc'];
+$dui        = $_REQUEST['dui'];
+$nit        = $_REQUEST['nit'];
+$email      = $_REQUEST['email'];
+$telefono   = $_RQUEST['telefono'];
+$celular    = $_REQUEST['celular'];
+$trabajo    = $_REQUEST['trabajo'];
+$salario    = $_REQUEST['salario'];
+msg($nombre);
 
-    $consulta  = "INSERT INTO tfiador VALUES('null','" .$nombre. "','" .$apellido. "','" .$direccion. "','" .$dui. "','" .$nit. "','" .$email. "','" .$trabajo. "','" .$salario. "','" .$telefono. "','" .$celular. "')";
+    $consulta  = "UPDATE tfiador set nombre='" . $nombre . "' where id_fiador='" . $baccion . "'";
     $resultado = $conexion->query($consulta);
       if ($resultado) {
-          msg("Se agregaron los datos correctamente");
+          msg("Se modificacon los datos correctamente");
       } else {
           msg("Error al insertar los datos");
       }
-}
+    }
+
 function msg($texto)
 {
     echo "<script type='text/javascript'>";
     echo "alert('$texto');";
-    echo "document.location.href='ingresarFiador.php';";
+    echo "document.location.href='editarFiador.php';";
     echo "</script>";
 }
 ?>
