@@ -348,7 +348,7 @@ $celular    = $_POST['celular'];
 $trabajo    = $_POST['trabajo'];
 $salario    = $_POST['salario'];
 
-    $consulta  = "INSERT INTO tfiador VALUES('null','" .$nombre. "','" .$apellido. "','" .$direccion. "','" .$dui. "','" .$nit. "','" .$email. "','" .$telefono. "','" .$trabajo. "','" .$celular. "','" .$salario. "')";
+    $consulta  = "INSERT INTO tfiador VALUES('null','" .$nombre. "','" .$apellido. "','" .$direccion. "','" .$dui. "','" .$nit. "','" .$email. "','" .$trabajo. "','" .$salario. "','" .$telefono. "','" .$celular. "')";
     $resultado = $conexion->query($consulta);
       if ($resultado) {
           msg("Se agregaron los datos correctamente");
