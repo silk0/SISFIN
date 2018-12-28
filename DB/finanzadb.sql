@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Servidor: 127.0.0.1
--- Tiempo de generación: 28-12-2018 a las 16:37:03
+-- Tiempo de generación: 28-12-2018 a las 16:54:34
 -- Versión del servidor: 10.1.25-MariaDB
 -- Versión de PHP: 7.1.7
 
@@ -87,18 +87,18 @@ CREATE TABLE `tclientes` (
   `id_cliente` int(10) NOT NULL,
   `id_cartera` int(10) NOT NULL,
   `id_fiador` int(10) NOT NULL,
-  `nombre` int(11) NOT NULL,
-  `apellido` int(11) NOT NULL,
-  `direccion` int(11) NOT NULL,
-  `dui` int(11) NOT NULL,
-  `nit` int(11) NOT NULL,
+  `nombre` varchar(50) NOT NULL,
+  `apellido` varchar(50) NOT NULL,
+  `direccion` varchar(150) NOT NULL,
+  `dui` varchar(20) NOT NULL,
+  `nit` varchar(20) NOT NULL,
   `profecion` varchar(50) NOT NULL,
   `tipo_ingreso` varchar(50) NOT NULL,
   `salario` float NOT NULL,
-  `telefono` int(11) NOT NULL,
-  `celular` int(11) NOT NULL,
-  `correo` int(11) NOT NULL,
-  `observaciones` int(11) NOT NULL
+  `telefono` varchar(20) NOT NULL,
+  `celular` varchar(20) NOT NULL,
+  `correo` varchar(40) NOT NULL,
+  `observaciones` varchar(200) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 -- --------------------------------------------------------
