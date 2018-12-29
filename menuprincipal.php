@@ -18,7 +18,7 @@
                         </li>
                         <li><a data-toggle="tab" href="#Appviews"><i class="notika-icon notika-app"></i> Proveedores</a>
                         </li>
-                        
+                                               
                     </ul>
                     <div class="tab-content custom-menu-content">
                         <div id="Home" class="tab-pane in active notika-tab-menu-bg animated flipInX">
@@ -99,7 +99,7 @@
                             <ul class="notika-main-menu-dropdown">
                                 <li><a href="ingresarProducto.php">Registrar Productos</a>
                                 </li>
-                                <li><a href="form-elements.html">Form Elements</a>
+                                <li><a href="comprarProductos.php">Comprar</a>
                                 </li>
                                 <li><a href="form-components.html">Form Components</a>
                                 </li>
@@ -151,6 +151,7 @@
                                 </li>
                             </ul>
                         </div>
+                        
                     </div>
                 </div>
             </div>
