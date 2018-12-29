@@ -141,7 +141,17 @@ function enviar(id){
                         <form name="form" method="post" action="ingresoCliente.php?bandera=1">
                         <input type="hidden" id="idproveedor" name="idproveedor">
                         <div class="row">
-                            <div class="col-lg-8 col-md-8 col-sm-8 col-xs-12">
+                            <div class="col-lg-4 col-md-4 col-sm-4 col-xs-12">
+                                <div class="form-example-int">
+                                    <div class="form-group">
+                                        <label>Código:</label>
+                                        <div class="nk-int-st">
+                                        <input type="text" name="nombre" class="form-control input-sm" data-mask="99999999" placeholder="Ingrese el código del producto." >
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-lg-4 col-md-4 col-sm-4 col-xs-12">
                                 <div class="form-example-int">
                                     <div class="form-group">
                                         <label>Nombre:</label>

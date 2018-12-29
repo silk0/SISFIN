@@ -4,7 +4,7 @@
 <head>
     <meta charset="utf-8">
     <meta http-equiv="x-ua-compatible" content="ie=edge">
-    <title>Mostrar Fiadores| SISFIN</title>
+    <title>Productos Disponibles| SISFIN</title>
     <meta name="description" content="">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <!-- favicon
@@ -60,8 +60,8 @@
     <script src="js/vendor/modernizr-2.8.3.min.js"></script>
     <script>
     function modify(id){
-       
-        document.location.href="editarFiador.php?id="+id;
+        alert(id);
+        // document.location.href="editarFiador.php?id="+id;
     }
     </script>
 </head>
@@ -94,8 +94,8 @@
 										<i class="notika-icon notika-windows"></i>
 									</div>
 									<div class="breadcomb-ctn">
-										<h2>Lista de Fiadores</h2>
-										<p>Datos personales<span class="bread-ntd">de fiadores registrados.</span></p>
+										<h2>Lista de productos</h2>
+										<p>Datos de <span class="bread-ntd">de productos activos.</span></p>
 									</div>
 								</div>
 							</div>
@@ -123,35 +123,37 @@
                         <div class="table-responsive">
                             <table id="data-table-basic" class="table table-striped">
                                 <thead>
-                                   <tr>
-                                        
+                                   <tr>                                       
+                                        <th>Código</th>
                                         <th>Nombre</th>
-                                        <th>Apellido</th>
-                                        <th>DUI</th>
-                                        <th>Teléfono</th>
-                                        <th>Celular</th>
-                                        <th>E-mail</th>
-                                        <th>Opciones</th>
-                                       
+                                        <th>Proveedor</th>
+                                        <th>Stock</th>
+                                        <th>Opciones</th>                                       
                                     </tr>
                                 </thead>
                                 <tbody>
                       <?php
 include "config/conexion.php";
-$result = $conexion->query("SELECT * from tfiador ORDER BY id_fiador");
+$result = $conexion->query("SELECT * from tproducto ORDER BY id_producto");
 if ($result) {
     while ($fila = $result->fetch_object()) {
         echo "<tr>";
+        echo "<td>" . $fila->codigo . "</td>";
         echo "<td>" . $fila->nombre . "</td>";
-        echo "<td>" . $fila->apellido . "</td>";
-        echo "<td>" . $fila->dui . "</td>";  
-        echo "<td>" . $fila->telefono . "</td>";
-        echo "<td>" . $fila->celular . "</td>";
-        echo "<td>" . $fila->correo . "</td>";
+        // OBTENER EL NOMBRE DEL PROVEEDOR
+        $result2 = $conexion->query("SELECT * from tproveedor where id_proveedor=".$fila->id_proveedor);
+        if ($result2) {
+             while ($fila2 = $result2->fetch_object()) {
+                 echo "<td>" . $fila2->nombre . "</td>"; 
+                }
+            }
+         
+        echo "<td>" . $fila->stock . "</td>";
+        
         echo "<td>
         <div class='button-icon-btn'>
         <button class='btn btn-info info-icon-notika btn-reco-mg btn-button-mg' ><i class='notika-icon notika-search'></i></button>
-        <button class='btn btn-lightgreen lightgreen-icon-notika btn-reco-mg btn-button-mg' onclick='modify(" . $fila->id_fiador. ")'><i class='notika-icon notika-menus'></i></button>
+        <button class='btn btn-lightgreen lightgreen-icon-notika btn-reco-mg btn-button-mg' data-toggle='tooltip' data-placement='bottom' title='Hacer una compra.' onclick='modify(" . $fila->id_producto. ")'><i class='notika-icon notika-up-arrow'></i></button>
         </div>
         </td>";
         echo "</tr>";
@@ -162,13 +164,11 @@ if ($result) {
                                 </tbody>
                                 <tfoot>
                                     <tr>
+                                        <th>Código</th>
                                         <th>Nombre</th>
-                                        <th>Apellido</th>
-                                        <th>DUI</th>
-                                        <th>Teléfono</th>
-                                        <th>Celular</th>
-                                        <th>E-mail</th>
-                                        <th>Opciones</th>
+                                        <th>Proveedor</th>
+                                        <th>Stock</th>
+                                        <th>Opciones</th>  
                                     </tr>
                                 </tfoot>
                             </table>
