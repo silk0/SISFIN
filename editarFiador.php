@@ -360,15 +360,17 @@ $direccion  = $_REQUEST['direc'];
 $dui        = $_REQUEST['dui'];
 $nit        = $_REQUEST['nit'];
 $email      = $_REQUEST['email'];
-$telefono   = $_RQUEST['telefono'];
+$telefono   = $_REQUEST['telefono'];
 $celular    = $_REQUEST['celular'];
 $trabajo    = $_REQUEST['trabajo'];
 $salario    = $_REQUEST['salario'];
 msg($nombre);
 
-    $consulta  = "UPDATE tfiador set nombre='" . $nombre . "' where id_fiador='" . $baccion . "'";
+    $consulta  = "UPDATE tfiador set nombre='" . $nombre . "',apellido='" . $apellido . "',direccion='" . $direccion . "',dui='" . $dui . "',nit='" . $nit . "',correo='" . $email . "',profecion='" . $trabajo . "',salario='" . $salario . "',telefono='" . $telefono . "',celular='" . $celular . "' where id_fiador='" . $baccion . "'";
     $resultado = $conexion->query($consulta);
+    msg("antes if php");
       if ($resultado) {
+          
           msg("Se modificacon los datos correctamente");
       } else {
           msg("Error al insertar los datos");

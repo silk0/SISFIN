@@ -4,7 +4,7 @@
 <head>
     <meta charset="utf-8">
     <meta http-equiv="x-ua-compatible" content="ie=edge">
-    <title>Mostrar Fiadores |SISFIN</title>
+    <title>Mostrar Fiadores | SISFIN</title>
     <meta name="description" content="">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <!-- favicon
@@ -33,21 +33,21 @@
     <!-- normalize CSS
 		============================================ -->
     <link rel="stylesheet" href="css/normalize.css">
-	<!-- wave CSS
-		============================================ -->
-    <link rel="stylesheet" href="css/wave/waves.min.css">
-    <link rel="stylesheet" href="css/wave/button.css">
     <!-- mCustomScrollbar CSS
 		============================================ -->
     <link rel="stylesheet" href="css/scrollbar/jquery.mCustomScrollbar.min.css">
     <!-- Notika icon CSS
 		============================================ -->
     <link rel="stylesheet" href="css/notika-custom-icon.css">
-    <!-- Data Table JS
+    <!-- wave CSS
+		============================================ -->
+    <link rel="stylesheet" href="css/wave/waves.min.css">
+    <link rel="stylesheet" href="css/wave/button.css">
+    <!-- main CSS
+    ============================================ -->
+     <!-- Data Table JS
 		============================================ -->
     <link rel="stylesheet" href="css/jquery.dataTables.min.css">
-    <!-- main CSS
-		============================================ -->
     <link rel="stylesheet" href="css/main.css">
     <!-- style CSS
 		============================================ -->
@@ -58,13 +58,57 @@
     <!-- modernizr JS
 		============================================ -->
     <script src="js/vendor/modernizr-2.8.3.min.js"></script>
-</head>
 
+     <!-- Datatables -->
+     <link href="vendors/datatables.net-bs/css/dataTables.bootstrap.min.css" rel="stylesheet">
+    <link href="vendors/datatables.net-buttons-bs/css/buttons.bootstrap.min.css" rel="stylesheet">
+    <link href="vendors/datatables.net-fixedheader-bs/css/fixedHeader.bootstrap.min.css" rel="stylesheet">
+    <link href="vendors/datatables.net-responsive-bs/css/responsive.bootstrap.min.css" rel="stylesheet">
+    <link href="vendors/datatables.net-scroller-bs/css/scroller.bootstrap.min.css" rel="stylesheet">
+</head>
+<SCRIPT  language=JavaScript> 
+function go(){
+    //validacion respectiva me da hueva
+        document.form.submit();  
+} 
+function modify(id)
+        {
+          //alert("entra");
+          document.getElementById('bandera').value='enviar';
+          document.getElementById('baccion').value=id;
+         document.form.submit();
+        }
+function edit(id,nom,ape)
+        {
+            alert("llega");
+         // document.getElementById("baccion2").value=id;
+          document.getElementById("nombrem").value=nom;
+          document.getElementById("apellidom").value=ape;
+         // document.getElementById("marc").value=marca;
+         // document.getElementById("num").value=num;
+         // document.getElementById("descr").value=des;
+         // document.getElementById("donad").value=don;
+         //$("#baccion2").val(id);
+          //document.getElementById("tipou").value=tip;
+          //document.getElementById("esteq").value=estado;
+         //$("#nomb").val(nom);
+        //$("#marc").val(marca);
+          //$("#num").val(num);
+          //$("#donad").val(don);
+          //$("#descr").val(des);
+          $("#ModalInfo").modal();
+        //Ya manda todos los datos correcatamente
+          
+          
+        }
+
+</script> 
 <body>
     <!--[if lt IE 8]>
             <p class="browserupgrade">You are using an <strong>outdated</strong> browser. Please <a href="http://browsehappy.com/">upgrade your browser</a> to improve your experience.</p>
         <![endif]-->
-     <!-- Start Header Top Area -->
+    
+      <!-- Start Header Top Area -->
     <?php include "header.php"; ?>
         <!-- End Header Top Area -->
 
@@ -75,7 +119,6 @@
     <!-- Main Menu area start-->
     <?php include "menuprincipal.php"; ?>
     <!-- Main Menu area End-->
-    <!-- Start Status area -->
 	<!-- Breadcomb area Start-->
 	<div class="breadcomb-area">
 		<div class="container">
@@ -86,36 +129,34 @@
 							<div class="col-lg-6 col-md-6 col-sm-6 col-xs-12">
 								<div class="breadcomb-wp">
 									<div class="breadcomb-icon">
-										<i class="notika-icon notika-windows"></i>
+										<i class="notika-icon notika-form"></i>
 									</div>
 									<div class="breadcomb-ctn">
-										<h2>Fiadores</h2>
-										<p>Esta tabla <span class="bread-ntd">muestra los fiadores registrados.</span></p>
+										<h2>Lista de fiadores.</h2>
+										<p>Datos personales de clientes <span class="bread-ntd">para un nuevo cliente.</span></p>
 									</div>
 								</div>
 							</div>
-							<div class="col-lg-6 col-md-6 col-sm-6 col-xs-3">
+							<!-- <div class="col-lg-6 col-md-6 col-sm-6 col-xs-3">
 								<div class="breadcomb-report">
 									<button data-toggle="tooltip" data-placement="left" title="Download Report" class="btn"><i class="notika-icon notika-sent"></i></button>
 								</div>
-							</div>
+							</div> -->
 						</div>
 					</div>
 				</div>
 			</div>
 		</div>
 	</div>
-	<!-- Breadcomb area End-->
-    <!-- Data Table area Start-->
-    <div class="data-table-area">
+  <!-- Breadcomb area End-->
+  <!-- Data Table area Start-->
+  <div class="data-table-area">
         <div class="container">
             <div class="row">
                 <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
                     <div class="data-table-list">
                         <div class="basic-tb-hd">
-                            <h2>Fiadores</h2>
-                            <p>En esta tabla puede acceder a las diferentes opciones para cada fiador.</p>
-                        </div>
+                             </div>
                         <div class="table-responsive">
                             <table id="data-table-basic" class="table table-striped">
                                 <thead>
@@ -123,79 +164,39 @@
                                         
                                         <th>Nombre</th>
                                         <th>Apellido</th>
-                                        <th>Dirección</th>
+                                        <th>DUI</th>
                                         <th>Teléfono</th>
                                         <th>Celular</th>
-                                        <th>Lugar de Trabajo</th>
-                                       
-                                       
+                                        <th>E-mail</th>
+                                        <th>Opciones</th>
                                        
                                     </tr>
                                 </thead>
                                 <tbody>
-                                
-                                
-                                    <tr>
-                                        <td>Tiger Nixon</td>
-                                        <td>System Architect</td>
-                                        <td>Edinburgh</td>
-                                        <td>61</td>
-                                        <td>2011/04/25</td>
-                                        <td>$320,800</td>
-                                    </tr>
-                                    <tr>
-                                        <td>Garrett Winters</td>
-                                        <td>Accountant</td>
-                                        <td>Tokyo</td>
-                                        <td>63</td>
-                                        <td>2011/07/25</td>
-                                        <td>$170,750</td>
-                                    </tr>
-                                    <tr>
-                                        <td>Ashton Cox</td>
-                                        <td>Junior Technical Author</td>
-                                        <td>San Francisco</td>
-                                        <td>66</td>
-                                        <td>2009/01/12</td>
-                                        <td>$86,000</td>
-                                    </tr>
-                                    <tr>
-                                        <td>Cedric Kelly</td>
-                                        <td>Senior Javascript Developer</td>
-                                        <td>Edinburgh</td>
-                                        <td>22</td>
-                                        <td>2012/03/29</td>
-                                        <td>$433,060</td>
-                                    </tr>
-                                    <tr>
-                                        <td>Airi Satou</td>
-                                        <td>Accountant</td>
-                                        <td>Tokyo</td>
-                                        <td>33</td>
-                                        <td>2008/11/28</td>
-                                        <td>$162,700</td>
-                                    </tr>
-                                    <tr>
-                                        <td>Brielle Williamson</td>
-                                        <td>Integration Specialist</td>
-                                        <td>New York</td>
-                                        <td>61</td>
-                                        <td>2012/12/02</td>
-                                        <td>$372,000</td>
-                                    </tr>
-                                    
-                                </tbody>
-                                <tfoot>
-                                    <tr>
-                                       
-                                        <th>Nombre</th>
-                                        <th>Apellido</th>
-                                        <th>Dirección</th>
-                                        <th>Teléfono</th>
-                                        <th>Celular</th>
-                                        <th>Lugar de Trabajo</th>
-                                    </tr>
-                                </tfoot>
+                      <?php
+include "config/conexion.php";
+$result = $conexion->query("SELECT * from tfiador ORDER BY id_fiador");
+if ($result) {
+    while ($fila = $result->fetch_object()) {
+        echo "<tr>";
+        echo "<td>" . $fila->nombre . "</td>";
+        echo "<td>" . $fila->apellido . "</td>";
+        echo "<td>" . $fila->dui . "</td>";  
+        echo "<td>" . $fila->telefono . "</td>";
+        echo "<td>" . $fila->celular . "</td>";
+        echo "<td>" . $fila->correo . "</td>";
+        echo "<td>
+        <div class='button-icon-btn'>
+        <button class='btn btn-info info-icon-notika btn-reco-mg btn-button-mg' onclick='modify(" . $fila->id_fiador. ")';><i class='notika-icon notika-search'></i></button>
+        <button class='btn btn-lightgreen lightgreen-icon-notika btn-reco-mg btn-button-mg'><i class='notika-icon notika-menus'></i></button>
+        </div>
+        </td>";
+        echo "</tr>";
+
+    }
+}
+?>
+                      </tbody>
                             </table>
                         </div>
                     </div>
@@ -204,8 +205,128 @@
         </div>
     </div>
     <!-- Data Table area End-->
+ <!-- MODAL PARA FIADOR -->
+ <div class="modal animated shake" id="ModalInfo" role="dialog">
+                                    <div class="modal-dialog modal-large">
+                                        <div class="modal-content">
+                                            <div class="modal-header">
+                                                <button type="button" class="close" data-dismiss="modal">&times;</button>
+                                            </div>
+                                            <div class="modal-body">
+                                          
+
+        <h1>Datos del cliente</h1>
+<div class="row">
+                            <div class="col-lg-6 col-md-6 col-sm-6 col-xs-12">
+                                <div class="form-example-int">
+                                    <div class="form-group">
+                                        <label>Nombre:</label>
+                                        <div class="nk-int-st">
+                                        <input type="text" name="nombrem" id="nombrem" class="form-control input-sm" >
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-lg-6 col-md-6 col-sm-6 col-xs-12">
+                                <div class="form-example-int">
+                                    <div class="form-group">
+                                        <label>Apellido:</label>
+                                        <div class="nk-int-st">
+                                        <input type="text" name="apellidom" id="apellidom" class="form-control input-sm">
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+
+                        </div>
+                        <div class="row">
+                            <div class="col-lg-3 col-md-3 col-sm-3 col-xs-12">
+                                <div class="form-example-int mg-t-15">
+                                    <div class="form-group">
+                                        <label>DUI:</label>
+                                        <div class="nk-int-st">
+                                           <input type="text" name="dui" class="form-control input-sm">
+                                        </div>
+                                     </div>                            
+                                </div>
+                            </div>
+
+                             <div class="col-lg-3 col-md-3 col-sm-3 col-xs-10">
+                                <div class="form-example-int mg-t-15">
+                                    <div class="form-group">
+                                        <label>NIT:</label>
+                                        <div class="nk-int-st">
+                                           <input type="text" name="nit" class="form-control input-sm">
+                                        </div>
+                                     </div>                            
+                                </div>
+                            </div>
+                            <div class="col-lg-3 col-md-3 col-sm-3 col-xs-10">
+                                <div class="form-example-int mg-t-15">
+                                    <div class="form-group">
+                                        <label>Fiador</label>
+                                        <div class="nk-int-st">
+                                           <input type="text" name="nit" class="form-control input-sm">
+                                        </div>
+                                     </div>                            
+                                </div>
+                            </div>
+                            </div>
+                            <div class="form-example-int mg-t-15">
+                            <div class="form-group">
+                                <label>Dirección:</label>
+                                <div class="nk-int-st">
+                                    <input type="text" name="direc" class="form-control input-sm">
+                                </div>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-lg-4 col-md-4 col-sm-4 col-xs-12">
+                                <div class="form-example-int mg-t-15">
+                                    <div class="form-group">
+                                        <label>Teléfono:</label>
+                                        <div class="nk-int-st">
+                                           <input type="text" name="telefono" class="form-control input-sm">
+                                        </div>
+                                     </div>                            
+                                </div>
+                            </div>
+
+                             <div class="col-lg-4 col-md-4 col-sm-4 col-xs-12" >
+                                <div class="form-example-int mg-t-15">
+                                    <div class="form-group">
+                                        <label>Celular:</label>
+                                        <div class="nk-int-st">
+                                           <input type="text" name="celular" class="form-control input-sm">
+                                        </div>
+                                     </div>                            
+                                </div>
+                            </div>
+                            <div class="col-lg-4 col-md-4 col-sm-4 col-xs-12">
+                                <div class="form-example-int mg-t-15">
+                                    <div class="form-group">
+                                        <label>E-mail:</label>
+                                        <div class="nk-int-st">
+                                           <input type="text" name="email" class="form-control input-sm">
+                                        </div>
+                                     </div>                            
+                                </div>
+                            </div>
+                        </div>
+
+
+
+                                            </div>
+                                            <div class="modal-footer">
+                                                <button type="button" class="btn btn-default" data-dismiss="modal">Save changes</button>
+                                                <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+            <!-- FIN PARA MODAL DE FIADOR -->
     <!-- Start Footer area-->
-       <?php include "footer.php"; ?>
+    <?php include "footer.php";?>
     <!-- End Footer area-->
     <!-- jquery
 		============================================ -->
@@ -250,29 +371,76 @@
     <script src="js/knob/jquery.knob.js"></script>
     <script src="js/knob/jquery.appear.js"></script>
     <script src="js/knob/knob-active.js"></script>
+    <!-- icheck JS
+		============================================ -->
+    <script src="js/icheck/icheck.min.js"></script>
+    <script src="js/icheck/icheck-active.js"></script>
+    <!--  wave JS
+		============================================ -->
+    <script src="js/wave/waves.min.js"></script>
+    <script src="js/wave/wave-active.js"></script>
     <!--  Chat JS
 		============================================ -->
     <script src="js/chat/jquery.chat.js"></script>
     <!--  todo JS
 		============================================ -->
     <script src="js/todo/jquery.todo.js"></script>
-	<!--  wave JS
-		============================================ -->
-    <script src="js/wave/waves.min.js"></script>
-    <script src="js/wave/wave-active.js"></script>
     <!-- plugins JS
-		============================================ -->
-    <script src="js/plugins.js"></script>
+  
+    ============================================ -->
     <!-- Data Table JS
 		============================================ -->
     <script src="js/data-table/jquery.dataTables.min.js"></script>
     <script src="js/data-table/data-table-act.js"></script>
+    <script src="js/plugins.js"></script>
+        <!-- Input Mask JS
+		============================================ -->
+    <script src="js/jasny-bootstrap.min.js"></script>
     <!-- main JS
 		============================================ -->
     <script src="js/main.js"></script>
 	<!-- tawk chat JS
 		============================================ -->
-    <script src="js/tawk-chat.js"></script>
+    <!-- <script src="js/tawk-chat.js"></script> -->
+    <!-- Datatables -->
+  
+    <script src="vendors/datatables.net/js/jquery.dataTables.min.js"></script>
+    <script src="vendors/datatables.net-bs/js/dataTables.bootstrap.min.js"></script>
+    <script src="vendors/datatables.net-buttons/js/dataTables.buttons.min.js"></script>
+    <script src="vendors/datatables.net-buttons-bs/js/buttons.bootstrap.min.js"></script>
+    <script src="vendors/datatables.net-buttons/js/buttons.flash.min.js"></script>
+    <script src="vendors/datatables.net-buttons/js/buttons.html5.min.js"></script>
+    <script src="vendors/datatables.net-buttons/js/buttons.print.min.js"></script>
+    <script src="vendors/datatables.net-fixedheader/js/dataTables.fixedHeader.min.js"></script>
+    <script src="vendors/datatables.net-keytable/js/dataTables.keyTable.min.js"></script>
+    <script src="vendors/datatables.net-responsive/js/dataTables.responsive.min.js"></script>
+    <script src="vendors/datatables.net-responsive-bs/js/responsive.bootstrap.js"></script>
+    <script src="vendors/datatables.net-scroller/js/dataTables.scroller.min.js"></script>
+    <script src="vendors/jszip/dist/jszip.min.js"></script>
+    <script src="vendors/pdfmake/build/pdfmake.min.js"></script>
+    <script src="vendors/pdfmake/build/vfs_fonts.js"></script>
 </body>
 
 </html>
+<?php
+include "../config/conexion.php";
+
+$bandera = $_REQUEST["bandera"];
+$baccion = $_REQUEST["baccion"];
+if ($bandera == 'enviar') {
+    echo "<script type='text/javascript'>";
+    echo "document.location.href='editarFiador.php?id=" . $baccion . "';";
+    echo "</script>";
+    # code...
+}
+function msg($texto)
+{
+    echo "<script type='text/javascript'>";
+    echo "alert('$texto');";
+    echo "document.location.href='mostrarFiadores.php';";
+    echo "</script>";
+}
+  
+
+?>
+
