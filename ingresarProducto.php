@@ -7,6 +7,9 @@
     <title>Ingreso de Productos | SISFIN</title>
     <meta name="description" content="">
     <meta name="viewport" content="width=device-width, initial-scale=1">
+    <!-- bootstrap select CSS
+		============================================ -->
+        <link rel="stylesheet" href="css/bootstrap-select/bootstrap-select.css">
     <!-- favicon
 		============================================ -->
     <link rel="shortcut icon" type="image/x-icon" href="img/favicon.ico">
@@ -60,6 +63,22 @@
 function go(){
     //validacion respectiva me da hueva
         document.form.submit();  
+}
+function enviar(id){
+    
+    $.ajax({
+        data:{"id":id},
+        url: 'scriptsphp/recuperarProveedor.php',
+        type: 'post',
+        beforeSend: function(){
+            alert("Por favr espere...");
+        },
+        success: function(response){
+            alert(response);
+            document.getElementById("proveedor").value=response;
+            document.getElementById("idproveedor").value=id;
+        }
+    });
 } 
 
 </script> 
@@ -120,23 +139,24 @@ function go(){
                             
                         </div>
                         <form name="form" method="post" action="ingresoCliente.php?bandera=1">
+                        <input type="hidden" id="idproveedor" name="idproveedor">
                         <div class="row">
-                            <div class="col-lg-6 col-md-6 col-sm-6 col-xs-12">
+                            <div class="col-lg-8 col-md-8 col-sm-8 col-xs-12">
                                 <div class="form-example-int">
                                     <div class="form-group">
                                         <label>Nombre:</label>
                                         <div class="nk-int-st">
-                                        <input type="text" name="nombre" class="form-control input-sm" placeholder="Ingrese su nombre." required>
+                                        <input type="text" name="nombre" class="form-control input-sm" placeholder="Ingrese el nombre del producto." >
                                         </div>
                                     </div>
                                 </div>
                             </div>
-                            <div class="col-lg-6 col-md-6 col-sm-6 col-xs-12">
+                           <div class="col-lg-4 col-md-4 col-sm-4 col-xs-12">
                                 <div class="form-example-int">
                                     <div class="form-group">
-                                        <label>Apellido:</label>
+                                        <label>Stock Mínimo:</label>
                                         <div class="nk-int-st">
-                                        <input type="text" name="apellido" class="form-control input-sm" placeholder="Ingrese su apellido." required>
+                                        <input type="text" name="nombre" class="form-control input-sm" placeholder="Ingrese el stock minimo deseado." >
                                         </div>
                                     </div>
                                 </div>
@@ -144,81 +164,73 @@ function go(){
 
                         </div>
                         <div class="row">
+                            <div class="col-lg-2 col-md-2 col-sm-2 col-xs-12">
+                                <div class="form-example-int mg-t-15">
+                                    <div class="form-group">
+                                        <label>Precio de Compra:</label>
+                                        <div class="nk-int-st">
+                                           <input type="text" name="pcompra" class="form-control input-sm" readonly placeholder="Precio de compra." value="0.00">
+                                        </div>
+                                     </div>                            
+                                </div>
+                            </div>
+
+                             <div class="col-lg-3 col-md-3 col-sm-3 col-xs-12">
+                                <div class="form-example-int mg-t-15">
+                                    <div class="form-group">
+                                        <label>Margen de Ganancia:</label>
+                                        <div class="nk-int-st">
+                                           <input type="text" name="mganancia" class="form-control input-sm"  placeholder="Ingrese el margen deseado %." >
+                                        </div>
+                                     </div>                            
+                                </div>
+                            </div>
+                            <div class="col-lg-2 col-md-2 col-sm-2 col-xs-12">
+                                <div class="form-example-int mg-t-15">
+                                    <div class="form-group">
+                                        <label>Precio de Venta:</label>
+                                        <div class="nk-int-st">
+                                           <input type="text" name="pventa" class="form-control input-sm"  placeholder="Ingrese el precio de venta deseado." readonly value="0.00">
+                                        </div>
+                                     </div>                            
+                                </div>
+                            </div>
                             <div class="col-lg-4 col-md-4 col-sm-4 col-xs-12">
                                 <div class="form-example-int mg-t-15">
                                     <div class="form-group">
-                                        <label>DUI:</label>
+                                        <label>Proveedor:</label>
                                         <div class="nk-int-st">
-                                           <input type="text" name="dui" class="form-control input-sm" data-mask="99999999-9" placeholder="Ingrese su DUI." required>
+                                           <input type="text" name="proveedor" id="proveedor" class="form-control input-sm"  placeholder="Nombre del proveedor." readonly>
+                                           
                                         </div>
                                      </div>                            
                                 </div>
                             </div>
-                           
-                             <div class="col-lg-4 col-md-4 col-sm-4 col-xs-12">
-                                <div class="form-example-int mg-t-15">
-                                    <div class="form-group">
-                                        <label>NIT:</label>
-                                        <div class="nk-int-st">
-                                           <input type="text" name="nit" class="form-control input-sm" data-mask="9999-999999-999-9" placeholder="Ingrese su NIT." required>
-                                        </div>
-                                     </div>                            
-                                </div>
+
+                            <div class="col-lg-1 col-md-1 col-sm-1 col-xs-12">
+                               <div class="">
+                                   <br>
+									<button type="button" data-toggle="modal" data-target="#myModalone" class="btn btn-success success-icon-notika btn-reco-mg btn-button-mg waves-effect"><i class="notika-icon notika-house"></i></button>
+								</div>
                             </div>
+                            
                         </div>
-                        
-                        <div class="form-example-int mg-t-15">
-                            <div class="form-group">
-                                <label>Dirección:</label>
-                                <div class="nk-int-st">
-                                    <input type="text" name="direc" class="form-control input-sm" placeholder="Ingrese su dirección." required>
-                                </div>
-                            </div>
-                        </div>
+                    
                         
                         
                         <!-- FILA PARA DATOS CORTOS -->
                         
                          <!-- FIN DE FILA PARA DATOS CORTOS -->
                       
-                        <div class="row">
-                            <div class="col-lg-4 col-md-4 col-sm-4 col-xs-12">
-                                <div class="form-example-int mg-t-15">
-                                    <div class="form-group">
-                                        <label>Teléfono:</label>
-                                        <div class="nk-int-st">
-                                           <input type="text" name="telefono" class="form-control input-sm" data-mask="9999-9999" placeholder="Ingrese Telefono." required>
-                                        </div>
-                                     </div>                            
-                                </div>
-                            </div>
-                             <div class="col-lg-4 col-md-4 col-sm-4 col-xs-12" >
-                                <div class="form-example-int mg-t-15">
-                                    <div class="form-group">
-                                        <label>Celular:</label>
-                                        <div class="nk-int-st">
-                                           <input type="text" name="celular" class="form-control input-sm" data-mask="9999-9999" placeholder="Ingrese Celular." required>
-                                        </div>
-                                     </div>                            
-                                </div>
-                            </div>
-                             <div class="col-lg-4 col-md-4 col-sm-4 col-xs-12">
-                                <div class="form-example-int mg-t-15">
-                                    <div class="form-group">
-                                        <label>E-mail:</label>
-                                        <div class="nk-int-st">
-                                           <input type="text" name="email" class="form-control input-sm" placeholder="Ingrese el E-mail">
-                                        </div>
-                                     </div>                            
-                                </div>
-                            </div>
-                        </div>
+                    
+                        <!-- salrios-->
+                    
                         
-                           
+                            
                         <div class="row">
                             <div class="col-lg-8 col-md-12 col-sm-12 col-xs-12">
                                 <div class="floating-numner form-rlt-mg">
-                                    <p>Observaciones:</p>
+                                    <p>Descripción:</p>
                                 </div>
                             </div>
                         </div>
@@ -226,18 +238,17 @@ function go(){
                             <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
                                 <div class="form-group">
                                     <div class="nk-int-st">
-                                        <textarea class="form-control" name="observ" rows="5" placeholder="Escriba aquí las observaciones deseadas acerca del cliente..."></textarea required>
+                                        <textarea class="form-control" name="observ" rows="3" placeholder="Escriba aquí la descripción deseada acerca del producto..."></textarea required>
                                     </div>
                                 </div>
                             </div>
                         </div>
-                        <div class="form-example-int mg-t-15">
+                       <!-- <div class="form-example-int mg-t-15">
                             <div class="fm-checkbox">
                                 <label><input type="checkbox" name="estado" class="i-checks"> <i></i> Estado.</label>
                                 <label for="">Checkee para activar</label>
                             </div>
-                        </div>
-
+                        </div>-->
                         
                         <div class="form-example-int mg-t-15">
                             <button class="btn btn-success notika-btn-success" onclick="go();">Guardar.</button>
@@ -246,6 +257,86 @@ function go(){
                     </div>
                 </div>
             </div>
+            <!-- MODAL PARA FIADOR -->
+                                <div class="modal animated shake" id="myModalone" role="dialog">
+                                    <div class="modal-dialog modal-large">
+                                        <div class="modal-content">
+                                            <div class="modal-header">
+                                                <button type="button" class="close" data-dismiss="modal">&times;</button>
+                                            </div>
+                                            <div class="modal-body">
+                                               <!-- Data Table area Start-->
+    <div class="data-table-area">
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-7 col-md-7 col-sm-7 col-xs-7">
+                    <div class="data-table-list">
+                        <div class="basic-tb-hd">
+                            <h2>Seleccione uno de los fiadores de la sigueinte tabla.</h2>
+                        </div>
+                        <div class="table-responsive">
+                            <table id="data-table-basic" class="table table-striped">
+                                <thead>
+                                    <tr>
+                                        
+                                        <th>Nombre</th>
+                                        <th>Apellido</th>
+                                        <th>Dui</th>
+                                        <th>Enviar</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                        <?php
+include "config/conexion.php";
+$result = $conexion->query("SELECT * from tproveedor ORDER BY id_proveedor");
+if ($result) {
+    while ($fila = $result->fetch_object()) {
+        echo "<tr>";
+        echo "<td>" . $fila->nombre . "</td>";
+        echo "<td>" . $fila->representante . "</td>";
+        echo "<td>" . $fila->celular . "</td>";  
+        
+        echo "<td>
+        <div class='button-icon-btn'>
+        <button class='btn btn-info info-icon-notika btn-reco-mg btn-button-mg' data-dismiss='modal' onclick=\"enviar('$fila->id_proveedor')\";><i class='notika-icon notika-next'></i></button>
+        </div>
+        </td>";
+        echo "</tr>";
+
+    }
+}
+?>
+                                
+                                   
+                                    
+                                </tbody>
+                                <tfoot>
+                                    <tr>
+                                       
+                                        <th>Nombre</th>
+                                        <th>Apellido</th>
+                                        <th>Dui</th>
+                                        <th>Enviar</th>
+                                       
+                                    </tr>
+                                </tfoot>
+                            </table>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- Data Table area End-->
+</div>
+                                            <div class="modal-footer">
+                                                <button type="button" class="btn btn-default" data-dismiss="modal">Listo</button>
+                                               
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+            <!-- FIN PARA MODAL DE FIADOR -->
             
             
     </div>
@@ -313,6 +404,10 @@ function go(){
     <!-- plugins JS
 		============================================ -->
     <script src="js/plugins.js"></script>
+        <!-- Data Table JS
+		============================================ -->
+    <script src="js/data-table/jquery.dataTables.min.js"></script>
+    <script src="js/data-table/data-table-act.js"></script>
         <!-- Input Mask JS
 		============================================ -->
     <script src="js/jasny-bootstrap.min.js"></script>
@@ -322,6 +417,11 @@ function go(){
 	<!-- tawk chat JS
 		============================================ -->
     <!-- <script src="js/tawk-chat.js"></script> -->
+ <!-- bootstrap select JS
+		============================================ -->
+        <script src="js/bootstrap-select/bootstrap-select.js"></script>
+
+    
 </body>
 
 </html>
@@ -337,8 +437,11 @@ $nit   = $_POST['nit'];
 $email   = $_POST['email'];
 $tel   = $_POST['telefono'];
 $cel  = $_POST['celular'];
+$tipo=$_POST['tipo'];
+$prof=$_POST['profecion'];
+$salario=$_POST['salario'];
 $observ  = $_POST['observ'];
-    $consulta  = "INSERT INTO tclientes VALUES('null','4','" .$nombre. "','" .$apellido. "','" .$direccion. "','" .$dui. "','" .$nit. "','" .$email. "','" .$tel. "','" .$observ. "','" .$cel. "')";
+    $consulta  = "INSERT INTO tclientes VALUES('null','4','1','" .$nombre. "','" .$apellido. "','" .$direccion. "','" .$dui. "','" .$nit. "','" .$prof. "','" .$tipo. "','" .$salario. "','" .$tel. "','" .$cel. "','" .$email. "','" .$observ. "')";
     $resultado = $conexion->query($consulta);
       if ($resultado) {
           msg("Se agregaron los datos correctamente");
