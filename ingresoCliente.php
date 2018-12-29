@@ -64,6 +64,22 @@ function go(){
     //validacion respectiva me da hueva
         document.form.submit();  
 } 
+function enviar(id){
+    
+    $.ajax({
+        data:{"id":id},
+        url: 'scriptsphp/recuperarFiador.php',
+        type: 'post',
+        beforeSend: function(){
+            alert("Por favr espere...");
+        },
+        success: function(response){
+            alert(response);
+            document.getElementById("fiador").value=response;
+            document.getElementById("idfiador").value=id;
+        }
+    });
+} 
 
 </script> 
 <body>
@@ -123,6 +139,7 @@ function go(){
                             
                         </div>
                         <form name="form" method="post" action="ingresoCliente.php?bandera=1">
+                        <input type="hidden" id="idfiador" name="idfiador">
                         <div class="row">
                             <div class="col-lg-6 col-md-6 col-sm-6 col-xs-12">
                                 <div class="form-example-int">
@@ -173,7 +190,7 @@ function go(){
                                     <div class="form-group">
                                         <label>Fiador:</label>
                                         <div class="nk-int-st">
-                                           <input type="text" name="fiador" class="form-control input-sm"  placeholder="Nombre del fiador." readonly>
+                                           <input type="text" name="fiador" id="fiador" class="form-control input-sm"  placeholder="Nombre del fiador." readonly>
                                            
                                         </div>
                                      </div>                            
@@ -183,7 +200,7 @@ function go(){
                             <div class="col-lg-2 col-md-2 col-sm-2 col-xs-10">
                                <div class="">
                                    <br>
-									<button data-toggle="modal" data-target="#myModalone" class="btn btn-success success-icon-notika btn-reco-mg btn-button-mg waves-effect"><i class="notika-icon notika-house"></i></button>
+									<button  type="button" data-toggle="modal" data-target="#myModalone" class="btn btn-success success-icon-notika btn-reco-mg btn-button-mg waves-effect"><i class="notika-icon notika-house"></i></button>
 								</div>
                             </div>
                             
@@ -304,8 +321,8 @@ function go(){
                     </div>
                 </div>
             </div>
-            <!-- MODAL PARA FIADOR -->
-                                <div class="modal animated shake" id="myModalone" role="dialog">
+           <!-- MODAL PARA FIADOR -->
+           <div class="modal animated shake" id="myModalone" role="dialog">
                                     <div class="modal-dialog modal-large">
                                         <div class="modal-content">
                                             <div class="modal-header">
@@ -316,11 +333,10 @@ function go(){
     <div class="data-table-area">
         <div class="container">
             <div class="row">
-                <div class="col-lg-6 col-md-6 col-sm-6 col-xs-6">
+                <div class="col-lg-7 col-md-7 col-sm-7 col-xs-7">
                     <div class="data-table-list">
                         <div class="basic-tb-hd">
-                            <h2>Fiadores</h2>
-                            <p>Datos personales de fiador.</p>
+                            <h2>Seleccione uno de los fiadores de la sigueinte tabla.</h2>
                         </div>
                         <div class="table-responsive">
                             <table id="data-table-basic" class="table table-striped">
@@ -329,48 +345,33 @@ function go(){
                                         
                                         <th>Nombre</th>
                                         <th>Apellido</th>
-                                        <th>Teléfono</th>
+                                        <th>Dui</th>
+                                        <th>Enviar</th>
                                     </tr>
                                 </thead>
                                 <tbody>
+                                        <?php
+include "config/conexion.php";
+$result = $conexion->query("SELECT * from tfiador ORDER BY id_fiador");
+if ($result) {
+    while ($fila = $result->fetch_object()) {
+        echo "<tr>";
+        echo "<td>" . $fila->nombre . "</td>";
+        echo "<td>" . $fila->apellido . "</td>";
+        echo "<td>" . $fila->dui . "</td>";  
+        
+        echo "<td>
+        <div class='button-icon-btn'>
+        <button class='btn btn-info info-icon-notika btn-reco-mg btn-button-mg' data-dismiss='modal' onclick=\"enviar('$fila->id_fiador')\";><i class='notika-icon notika-next'></i></button>
+        </div>
+        </td>";
+        echo "</tr>";
+
+    }
+}
+?>
                                 
-                                
-                                    <tr>
-                                        <td>Tiger Nixon</td>
-                                        <td>System Architect</td>
-                                        <td>Edinburgh</td>
-                                       
-                                    </tr>
-                                    <tr>
-                                        <td>Garrett Winters</td>
-                                        <td>Accountant</td>
-                                        <td>Tokyo</td>
-                                      
-                                    </tr>
-                                    <tr>
-                                        <td>Ashton Cox</td>
-                                        <td>Junior Technical Author</td>
-                                        <td>San Francisco</td>
-                                       
-                                    </tr>
-                                    <tr>
-                                        <td>Cedric Kelly</td>
-                                        <td>Senior Javascript Developer</td>
-                                        <td>Edinburgh</td>
-                                        
-                                    </tr>
-                                    <tr>
-                                        <td>Airi Satou</td>
-                                        <td>Accountant</td>
-                                        <td>Tokyo</td>
-                                      
-                                    </tr>
-                                    <tr>
-                                        <td>Brielle Williamson</td>
-                                        <td>Integration Specialist</td>
-                                        <td>New York</td>
-                                        
-                                    </tr>
+                                   
                                     
                                 </tbody>
                                 <tfoot>
@@ -378,7 +379,8 @@ function go(){
                                        
                                         <th>Nombre</th>
                                         <th>Apellido</th>
-                                        <th>Dirección</th>
+                                        <th>Dui</th>
+                                        <th>Enviar</th>
                                        
                                     </tr>
                                 </tfoot>
@@ -392,8 +394,8 @@ function go(){
     <!-- Data Table area End-->
 </div>
                                             <div class="modal-footer">
-                                                <button type="button" class="btn btn-default" data-dismiss="modal">Save changes</button>
-                                                <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+                                                <button type="button" class="btn btn-default" data-dismiss="modal">Listo</button>
+                                               
                                             </div>
                                         </div>
                                     </div>
@@ -463,8 +465,13 @@ function go(){
     <!--  todo JS
 		============================================ -->
     <script src="js/todo/jquery.todo.js"></script>
+     <!-- Data Table JS
+		============================================ -->
+        <script src="js/data-table/jquery.dataTables.min.js"></script>
+    <script src="js/data-table/data-table-act.js"></script>
     <!-- plugins JS
 		============================================ -->
+        
     <script src="js/plugins.js"></script>
         <!-- Input Mask JS
 		============================================ -->
@@ -490,6 +497,7 @@ if($accion==1){
 $nombre   = $_POST['nombre'];
 $apellido   = $_POST['apellido'];
 $direccion   = $_POST['direc'];
+$fiador= $_POST['idfiador'];
 $dui  = $_POST['dui'];
 $nit   = $_POST['nit'];
 $email   = $_POST['email'];
@@ -499,7 +507,7 @@ $tipo=$_POST['tipo'];
 $prof=$_POST['profecion'];
 $salario=$_POST['salario'];
 $observ  = $_POST['observ'];
-    $consulta  = "INSERT INTO tclientes VALUES('null','4','1','" .$nombre. "','" .$apellido. "','" .$direccion. "','" .$dui. "','" .$nit. "','" .$prof. "','" .$tipo. "','" .$salario. "','" .$tel. "','" .$cel. "','" .$email. "','" .$observ. "')";
+    $consulta  = "INSERT INTO tclientes VALUES('null','4','" .$fiador. "','" .$nombre. "','" .$apellido. "','" .$direccion. "','" .$dui. "','" .$nit. "','" .$prof. "','" .$tipo. "','" .$salario. "','" .$tel. "','" .$cel. "','" .$email. "','" .$observ. "')";
     $resultado = $conexion->query($consulta);
       if ($resultado) {
           msg("Se agregaron los datos correctamente");
