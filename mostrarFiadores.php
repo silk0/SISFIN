@@ -4,7 +4,7 @@
 <head>
     <meta charset="utf-8">
     <meta http-equiv="x-ua-compatible" content="ie=edge">
-    <title>Data Table | Notika - Notika Admin Template</title>
+    <title>Mostrar Fiadores| SISFIN</title>
     <meta name="description" content="">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <!-- favicon
@@ -94,8 +94,8 @@
 										<i class="notika-icon notika-windows"></i>
 									</div>
 									<div class="breadcomb-ctn">
-										<h2>Data Table</h2>
-										<p>Welcome to Notika <span class="bread-ntd">Admin Template</span></p>
+										<h2>Lista de Fiadores</h2>
+										<p>Datos personales<span class="bread-ntd">de fiadores registrados.</span></p>
 									</div>
 								</div>
 							</div>
@@ -118,8 +118,7 @@
                 <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
                     <div class="data-table-list">
                         <div class="basic-tb-hd">
-                            <h2>Basic Example</h2>
-                            <p>It's just that simple. Turn your simple table into a sophisticated data table and offer your users a nice experience and great features without any effort.</p>
+                            
                         </div>
                         <div class="table-responsive">
                             <table id="data-table-basic" class="table table-striped">
