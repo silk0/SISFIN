@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Servidor: 127.0.0.1
--- Tiempo de generación: 28-12-2018 a las 16:54:34
+-- Tiempo de generación: 29-12-2018 a las 04:39:14
 -- Versión del servidor: 10.1.25-MariaDB
 -- Versión de PHP: 7.1.7
 
@@ -101,6 +101,15 @@ CREATE TABLE `tclientes` (
   `observaciones` varchar(200) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
+--
+-- Volcado de datos para la tabla `tclientes`
+--
+
+INSERT INTO `tclientes` (`id_cliente`, `id_cartera`, `id_fiador`, `nombre`, `apellido`, `direccion`, `dui`, `nit`, `profecion`, `tipo_ingreso`, `salario`, `telefono`, `celular`, `correo`, `observaciones`) VALUES
+(3, 4, 1, 'Jessica Abigail ', 'Rosales', 'Santo tomas abajo cantos los hernandez, apastepeque San vicente', '12832738-7', '1278-372883-827-8', '2783-7827', 'Remesa', 500, '2389-2898', '7787-8788', 'jessica@gmail.com', 'jksjkfjkdsh'),
+(4, 4, 1, 'Fernando Josue', 'Hernandez Arevalo', 'COl san benito #45 san Isisdro San salavador', '29389829-8', '7281-728738-273-4', '9999-9999', 'Salario', 1500, '2239-8928', '7887-8788', 'fernando97@gmai.com', 'una persona con posibilidad de pagar el credito'),
+(5, 4, 2, 'Maria Azucena', 'Garcia Mata', 'Colonia el manantial #45 SUchitoto', '28298398-9', '7876-767565-777-7', '9999-9999', 'Salario', 600, '2342-2222', '7837-8738', 'MariaAzu@hotmail.com', 'buena condicion de pago');
+
 -- --------------------------------------------------------
 
 --
@@ -197,6 +206,14 @@ CREATE TABLE `tfiador` (
   `celular` varchar(20) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
+--
+-- Volcado de datos para la tabla `tfiador`
+--
+
+INSERT INTO `tfiador` (`id_fiador`, `nombre`, `apellido`, `direccion`, `dui`, `nit`, `correo`, `profecion`, `salario`, `telefono`, `celular`) VALUES
+(1, 'kevin', 'jovel', 'san sebas', '2838329', '3989283', 'kevin@gmail.com', 'estudiante', 500, '2233234', '777777'),
+(2, 'Jose de la Cruz', 'Flores Garcia', 'col santa fe pol e casa $34', '298899-9', '289-234232-234-2', 'jose@gmail.com', 'ingeniero', 1600, '23334433', '78773667');
+
 -- --------------------------------------------------------
 
 --
@@ -258,7 +275,10 @@ CREATE TABLE `tproducto` (
   `nombre` varchar(50) NOT NULL,
   `descripcion` varchar(100) NOT NULL,
   `precio_compra` float NOT NULL,
-  `precio_venta` float NOT NULL
+  `precio_venta` float NOT NULL,
+  `margen` float NOT NULL,
+  `stock_minimo` int(10) NOT NULL,
+  `stock` int(10) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 -- --------------------------------------------------------
@@ -270,10 +290,22 @@ CREATE TABLE `tproducto` (
 CREATE TABLE `tproveedor` (
   `id_proveedor` int(10) NOT NULL,
   `nombre` varchar(50) NOT NULL,
-  `dui` varchar(20) NOT NULL,
   `direccion` varchar(100) NOT NULL,
-  `telefono` varchar(30) NOT NULL
+  `telefono` varchar(30) NOT NULL,
+  `representante` varchar(75) NOT NULL,
+  `dui` varchar(20) NOT NULL,
+  `nit` varchar(20) NOT NULL,
+  `celular` varchar(20) NOT NULL,
+  `email` varchar(30) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+--
+-- Volcado de datos para la tabla `tproveedor`
+--
+
+INSERT INTO `tproveedor` (`id_proveedor`, `nombre`, `direccion`, `telefono`, `representante`, `dui`, `nit`, `celular`, `email`) VALUES
+(1, 'SIMAN', 'Blv. santa cruz #42 Santa Tecla, La Libertad', '2342-3212', 'Jose ignacio Martinez Zavala', '83829898-9', '2001-299399-901-0', '7829-9388', 'Jose234@gmail.com'),
+(2, 'CACAO', 'el paso', '2939-9299', 'oscar', '23989898-9', '2817-287987-287-9', '7876-5524', 'oscar@yahoo.com');
 
 -- --------------------------------------------------------
 
@@ -465,7 +497,7 @@ ALTER TABLE `tclasificacion`
 -- AUTO_INCREMENT de la tabla `tclientes`
 --
 ALTER TABLE `tclientes`
-  MODIFY `id_cliente` int(10) NOT NULL AUTO_INCREMENT;
+  MODIFY `id_cliente` int(10) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
 --
 -- AUTO_INCREMENT de la tabla `tdepartamento`
 --
@@ -490,7 +522,7 @@ ALTER TABLE `testado`
 -- AUTO_INCREMENT de la tabla `tfiador`
 --
 ALTER TABLE `tfiador`
-  MODIFY `id_fiador` int(10) NOT NULL AUTO_INCREMENT;
+  MODIFY `id_fiador` int(10) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
 --
 -- AUTO_INCREMENT de la tabla `tinstitucion`
 --
@@ -520,7 +552,7 @@ ALTER TABLE `tproducto`
 -- AUTO_INCREMENT de la tabla `tproveedor`
 --
 ALTER TABLE `tproveedor`
-  MODIFY `id_proveedor` int(10) NOT NULL AUTO_INCREMENT;
+  MODIFY `id_proveedor` int(10) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
 --
 -- AUTO_INCREMENT de la tabla `ttipo_activo`
 --
