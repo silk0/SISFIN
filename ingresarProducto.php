@@ -141,7 +141,7 @@ function enviar(id){
                         <form name="form" method="post" action="ingresoCliente.php?bandera=1">
                         <input type="hidden" id="idproveedor" name="idproveedor">
                         <div class="row">
-                            <div class="col-lg-6 col-md-6 col-sm-6 col-xs-12">
+                            <div class="col-lg-8 col-md-8 col-sm-8 col-xs-12">
                                 <div class="form-example-int">
                                     <div class="form-group">
                                         <label>Nombre:</label>
@@ -151,7 +151,16 @@ function enviar(id){
                                     </div>
                                 </div>
                             </div>
-                           
+                           <div class="col-lg-4 col-md-4 col-sm-4 col-xs-12">
+                                <div class="form-example-int">
+                                    <div class="form-group">
+                                        <label>Stock Mínimo:</label>
+                                        <div class="nk-int-st">
+                                        <input type="text" name="nombre" class="form-control input-sm" placeholder="Ingrese el stock minimo deseado." >
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
 
                         </div>
                         <div class="row">
@@ -279,17 +288,17 @@ function enviar(id){
                                 <tbody>
                                         <?php
 include "config/conexion.php";
-$result = $conexion->query("SELECT * from tfiador ORDER BY id_fiador");
+$result = $conexion->query("SELECT * from tproveedor ORDER BY id_proveedor");
 if ($result) {
     while ($fila = $result->fetch_object()) {
         echo "<tr>";
         echo "<td>" . $fila->nombre . "</td>";
-        echo "<td>" . $fila->apellido . "</td>";
-        echo "<td>" . $fila->dui . "</td>";  
+        echo "<td>" . $fila->representante . "</td>";
+        echo "<td>" . $fila->celular . "</td>";  
         
         echo "<td>
         <div class='button-icon-btn'>
-        <button class='btn btn-info info-icon-notika btn-reco-mg btn-button-mg' data-dismiss='modal' onclick=\"enviar('$fila->id_fiador')\";><i class='notika-icon notika-next'></i></button>
+        <button class='btn btn-info info-icon-notika btn-reco-mg btn-button-mg' data-dismiss='modal' onclick=\"enviar('$fila->id_proveedor')\";><i class='notika-icon notika-next'></i></button>
         </div>
         </td>";
         echo "</tr>";
