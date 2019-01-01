@@ -1,6 +1,5 @@
 <!doctype html>
 <html class="no-js" lang="">
-
 <head>
     <meta charset="utf-8">
     <meta http-equiv="x-ua-compatible" content="ie=edge">
@@ -56,13 +55,52 @@
 		============================================ -->
     <link rel="stylesheet" href="css/responsive.css">
     <!-- modernizr JS
+        ============================================ -->
+         <!-- notification CSS
 		============================================ -->
+    <link rel="stylesheet" href="css/notification/notification.css">
     <script src="js/vendor/modernizr-2.8.3.min.js"></script>
 </head>
 <SCRIPT  language=JavaScript> 
 function go(){
-    //validacion respectiva me da hueva
-        document.form.submit();  
+
+    //Validaciones
+   if(document.getElementById('nombre').value==""){
+       alert("El campo nombre es obligatorio");
+       document.getElementById("nombre").focus();
+   }else if(document.getElementById('apellido').value==""){
+        alert("El campo apellido es obligatorio");
+       document.getElementById("apellido").focus();
+   }else if(document.getElementById('dui').value==""){
+        alert("El campo DUI es obligatorio");
+       document.getElementById("dui").focus();
+   }else if(document.getElementById('nit').value==""){
+        alert("El campo NIT es obligatorio");
+       document.getElementById("nit").focus();
+   }else if(document.getElementById('direc').value==""){
+        alert("El campo Direccion es obligatorio");
+       document.getElementById("direc").focus();
+   }else if(document.getElementById('telefono').value=="" && document.getElementById('celular').value==""){
+        alert("Ingrese por lo menos un numero de telefono");
+       document.getElementById("telefono").focus();
+   }else if(document.getElementById('profecion').value==""){
+        alert("El campo Profecion u Oficio es obligatorio");
+       document.getElementById("profecion").focus();
+   }else if(document.getElementById('tipo').value=="Seleccione"){
+        alert("Seleccione un tipo de Ingreso");
+       document.getElementById("tipo").focus();
+   }else if(document.getElementById('salario').value==""){
+        alert("El campo Ingreso Promedio es obligatorio");
+       document.getElementById("salario").focus();
+   }else if(document.getElementById('observ').value==""){
+        alert("El campo Observaciones es obligatorio");
+       document.getElementById("observ").focus();
+   }else{
+      document.form.submit();  
+   }
+   
+   
+     
 } 
 function enviar(id){
     
@@ -80,7 +118,6 @@ function enviar(id){
         }
     });
 } 
-
 </script> 
 <body>
     <!--[if lt IE 8]>
@@ -113,7 +150,8 @@ function enviar(id){
 									<div class="breadcomb-ctn">
 										<h2>Rgistro de cliente.</h2>
 										<p>Formulario de datos personales <span class="bread-ntd">para un nuevo cliente.</span></p>
-									</div>
+                                    </div>
+                                    
 								</div>
 							</div>
 							<!-- <div class="col-lg-6 col-md-6 col-sm-6 col-xs-3">
@@ -146,7 +184,7 @@ function enviar(id){
                                     <div class="form-group">
                                         <label>Nombre:</label>
                                         <div class="nk-int-st">
-                                        <input type="text" name="nombre" class="form-control input-sm" placeholder="Ingrese su nombre." >
+                                        <input type="text" name="nombre" id="nombre" class="form-control input-sm" placeholder="Ingrese su nombre." required >
                                         </div>
                                     </div>
                                 </div>
@@ -156,7 +194,7 @@ function enviar(id){
                                     <div class="form-group">
                                         <label>Apellido:</label>
                                         <div class="nk-int-st">
-                                        <input type="text" name="apellido" class="form-control input-sm" placeholder="Ingrese su apellido.">
+                                        <input type="text" name="apellido" id="apellido" class="form-control input-sm" placeholder="Ingrese su apellido.">
                                         </div>
                                     </div>
                                 </div>
@@ -169,7 +207,7 @@ function enviar(id){
                                     <div class="form-group">
                                         <label>DUI:</label>
                                         <div class="nk-int-st">
-                                           <input type="text" name="dui" class="form-control input-sm" data-mask="99999999-9" placeholder="Ingrese su DUI.">
+                                           <input type="text" name="dui" id="dui" class="form-control input-sm" data-mask="99999999-9" placeholder="Ingrese su DUI.">
                                         </div>
                                      </div>                            
                                 </div>
@@ -180,7 +218,7 @@ function enviar(id){
                                     <div class="form-group">
                                         <label>NIT:</label>
                                         <div class="nk-int-st">
-                                           <input type="text" name="nit" class="form-control input-sm" data-mask="9999-999999-999-9" placeholder="Ingrese su NIT.">
+                                           <input type="text" name="nit" id="nit" class="form-control input-sm" data-mask="9999-999999-999-9" placeholder="Ingrese su NIT.">
                                         </div>
                                      </div>                            
                                 </div>
@@ -210,7 +248,7 @@ function enviar(id){
                             <div class="form-group">
                                 <label>Dirección:</label>
                                 <div class="nk-int-st">
-                                    <input type="text" name="direc" class="form-control input-sm" placeholder="Ingrese su dirección." required>
+                                    <input type="text" name="direc" id="direc" class="form-control input-sm" placeholder="Ingrese su dirección.">
                                 </div>
                             </div>
                         </div>
@@ -226,7 +264,7 @@ function enviar(id){
                                     <div class="form-group">
                                         <label>Teléfono:</label>
                                         <div class="nk-int-st">
-                                           <input type="text" name="telefono" class="form-control input-sm" data-mask="9999-9999" placeholder="Ingrese Telefono." required>
+                                           <input type="text" name="telefono" id="telefono" class="form-control input-sm" data-mask="9999-9999" placeholder="Ingrese Telefono.">
                                         </div>
                                      </div>                            
                                 </div>
@@ -237,7 +275,7 @@ function enviar(id){
                                     <div class="form-group">
                                         <label>Celular:</label>
                                         <div class="nk-int-st">
-                                           <input type="text" name="celular" class="form-control input-sm" data-mask="9999-9999" placeholder="Ingrese Celular." required>
+                                           <input type="text" name="celular" id="celular" class="form-control input-sm" data-mask="9999-9999" placeholder="Ingrese Celular.">
                                         </div>
                                      </div>                            
                                 </div>
@@ -247,7 +285,7 @@ function enviar(id){
                                     <div class="form-group">
                                         <label>E-mail:</label>
                                         <div class="nk-int-st">
-                                           <input type="text" name="email" class="form-control input-sm" placeholder="Ingrese el E-mail">
+                                           <input type="text" name="email" id="email" class="form-control input-sm" placeholder="Ingrese el E-mail">
                                         </div>
                                      </div>                            
                                 </div>
@@ -258,22 +296,21 @@ function enviar(id){
                             <div class="col-lg-4 col-md-4 col-sm-4 col-xs-12">
                                 
                                 <label>Tipo de Ingreso</label>
-                               
                                 <div class="bootstrap-select fm-cmp-mg">
-                                    <select class="selectpicker" data-live-search="true" name="tipo">
-											<option>Salario</option>
+                                    <select class="selectpicker" data-live-search="true" name="tipo" id="tipo">
+                                    <option value="Seleccione">Seleccione</option>
+                                            <option>Salario</option>
 											<option>Remesa</option>
-											
+											<option>Salario Informal</option>
 										</select>
                                 </div>
                             </div>
-
                              <div class="col-lg-4 col-md-4 col-sm-4 col-xs-12" >
                                 <div class="form-example-int mg-t-15">
                                     <div class="form-group">
                                         <label>Profecion u oficio</label>
                                         <div class="nk-int-st">
-                                           <input type="text" name="profecion" class="form-control input-sm" data-mask="9999-9999" placeholder="Ingrese Profecion u oficio" required>
+                                           <input type="text" name="profecion" id="profecion" class="form-control input-sm" placeholder="Ingrese Profecion u oficio">
                                         </div>
                                      </div>                            
                                 </div>
@@ -281,9 +318,9 @@ function enviar(id){
                             <div class="col-lg-4 col-md-4 col-sm-4 col-xs-12">
                                 <div class="form-example-int mg-t-15">
                                     <div class="form-group">
-                                        <label>Salario</label>
+                                        <label>Ingreso Promedio</label>
                                         <div class="nk-int-st">
-                                           <input type="text" name="salario" class="form-control input-sm" placeholder="Ingrese salario">
+                                           <input type="number" name="salario" id="salario" class="form-control input-sm" placeholder="Introduzca Ingreso Promedio">
                                         </div>
                                      </div>                            
                                 </div>
@@ -302,7 +339,7 @@ function enviar(id){
                             <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
                                 <div class="form-group">
                                     <div class="nk-int-st">
-                                        <textarea class="form-control" name="observ" rows="5" placeholder="Escriba aquí las observaciones deseadas acerca del cliente..."></textarea required>
+                                        <textarea class="form-control" name="observ" id="observ" rows="5" placeholder="Escriba aquí las observaciones deseadas acerca del cliente..."></textarea>
                                     </div>
                                 </div>
                             </div>
@@ -312,10 +349,10 @@ function enviar(id){
                                 <label><input type="checkbox" name="estado" class="i-checks"> <i></i> Estado.</label>
                                 <label for="">Checkee para activar</label>
                             </div>
-                        </div>-->
+                        </div> -->
                         
                         <div class="form-example-int mg-t-15">
-                            <button class="btn btn-success notika-btn-success" onclick="go();">Guardar.</button>
+                            <button type="button" class="btn btn-success notika-btn-success" onclick="go();">Guardar.</button>
                         </div>
                         </form>
                     </div>
@@ -394,9 +431,10 @@ if ($result) {
     <!-- Data Table area End-->
 </div>
                                             <div class="modal-footer">
-                                                <button type="button" class="btn btn-default" data-dismiss="modal">Listo</button>
+                                                <button  type="button" class="btn btn-default" data-dismiss="modal">Listo</button>
                                                
                                             </div>
+                                         
                                         </div>
                                     </div>
                                 </div>
@@ -485,7 +523,10 @@ if ($result) {
  <!-- bootstrap select JS
 		============================================ -->
         <script src="js/bootstrap-select/bootstrap-select.js"></script>
-
+ <!--  notification JS
+		============================================ -->
+        <script src="js/notification/bootstrap-growl.min.js"></script>
+    <script src="js/notification/notification-active.js"></script>
     
 </body>
 
@@ -514,6 +555,7 @@ $observ  = $_POST['observ'];
       } else {
           msg("Error al insertar los datos");
       }
+      
 }
 function msg($texto)
 {

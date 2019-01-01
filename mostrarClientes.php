@@ -4,7 +4,7 @@
 <head>
     <meta charset="utf-8">
     <meta http-equiv="x-ua-compatible" content="ie=edge">
-    <title>Ingreso de Clientes | SISFIN</title>
+    <title>Lista de Clientes | SISFIN</title>
     <meta name="description" content="">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <!-- favicon
@@ -59,12 +59,6 @@
 		============================================ -->
     <script src="js/vendor/modernizr-2.8.3.min.js"></script>
 
-     <!-- Datatables -->
-     <link href="vendors/datatables.net-bs/css/dataTables.bootstrap.min.css" rel="stylesheet">
-    <link href="vendors/datatables.net-buttons-bs/css/buttons.bootstrap.min.css" rel="stylesheet">
-    <link href="vendors/datatables.net-fixedheader-bs/css/fixedHeader.bootstrap.min.css" rel="stylesheet">
-    <link href="vendors/datatables.net-responsive-bs/css/responsive.bootstrap.min.css" rel="stylesheet">
-    <link href="vendors/datatables.net-scroller-bs/css/scroller.bootstrap.min.css" rel="stylesheet">
 </head>
 <SCRIPT  language=JavaScript> 
 function go(){
@@ -130,11 +124,11 @@ function edit(id,nom,ape)
 									</div>
 								</div>
 							</div>
-							<!-- <div class="col-lg-6 col-md-6 col-sm-6 col-xs-3">
+							<div class="col-lg-6 col-md-6 col-sm-6 col-xs-3">
 								<div class="breadcomb-report">
 									<button data-toggle="tooltip" data-placement="left" title="Download Report" class="btn"><i class="notika-icon notika-sent"></i></button>
 								</div>
-							</div> -->
+							</div>
 						</div>
 					</div>
 				</div>
@@ -156,8 +150,7 @@ function edit(id,nom,ape)
                                     <tr>
                                         
                                         <th>Nombre</th>
-                                        <th>Apellido</th>
-                                       
+                                        <th>Apellido</th> 
                                         <th>Profecion</th>
                                         <th>Teléfono</th>
                                         <th>Celular</th>
@@ -395,24 +388,8 @@ if ($result) {
     <script src="js/main.js"></script>
 	<!-- tawk chat JS
 		============================================ -->
-    <!-- <script src="js/tawk-chat.js"></script> -->
-    <!-- Datatables -->
-  
-    <script src="vendors/datatables.net/js/jquery.dataTables.min.js"></script>
-    <script src="vendors/datatables.net-bs/js/dataTables.bootstrap.min.js"></script>
-    <script src="vendors/datatables.net-buttons/js/dataTables.buttons.min.js"></script>
-    <script src="vendors/datatables.net-buttons-bs/js/buttons.bootstrap.min.js"></script>
-    <script src="vendors/datatables.net-buttons/js/buttons.flash.min.js"></script>
-    <script src="vendors/datatables.net-buttons/js/buttons.html5.min.js"></script>
-    <script src="vendors/datatables.net-buttons/js/buttons.print.min.js"></script>
-    <script src="vendors/datatables.net-fixedheader/js/dataTables.fixedHeader.min.js"></script>
-    <script src="vendors/datatables.net-keytable/js/dataTables.keyTable.min.js"></script>
-    <script src="vendors/datatables.net-responsive/js/dataTables.responsive.min.js"></script>
-    <script src="vendors/datatables.net-responsive-bs/js/responsive.bootstrap.js"></script>
-    <script src="vendors/datatables.net-scroller/js/dataTables.scroller.min.js"></script>
-    <script src="vendors/jszip/dist/jszip.min.js"></script>
-    <script src="vendors/pdfmake/build/pdfmake.min.js"></script>
-    <script src="vendors/pdfmake/build/vfs_fonts.js"></script>
+    <script src="js/tawk-chat.js"></script>
+   
 </body>
 
 </html>

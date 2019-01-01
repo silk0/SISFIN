@@ -138,7 +138,7 @@ function enviar(id){
                             <h2>Datos del Producto</h2>
                             
                         </div>
-                        <form name="form" method="post" action="ingresoCliente.php?bandera=1">
+                        <form name="form" method="post" action="ingresarProducto.php?bandera=1">
                         <input type="hidden" id="idproveedor" name="idproveedor">
                         <div class="row">
                             <div class="col-lg-4 col-md-4 col-sm-4 col-xs-12">
