@@ -130,7 +130,7 @@ if ($result) {
                         </div>
 
                        <div class="row">
-                            <div class="col-lg-6 col-md-6 col-sm-6 col-xs-12">
+                            <div class="col-lg-4 col-md-4 col-sm-4 col-xs-12">
                                 <div class="form-example-int">
                                     <div class="form-group">
                                         <label>Producto:</label>
@@ -140,12 +140,32 @@ if ($result) {
                                     </div>
                                 </div>
                             </div>
-                            <div class="col-lg-6 col-md-6 col-sm-6 col-xs-12">
+                            <div class="col-lg-4 col-md-4 col-sm-4 col-xs-12">
                                 <div class="form-example-int">
                                     <div class="form-group">
                                         <label>Proveedor:</label>
                                         <div class="nk-int-st">
                                         <input type="text" name="apellido" id="apellido" class="form-control input-sm" placeholder="Ingrese el nombre del proveedor." value="<?php echo $nombreprov ?>" readonly>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-lg-2 col-md-2 col-sm-2 col-xs-12">
+                                <div class="form-example-int">
+                                    <div class="form-group">
+                                        <label>Precio de compra:</label>
+                                        <div class="nk-int-st">
+                                        <input type="text" name="apellido" id="apellido" class="form-control input-sm" placeholder="$0.00" >
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-lg-2 col-md-2 col-sm-2 col-xs-12">
+                                <div class="form-example-int">
+                                    <div class="form-group">
+                                        <label>Cantidad:</label>
+                                        <div class="nk-int-st">
+                                        <input type="text" name="apellido" id="apellido" class="form-control input-sm" placeholder="00" >
                                         </div>
                                     </div>
                                 </div>

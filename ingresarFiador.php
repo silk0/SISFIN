@@ -58,8 +58,46 @@
 </head>
 <SCRIPT  language=JavaScript> 
 function go(){
-    //validacion respectiva me da hueva
-        document.form.submit();  
+
+    //Validaciones
+   if(document.getElementById('nombre').value==""){
+    //    alert("El campo nombre es obligatorio");
+    //    prueba :p
+     notify(' Advertencia','El campo nombre es obligatorio.','top', 'right', 'any', 'warning');
+       document.getElementById("nombre").focus();
+   }else if(document.getElementById('apellido').value==""){
+        alert("El campo apellido es obligatorio");
+       document.getElementById("apellido").focus();
+   }else if(document.getElementById('dui').value==""){
+        alert("El campo DUI es obligatorio");
+       document.getElementById("dui").focus();
+   }else if(document.getElementById('nit').value==""){
+        alert("El campo NIT es obligatorio");
+       document.getElementById("nit").focus();
+   }else if(document.getElementById('direc').value==""){
+        alert("El campo Direccion es obligatorio");
+       document.getElementById("direc").focus();
+   }else if(document.getElementById('telefono').value=="" && document.getElementById('celular').value==""){
+        alert("Ingrese por lo menos un numero de telefono");
+       document.getElementById("telefono").focus();
+   }else if(document.getElementById('celular').value==""){
+        alert("El campo celular es obligatorio");
+       document.getElementById("celular").focus();
+   }else if(document.getElementById('email').value==""){
+        alert("Ingrese E-mail");
+       document.getElementById("email").focus();
+   }else if(document.getElementById('trabajo').value==""){
+        alert("El campo Trabajo que realiza es obligatorio");
+       document.getElementById("trabajo").focus();
+   }else if(document.getElementById('salario').value==""){
+        alert("El campo Salario es obligatorio");
+       document.getElementById("salario").focus();
+   }else{
+      document.form.submit();  
+   }
+   
+   
+     
 } 
 
 </script> 
