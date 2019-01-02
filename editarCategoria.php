@@ -1,3 +1,16 @@
+<?php
+$id = $_REQUEST["id"];
+include "config/conexion.php";
+$result = $conexion->query("select * from tcategoria where id_categoria=" . $id);
+if ($result) {
+    while ($fila = $result->fetch_object()) {
+        $idR               = $fila->id_categoria;
+        $nombreR           = $fila->categoria;
+        
+       }
+}
+
+?>
 <!doctype html>
 <html class="no-js" lang="">
 
@@ -60,37 +73,11 @@
 function go(){
     //validacion respectiva me da hueva
         document.form.submit();  
-}
-function confirmar(id,op)
-        {
-          if (op==1) {
-            if (confirm("!!Advertencia!! Desea Desactivar Este Registro?")) {
-            document.getElementById('bandera').value='desactivar';
-            document.getElementById('baccion').value=id;
-
-            document.form.submit();
-          }else
-          {
-            alert("No entra");
-          }
-          }else{
-            if (confirm("!!Advertencia!! Desea Activar Este Registro?")) {
-            document.getElementById('bandera').value='activar';
-            document.getElementById('baccion').value=id;
-            document.form.submit();
-          }else
-          {
-            alert("No entra");
-          }
-          }
-
-
-        } 
+} 
 function modificar(id){
        
        document.location.href="editarCategoria.php?id="+id;
    }
-   
 function enviar(id){
     
     $.ajax({
@@ -166,9 +153,9 @@ function enviar(id){
                             <h2>Datos de la Categoria</h2>
                             
                         </div>
-                        <form name="form" method="post" action="ingresarCategoria.php?bandera=1">
-                        <input type="hidden" name="bandera" id="bandera">
-                        <input type="hidden" name="baccion" id="baccion">
+                        <form name="form" method="post" action="editarCategoria.php?bandera=1">
+                        
+                        <input type="hidden" name="baccion" id="baccion" value="<?php echo $idR; ?>">
                         
 
                         <div class="row">
@@ -177,7 +164,7 @@ function enviar(id){
                                     <div class="form-group">
                                         <label>Categoria:</label>
                                         <div class="nk-int-st">
-                                        <input type="text" class="form-control input-sm" placeholder="Ingrese  nombre de categoria." id="nombre" name="nombre">
+                                        <input type="text" class="form-control input-sm" placeholder="Ingrese  nombre de categoria." id="nombre" name="nombre" value="<?php echo $nombreR; ?>">
                                         </div>
                                     </div>
                                 </div>
@@ -223,7 +210,7 @@ function enviar(id){
                                         
                                         <th>Categoria</th>
                                         <th>Modificar</th>
-                                        <th>Dar Alta/ Dar Baja</th>
+                                        <th>Enviar</th>
                                         
                                     </tr>
                                 </thead>
@@ -237,24 +224,21 @@ if ($result) {
         echo "<td>" . $fila->categoria . "</td>";
         echo "<td>
         <div class='button-icon-btn'>
+        
         <button class='btn btn-lightgreen lightgreen-icon-notika btn-reco-mg btn-button-mg' data-dismiss='modal' onclick=\"modificar('$fila->id_categoria')\";><i class='notika-icon notika-menus'></i></button>
-         </div>
+        
+        </div>
         </td>";
-        if ($fila->estado==1) {
-          echo "<td>Activo</td>";
-           //echo "<td><img src='imagenes.php?id=" . $fila->idempleados . "&tipo=empleado' width=100 height=180></td>";
-          echo "<td style='text-align:center;'><button align='center' type='button' class='btn btn-default' onclick=confirmar(" . $fila->id_categoria . ",1);><i class='fa fa-remove'></i>
-             </button></td>";
-       }else
-       {
-          echo "<td>Inactivo</td>";
-           //echo "<td><img src='imagenes.php?id=" . $fila->idempleados . "&tipo=empleado' width=100 height=180></td>";
-          echo "<td style='text-align:center;'><button align='center' type='button' class='btn btn-default' onclick=confirmar(" . $fila->id_categoria . ",2);><i class='fa fa-check'></i>
-             </button></td>";
-       }
         
         
-       
+        echo "<td>
+        <div class='button-icon-btn'>
+        <button class='btn btn-info info-icon-notika btn-reco-mg btn-button-mg' data-dismiss='modal' onclick=\"enviar('$fila->id_categoria')\";><i class='notika-icon notika-next'></i></button>
+        
+        
+        </div>
+        </td>";
+        
         
         echo "</tr>";
 
@@ -270,7 +254,7 @@ if ($result) {
                                        
                                         <th>Categoria</th>
                                         <th>Modificar</th>
-                                        <th>Dar Alta/ Dar Baja</th>
+                                        <th>Enviar</th>
                                         
                                        
                                     </tr>
@@ -373,24 +357,23 @@ if ($result) {
 </html>
 <?php
 include "config/conexion.php";
-$accion = $_REQUEST['bandera'];
-$baccion = $_REQUEST["baccion"];
-if($accion==1){
-$nombre     = $_POST['nombre'];
-$query = "SELECT categoria FROM tcategoria WHERE categoria like '%".$nombre."';";
-$result = $conexion->query($query);
-if($result->num_rows == 0){   
-$consulta  = "INSERT INTO tcategoria VALUES('null','" .$nombre. "')";
+$bandera = $_REQUEST['bandera'];
+$baccion  = $_REQUEST["baccion"];
+if ($bandera==1) {
+$nombre     = $_REQUEST['nombre'];
+msg($nombre);
+
+    $consulta  = "UPDATE tcategoria set categoria='" . $nombre . "' where id_categoria='" . $baccion . "'";
     $resultado = $conexion->query($consulta);
-      if($resultado){
-          msg("Se agregaron los datos correctamente");
+    msg("antes if php");
+      if ($resultado) {
+          
+          msg("Se modificacon los datos correctamente");
       } else {
           msg("Error al insertar los datos");
       }
-}else{
-  msg("Esta categoria ya existe");
-}
-}
+    }
+
 function msg($texto)
 {
     echo "<script type='text/javascript'>";
