@@ -65,19 +65,23 @@ function go(){
     //validacion respectiva me da hueva
         document.form.submit();  
 } 
-function edit(id,nom,ape)
+function edit(id,nom,ape,dui,nit,direc,tel,cel,email,tipo,prof,sal,ob)
         {
             alert("llega");
          // document.getElementById("baccion2").value=id;
           document.getElementById("nombrem").value=nom;
           document.getElementById("apellidom").value=ape;
-         // document.getElementById("marc").value=marca;
-         // document.getElementById("num").value=num;
-         // document.getElementById("descr").value=des;
-         // document.getElementById("donad").value=don;
+          document.getElementById("duim").value=dui;
+          document.getElementById("nitm").value=nit;
+          document.getElementById("direcm").value=direc;
+          document.getElementById("telm").value=tel;
          //$("#baccion2").val(id);
-          //document.getElementById("tipou").value=tip;
-          //document.getElementById("esteq").value=estado;
+          document.getElementById("celm").value=cel;
+          document.getElementById("emailm").value=email;
+          document.getElementById("tipom").value=tipo;
+          document.getElementById("profecion").value=prof;
+          document.getElementById("salm").value=sal;
+          document.getElementById("observm").value=ob;
          //$("#nomb").val(nom);
         //$("#marc").val(marca);
           //$("#num").val(num);
@@ -174,7 +178,7 @@ if ($result) {
         echo "<td>" . $fila->correo . "</td>";
         echo "<td>
         <div class='button-icon-btn'>
-        <button class='btn btn-info info-icon-notika btn-reco-mg btn-button-mg' onclick=\"edit('$fila->id_cliente','$fila->nombre','$fila->apellido')\";><i class='notika-icon notika-search'></i></button>
+        <button class='btn btn-info info-icon-notika btn-reco-mg btn-button-mg' onclick=\"edit('$fila->id_cliente','$fila->nombre','$fila->apellido','$fila->dui','$fila->nit','$fila->direccion','$fila->telefono','$fila->celular','$fila->correo','$fila->tipo_ingreso','$fila->profecion','$fila->salario','$fila->observaciones')\";><i class='notika-icon notika-search'></i></button>
         <button class='btn btn-lightgreen lightgreen-icon-notika btn-reco-mg btn-button-mg'><i class='notika-icon notika-menus'></i></button>
         </div>
         </td>";
@@ -227,43 +231,34 @@ if ($result) {
 
                         </div>
                         <div class="row">
-                            <div class="col-lg-3 col-md-3 col-sm-3 col-xs-12">
+                            <div class="col-lg-6 col-md-6 col-sm-6 col-xs-12">
                                 <div class="form-example-int mg-t-15">
                                     <div class="form-group">
                                         <label>DUI:</label>
                                         <div class="nk-int-st">
-                                           <input type="text" name="dui" class="form-control input-sm">
+                                           <input type="text" name="duim" id="duim" class="form-control input-sm">
                                         </div>
                                      </div>                            
                                 </div>
                             </div>
 
-                             <div class="col-lg-3 col-md-3 col-sm-3 col-xs-10">
+                             <div class="col-lg-6 col-md-6 col-sm-6 col-xs-10">
                                 <div class="form-example-int mg-t-15">
                                     <div class="form-group">
                                         <label>NIT:</label>
                                         <div class="nk-int-st">
-                                           <input type="text" name="nit" class="form-control input-sm">
+                                           <input type="text" name="nitm" id="nitm" class="form-control input-sm">
                                         </div>
                                      </div>                            
                                 </div>
                             </div>
-                            <div class="col-lg-3 col-md-3 col-sm-3 col-xs-10">
-                                <div class="form-example-int mg-t-15">
-                                    <div class="form-group">
-                                        <label>Fiador</label>
-                                        <div class="nk-int-st">
-                                           <input type="text" name="nit" class="form-control input-sm">
-                                        </div>
-                                     </div>                            
-                                </div>
-                            </div>
+                            
                             </div>
                             <div class="form-example-int mg-t-15">
                             <div class="form-group">
                                 <label>Dirección:</label>
                                 <div class="nk-int-st">
-                                    <input type="text" name="direc" class="form-control input-sm">
+                                    <input type="text" name="direcm" id="direcm"class="form-control input-sm">
                                 </div>
                             </div>
                         </div>
@@ -273,7 +268,7 @@ if ($result) {
                                     <div class="form-group">
                                         <label>Teléfono:</label>
                                         <div class="nk-int-st">
-                                           <input type="text" name="telefono" class="form-control input-sm">
+                                           <input type="text" name="telm" id="telm" class="form-control input-sm">
                                         </div>
                                      </div>                            
                                 </div>
@@ -284,7 +279,7 @@ if ($result) {
                                     <div class="form-group">
                                         <label>Celular:</label>
                                         <div class="nk-int-st">
-                                           <input type="text" name="celular" class="form-control input-sm">
+                                           <input type="text" name="celm" id="celm" class="form-control input-sm">
                                         </div>
                                      </div>                            
                                 </div>
@@ -294,13 +289,62 @@ if ($result) {
                                     <div class="form-group">
                                         <label>E-mail:</label>
                                         <div class="nk-int-st">
-                                           <input type="text" name="email" class="form-control input-sm">
+                                           <input type="text" name="emailm" id="emailm" class="form-control input-sm">
                                         </div>
                                      </div>                            
                                 </div>
                             </div>
                         </div>
-
+                        <div class="row">
+                        <div class="col-lg-4 col-md-4 col-sm-4 col-xs-12" >
+                                <div class="form-example-int mg-t-15">
+                                    <div class="form-group">
+                                        <label>Tipo de Ingreso</label>
+                                        <div class="nk-int-st">
+                                           <input type="text" name="tipom" id="tipom" class="form-control input-sm" placeholder="Ingrese Profecion u oficio">
+                                        </div>
+                                     </div>                            
+                                </div>
+                            </div>
+                             <div class="col-lg-4 col-md-4 col-sm-4 col-xs-12" >
+                                <div class="form-example-int mg-t-15">
+                                    <div class="form-group">
+                                        <label>Profecion u oficio</label>
+                                        <div class="nk-int-st">
+                                           <input type="text" name="profecion" id="profecion" class="form-control input-sm" placeholder="Ingrese Profecion u oficio">
+                                        </div>
+                                     </div>                            
+                                </div>
+                            </div>
+                            <div class="col-lg-4 col-md-4 col-sm-4 col-xs-12">
+                                <div class="form-example-int mg-t-15">
+                                    <div class="form-group">
+                                        <label>Ingreso Promedio $ (mensual)</label>
+                                        <div class="nk-int-st">
+                                           <input type="number" name="salm" id="salm" class="form-control input-sm" placeholder="Introduzca Ingreso Promedio">
+                                        </div>
+                                     </div>                            
+                                </div>
+                            </div>
+                        </div>
+                        
+                            
+                        <div class="row">
+                            <div class="col-lg-8 col-md-12 col-sm-12 col-xs-12">
+                                <div class="floating-numner form-rlt-mg">
+                                    <p>Observaciones:</p>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
+                                <div class="form-group">
+                                    <div class="nk-int-st">
+                                        <textarea class="form-control" name="observm" id="observm" rows="5" placeholder="Escriba aquí las observaciones deseadas acerca del cliente..."></textarea>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
 
 
                                             </div>

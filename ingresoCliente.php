@@ -142,10 +142,7 @@ function go(){
        document.getElementById("observ").focus();
    }else{
       document.form.submit();  
-   }
-   
-   
-     
+   }   
 } 
 function enviar(id){
     
@@ -247,7 +244,7 @@ function enviar(id){
 
                         </div>
                         <div class="row">
-                            <div class="col-lg-3 col-md-3 col-sm-3 col-xs-12">
+                            <div class="col-lg-6 col-md-6 col-sm-6 col-xs-12">
                                 <div class="form-example-int mg-t-15">
                                     <div class="form-group">
                                         <label>DUI:</label>
@@ -258,7 +255,7 @@ function enviar(id){
                                 </div>
                             </div>
 
-                             <div class="col-lg-3 col-md-3 col-sm-3 col-xs-10">
+                             <div class="col-lg-6 col-md-6 col-sm-6 col-xs-10">
                                 <div class="form-example-int mg-t-15">
                                     <div class="form-group">
                                         <label>NIT:</label>
@@ -269,7 +266,7 @@ function enviar(id){
                                 </div>
                             </div>
                            
-                            <div class="col-lg-4 col-md-4 col-sm-4 col-xs-10">
+                            <!-- <div class="col-lg-4 col-md-4 col-sm-4 col-xs-10">
                                 <div class="form-example-int mg-t-15">
                                     <div class="form-group">
                                         <label>Fiador:</label>
@@ -279,14 +276,14 @@ function enviar(id){
                                         </div>
                                      </div>                            
                                 </div>
-                            </div>
+                            </div> -->
 
-                            <div class="col-lg-2 col-md-2 col-sm-2 col-xs-10">
+                            <!-- <div class="col-lg-2 col-md-2 col-sm-2 col-xs-10">
                                <div class="">
                                    <br>
 									<button  type="button" data-toggle="modal" data-target="#myModalone" class="btn btn-success success-icon-notika btn-reco-mg btn-button-mg waves-effect"><i class="notika-icon notika-house"></i></button>
 								</div>
-                            </div>
+                            </div> -->
                             
                         </div>
                         
@@ -399,7 +396,8 @@ function enviar(id){
                         
                         <div class="form-example-int mg-t-15">
                             <button type="button" class="btn btn-success notika-btn-success" onclick="go();">Guardar.</button>
-                        </div>
+                            <button  type="reset" class="btn btn-warning" data-dismiss="modal">Limpiar</button>
+                        </div>               
                         </form>
                     </div>
                 </div>
@@ -480,7 +478,7 @@ if ($result) {
                                                 <button  type="button" class="btn btn-default" data-dismiss="modal">Listo</button>
                                                
                                             </div>
-                                         
+                                           
                                         </div>
                                     </div>
                                 </div>
@@ -585,7 +583,6 @@ if($accion==1){
 $nombre   = $_POST['nombre'];
 $apellido   = $_POST['apellido'];
 $direccion   = $_POST['direc'];
-$fiador= $_POST['idfiador'];
 $dui  = $_POST['dui'];
 $nit   = $_POST['nit'];
 $email   = $_POST['email'];
@@ -595,14 +592,13 @@ $tipo=$_POST['tipo'];
 $prof=$_POST['profecion'];
 $salario=$_POST['salario'];
 $observ  = $_POST['observ'];
-    $consulta  = "INSERT INTO tclientes VALUES('null','4','" .$fiador. "','" .$nombre. "','" .$apellido. "','" .$direccion. "','" .$dui. "','" .$nit. "','" .$prof. "','" .$tipo. "','" .$salario. "','" .$tel. "','" .$cel. "','" .$email. "','" .$observ. "')";
+    $consulta  = "INSERT INTO tclientes VALUES('null','4','" .$nombre. "','" .$apellido. "','" .$direccion. "','" .$dui. "','" .$nit. "','" .$prof. "','" .$tipo. "','" .$salario. "','" .$tel. "','" .$cel. "','" .$email. "','" .$observ. "')";
     $resultado = $conexion->query($consulta);
       if ($resultado) {
           msg("Se agregaron los datos correctamente");
       } else {
           msg("Error al insertar los datos");
-      }
-      
+      }     
 }
 function msg($texto)
 {
