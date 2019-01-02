@@ -67,7 +67,6 @@ function go(){
 } 
 function edit(id,nom,ape,dui,nit,direc,tel,cel,email,tipo,prof,sal,ob)
         {
-            alert("llega");
          // document.getElementById("baccion2").value=id;
           document.getElementById("nombrem").value=nom;
           document.getElementById("apellidom").value=ape;
@@ -92,6 +91,9 @@ function edit(id,nom,ape,dui,nit,direc,tel,cel,email,tipo,prof,sal,ob)
           
           
         }
+        function modify(id){
+       document.location.href="editarCliente.php?id="+id;
+   }
 
 </script> 
 <body>
@@ -179,7 +181,7 @@ if ($result) {
         echo "<td>
         <div class='button-icon-btn'>
         <button class='btn btn-info info-icon-notika btn-reco-mg btn-button-mg' onclick=\"edit('$fila->id_cliente','$fila->nombre','$fila->apellido','$fila->dui','$fila->nit','$fila->direccion','$fila->telefono','$fila->celular','$fila->correo','$fila->tipo_ingreso','$fila->profecion','$fila->salario','$fila->observaciones')\";><i class='notika-icon notika-search'></i></button>
-        <button class='btn btn-lightgreen lightgreen-icon-notika btn-reco-mg btn-button-mg'><i class='notika-icon notika-menus'></i></button>
+        <button class='btn btn-lightgreen lightgreen-icon-notika btn-reco-mg btn-button-mg' onclick='modify(" . $fila->id_cliente. ")'><i class='notika-icon notika-menus'></i></button>
         </div>
         </td>";
         echo "</tr>";

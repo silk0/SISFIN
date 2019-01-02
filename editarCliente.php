@@ -1,3 +1,24 @@
+<?php
+$id = $_REQUEST["id"];
+include "config/conexion.php";
+$result = $conexion->query("select * from tclientes where id_cliente=" . $id);
+if ($result) {
+    while ($fila = $result->fetch_object()) {
+        $idR               = $fila->id_cliente;
+        $nombreR           = $fila->nombre;
+        // $apellidoR         = $fila->apellido;
+        // $direccionR        = $fila->direccion;
+        // $duiR              = $fila->dui;
+        // $nitR              = $fila->nit;
+        // $correoR           = $fila->correo;
+        // $trabajoR          = $fila->profecion;
+        // $salarioR          = $fila->salario;
+        // $telefonoR         = $fila->telefono;
+        // $celularR          = $fila->celular;
+       }
+}
+
+?>
 <!doctype html>
 <html class="no-js" lang="">
 <head>
@@ -222,14 +243,14 @@ function enviar(id){
                             
                         </div>
                         <form name="form" method="post" action="ingresoCliente.php?bandera=1">
-                        <input type="hidden" id="idfiador" name="idfiador">
+                        <input type="hidden" id="idfiador" name="idfiador" value="<?php echo $idR; ?>">
                         <div class="row">
                             <div class="col-lg-6 col-md-6 col-sm-6 col-xs-12">
                                 <div class="form-example-int">
                                     <div class="form-group">
                                         <label>Nombre:</label>
                                         <div class="nk-int-st">
-                                        <input type="text" name="nombre" id="nombre" class="form-control input-sm" placeholder="Ingrese su nombre." required >
+                                        <input type="text" name="nombre" id="nombre" class="form-control input-sm" value="<?php echo $nombreR;?>">
                                         </div>
                                     </div>
                                 </div>
