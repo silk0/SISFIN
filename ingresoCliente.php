@@ -111,37 +111,37 @@ function go(){
    if(document.getElementById('nombre').value==""){
     //    alert("El campo nombre es obligatorio");
     //    prueba :p
-     notify(' Advertencia','El campo Nombre es obligatorio.','top', 'right', 'any', 'warning');
+     notify(' Advertencia:','El campo Nombre es obligatorio.','top', 'right', 'any', 'warning');
        document.getElementById("nombre").focus();
    }else if(document.getElementById('apellido').value==""){
-        notify(' Advertencia','El campo Apellido es obligatorio,','top', 'right', 'any', 'warning');
+        notify(' Advertencia:','El campo Apellido es obligatorio,','top', 'right', 'any', 'warning');
        document.getElementById("apellido").focus();
    }else if(document.getElementById('dui').value==""){
-        notify(' Advertencia','El campo DUI es obligatorio','top', 'right', 'any', 'warning');
+        notify(' Advertencia:','El campo DUI es obligatorio','top', 'right', 'any', 'warning');
        document.getElementById("dui").focus();
    }else if(document.getElementById('nit').value==""){
-        notify(' Advertencia','El campo NIT es obligatorio', 'top', 'right', 'any', 'warning');
+        notify(' Advertencia:','El campo NIT es obligatorio', 'top', 'right', 'any', 'warning');
        document.getElementById("nit").focus();
    }else if(document.getElementById('direc').value==""){
-        notify(' Advertencia','El campo Direccion es obligatorio', 'top', 'right', 'any', 'warning');
+        notify(' Advertencia:','El campo Direccion es obligatorio', 'top', 'right', 'any', 'warning');
        document.getElementById("direc").focus();
    }else if(document.getElementById('telefono').value=="" && document.getElementById('celular').value==""){
-        notify(' Advertencia','Es necesario por lo menos un numero de telefono', 'top', 'right', 'any', 'warning');
+        notify(' Advertencia:','Es necesario por lo menos un numero de telefono', 'top', 'right', 'any', 'warning');
        document.getElementById("telefono").focus();
    }else if(document.getElementById('email').value==""){
-        notify(' Advertencia','El campo E-mail es obligatorio,','top', 'right', 'any', 'warning');
+        notify(' Advertencia:','El campo E-mail es obligatorio,','top', 'right', 'any', 'warning');
        document.getElementById("email").focus();
    }else if(document.getElementById('tipo').value=="Seleccione"){
-        notify(' Advertencia','Seleccione un tipo de Ingreso', 'top', 'right', 'any', 'warning');
+        notify(' Advertencia:','Seleccione un tipo de Ingreso', 'top', 'right', 'any', 'warning');
        document.getElementById("tipo").focus();
    }else if(document.getElementById('profecion').value==""){
-        notify(' Advertencia','El campo Profecion u Oficio es obligatorio', 'top', 'right', 'any', 'warning');
+        notify(' Advertencia:','El campo Profecion u Oficio es obligatorio', 'top', 'right', 'any', 'warning');
        document.getElementById("profecion").focus();
    }else if(document.getElementById('salario').value==""){
-        notify(' Advertencia','El campo Ingreso Promedio es obligatorio', 'top', 'right', 'any', 'warning');
+        notify(' Advertencia:','El campo Ingreso Promedio es obligatorio', 'top', 'right', 'any', 'warning');
        document.getElementById("salario").focus();
    }else if(document.getElementById('observ').value==""){
-        notify(' Advertencia','El campo Observaciones es obligatorio', 'top', 'right', 'any', 'warning');
+        notify(' Advertencia:','El campo Observaciones es obligatorio', 'top', 'right', 'any', 'warning');
        document.getElementById("observ").focus();
    }else{
       document.form.submit();  
@@ -598,16 +598,15 @@ $observ  = $_POST['observ'];
     $consulta  = "INSERT INTO tclientes VALUES('null','4','" .$nombre. "','" .$apellido. "','" .$direccion. "','" .$dui. "','" .$nit. "','" .$prof. "','" .$tipo. "','" .$salario. "','" .$tel. "','" .$cel. "','" .$email. "','" .$observ. "')";
     $resultado = $conexion->query($consulta);
       if ($resultado) {
-          msg("Se agregaron los datos correctamente");
+        msgI("Los datos fueron almacenados con exito");
       } else {
-          msg("Error al insertar los datos");
+        msgE('Error','No se pudo realizar el registro','top', 'right', 'any', 'danger');
       }     
 }
-function msg($texto)
+function msgI($texto)
 {
     echo "<script type='text/javascript'>";
-    echo "alert('$texto');";
-    echo "document.location.href='ingresoCliente.php';";
+    echo "notify('Exito','$texto','top', 'right', 'any', 'success');";
     echo "</script>";
 }
 ?>
