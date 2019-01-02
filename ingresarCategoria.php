@@ -151,7 +151,7 @@ function enviar(id){
                                 </div>
                                 <div class="col-lg-1 col-md-1 col-sm-1 col-xs-12">
                                <div class="">
-                               <button type="button" data-toggle="modal" data-target="#myModalone" class="btn btn-success success-icon-notika btn-reco-mg btn-button-mg waves-effect"><h5>Ver Categorias</h5></button>
+                               
 								               </div>
                             </div>
                             </div>
@@ -159,21 +159,9 @@ function enviar(id){
                         
                         
                         
-                        
-                        
-                        <!-- FILA PARA DATOS CORTOS -->
-                        
-                         <!-- FIN DE FILA PARA DATOS CORTOS -->
-                        
-                        
-                        
-
-                        </br>
-                        <br>
-                        </br>
-                        
                         <div class="form-example-int mg-t-15">
                             <button class="btn btn-success notika-btn-success" style="margin-left: 500px;" onclick="go();" >Guardar.</button>
+                            <button type="button" data-toggle="modal" data-target="#myModalone" class="btn btn-success notika-btn-success">Ver Categorias</button>
                         </div>
                         </form>
                     </div>
@@ -218,6 +206,7 @@ if ($result) {
         echo "<td>
         <div class='button-icon-btn'>
         <button class='btn btn-info info-icon-notika btn-reco-mg btn-button-mg' data-dismiss='modal' onclick=\"enviar('$fila->id_categoria')\";><i class='notika-icon notika-next'></i></button>
+        <button class='btn btn-info info-icon-notika btn-reco-mg btn-button-mg' data-dismiss='modal' onclick=\"modificar('$fila->id_categoria')\";><i class='notika-icon notika-next'></i></button>
         </div>
         </td>";
         echo "</tr>";
