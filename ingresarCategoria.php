@@ -218,6 +218,7 @@ if ($result) {
         echo "<td>
         <div class='button-icon-btn'>
         <button class='btn btn-info info-icon-notika btn-reco-mg btn-button-mg' data-dismiss='modal' onclick=\"enviar('$fila->id_categoria')\";><i class='notika-icon notika-next'></i></button>
+        <button class='btn btn-info info-icon-notika btn-reco-mg btn-button-mg' data-dismiss='modal' onclick=\"modificar('$fila->id_categoria')\";><i class='notika-icon notika-next'></i></button>
         </div>
         </td>";
         echo "</tr>";
