@@ -3,7 +3,7 @@
 -- http://www.phpmyadmin.net
 --
 -- Servidor: 127.0.0.1
--- Tiempo de generación: 30-12-2018 a las 03:07:48
+-- Tiempo de generación: 02-01-2019 a las 22:04:18
 -- Versión del servidor: 5.6.24
 -- Versión de PHP: 5.6.8
 
@@ -65,6 +65,18 @@ INSERT INTO `tcartera` (`id_categoria`, `nombre`) VALUES
 -- --------------------------------------------------------
 
 --
+-- Estructura de tabla para la tabla `tcategoria`
+--
+
+CREATE TABLE IF NOT EXISTS `tcategoria` (
+  `id_categoria` int(10) NOT NULL,
+  `categoria` varchar(50) NOT NULL,
+  `estado` int(11) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+-- --------------------------------------------------------
+
+--
 -- Estructura de tabla para la tabla `tclasificacion`
 --
 
@@ -84,7 +96,6 @@ CREATE TABLE IF NOT EXISTS `tclasificacion` (
 CREATE TABLE IF NOT EXISTS `tclientes` (
   `id_cliente` int(10) NOT NULL,
   `id_cartera` int(10) NOT NULL,
-  `id_fiador` int(10) NOT NULL,
   `nombre` varchar(50) NOT NULL,
   `apellido` varchar(50) NOT NULL,
   `direccion` varchar(150) NOT NULL,
@@ -97,16 +108,44 @@ CREATE TABLE IF NOT EXISTS `tclientes` (
   `celular` varchar(20) NOT NULL,
   `correo` varchar(40) NOT NULL,
   `observaciones` varchar(200) NOT NULL
-) ENGINE=InnoDB AUTO_INCREMENT=6 DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB AUTO_INCREMENT=11 DEFAULT CHARSET=latin1;
 
 --
 -- Volcado de datos para la tabla `tclientes`
 --
 
-INSERT INTO `tclientes` (`id_cliente`, `id_cartera`, `id_fiador`, `nombre`, `apellido`, `direccion`, `dui`, `nit`, `profecion`, `tipo_ingreso`, `salario`, `telefono`, `celular`, `correo`, `observaciones`) VALUES
-(3, 4, 1, 'Jessica Abigail ', 'Rosales', 'Santo tomas abajo cantos los hernandez, apastepeque San vicente', '12832738-7', '1278-372883-827-8', '2783-7827', 'Remesa', 500, '2389-2898', '7787-8788', 'jessica@gmail.com', 'jksjkfjkdsh'),
-(4, 4, 1, 'Fernando Josue', 'Hernandez Arevalo', 'COl san benito #45 san Isisdro San salavador', '29389829-8', '7281-728738-273-4', '9999-9999', 'Salario', 1500, '2239-8928', '7887-8788', 'fernando97@gmai.com', 'una persona con posibilidad de pagar el credito'),
-(5, 4, 2, 'Maria Azucena', 'Garcia Mata', 'Colonia el manantial #45 SUchitoto', '28298398-9', '7876-767565-777-7', '9999-9999', 'Salario', 600, '2342-2222', '7837-8738', 'MariaAzu@hotmail.com', 'buena condicion de pago');
+INSERT INTO `tclientes` (`id_cliente`, `id_cartera`, `nombre`, `apellido`, `direccion`, `dui`, `nit`, `profecion`, `tipo_ingreso`, `salario`, `telefono`, `celular`, `correo`, `observaciones`) VALUES
+(3, 4, 'Jessica Abigail ', 'Rosales', 'Santo tomas abajo cantos los hernandez, apastepeque San vicente', '12832738-7', '1278-372883-827-8', '2783-7827', 'Remesa', 500, '2389-2898', '7787-8788', 'jessica@gmail.com', 'jksjkfjkdsh'),
+(4, 4, 'Fernando Josue', 'Hernandez Arevalo', 'COl san benito #45 san Isisdro San salavador', '29389829-8', '7281-728738-273-4', '9999-9999', 'Salario', 1500, '2239-8928', '7887-8788', 'fernando97@gmai.com', 'una persona con posibilidad de pagar el credito'),
+(5, 4, 'Maria Azucena', 'Garcia Mata', 'Colonia el manantial #45 SUchitoto', '28298398-9', '7876-767565-777-7', '9999-9999', 'Salario', 600, '2342-2222', '7837-8738', 'MariaAzu@hotmail.com', 'buena condicion de pago'),
+(10, 4, 'Sandra Liseth', 'Arevalo Carranza', 'Colonia la monserrath, san esteban obrajuelo San Otrillo', '12321112-2', '2342-342342-221-1', 'Lic. Contadora', 'Salario', 800, '2332-3232', '7899-8989', 'Sandra@gmail.com', 'el cliente cumple con los requisitos');
+
+-- --------------------------------------------------------
+
+--
+-- Estructura de tabla para la tabla `tclientes_fiador`
+--
+
+CREATE TABLE IF NOT EXISTS `tclientes_fiador` (
+  `id_clientes_fiador` int(10) NOT NULL,
+  `id_cliente` int(10) NOT NULL,
+  `id_fiador` int(10) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+-- --------------------------------------------------------
+
+--
+-- Estructura de tabla para la tabla `tcompras`
+--
+
+CREATE TABLE IF NOT EXISTS `tcompras` (
+  `id_compras` int(11) NOT NULL,
+  `id_producto` int(11) NOT NULL,
+  `id_proveedor` int(11) NOT NULL,
+  `fecha` date NOT NULL,
+  `precio` float NOT NULL,
+  `cantidad` int(11) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 -- --------------------------------------------------------
 
@@ -210,7 +249,7 @@ CREATE TABLE IF NOT EXISTS `tfiador` (
 
 INSERT INTO `tfiador` (`id_fiador`, `nombre`, `apellido`, `direccion`, `dui`, `nit`, `correo`, `profecion`, `salario`, `telefono`, `celular`) VALUES
 (1, 'kevin', 'jovel', 'san sebas', '2838329', '3989283', 'kevin@gmail.com', 'estudiante', 500, '2233234', '777777'),
-(2, 'Jose de la Cruz', 'Flores Garcia', 'col santa fe pol e casa $34', '298899-9', '289-234232-234-2', 'jose@gmail.com', 'ingeniero', 1600, '23334433', '78773667');
+(2, 'Jose de la Cruz', 'Flores Garcia', 'col santa fe pol e casa $34', '298899-9', '289-234232-234-2', 'jose@gmail.com', 'ingeniero de Sistemas', 1600, '23334433', '78773667');
 
 -- --------------------------------------------------------
 
@@ -270,6 +309,7 @@ CREATE TABLE IF NOT EXISTS `tplan_pago` (
 CREATE TABLE IF NOT EXISTS `tproducto` (
   `id_producto` int(10) NOT NULL,
   `id_proveedor` int(10) NOT NULL,
+  `id_categoria` int(10) NOT NULL,
   `nombre` varchar(50) NOT NULL,
   `descripcion` varchar(100) NOT NULL,
   `precio_compra` float NOT NULL,
@@ -277,15 +317,9 @@ CREATE TABLE IF NOT EXISTS `tproducto` (
   `margen` float NOT NULL,
   `stock_minimo` int(10) NOT NULL,
   `stock` int(10) NOT NULL,
-  `codigo` varchar(8) NOT NULL
+  `codigo` varchar(8) NOT NULL,
+  `estado` int(11) NOT NULL
 ) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=latin1;
-
---
--- Volcado de datos para la tabla `tproducto`
---
-
-INSERT INTO `tproducto` (`id_producto`, `id_proveedor`, `nombre`, `descripcion`, `precio_compra`, `precio_venta`, `margen`, `stock_minimo`, `stock`, `codigo`) VALUES
-(1, 1, 'Televisor', 'Gran televisor 40 pulgadas.', 0, 0, 15, 10, 0, '00000000');
 
 -- --------------------------------------------------------
 
@@ -362,6 +396,12 @@ ALTER TABLE `tcartera`
   ADD PRIMARY KEY (`id_categoria`);
 
 --
+-- Indices de la tabla `tcategoria`
+--
+ALTER TABLE `tcategoria`
+  ADD PRIMARY KEY (`id_categoria`);
+
+--
 -- Indices de la tabla `tclasificacion`
 --
 ALTER TABLE `tclasificacion`
@@ -371,7 +411,19 @@ ALTER TABLE `tclasificacion`
 -- Indices de la tabla `tclientes`
 --
 ALTER TABLE `tclientes`
-  ADD PRIMARY KEY (`id_cliente`), ADD KEY `fk_cartera` (`id_cartera`), ADD KEY `fk_fiador` (`id_fiador`);
+  ADD PRIMARY KEY (`id_cliente`), ADD KEY `fk_cartera` (`id_cartera`);
+
+--
+-- Indices de la tabla `tclientes_fiador`
+--
+ALTER TABLE `tclientes_fiador`
+  ADD PRIMARY KEY (`id_clientes_fiador`), ADD KEY `fk_clientefiador` (`id_cliente`), ADD KEY `fk_fiadorcliente` (`id_fiador`);
+
+--
+-- Indices de la tabla `tcompras`
+--
+ALTER TABLE `tcompras`
+  ADD PRIMARY KEY (`id_compras`);
 
 --
 -- Indices de la tabla `tdepartamento`
@@ -443,7 +495,7 @@ ALTER TABLE `tplan_pago`
 -- Indices de la tabla `tproducto`
 --
 ALTER TABLE `tproducto`
-  ADD PRIMARY KEY (`id_producto`), ADD KEY `fk_proveedores` (`id_proveedor`);
+  ADD PRIMARY KEY (`id_producto`), ADD KEY `fk_proveedores` (`id_proveedor`), ADD KEY `fk_categoria` (`id_categoria`);
 
 --
 -- Indices de la tabla `tproveedor`
@@ -478,6 +530,11 @@ ALTER TABLE `tactivo`
 ALTER TABLE `tcartera`
   MODIFY `id_categoria` int(10) NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=5;
 --
+-- AUTO_INCREMENT de la tabla `tcategoria`
+--
+ALTER TABLE `tcategoria`
+  MODIFY `id_categoria` int(10) NOT NULL AUTO_INCREMENT;
+--
 -- AUTO_INCREMENT de la tabla `tclasificacion`
 --
 ALTER TABLE `tclasificacion`
@@ -486,7 +543,17 @@ ALTER TABLE `tclasificacion`
 -- AUTO_INCREMENT de la tabla `tclientes`
 --
 ALTER TABLE `tclientes`
-  MODIFY `id_cliente` int(10) NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=6;
+  MODIFY `id_cliente` int(10) NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=11;
+--
+-- AUTO_INCREMENT de la tabla `tclientes_fiador`
+--
+ALTER TABLE `tclientes_fiador`
+  MODIFY `id_clientes_fiador` int(10) NOT NULL AUTO_INCREMENT;
+--
+-- AUTO_INCREMENT de la tabla `tcompras`
+--
+ALTER TABLE `tcompras`
+  MODIFY `id_compras` int(11) NOT NULL AUTO_INCREMENT;
 --
 -- AUTO_INCREMENT de la tabla `tdepartamento`
 --
@@ -571,8 +638,14 @@ ADD CONSTRAINT `fk_usuario` FOREIGN KEY (`id_usuario`) REFERENCES `templeados` (
 -- Filtros para la tabla `tclientes`
 --
 ALTER TABLE `tclientes`
-ADD CONSTRAINT `fk_cartera` FOREIGN KEY (`id_cartera`) REFERENCES `tcartera` (`id_categoria`),
-ADD CONSTRAINT `fk_fiador` FOREIGN KEY (`id_fiador`) REFERENCES `tfiador` (`id_fiador`);
+ADD CONSTRAINT `fk_cartera` FOREIGN KEY (`id_cartera`) REFERENCES `tcartera` (`id_categoria`);
+
+--
+-- Filtros para la tabla `tclientes_fiador`
+--
+ALTER TABLE `tclientes_fiador`
+ADD CONSTRAINT `fk_clientefiador` FOREIGN KEY (`id_cliente`) REFERENCES `tclientes` (`id_cliente`),
+ADD CONSTRAINT `fk_fiadorcliente` FOREIGN KEY (`id_fiador`) REFERENCES `tfiador` (`id_fiador`);
 
 --
 -- Filtros para la tabla `tdepartamento`
@@ -610,6 +683,7 @@ ADD CONSTRAINT `fk_ventapro` FOREIGN KEY (`id_venta`) REFERENCES `tventas` (`id_
 -- Filtros para la tabla `tproducto`
 --
 ALTER TABLE `tproducto`
+ADD CONSTRAINT `fk_categoria` FOREIGN KEY (`id_categoria`) REFERENCES `tcategoria` (`id_categoria`),
 ADD CONSTRAINT `fk_proveedores` FOREIGN KEY (`id_proveedor`) REFERENCES `tproveedor` (`id_proveedor`);
 
 --
