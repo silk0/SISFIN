@@ -155,7 +155,7 @@ if ($result) {
                                     <div class="form-group">
                                         <label>Precio de compra:</label>
                                         <div class="nk-int-st">
-                                        <input type="text" name="apellido" id="apellido" class="form-control input-sm" placeholder="$0.00 >
+                                        <input type="text" name="apellido" id="apellido" class="form-control input-sm" placeholder="$0.00" >
                                         </div>
                                     </div>
                                 </div>
