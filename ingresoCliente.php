@@ -361,7 +361,7 @@ function enviar(id){
                             <div class="col-lg-4 col-md-4 col-sm-4 col-xs-12">
                                 <div class="form-example-int mg-t-15">
                                     <div class="form-group">
-                                        <label>Ingreso Promedio</label>
+                                        <label>Ingreso Promedio $ (Mensual)</label>
                                         <div class="nk-int-st">
                                            <input type="number" name="salario" id="salario" class="form-control input-sm" placeholder="Introduzca Ingreso Promedio">
                                         </div>
