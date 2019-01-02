@@ -54,8 +54,8 @@
 		var nType = $(this).attr('data-type');
 		var nAnimIn = $(this).attr('data-animation-in');
 		var nAnimOut = $(this).attr('data-animation-out');
-		
-		notify(nFrom, nAlign, nIcons, nType, nAnimIn, nAnimOut);
+	
+		notify('top', 'right', 'any', 'warning');
 	});
 
  

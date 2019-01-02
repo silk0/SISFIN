@@ -45,6 +45,9 @@
 		============================================ -->
     <link rel="stylesheet" href="css/wave/waves.min.css">
     <link rel="stylesheet" href="css/wave/button.css">
+    <!-- notification CSS
+		============================================ -->
+    <link rel="stylesheet" href="css/notification/notification.css">
     <!-- main CSS
 		============================================ -->
     <link rel="stylesheet" href="css/main.css">
@@ -56,17 +59,59 @@
     <link rel="stylesheet" href="css/responsive.css">
     <!-- modernizr JS
         ============================================ -->
-         <!-- notification CSS
-		============================================ -->
-    <link rel="stylesheet" href="css/notification/notification.css">
+
     <script src="js/vendor/modernizr-2.8.3.min.js"></script>
 </head>
 <SCRIPT  language=JavaScript> 
+function notify(titulo,texto,from, align, icon, type, animIn, animOut){
+		$.growl({
+			icon: icon,
+			title: titulo+" ",
+			message: texto,
+			url: ''
+		},{
+				element: 'body',
+				type: type,
+				allow_dismiss: true,
+				placement: {
+						from: from,
+						align: align
+				},
+				offset: {
+					x: 20,
+					y: 85
+				},
+				spacing: 10,
+				z_index: 1031,
+				delay: 2500,
+				timer: 1000,
+				url_target: '_blank',
+				mouse_over: false,
+				animate: {
+						enter: animIn,
+						exit: animOut
+				},
+				icon_type: 'class',
+				template: '<div data-growl="container" class="alert" role="alert">' +
+								'<button type="button" class="close" data-growl="dismiss">' +
+									'<span aria-hidden="true">&times;</span>' +
+									'<span class="sr-only">Close</span>' +
+								'</button>' +
+								'<span data-growl="icon"></span>' +
+								'<span data-growl="title"></span>' +
+								'<span data-growl="message"></span>' +
+								'<a href="#" data-growl="url"></a>' +
+							'</div>'
+		});
+	}
+	
 function go(){
 
     //Validaciones
    if(document.getElementById('nombre').value==""){
-       alert("El campo nombre es obligatorio");
+    //    alert("El campo nombre es obligatorio");
+    //    prueba :p
+     notify(' Advertencia','El campo nombre es obligatorio.','top', 'right', 'any', 'warning');
        document.getElementById("nombre").focus();
    }else if(document.getElementById('apellido').value==""){
         alert("El campo apellido es obligatorio");
@@ -223,6 +268,7 @@ function enviar(id){
                                      </div>                            
                                 </div>
                             </div>
+                           
                             <div class="col-lg-4 col-md-4 col-sm-4 col-xs-10">
                                 <div class="form-example-int mg-t-15">
                                     <div class="form-group">
@@ -517,6 +563,7 @@ if ($result) {
     <!-- main JS
 		============================================ -->
     <script src="js/main.js"></script>
+    
 	<!-- tawk chat JS
 		============================================ -->
     <!-- <script src="js/tawk-chat.js"></script> -->
