@@ -4,7 +4,7 @@
 <head>
     <meta charset="utf-8">
     <meta http-equiv="x-ua-compatible" content="ie=edge">
-    <title>Comprando producto | SISFIN</title>
+    <title>Ingreso de Categorias | SISFIN</title>
     <meta name="description" content="">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <!-- favicon
@@ -33,19 +33,16 @@
     <!-- normalize CSS
 		============================================ -->
     <link rel="stylesheet" href="css/normalize.css">
-	<!-- wave CSS
-		============================================ -->
-    <link rel="stylesheet" href="css/wave/waves.min.css">
-    <link rel="stylesheet" href="css/wave/button.css">
     <!-- mCustomScrollbar CSS
 		============================================ -->
     <link rel="stylesheet" href="css/scrollbar/jquery.mCustomScrollbar.min.css">
     <!-- Notika icon CSS
 		============================================ -->
     <link rel="stylesheet" href="css/notika-custom-icon.css">
-    <!-- Data Table JS
+    <!-- wave CSS
 		============================================ -->
-    <link rel="stylesheet" href="css/jquery.dataTables.min.css">
+    <link rel="stylesheet" href="css/wave/waves.min.css">
+    <link rel="stylesheet" href="css/wave/button.css">
     <!-- main CSS
 		============================================ -->
     <link rel="stylesheet" href="css/main.css">
@@ -58,18 +55,36 @@
     <!-- modernizr JS
 		============================================ -->
     <script src="js/vendor/modernizr-2.8.3.min.js"></script>
-    <script>
-    function modify(id){
-        alert(id);
-         document.location.href="registrarCompra.php?id="+id;
-    }
-    </script>
 </head>
+<script  language=JavaScript> 
+function go(){
+    //validacion respectiva me da hueva
+        document.form.submit();  
+} 
+function enviar(id){
+    
+    $.ajax({
+        data:{"id":id},
+        url: 'scriptsphp/recuperarCategoria.php',
+        type: 'post',
+        beforeSend: function(){
+            alert("Por favor espere...");
+        },
+        success: function(response){
+            alert(response);
+            document.getElementById("nombre").value=response;
+            document.getElementById("idcategoria").value=id;
+        }
+    });
+} 
+
+</script> 
 
 <body>
     <!--[if lt IE 8]>
             <p class="browserupgrade">You are using an <strong>outdated</strong> browser. Please <a href="http://browsehappy.com/">upgrade your browser</a> to improve your experience.</p>
         <![endif]-->
+    
       <!-- Start Header Top Area -->
     <?php include "header.php"; ?>
         <!-- End Header Top Area -->
@@ -91,19 +106,19 @@
 							<div class="col-lg-6 col-md-6 col-sm-6 col-xs-12">
 								<div class="breadcomb-wp">
 									<div class="breadcomb-icon">
-										<i class="notika-icon notika-windows"></i>
+										<i class="notika-icon notika-form"></i>
 									</div>
 									<div class="breadcomb-ctn">
-										<h2>Comprar productos</h2>
-										<p>Datos de <span class="bread-ntd">la compra.</span></p>
+										<h2>Registro de Categoria.</h2>
+										<p>Formulario de categoria <span class="bread-ntd">.</span></p>
 									</div>
 								</div>
 							</div>
-							<div class="col-lg-6 col-md-6 col-sm-6 col-xs-3">
+							<!-- <div class="col-lg-6 col-md-6 col-sm-6 col-xs-3">
 								<div class="breadcomb-report">
 									<button data-toggle="tooltip" data-placement="left" title="Download Report" class="btn"><i class="notika-icon notika-sent"></i></button>
 								</div>
-							</div>
+							</div> -->
 						</div>
 					</div>
 				</div>
@@ -111,49 +126,98 @@
 		</div>
 	</div>
 	<!-- Breadcomb area End-->
-    <!-- Data Table area Start-->
-    <div class="data-table-area">
+    <!-- Form Examples area start-->
+    <div class="form-example-area">
         <div class="container">
             <div class="row">
                 <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
+                    <div class="form-example-wrap">
+                        <div class="cmp-tb-hd">
+                            <h2>Datos de la Categoria</h2>
+                            
+                        </div>
+                        <form name="form" method="post" action="ingresarCategoria.php?bandera=1">
+                        
+
+                        <div class="row">
+                            <div class="col-lg-6 col-md-6 col-sm-6 col-xs-12">
+                                <div class="form-example-int">
+                                    <div class="form-group">
+                                        <label>Categoria:</label>
+                                        <div class="nk-int-st">
+                                        <input type="text" class="form-control input-sm" placeholder="Ingrese  nombre de categoria." id="nombre" name="nombre">
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="col-lg-1 col-md-1 col-sm-1 col-xs-12">
+                               <div class="">
+                               <button type="button" data-toggle="modal" data-target="#myModalone" class="btn btn-success success-icon-notika btn-reco-mg btn-button-mg waves-effect"><h5>Ver Categorias</h5></button>
+								               </div>
+                            </div>
+                            </div>
+                            
+                        
+                        
+                        
+                        
+                        
+                        <!-- FILA PARA DATOS CORTOS -->
+                        
+                         <!-- FIN DE FILA PARA DATOS CORTOS -->
+                        
+                        
+                        
+
+                        </br>
+                        <br>
+                        </br>
+                        
+                        <div class="form-example-int mg-t-15">
+                            <button class="btn btn-success notika-btn-success" style="margin-left: 500px;" onclick="go();" >Guardar.</button>
+                        </div>
+                        </form>
+                    </div>
+                </div>
+            </div>
+            <!-- MODAL PARA CATEGORIAS -->
+            <div class="modal animated shake" id="myModalone" role="dialog">
+                                    <div class="modal-dialog modal-large">
+                                        <div class="modal-content">
+                                            <div class="modal-header">
+                                                <button type="button" class="close" data-dismiss="modal">&times;</button>
+                                            </div>
+                                            <div class="modal-body">
+                                               <!-- Data Table area Start-->
+    <div class="data-table-area">
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-7 col-md-7 col-sm-7 col-xs-7">
                     <div class="data-table-list">
                         <div class="basic-tb-hd">
-                            
+                            <h2>Seleccione una de las categorias de la siguiente  tabla.</h2>
                         </div>
                         <div class="table-responsive">
                             <table id="data-table-basic" class="table table-striped">
                                 <thead>
-                                   <tr>                                       
-                                        <th>Código</th>
-                                        <th>Nombre</th>
-                                        <th>Proveedor</th>
-                                        <th>Stock</th>
-                                        <th>Opciones</th>                                       
+                                    <tr>
+                                        
+                                        <th>Categoria</th>
+                                        <th>Enviar</th>
                                     </tr>
                                 </thead>
                                 <tbody>
-                      <?php
+                                        <?php
 include "config/conexion.php";
-$result = $conexion->query("SELECT * from tproducto ORDER BY id_producto");
+$result = $conexion->query("SELECT * from tcategoria ORDER BY id_categoria");
 if ($result) {
     while ($fila = $result->fetch_object()) {
         echo "<tr>";
-        echo "<td>" . $fila->codigo . "</td>";
-        echo "<td>" . $fila->nombre . "</td>";
-        // OBTENER EL NOMBRE DEL PROVEEDOR
-        $result2 = $conexion->query("SELECT * from tproveedor where id_proveedor=".$fila->id_proveedor);
-        if ($result2) {
-             while ($fila2 = $result2->fetch_object()) {
-                 echo "<td>" . $fila2->nombre . "</td>"; 
-                }
-            }
-         
-        echo "<td>" . $fila->stock . "</td>";
+        echo "<td>" . $fila->categoria . "</td>";
+        
         
         echo "<td>
         <div class='button-icon-btn'>
-        <button class='btn btn-info info-icon-notika btn-reco-mg btn-button-mg' ><i class='notika-icon notika-search'></i></button>
-        <button class='btn btn-lightgreen lightgreen-icon-notika btn-reco-mg btn-button-mg' data-toggle='tooltip' data-placement='bottom' title='Hacer una compra.' onclick='modify(" . $fila->id_producto. ")'><i class='notika-icon notika-up-arrow'></i></button>
+        <button class='btn btn-info info-icon-notika btn-reco-mg btn-button-mg' data-dismiss='modal' onclick=\"enviar('$fila->id_categoria')\";><i class='notika-icon notika-next'></i></button>
         </div>
         </td>";
         echo "</tr>";
@@ -161,14 +225,16 @@ if ($result) {
     }
 }
 ?>
+                                
+                                   
+                                    
                                 </tbody>
                                 <tfoot>
                                     <tr>
-                                        <th>Código</th>
-                                        <th>Nombre</th>
-                                        <th>Proveedor</th>
-                                        <th>Stock</th>
-                                        <th>Opciones</th>  
+                                       
+                                        <th>Categoria</th>
+                                        <th>Enviar</th>
+                                       
                                     </tr>
                                 </tfoot>
                             </table>
@@ -179,7 +245,20 @@ if ($result) {
         </div>
     </div>
     <!-- Data Table area End-->
-        <!-- Start Footer area-->
+</div>
+                                            <div class="modal-footer">
+                                                <button type="button" class="btn btn-default" data-dismiss="modal">Listo</button>
+                                               
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+            <!-- FIN PARA MODAL DE FIADOR -->
+            
+            
+    </div>
+    <!-- Form Examples area End-->
+    <!-- Start Footer area-->
     <?php include "footer.php";?>
     <!-- End Footer area-->
     <!-- jquery
@@ -225,29 +304,59 @@ if ($result) {
     <script src="js/knob/jquery.knob.js"></script>
     <script src="js/knob/jquery.appear.js"></script>
     <script src="js/knob/knob-active.js"></script>
+    <!-- icheck JS
+		============================================ -->
+    <script src="js/icheck/icheck.min.js"></script>
+    <script src="js/icheck/icheck-active.js"></script>
+    <!--  wave JS
+		============================================ -->
+    <script src="js/wave/waves.min.js"></script>
+    <script src="js/wave/wave-active.js"></script>
     <!--  Chat JS
 		============================================ -->
     <script src="js/chat/jquery.chat.js"></script>
     <!--  todo JS
 		============================================ -->
     <script src="js/todo/jquery.todo.js"></script>
-	<!--  wave JS
-		============================================ -->
-    <script src="js/wave/waves.min.js"></script>
-    <script src="js/wave/wave-active.js"></script>
     <!-- plugins JS
 		============================================ -->
     <script src="js/plugins.js"></script>
-    <!-- Data Table JS
+        <!-- Input Mask JS
 		============================================ -->
-    <script src="js/data-table/jquery.dataTables.min.js"></script>
-    <script src="js/data-table/data-table-act.js"></script>
+    <script src="js/jasny-bootstrap.min.js"></script>
     <!-- main JS
 		============================================ -->
     <script src="js/main.js"></script>
 	<!-- tawk chat JS
 		============================================ -->
-    <script src="js/tawk-chat.js"></script>
+    <!-- <script src="js/tawk-chat.js"></script> -->
 </body>
 
 </html>
+<?php
+include "config/conexion.php";
+$accion = $_REQUEST['bandera'];
+if($accion==1){
+$nombre     = $_POST['nombre'];
+$query = "SELECT categoria FROM tcategoria WHERE categoria like '%".$nombre."';";
+$result = $conexion->query($query);
+if($result->num_rows == 0){   
+$consulta  = "INSERT INTO tcategoria VALUES('null','" .$nombre. "')";
+    $resultado = $conexion->query($consulta);
+      if($resultado){
+          msg("Se agregaron los datos correctamente");
+      } else {
+          msg("Error al insertar los datos");
+      }
+}else{
+  msg("Esta categoria ya existe");
+}
+}
+function msg($texto)
+{
+    echo "<script type='text/javascript'>";
+    echo "alert('$texto');";
+    echo "document.location.href='ingresarCategoria.php';";
+    echo "</script>";
+}
+?>
