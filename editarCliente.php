@@ -6,7 +6,7 @@ if ($result) {
     while ($fila = $result->fetch_object()) {
         $idR               = $fila->id_cliente;
         $nombreR           = $fila->nombre;
-        // $apellidoR         = $fila->apellido;
+         $apellidoR         = $fila->apellido;
         // $direccionR        = $fila->direccion;
         // $duiR              = $fila->dui;
         // $nitR              = $fila->nit;
