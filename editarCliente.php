@@ -6,19 +6,21 @@ if ($result) {
     while ($fila = $result->fetch_object()) {
         $idR               = $fila->id_cliente;
         $nombreR           = $fila->nombre;
-         $apellidoR         = $fila->apellido;
-        // $direccionR        = $fila->direccion;
-        // $duiR              = $fila->dui;
-        // $nitR              = $fila->nit;
-        // $correoR           = $fila->correo;
-        // $trabajoR          = $fila->profecion;
-        // $salarioR          = $fila->salario;
-        // $telefonoR         = $fila->telefono;
-        // $celularR          = $fila->celular;
+        $apellidoR         = $fila->apellido;
+        $direccionR        = $fila->direccion;
+        $duiR              = $fila->dui;
+        $nitR              = $fila->nit;
+        $correoR           = $fila->correo;
+        $trabajoR          = $fila->profecion;
+        $salarioR          = $fila->salario;
+        $telefonoR         = $fila->telefono;
+        $celularR          = $fila->celular;
+        $observR           = $fila->observaciones;
+        $tipoR             = $fila->tipo_ingreso;
        }
 }
 
-?>
+?> 
 <!doctype html>
 <html class="no-js" lang="">
 <head>
@@ -168,7 +170,7 @@ function go(){
       document.form.submit();  
    }   
 } 
-function enviar(id){
+function recuperar(id){
     
     $.ajax({
         data:{"id":id},
@@ -184,7 +186,11 @@ function enviar(id){
         }
     });
 } 
-</script> 
+        function modify(id){
+       document.location.href="editarCliente.php?id="+id;
+   }
+</script>
+
 <body>
     <!--[if lt IE 8]>
             <p class="browserupgrade">You are using an <strong>outdated</strong> browser. Please <a href="http://browsehappy.com/">upgrade your browser</a> to improve your experience.</p>
@@ -260,7 +266,7 @@ function enviar(id){
                                     <div class="form-group">
                                         <label>Apellido:</label>
                                         <div class="nk-int-st">
-                                        <input type="text" name="apellido" id="apellido" class="form-control input-sm" placeholder="Ingrese su apellido.">
+                                        <input type="text" name="apellido" id="apellido" class="form-control input-sm" value="<?php echo $apellidoR;?>">
                                         </div>
                                     </div>
                                 </div>
@@ -273,7 +279,7 @@ function enviar(id){
                                     <div class="form-group">
                                         <label>DUI:</label>
                                         <div class="nk-int-st">
-                                           <input type="text" name="dui" id="dui" class="form-control input-sm" data-mask="99999999-9" placeholder="Ingrese su DUI.">
+                                           <input type="text" name="dui" id="dui" class="form-control input-sm" data-mask="99999999-9" value="<?php echo $duiR;?>">
                                         </div>
                                      </div>                            
                                 </div>
@@ -284,7 +290,7 @@ function enviar(id){
                                     <div class="form-group">
                                         <label>NIT:</label>
                                         <div class="nk-int-st">
-                                           <input type="text" name="nit" id="nit" class="form-control input-sm" data-mask="9999-999999-999-9" placeholder="Ingrese su NIT.">
+                                           <input type="text" name="nit" id="nit" class="form-control input-sm" data-mask="9999-999999-999-9" value="<?php echo $nitR;?>">
                                         </div>
                                      </div>                            
                                 </div>
@@ -315,7 +321,7 @@ function enviar(id){
                             <div class="form-group">
                                 <label>Dirección:</label>
                                 <div class="nk-int-st">
-                                    <input type="text" name="direc" id="direc" class="form-control input-sm" placeholder="Ingrese su dirección.">
+                                    <input type="text" name="direc" id="direc" class="form-control input-sm" value="<?php echo $direccionR;?>">
                                 </div>
                             </div>
                         </div>
@@ -331,7 +337,7 @@ function enviar(id){
                                     <div class="form-group">
                                         <label>Teléfono:</label>
                                         <div class="nk-int-st">
-                                           <input type="text" name="telefono" id="telefono" class="form-control input-sm" data-mask="9999-9999" placeholder="Ingrese Telefono.">
+                                           <input type="text" name="telefono" id="telefono" class="form-control input-sm" data-mask="9999-9999" value="<?php echo $telefonoR;?>">
                                         </div>
                                      </div>                            
                                 </div>
@@ -342,7 +348,7 @@ function enviar(id){
                                     <div class="form-group">
                                         <label>Celular:</label>
                                         <div class="nk-int-st">
-                                           <input type="text" name="celular" id="celular" class="form-control input-sm" data-mask="9999-9999" placeholder="Ingrese Celular.">
+                                           <input type="text" name="celular" id="celular" class="form-control input-sm" data-mask="9999-9999" value="<?php echo $celularR;?>">
                                         </div>
                                      </div>                            
                                 </div>
@@ -352,7 +358,7 @@ function enviar(id){
                                     <div class="form-group">
                                         <label>E-mail:</label>
                                         <div class="nk-int-st">
-                                           <input type="text" name="email" id="email" class="form-control input-sm" placeholder="Ingrese el E-mail">
+                                           <input type="text" name="email" id="email" class="form-control input-sm" value="<?php echo $correoR;?>">
                                         </div>
                                      </div>                            
                                 </div>
@@ -366,9 +372,27 @@ function enviar(id){
                                 <div class="bootstrap-select fm-cmp-mg">
                                     <select class="selectpicker" data-live-search="true" name="tipo" id="tipo">
                                     <option value="Seleccione">Seleccione</option>
-                                            <option>Salario</option>
-											<option>Remesa</option>
-											<option>Salario Informal</option>
+                                    <?php
+                                    if($tipoR=="Salario"){
+                                        ?>
+                                        <option selected>Salario</option>
+                                        <option>Remesa</option>
+                                        <option>Salario informal</option>
+                                        <?php
+                                    }else if($tipoR=="Remesa"){
+                                        ?>
+                                        <option>Salario</option>
+                                        <option selected>Remesa</option>
+                                        <option>Salario informal</option>
+                                        <?php
+                                    }else if($tipoR=="Salario Informal"){
+                                        ?>
+                                        <option>Salario</option>
+                                        <option>Remesa</option>
+                                        <option selected>Salario Informal</option>
+                                        <?php
+                                    }
+                                    ?>
 										</select>
                                 </div>
                             </div>
@@ -377,7 +401,7 @@ function enviar(id){
                                     <div class="form-group">
                                         <label>Profecion u oficio</label>
                                         <div class="nk-int-st">
-                                           <input type="text" name="profecion" id="profecion" class="form-control input-sm" placeholder="Ingrese Profecion u oficio">
+                                           <input type="text" name="profecion" id="profecion" class="form-control input-sm" value="<?php echo $trabajoR;?>">
                                         </div>
                                      </div>                            
                                 </div>
@@ -387,7 +411,7 @@ function enviar(id){
                                     <div class="form-group">
                                         <label>Ingreso Promedio $ (Mensual)</label>
                                         <div class="nk-int-st">
-                                           <input type="number" name="salario" id="salario" class="form-control input-sm" placeholder="Introduzca Ingreso Promedio">
+                                           <input type="number" name="salario" id="salario" class="form-control input-sm" value="<?php echo $salarioR;?>">
                                         </div>
                                      </div>                            
                                 </div>
@@ -406,7 +430,7 @@ function enviar(id){
                             <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
                                 <div class="form-group">
                                     <div class="nk-int-st">
-                                        <textarea class="form-control" name="observ" id="observ" rows="5" placeholder="Escriba aquí las observaciones deseadas acerca del cliente..."></textarea>
+                                        <textarea class="form-control" name="observ" id="observ" rows="5"><?php echo $observR;?></textarea>
                                     </div>
                                 </div>
                             </div>
@@ -419,8 +443,8 @@ function enviar(id){
                         </div> -->
                         
                         <div class="form-example-int mg-t-15">
-                            <button type="button" class="btn btn-success notika-btn-success" onclick="go();">Guardar.</button>
-                            <button  type="reset" class="btn btn-warning" data-dismiss="modal">Limpiar</button>
+                            <button type="button" class="btn btn-success notika-btn-success" onclick="go();">Guardar Cambios</button>
+                         
                         </div>               
                         </form>
                     </div>
@@ -631,4 +655,5 @@ function msg($texto)
     echo "document.location.href='ingresoCliente.php';";
     echo "</script>";
 }
+
 ?>

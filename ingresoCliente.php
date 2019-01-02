@@ -598,16 +598,15 @@ $observ  = $_POST['observ'];
     $consulta  = "INSERT INTO tclientes VALUES('null','4','" .$nombre. "','" .$apellido. "','" .$direccion. "','" .$dui. "','" .$nit. "','" .$prof. "','" .$tipo. "','" .$salario. "','" .$tel. "','" .$cel. "','" .$email. "','" .$observ. "')";
     $resultado = $conexion->query($consulta);
       if ($resultado) {
-          msg("Se agregaron los datos correctamente");
+        msgI("Los datos fueron almacenados con exito");
       } else {
-          msg("Error al insertar los datos");
+        msgE('Error','No se pudo realizar el registro','top', 'right', 'any', 'danger');
       }     
 }
-function msg($texto)
+function msgI($texto)
 {
     echo "<script type='text/javascript'>";
-    echo "alert('$texto');";
-    echo "document.location.href='ingresoCliente.php';";
+    echo "notify('Exito','$texto','top', 'right', 'any', 'success');";
     echo "</script>";
 }
 ?>
