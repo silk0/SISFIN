@@ -108,31 +108,31 @@ function go(){
    if(document.getElementById('nombre').value==""){
     //    alert("El campo nombre es obligatorio");
     //    prueba :p
-     notify(' Advertencia','El campo Nombre es obligatorio.','top', 'right', 'any', 'warning');
+     notify(' Advertencia:','El campo Nombre es obligatorio.','top', 'right', 'any', 'warning');
        document.getElementById("nombre").focus();
    }else if(document.getElementById('apellido').value==""){
-        notify(' Advertencia','El campo Apellido es obligatorio,','top', 'right', 'any', 'warning');
+        notify(' Advertencia:','El campo Apellido es obligatorio,','top', 'right', 'any', 'warning');
        document.getElementById("apellido").focus();
    }else if(document.getElementById('dui').value==""){
-        notify(' Advertencia','El campo DUI es obligatorio','top', 'right', 'any', 'warning');
+        notify(' Advertencia:','El campo DUI es obligatorio','top', 'right', 'any', 'warning');
        document.getElementById("dui").focus();
    }else if(document.getElementById('nit').value==""){
-        notify(' Advertencia','El campo NIT es obligatorio', 'top', 'right', 'any', 'warning');
+        notify(' Advertencia:','El campo NIT es obligatorio', 'top', 'right', 'any', 'warning');
        document.getElementById("nit").focus();
    }else if(document.getElementById('direc').value==""){
-        notify(' Advertencia','El campo Direccion es obligatorio', 'top', 'right', 'any', 'warning');
+        notify(' Advertencia:','El campo Direccion es obligatorio', 'top', 'right', 'any', 'warning');
        document.getElementById("direc").focus();
    }else if(document.getElementById('telefono').value=="" && document.getElementById('celular').value==""){
-        notify(' Advertencia','Ingrese telefono', 'top', 'right', 'any', 'warning');
+        notify(' Advertencia:','Ingrese telefono', 'top', 'right', 'any', 'warning');
        document.getElementById("telefono").focus();
    }else if(document.getElementById('email').value==""){
-        notify(' Advertencia','El campo E-mail es obligatorio,','top', 'right', 'any', 'warning');
+        notify(' Advertencia:','El campo E-mail es obligatorio,','top', 'right', 'any', 'warning');
        document.getElementById("email").focus();
    }else if(document.getElementById('trabajo').value==""){
-        notify(' Advertencia','El campo Tabajo que realiza es obligatorio', 'top', 'right', 'any', 'warning');
+        notify(' Advertencia:','El campo Tabajo que realiza es obligatorio', 'top', 'right', 'any', 'warning');
        document.getElementById("trabajo").focus();
    }else if(document.getElementById('salario').value==""){
-        notify(' Advertencia','El campo Salario  es obligatorio', 'top', 'right', 'any', 'warning');
+        notify(' Advertencia:','El campo Salario  es obligatorio', 'top', 'right', 'any', 'warning');
        document.getElementById("salario").focus();
    }else{
       document.form.submit();  
@@ -395,16 +395,18 @@ function go(){
         <!-- Input Mask JS
 		============================================ -->
     <script src="js/jasny-bootstrap.min.js"></script>
+
+    <!--  notification JS
+        ============================================ -->
+        <script src="js/notification/bootstrap-growl.min.js"></script>
+        <script src="js/notification/notification-active.js"></script>
+
     <!-- main JS
 		============================================ -->
     <script src="js/main.js"></script>
 	<!-- tawk chat JS
 		============================================ -->
     <!-- <script src="js/tawk-chat.js"></script> -->
-<!--  notification JS
-        ============================================ -->
-        <script src="js/notification/bootstrap-growl.min.js"></script>
-    <script src="js/notification/notification-active.js"></script>
 
 </body>
 
