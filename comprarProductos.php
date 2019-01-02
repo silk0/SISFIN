@@ -4,7 +4,7 @@
 <head>
     <meta charset="utf-8">
     <meta http-equiv="x-ua-compatible" content="ie=edge">
-    <title>Productos Disponibles| SISFIN</title>
+    <title>Comprando producto | SISFIN</title>
     <meta name="description" content="">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <!-- favicon
@@ -61,7 +61,7 @@
     <script>
     function modify(id){
         alert(id);
-        // document.location.href="editarFiador.php?id="+id;
+         document.location.href="registrarCompra.php?id="+id;
     }
     </script>
 </head>
@@ -94,8 +94,8 @@
 										<i class="notika-icon notika-windows"></i>
 									</div>
 									<div class="breadcomb-ctn">
-										<h2>Lista de productos</h2>
-										<p>Datos de <span class="bread-ntd">de productos activos.</span></p>
+										<h2>Comprar productos</h2>
+										<p>Datos de <span class="bread-ntd">la compra.</span></p>
 									</div>
 								</div>
 							</div>
