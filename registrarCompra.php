@@ -1,10 +1,25 @@
+<?php
+$id = $_REQUEST["id"];
+include "config/conexion.php";
+$result = $conexion->query("select p.id_producto as idp, p.nombre as namep,prov.id_proveedor as idprov,prov.nombre as nameprov from tproducto as p,tproveedor as prov  where p.id_proveedor=prov.id_proveedor and id_producto=" . $id);
+if ($result) {
+    while ($fila = $result->fetch_object()) {
+        $idR               = $fila->idp;
+        $nombreprod      = $fila->namep;
+        $idprov         = $fila->idprov;
+        $nombreprov        = $fila->nameprov;
+        
+       }
+}
+
+?>
 <!doctype html>
 <html class="no-js" lang="">
 
 <head>
     <meta charset="utf-8">
     <meta http-equiv="x-ua-compatible" content="ie=edge">
-    <title>Comprando producto | SISFIN</title>
+    <title>Registrar compra | SISFIN</title>
     <meta name="description" content="">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <!-- favicon
@@ -33,19 +48,16 @@
     <!-- normalize CSS
 		============================================ -->
     <link rel="stylesheet" href="css/normalize.css">
-	<!-- wave CSS
-		============================================ -->
-    <link rel="stylesheet" href="css/wave/waves.min.css">
-    <link rel="stylesheet" href="css/wave/button.css">
     <!-- mCustomScrollbar CSS
 		============================================ -->
     <link rel="stylesheet" href="css/scrollbar/jquery.mCustomScrollbar.min.css">
     <!-- Notika icon CSS
 		============================================ -->
     <link rel="stylesheet" href="css/notika-custom-icon.css">
-    <!-- Data Table JS
+    <!-- wave CSS
 		============================================ -->
-    <link rel="stylesheet" href="css/jquery.dataTables.min.css">
+    <link rel="stylesheet" href="css/wave/waves.min.css">
+    <link rel="stylesheet" href="css/wave/button.css">
     <!-- main CSS
 		============================================ -->
     <link rel="stylesheet" href="css/main.css">
@@ -58,18 +70,13 @@
     <!-- modernizr JS
 		============================================ -->
     <script src="js/vendor/modernizr-2.8.3.min.js"></script>
-    <script>
-    function modify(id){
-        alert(id);
-         document.location.href="registrarCompra.php?id="+id;
-    }
-    </script>
 </head>
 
 <body>
     <!--[if lt IE 8]>
             <p class="browserupgrade">You are using an <strong>outdated</strong> browser. Please <a href="http://browsehappy.com/">upgrade your browser</a> to improve your experience.</p>
         <![endif]-->
+    
       <!-- Start Header Top Area -->
     <?php include "header.php"; ?>
         <!-- End Header Top Area -->
@@ -91,19 +98,19 @@
 							<div class="col-lg-6 col-md-6 col-sm-6 col-xs-12">
 								<div class="breadcomb-wp">
 									<div class="breadcomb-icon">
-										<i class="notika-icon notika-windows"></i>
+										<i class="notika-icon notika-form"></i>
 									</div>
 									<div class="breadcomb-ctn">
-										<h2>Comprar productos</h2>
-										<p>Datos de <span class="bread-ntd">la compra.</span></p>
+										<h2>Registro de compra.</h2>
+										<p>Formulario de compra <span class="bread-ntd">.</span></p>
 									</div>
 								</div>
 							</div>
-							<div class="col-lg-6 col-md-6 col-sm-6 col-xs-3">
+							<!-- <div class="col-lg-6 col-md-6 col-sm-6 col-xs-3">
 								<div class="breadcomb-report">
 									<button data-toggle="tooltip" data-placement="left" title="Download Report" class="btn"><i class="notika-icon notika-sent"></i></button>
 								</div>
-							</div>
+							</div> -->
 						</div>
 					</div>
 				</div>
@@ -111,75 +118,66 @@
 		</div>
 	</div>
 	<!-- Breadcomb area End-->
-    <!-- Data Table area Start-->
-    <div class="data-table-area">
+    <!-- Form Examples area start-->
+    <div class="form-example-area">
         <div class="container">
             <div class="row">
                 <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
-                    <div class="data-table-list">
-                        <div class="basic-tb-hd">
+                    <div class="form-example-wrap">
+                        <div class="cmp-tb-hd">
+                            <h2>Datos de la compra</h2>
                             
                         </div>
-                        <div class="table-responsive">
-                            <table id="data-table-basic" class="table table-striped">
-                                <thead>
-                                   <tr>                                       
-                                        <th>Código</th>
-                                        <th>Nombre</th>
-                                        <th>Proveedor</th>
-                                        <th>Stock</th>
-                                        <th>Opciones</th>                                       
-                                    </tr>
-                                </thead>
-                                <tbody>
-                      <?php
-include "config/conexion.php";
-$result = $conexion->query("SELECT * from tproducto ORDER BY id_producto");
-if ($result) {
-    while ($fila = $result->fetch_object()) {
-        echo "<tr>";
-        echo "<td>" . $fila->codigo . "</td>";
-        echo "<td>" . $fila->nombre . "</td>";
-        // OBTENER EL NOMBRE DEL PROVEEDOR
-        $result2 = $conexion->query("SELECT * from tproveedor where id_proveedor=".$fila->id_proveedor);
-        if ($result2) {
-             while ($fila2 = $result2->fetch_object()) {
-                 echo "<td>" . $fila2->nombre . "</td>"; 
-                }
-            }
-         
-        echo "<td>" . $fila->stock . "</td>";
-        
-        echo "<td>
-        <div class='button-icon-btn'>
-        <button class='btn btn-info info-icon-notika btn-reco-mg btn-button-mg' ><i class='notika-icon notika-search'></i></button>
-        <button class='btn btn-lightgreen lightgreen-icon-notika btn-reco-mg btn-button-mg' data-toggle='tooltip' data-placement='bottom' title='Hacer una compra.' onclick='modify(" . $fila->id_producto. ")'><i class='notika-icon notika-up-arrow'></i></button>
-        </div>
-        </td>";
-        echo "</tr>";
 
-    }
-}
-?>
-                                </tbody>
-                                <tfoot>
-                                    <tr>
-                                        <th>Código</th>
-                                        <th>Nombre</th>
-                                        <th>Proveedor</th>
-                                        <th>Stock</th>
-                                        <th>Opciones</th>  
-                                    </tr>
-                                </tfoot>
-                            </table>
+                       <div class="row">
+                            <div class="col-lg-6 col-md-6 col-sm-6 col-xs-12">
+                                <div class="form-example-int">
+                                    <div class="form-group">
+                                        <label>Producto:</label>
+                                        <div class="nk-int-st">
+                                        <input type="text" name="nombre" id="nombre" class="form-control input-sm" placeholder="Ingrese nombre del producto." value="<?php echo $nombreprod ?>" readonly >
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-lg-6 col-md-6 col-sm-6 col-xs-12">
+                                <div class="form-example-int">
+                                    <div class="form-group">
+                                        <label>Proveedor:</label>
+                                        <div class="nk-int-st">
+                                        <input type="text" name="apellido" id="apellido" class="form-control input-sm" placeholder="Ingrese el nombre del proveedor." value="<?php echo $nombreprov ?>" readonly>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+
+                        </div>
+                            
+                        
+                        
+                        
+                        
+                        
+                        <!-- FILA PARA DATOS CORTOS -->
+                        
+                         <!-- FIN DE FILA PARA DATOS CORTOS -->
+                        
+                        
+                        
+
+                        
+                        
+                        <div class="form-example-int mg-t-15">
+                            <button class="btn btn-success notika-btn-success" style="margin-left: 500px;" >Guardar.</button>
                         </div>
                     </div>
                 </div>
             </div>
-        </div>
+            
+            
     </div>
-    <!-- Data Table area End-->
-        <!-- Start Footer area-->
+    <!-- Form Examples area End-->
+    <!-- Start Footer area-->
     <?php include "footer.php";?>
     <!-- End Footer area-->
     <!-- jquery
@@ -225,29 +223,32 @@ if ($result) {
     <script src="js/knob/jquery.knob.js"></script>
     <script src="js/knob/jquery.appear.js"></script>
     <script src="js/knob/knob-active.js"></script>
+    <!-- icheck JS
+		============================================ -->
+    <script src="js/icheck/icheck.min.js"></script>
+    <script src="js/icheck/icheck-active.js"></script>
+    <!--  wave JS
+		============================================ -->
+    <script src="js/wave/waves.min.js"></script>
+    <script src="js/wave/wave-active.js"></script>
     <!--  Chat JS
 		============================================ -->
     <script src="js/chat/jquery.chat.js"></script>
     <!--  todo JS
 		============================================ -->
     <script src="js/todo/jquery.todo.js"></script>
-	<!--  wave JS
-		============================================ -->
-    <script src="js/wave/waves.min.js"></script>
-    <script src="js/wave/wave-active.js"></script>
     <!-- plugins JS
 		============================================ -->
     <script src="js/plugins.js"></script>
-    <!-- Data Table JS
+        <!-- Input Mask JS
 		============================================ -->
-    <script src="js/data-table/jquery.dataTables.min.js"></script>
-    <script src="js/data-table/data-table-act.js"></script>
+    <script src="js/jasny-bootstrap.min.js"></script>
     <!-- main JS
 		============================================ -->
     <script src="js/main.js"></script>
 	<!-- tawk chat JS
 		============================================ -->
-    <script src="js/tawk-chat.js"></script>
+    <!-- <script src="js/tawk-chat.js"></script> -->
 </body>
 
 </html>
