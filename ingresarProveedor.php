@@ -49,18 +49,94 @@
     <!-- style CSS
 		============================================ -->
     <link rel="stylesheet" href="style.css">
+
+    <!-- notification CSS
+        ============================================ -->
+    <link rel="stylesheet" href="css/notification/notification.css">
     <!-- responsive CSS
 		============================================ -->
     <link rel="stylesheet" href="css/responsive.css">
     <!-- modernizr JS
 		============================================ -->
+
+
     <script src="js/vendor/modernizr-2.8.3.min.js"></script>
 </head>
-<SCRIPT  language=JavaScript> 
+<SCRIPT  language=JavaScript>   
+function notify(titulo,texto,from, align, icon, type, animIn, animOut){
+        $.growl({
+            icon: icon,
+            title: titulo+" ",
+            message: texto,
+            url: ''
+        },{
+                element: 'body',
+                type: type,
+                allow_dismiss: true,
+                placement: {
+                        from: from,
+                        align: align
+                },
+                offset: {
+                    x: 20,
+                    y: 85
+                },
+                spacing: 10,
+                z_index: 1031,
+                delay: 2500,
+                timer: 1000,
+                url_target: '_blank',
+                mouse_over: false,
+                animate: {
+                        enter: animIn,
+                        exit: animOut
+                },
+                icon_type: 'class',
+                template: '<div data-growl="container" class="alert" role="alert">' +
+                                '<button type="button" class="close" data-growl="dismiss">' +
+                                    '<span aria-hidden="true">&times;</span>' +
+                                    '<span class="sr-only">Close</span>' +
+                                '</button>' +
+                                '<span data-growl="icon"></span>' +
+                                '<span data-growl="title"></span>' +
+                                '<span data-growl="message"></span>' +
+                                '<a href="#" data-growl="url"></a>' +
+                            '</div>'
+        });
+    }
 function go(){
-    //validacion respectiva me da hueva
-        document.form.submit();  
-} 
+
+    //Validaciones
+   if(document.getElementById('nombre').value==""){
+    //    alert("El campo nombre es obligatorio");
+    //    prueba :p
+     notify(' Advertencia:','El campo Nombre es obligatorio.','top', 'right', 'any', 'warning');
+       document.getElementById("nombre").focus();
+   }else if(document.getElementById('telefono').value=="" ){
+        notify(' Advertencia:','El campo telefono es obligatorio', 'top', 'right', 'any', 'warning');
+       document.getElementById("telefono").focus();
+   }else if(document.getElementById('direc').value==""){
+        notify(' Advertencia:','El campo Direccion es obligatorio', 'top', 'right', 'any', 'warning');
+       document.getElementById("direc").focus();
+   }else if(document.getElementById('representante').value==""){
+        notify(' Advertencia:','El campo Representante es obligatorio','top', 'right', 'any', 'warning');
+       document.getElementById("representante").focus();
+   }else if(document.getElementById('dui').value==""){
+        notify(' Advertencia:','El campo DUI es obligatorio', 'top', 'right', 'any', 'warning');
+       document.getElementById("dui").focus();
+   }else if(document.getElementById('nit').value==""){
+        notify(' Advertencia:','El campo NIT es obligatorio', 'top', 'right', 'any', 'warning');
+       document.getElementById("nit").focus();
+   }else if(document.getElementById('celular').value=="" ){
+        notify(' Advertencia:','Ingrese Celular', 'top', 'right', 'any', 'warning');
+       document.getElementById("celular").focus();
+   }else if(document.getElementById('email').value==""){
+        notify(' Advertencia:','El campo E-mail es obligatorio,','top', 'right', 'any', 'warning');
+       document.getElementById("email").focus();
+   }else{
+      document.form.submit();  
+   }   
+}
 
 </script> 
 <body>
@@ -126,7 +202,7 @@ function go(){
                                     <div class="form-group">
                                         <label>Nombre:</label>
                                         <div class="nk-int-st">
-                                        <input type="text" name="nombre" class="form-control input-sm" placeholder="Ingrese el nombre del proveedor." required>
+                                        <input type="text" id="nombre" name="nombre" class="form-control input-sm" placeholder="Ingrese el nombre del proveedor." required>
                                         </div>
                                     </div>
                                 </div>
@@ -136,7 +212,7 @@ function go(){
                                     <div class="form-group">
                                         <label>Teléfono:</label>
                                         <div class="nk-int-st">
-                                        <input type="text" name="telefono" class="form-control input-sm" data-mask="9999-9999" placeholder="Ingrese el número de teléfono." required>
+                                        <input type="text" id="telefono" name="telefono" class="form-control input-sm" data-mask="9999-9999" placeholder="Ingrese el número de teléfono." required>
                                         </div>
                                     </div>
                                 </div>
@@ -147,7 +223,7 @@ function go(){
                             <div class="form-group">
                                 <label>Dirección:</label>
                                 <div class="nk-int-st">
-                                    <input type="text" name="direc" class="form-control input-sm" placeholder="Ingrese la dirección del proveedor." required>
+                                    <input type="text" id="direc" name="direc" class="form-control input-sm" placeholder="Ingrese la dirección del proveedor." required>
                                 </div>
                             </div>
                         </div>
@@ -161,7 +237,7 @@ function go(){
                                     <div class="form-group">
                                         <label>Representante:</label>
                                         <div class="nk-int-st">
-                                        <input type="text" name="representante" class="form-control input-sm" placeholder="Ingrese el nombre." required>
+                                        <input type="text" id="representante" name="representante" class="form-control input-sm" placeholder="Ingrese el nombre." required>
                                         </div>
                                     </div>
                                 </div>
@@ -172,7 +248,7 @@ function go(){
                                     <div class="form-group">
                                         <label>DUI:</label>
                                         <div class="nk-int-st">
-                                           <input type="text" name="dui" class="form-control input-sm" data-mask="99999999-9" placeholder="Ingrese el DUI." required>
+                                           <input type="text" id="dui" name="dui" class="form-control input-sm" data-mask="99999999-9" placeholder="Ingrese el DUI." required>
                                         </div>
                                      </div>                            
                                 </div>
@@ -191,7 +267,7 @@ function go(){
                                     <div class="form-group">
                                         <label>NIT:</label>
                                         <div class="nk-int-st">
-                                           <input type="text" name="nit" class="form-control input-sm" data-mask="9999-999999-999-9" placeholder="Ingrese el NIT." required>
+                                           <input type="text" id="nit" name="nit" class="form-control input-sm" data-mask="9999-999999-999-9" placeholder="Ingrese el NIT." required>
                                         </div>
                                      </div>                            
                                 </div>
@@ -203,7 +279,7 @@ function go(){
                                     <div class="form-group">
                                         <label>Celular:</label>
                                         <div class="nk-int-st">
-                                           <input type="text" name="celular" class="form-control input-sm" data-mask="9999-9999" placeholder="Ingrese celular." required>
+                                           <input type="text" id="celular" name="celular" class="form-control input-sm" data-mask="9999-9999" placeholder="Ingrese celular." required>
                                         </div>
                                      </div>                            
                                 </div>
@@ -213,7 +289,7 @@ function go(){
                                     <div class="form-group">
                                         <label>E-mail:</label>
                                         <div class="nk-int-st">
-                                           <input type="text" name="email" class="form-control input-sm" placeholder="Ingrese el E-mail.">
+                                           <input type="text" id="email" name="email" class="form-control input-sm" placeholder="Ingrese el E-mail.">
                                         </div>
                                      </div>                            
                                 </div>
@@ -287,6 +363,11 @@ function go(){
     <!--  Chat JS
 		============================================ -->
     <script src="js/chat/jquery.chat.js"></script>
+
+    <!--  notification JS
+        ============================================ -->
+        <script src="js/notification/bootstrap-growl.min.js"></script>
+        <script src="js/notification/notification-active.js"></script>
     <!--  todo JS
 		============================================ -->
     <script src="js/todo/jquery.todo.js"></script>
@@ -299,7 +380,9 @@ function go(){
     <!-- main JS
 		============================================ -->
     <script src="js/main.js"></script>
-	<!-- tawk chat JS
+
+       
+
 		============================================ -->
     <!-- <script src="js/tawk-chat.js"></script> -->
 </body>
