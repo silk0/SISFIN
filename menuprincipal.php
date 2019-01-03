@@ -21,6 +21,8 @@
                                                
                     </ul>
                     <div class="tab-content custom-menu-content">
+                    
+                        
                         <div id="Home" class="tab-pane in active notika-tab-menu-bg animated flipInX">
                             <ul class="notika-main-menu-dropdown">
                                 <li><a href="ingresoCliente.php">Registrar Cliente</a>
@@ -34,6 +36,7 @@
                                
                             </ul>
                         </div>
+                        
                         <div id="mailbox" class="tab-pane notika-tab-menu-bg animated flipInX">
                             <ul class="notika-main-menu-dropdown">
                                 <li><a href="inbox.html">Inbox</a>
@@ -84,11 +87,15 @@
                                 </li>
                             </ul>
                         </div>
+                       
+                        
                         <div id="Forms" class="tab-pane notika-tab-menu-bg animated flipInX">
                             <ul class="notika-main-menu-dropdown">
                                 <li><a href="ingresarProducto.php">Registrar Productos</a>
                                 </li>
                                 <li><a href="comprarProductos.php">Comprar</a>
+                                </li>
+                                <li><a href="ingresarCategoria.php">Registrar Categoria</a>
                                 </li>
                                 <li><a href="form-components.html">Form Components</a>
                                 </li>
@@ -96,6 +103,7 @@
                                 </li>
                             </ul>
                         </div>
+                        
                         <div id="Appviews" class="tab-pane notika-tab-menu-bg animated flipInX">
                             <ul class="notika-main-menu-dropdown">
                                 <li><a href="ingresarProveedor.php">Registrar</a>
