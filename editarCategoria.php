@@ -179,7 +179,7 @@ function enviar(id){
                         
                         
                         <div class="form-example-int mg-t-15">
-                            <button class="btn btn-success notika-btn-success" style="margin-left: 500px;" onclick="go();" >Guardar.</button>
+                            <button class="btn btn-success notika-btn-success" style="margin-left: 500px;" onclick="go();" >Modificar.</button>
                             <button type="button" data-toggle="modal" data-target="#myModalone" class="btn btn-success notika-btn-success">Ver Categorias</button>
                         </div>
                         </form>
