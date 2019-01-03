@@ -4,7 +4,7 @@
 <head>
     <meta charset="utf-8">
     <meta http-equiv="x-ua-compatible" content="ie=edge">
-    <title>Comprando producto | SISFIN</title>
+    <title>Kardex| SISFIN</title>
     <meta name="description" content="">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <!-- favicon
@@ -61,11 +61,7 @@
     <script>
     function modify(id){
        
-         document.location.href="registrarCompra.php?id="+id;
-    }
-     function kardex(id){
-   
-         document.location.href="kardex.php?id="+id;
+        document.location.href="editarFiador.php?id="+id;
     }
     </script>
 </head>
@@ -98,8 +94,8 @@
 										<i class="notika-icon notika-windows"></i>
 									</div>
 									<div class="breadcomb-ctn">
-										<h2>Comprar productos</h2>
-										<p>Datos de <span class="bread-ntd">la compra.</span></p>
+										<h2>Lista Kardex</h2>
+										<p>Tabla con los movimientos<span class="bread-ntd"> de la empresa.</span></p>
 									</div>
 								</div>
 							</div>
@@ -127,37 +123,36 @@
                         <div class="table-responsive">
                             <table id="data-table-basic" class="table table-striped">
                                 <thead>
-                                   <tr>                                       
-                                        <th>Código</th>
-                                        <th>Nombre</th>
-                                        <th>Proveedor</th>
-                                        <th>Stock</th>
-                                        <th>Opciones</th>                                       
+                                   <tr>
+                                        
+                                        <th>Fecha</th>
+                                        <th>Descripción</th>
+                                        <th>Cantidad</th>
+                                        <th>V Unitario</th>
+                                        <th>Cantidad</th>
+                                        <th>V Unitario</th>
+                                        <th>CantidadS</th>
+                                        
+                                       
                                     </tr>
                                 </thead>
                                 <tbody>
                       <?php
 include "config/conexion.php";
-$result = $conexion->query("SELECT * from tproducto ORDER BY id_producto");
+$result = $conexion->query("SELECT * from tfiador ORDER BY id_fiador");
 if ($result) {
     while ($fila = $result->fetch_object()) {
         echo "<tr>";
-        echo "<td>" . $fila->codigo . "</td>";
         echo "<td>" . $fila->nombre . "</td>";
-        // OBTENER EL NOMBRE DEL PROVEEDOR
-        $result2 = $conexion->query("SELECT * from tproveedor where id_proveedor=".$fila->id_proveedor);
-        if ($result2) {
-             while ($fila2 = $result2->fetch_object()) {
-                 echo "<td>" . $fila2->nombre . "</td>"; 
-                }
-            }
-         
-        echo "<td>" . $fila->stock . "</td>";
-        
+        echo "<td>" . $fila->apellido . "</td>";
+        echo "<td>" . $fila->dui . "</td>";  
+        echo "<td>" . $fila->telefono . "</td>";
+        echo "<td>" . $fila->celular . "</td>";
+        echo "<td>" . $fila->correo . "</td>";
         echo "<td>
         <div class='button-icon-btn'>
-        <button class='btn btn-info info-icon-notika btn-reco-mg btn-button-mg' data-toggle='tooltip' data-placement='bottom' title='Ver tarjeta kardex.' onclick='kardex(" . $fila->id_producto. ")' ><i class='notika-icon notika-search'></i></button>
-        <button class='btn btn-lightgreen lightgreen-icon-notika btn-reco-mg btn-button-mg' data-toggle='tooltip' data-placement='bottom' title='Hacer una compra.' onclick='modify(" . $fila->id_producto. ")'><i class='notika-icon notika-up-arrow'></i></button>
+        <button class='btn btn-info info-icon-notika btn-reco-mg btn-button-mg' ><i class='notika-icon notika-search'></i></button>
+        <button class='btn btn-lightgreen lightgreen-icon-notika btn-reco-mg btn-button-mg' onclick='modify(" . $fila->id_fiador. ")'><i class='notika-icon notika-menus'></i></button>
         </div>
         </td>";
         echo "</tr>";
@@ -168,11 +163,14 @@ if ($result) {
                                 </tbody>
                                 <tfoot>
                                     <tr>
-                                        <th>Código</th>
-                                        <th>Nombre</th>
-                                        <th>Proveedor</th>
-                                        <th>Stock</th>
-                                        <th>Opciones</th>  
+                                    <th>Fecha</th>
+                                    <th>Descripción</th>
+                                    <th>Cantidad</th>
+                                    <th>V Unitario</th>
+                                    <th>Cantidad</th>
+                                    <th>V Unitario</th>
+                                    <th>CantidadS</th>
+                                    
                                     </tr>
                                 </tfoot>
                             </table>
