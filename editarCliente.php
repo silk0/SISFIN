@@ -127,7 +127,9 @@ function notify(titulo,texto,from, align, icon, type, animIn, animOut){
 							'</div>'
 		});
 	}
-	
+    function back(){
+        document.location.href="/SISFIN/mostrarClientes.php";
+    }	
 function go(){
 
     //Validaciones
@@ -248,7 +250,7 @@ function recuperar(id){
                             <h2>Datos del Cliente</h2>
                             
                         </div>
-                        <form name="form" method="post" action="ingresoCliente.php?bandera=1">
+                        <form name="form" method="post" action="mostrarClientes.php?bandera=1">
                         <input type="hidden" id="idfiador" name="idfiador" value="<?php echo $idR; ?>">
                         <div class="row">
                             <div class="col-lg-6 col-md-6 col-sm-6 col-xs-12">
@@ -444,93 +446,15 @@ function recuperar(id){
                         
                         <div class="form-example-int mg-t-15">
                             <button type="button" class="btn btn-success notika-btn-success" onclick="go();">Guardar Cambios</button>
+                            <button type="button" class="btn btn-warning notika-btn-warning" onclick="back();">Cancelar</button>
                          
                         </div>               
                         </form>
                     </div>
                 </div>
             </div>
-           <!-- MODAL PARA FIADOR -->
-           <div class="modal animated shake" id="myModalone" role="dialog">
-                                    <div class="modal-dialog modal-large">
-                                        <div class="modal-content">
-                                            <div class="modal-header">
-                                                <button type="button" class="close" data-dismiss="modal">&times;</button>
-                                            </div>
-                                            <div class="modal-body">
-                                               <!-- Data Table area Start-->
-    <div class="data-table-area">
-        <div class="container">
-            <div class="row">
-                <div class="col-lg-7 col-md-7 col-sm-7 col-xs-7">
-                    <div class="data-table-list">
-                        <div class="basic-tb-hd">
-                            <h2>Seleccione uno de los fiadores de la sigueinte tabla.</h2>
-                        </div>
-                        <div class="table-responsive">
-                            <table id="data-table-basic" class="table table-striped">
-                                <thead>
-                                    <tr>
-                                        
-                                        <th>Nombre</th>
-                                        <th>Apellido</th>
-                                        <th>Dui</th>
-                                        <th>Enviar</th>
-                                    </tr>
-                                </thead>
-                                <tbody>
-                                        <?php
-include "config/conexion.php";
-$result = $conexion->query("SELECT * from tfiador ORDER BY id_fiador");
-if ($result) {
-    while ($fila = $result->fetch_object()) {
-        echo "<tr>";
-        echo "<td>" . $fila->nombre . "</td>";
-        echo "<td>" . $fila->apellido . "</td>";
-        echo "<td>" . $fila->dui . "</td>";  
-        
-        echo "<td>
-        <div class='button-icon-btn'>
-        <button class='btn btn-info info-icon-notika btn-reco-mg btn-button-mg' data-dismiss='modal' onclick=\"enviar('$fila->id_fiador')\";><i class='notika-icon notika-next'></i></button>
-        </div>
-        </td>";
-        echo "</tr>";
-
-    }
-}
-?>
-                                
-                                   
+         
                                     
-                                </tbody>
-                                <tfoot>
-                                    <tr>
-                                       
-                                        <th>Nombre</th>
-                                        <th>Apellido</th>
-                                        <th>Dui</th>
-                                        <th>Enviar</th>
-                                       
-                                    </tr>
-                                </tfoot>
-                            </table>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </div>
-    <!-- Data Table area End-->
-</div>
-                                            <div class="modal-footer">
-                                                <button  type="button" class="btn btn-default" data-dismiss="modal">Listo</button>
-                                               
-                                            </div>
-                                           
-                                        </div>
-                                    </div>
-                                </div>
-            <!-- FIN PARA MODAL DE FIADOR -->
             
             
     </div>
@@ -625,34 +549,11 @@ if ($result) {
 
 </html>
 <?php
-include "config/conexion.php";
-$accion = $_REQUEST['bandera'];
-if($accion==1){
-$nombre   = $_POST['nombre'];
-$apellido   = $_POST['apellido'];
-$direccion   = $_POST['direc'];
-$dui  = $_POST['dui'];
-$nit   = $_POST['nit'];
-$email   = $_POST['email'];
-$tel   = $_POST['telefono'];
-$cel  = $_POST['celular'];
-$tipo=$_POST['tipo'];
-$prof=$_POST['profecion'];
-$salario=$_POST['salario'];
-$observ  = $_POST['observ'];
-    $consulta  = "INSERT INTO tclientes VALUES('null','4','" .$nombre. "','" .$apellido. "','" .$direccion. "','" .$dui. "','" .$nit. "','" .$prof. "','" .$tipo. "','" .$salario. "','" .$tel. "','" .$cel. "','" .$email. "','" .$observ. "')";
-    $resultado = $conexion->query($consulta);
-      if ($resultado) {
-          msg("Se agregaron los datos correctamente");
-      } else {
-          msg("Error al insertar los datos");
-      }     
-}
-function msg($texto)
+
+function msg($var)
 {
     echo "<script type='text/javascript'>";
-    echo "alert('$texto');";
-    echo "document.location.href='ingresoCliente.php';";
+    echo "document.location.href='mostrarClientes.php?mod='+$var;";
     echo "</script>";
 }
 
