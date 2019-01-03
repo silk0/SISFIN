@@ -372,13 +372,33 @@ if($accion==1){
     $consulta  = "INSERT INTO tcompras VALUES('null','" .$idR. "','" .$idprov. "',now(),'" .$precio. "','" .$cantidad. "')";
     $resultado = $conexion->query($consulta);
       if ($resultado) {
+        // Ahora se va a modificar la exstencia del producto
+        // Obtenemos la cantidad anterior del precio del producto
+        $result = $conexion->query("select * from tproducto where id_producto=" . $idR);
+        if ($result) {
+            while ($fila = $result->fetch_object()) {
+              $cantidadAnterior=$fila->stock;
+              $margen=$fila->margen;
+            }
+        }else{
+           msgI('Error consulta cantidad anterior.');
+        }
+        // Ahora vamos a actualizar el stock actual y establecer el precio de venta 
+        $margen=$margen/100;
+        $nprecioventa=($margen*$precio)+$precio;
+        $nstock=$cantidadAnterior+$cantidad;
+        $consulta2  = "UPDATE tproducto set precio_compra='" . $precio . "',precio_venta='" . $nprecioventa . "',stock='" . $nstock . "' where id_producto='" . $idR . "'";
+        $resultado2 = $conexion->query($consulta2);
+        if($resultado2){
+
+        }else{
+           msgI('Error actualizando datos');
+        }
         msgI("Los datos fueron almacenados con exito");
       } else {
         msgI('Error, no se ingreso en la bd.');
       }     
 
-}else{
-   msgI('Error');
 }
 function msgI($texto)
 {
