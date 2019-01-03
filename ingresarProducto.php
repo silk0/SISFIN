@@ -92,7 +92,22 @@ function enviar(id){
         }
     });
 } 
-
+function enviarC(id){
+    
+    $.ajax({
+        data:{"id":id},
+        url: 'scriptsphp/recuperarCategoria.php',
+        type: 'post',
+        beforeSend: function(){
+            alert("Por favr espere...");
+        },
+        success: function(response){
+            alert(response);
+            document.getElementById("categoria").value=response;
+            document.getElementById("idcat").value=id;
+        }
+    });
+} 
 </script> 
 <body>
     <!--[if lt IE 8]>
@@ -152,8 +167,9 @@ function enviar(id){
                         </div>
                         <form name="form" method="post" action="ingresarProducto.php?bandera=1">
                         <input type="hidden" id="idproveedor" name="idproveedor">
+                        <input type="hidden" id="idcat" name="idcat">
                         <div class="row">
-                            <div class="col-lg-4 col-md-4 col-sm-4 col-xs-12">
+                            <div class="col-lg-2 col-md-2 col-sm-2 col-xs-12">
                                 <div class="form-example-int">
                                     <div class="form-group">
                                         <label>Código:</label>
@@ -163,7 +179,7 @@ function enviar(id){
                                     </div>
                                 </div>
                             </div>
-                            <div class="col-lg-4 col-md-4 col-sm-4 col-xs-12">
+                            <div class="col-lg-3 col-md-3 col-sm-3 col-xs-12">
                                 <div class="form-example-int">
                                     <div class="form-group">
                                         <label>Nombre:</label>
@@ -173,15 +189,33 @@ function enviar(id){
                                     </div>
                                 </div>
                             </div>
-                           <div class="col-lg-4 col-md-4 col-sm-4 col-xs-12">
+                           <div class="col-lg-2 col-md-2 col-sm-2 col-xs-12">
                                 <div class="form-example-int">
                                     <div class="form-group">
                                         <label>Stock Mínimo:</label>
                                         <div class="nk-int-st">
-                                        <input type="text" name="stock" class="form-control input-sm" placeholder="Ingrese el stock minimo deseado." >
+                                        <input type="text" name="stock" class="form-control input-sm" placeholder="Ingrese el stock minimo" >
                                         </div>
                                     </div>
                                 </div>
+                            </div>
+                            <div class="col-lg-4 col-md-4 col-sm-4 col-xs-12">
+                                <div class="form-example-int">
+                                    <div class="form-group">
+                                        <label>Categoria:</label>
+                                        <div class="nk-int-st">
+                                           <input type="text" name="categoria" id="categoria" class="form-control input-sm"  placeholder="Nombre del proveedor." readonly>
+                                           
+                                        </div>
+                                     </div>                            
+                                </div>
+                            </div>
+
+                            <div class="col-lg-1 col-md-1 col-sm-1 col-xs-12">
+                               <div class="">
+                                   <br>
+									<button type="button" data-toggle="modal" title="Selecciona una categoria" data-target="#myModaloneCat" class="btn btn-success success-icon-notika btn-reco-mg btn-button-mg waves-effect"><i class="notika-icon notika-house"></i></button>
+								</div>
                             </div>
 
                         </div>
@@ -232,7 +266,7 @@ function enviar(id){
                             <div class="col-lg-1 col-md-1 col-sm-1 col-xs-12">
                                <div class="">
                                    <br>
-									<button type="button" data-toggle="modal" data-target="#myModalone" class="btn btn-success success-icon-notika btn-reco-mg btn-button-mg waves-effect"><i class="notika-icon notika-house"></i></button>
+									<button type="button" data-toggle="modal" title="Selecciona un Proveedor" data-target="#myModalone" class="btn btn-success success-icon-notika btn-reco-mg btn-button-mg waves-effect"><i class="notika-icon notika-house"></i></button>
 								</div>
                             </div>
                             
@@ -359,6 +393,78 @@ if ($result) {
                                     </div>
                                 </div>
             <!-- FIN PARA MODAL DE FIADOR -->
+
+
+              <!-- MODAL PARA Categoria -->
+              <div class="modal animated shake" id="myModaloneCat" role="dialog">
+                                    <div class="modal-dialog modal-large">
+                                        <div class="modal-content">
+                                            <div class="modal-header">
+                                                <button type="button" class="close" data-dismiss="modal">&times;</button>
+                                            </div>
+                                            <div class="modal-body">
+                                               <!-- Data Table area Start-->
+    <div class="data-table-area">
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-7 col-md-7 col-sm-7 col-xs-7">
+                    <div class="data-table-list">
+                        <div class="basic-tb-hd">
+                            <h2>Seleccione uno de los fiadores de la sigueinte tabla.</h2>
+                        </div>
+                        <div class="table-responsive">
+                            <table id="data-table-basic" class="table table-striped">
+                                <thead>
+                                    <tr>
+                                        <th>Nombre</th>
+                                        <th>Estado</th>   
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                        <?php
+include "config/conexion.php";
+$result = $conexion->query("SELECT * from tcategoria ORDER BY id_categoria");
+if ($result) {
+    while ($fila = $result->fetch_object()) {
+        echo "<tr>";
+        echo "<td>" . $fila->categoria . "</td>";
+        if($fila->estado==1){
+            echo "<td>Activo</td>";
+        }else{
+            echo "<td>Inactivo</td>";  
+        }    
+        echo "<td>
+        <div class='button-icon-btn'>
+        <button class='btn btn-info info-icon-notika btn-reco-mg btn-button-mg' data-dismiss='modal' onclick=\"enviarC('$fila->id_categoria')\";><i class='notika-icon notika-next'></i></button>
+        </div>
+        </td>";
+        echo "</tr>";
+
+    }
+}
+?>
+                                
+                                   
+                                    
+                                </tbody>
+                               
+                            </table>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- Data Table area End-->
+</div>
+                                            <div class="modal-footer">
+                                                <button type="button" class="btn btn-default" data-dismiss="modal">Listo</button>
+                                               
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+            <!-- FIN PARA MODAL DE Categoria -->
             
             
     </div>
@@ -466,19 +572,17 @@ if ($result) {
 include "config/conexion.php";
 $accion = $_REQUEST['bandera'];
 if($accion==1){
+$codigo = $_POST['codigo'];
 $nombre   = $_POST['nombre'];
-$apellido   = $_POST['apellido'];
-$direccion   = $_POST['direc'];
-$dui  = $_POST['dui'];
-$nit   = $_POST['nit'];
-$email   = $_POST['email'];
-$tel   = $_POST['telefono'];
-$cel  = $_POST['celular'];
-$tipo=$_POST['tipo'];
-$prof=$_POST['profecion'];
-$salario=$_POST['salario'];
-$observ  = $_POST['observ'];
-    $consulta  = "INSERT INTO tclientes VALUES('null','4','1','" .$nombre. "','" .$apellido. "','" .$direccion. "','" .$dui. "','" .$nit. "','" .$prof. "','" .$tipo. "','" .$salario. "','" .$tel. "','" .$cel. "','" .$email. "','" .$observ. "')";
+$stock   = $_POST['stock'];
+$categoria   = $_POST['idcat'];
+$pcompra   = $_POST['pcompra'];
+$pventa  = $_POST['pventa'];
+$mganancia   = $_POST['mganancia'];
+$proveedor   = $_POST['idproveedor'];
+$descrip   = $_POST['descrip'];
+
+    $consulta  = "INSERT INTO tproducto VALUES('null','".$proveedor."','".$categoria."','" .$nombre. "','" .$descrip. "','" .$pcompra. "','" .$pventa. "','" .$mganancia. "','" .$stock. "','0','" .$codigo. "','1')";
     $resultado = $conexion->query($consulta);
       if ($resultado) {
           msg("Se agregaron los datos correctamente");

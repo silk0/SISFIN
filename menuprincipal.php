@@ -88,7 +88,11 @@
                             <ul class="notika-main-menu-dropdown">
                                 <li><a href="ingresarProducto.php">Registrar Productos</a>
                                 </li>
+                                <li><a href="inventario.php">Inventario</a>
+                                </li>
                                 <li><a href="comprarProductos.php">Comprar</a>
+                                </li>
+                                <li><a href="devolucion.php">Devoluviones</a>
                                 </li>
                                 <li><a href="form-components.html">Form Components</a>
                                 </li>
