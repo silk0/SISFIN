@@ -196,10 +196,10 @@ if ($result) {
                             <h2>Datos de la compra&nbsp;&nbsp;<?php echo $fecha=strftime( "%d-%m-%Y", time()); ?></h2>
                             
                         </div>
-                         <form name="form" method="post" action="registrarCompra.php?bandera=1&id=<?php echo $idR;?>">
+                         <form name="form" method="post" action='registrarCompra.php?bandera=1&id=<?php echo $idR;?>'>
                         <input type="hidden" id="fechac" name="fechac" value="<?php echo $fecha;?>">
                         <input type="hidden" id="id" name="id" value="<?php echo $idR;?>">
-                        <input type="hidden" id="bandera" name="bandera" value="">
+                     
                        <div class="row">
                             <div class="col-lg-4 col-md-4 col-sm-4 col-xs-12">
                                 <div class="form-example-int">
@@ -364,15 +364,12 @@ if ($result) {
 <?php
 include "config/conexion.php";
 
+$accion=$_REQUEST['bandera'];
 
-$precio=$_POST['precioco'];
-$bandera=$_REQUEST['bandera'];
-$cantidad  = $_POST['cantidad'];
-$fecha  = $_POST['fechac'];
-if($bandera==1){
-    msgI($cantidad);
-    msgI($precico);
-    $consulta  = "INSERT INTO tcompras VALUES('null','" .$idR. "','" .$idprov. "','" .$fecha. "','" .$precio. "','" .$cantidad. "')";
+if($accion==1){
+  $precio=$_POST['precioco'];
+  $cantidad  = $_POST['cantidad'];
+    $consulta  = "INSERT INTO tcompras VALUES('null','" .$idR. "','" .$idprov. "',now(),'" .$precio. "','" .$cantidad. "')";
     $resultado = $conexion->query($consulta);
       if ($resultado) {
         msgI("Los datos fueron almacenados con exito");

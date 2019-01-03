@@ -447,10 +447,8 @@ if ($result) {
 //genracion de codigo
         $(document).ready(function () {
                 $("#nombre").keyup(function () {
-                 
                     var value = $(this).val();
                     $cod = value.substr(0, 4).toUpperCase();
-                   
                     if (value != "") {
                         var numero = Math.floor(Math.random() * (9999 - 1000)) + 1000;
                         $codigo = $cod + numero;
@@ -458,7 +456,6 @@ if ($result) {
                     } else {
                         $("#codigo").val("");
                     }
-
                 });
             });
     </script>
