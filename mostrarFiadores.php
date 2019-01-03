@@ -4,7 +4,7 @@
 <head>
     <meta charset="utf-8">
     <meta http-equiv="x-ua-compatible" content="ie=edge">
-    <title>Comprar Productos| SISFIN</title>
+    <title>Lista de Fiadores| SISFIN</title>
     <meta name="description" content="">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <!-- favicon
@@ -94,8 +94,8 @@
 										<i class="notika-icon notika-windows"></i>
 									</div>
 									<div class="breadcomb-ctn">
-										<h2>Lista de productos</h2>
-										<p>Datos de <span class="bread-ntd">de productos activos.</span></p>
+										<h2>Lista de fiadores</h2>
+										<p>Datos de personales<span class="bread-ntd"> de fiadores.</span></p>
 									</div>
 								</div>
 							</div>

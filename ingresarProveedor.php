@@ -168,7 +168,7 @@ function go(){
 										<i class="notika-icon notika-form"></i>
 									</div>
 									<div class="breadcomb-ctn">
-										<h2>Rgistro de proveedores.</h2>
+										<h2>Registro de proveedores.</h2>
 										<p>Formulario de datos <span class="bread-ntd">para un nuevo proveedor.</span></p>
 									</div>
 								</div>
@@ -382,7 +382,7 @@ function go(){
     <script src="js/main.js"></script>
 
        
-
+<!-- nose 
 		============================================ -->
     <!-- <script src="js/tawk-chat.js"></script> -->
 </body>
