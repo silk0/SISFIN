@@ -173,8 +173,8 @@ if ($result) {
         echo "<td>" . $fila->email . "</td>";
         echo "<td>
         <div class='button-icon-btn'>
-        <button class='btn btn-info info-icon-notika btn-reco-mg btn-button-mg' onclick=\"edit('$fila->id_proveedor','$fila->nombre','$fila->direccion','$fila->telefono','$fila->representante','$fila->dui','$fila->nit','$fila->celular','$fila->email')\";><i class='notika-icon notika-search'></i></button>
-        <button class='btn btn-lightgreen lightgreen-icon-notika btn-reco-mg btn-button-mg' onclick='modify(" . $fila->id_proveedor. ")'><i class='notika-icon notika-menus'></i></button>
+        <button title='Ver' class='btn btn-info info-icon-notika btn-reco-mg btn-button-mg' onclick=\"edit('$fila->id_proveedor','$fila->nombre','$fila->direccion','$fila->telefono','$fila->representante','$fila->dui','$fila->nit','$fila->celular','$fila->email')\";><i class='notika-icon notika-search'></i></button>
+        <button title='Modificar' class='btn btn-lightgreen lightgreen-icon-notika btn-reco-mg btn-button-mg' onclick='modify(" . $fila->id_proveedor. ")'><i class='notika-icon notika-menus'></i></button>
         </div>
         </td>";
         echo "</tr>";
@@ -218,7 +218,7 @@ if ($result) {
                                     <div class="form-group">
                                         <label>Nombre:</label>
                                         <div class="nk-int-st">
-                                        <input type="text" name="nombrem" id="nombrem" class="form-control input-sm" >
+                                        <input type="text" name="nombrem" id="nombrem" class="form-control input-sm" readonly>
                                         </div>
                                     </div>
                                 </div>
@@ -228,28 +228,30 @@ if ($result) {
                                     <div class="form-group">
                                         <label>Teléfono:</label>
                                         <div class="nk-int-st">
-                                           <input type="text" name="telm" id="telm" class="form-control input-sm">
+                                           <input type="text" name="telm" id="telm" class="form-control input-sm"readonly>
                                         </div>
                                      </div>                            
                                 </div>
                             </div>
+                            <div class="col-lg-12 col-md-6 col-sm-6 col-xs-12">
                             <div class="form-example-int">
                             <div class="form-group">
                                 <label>Dirección:</label>
                                 <div class="nk-int-st">
-                                    <input type="text" name="direcm" id="direcm"class="form-control input-sm">
+                                    <input type="text" name="direcm" id="direcm"class="form-control input-sm" readonly>
                                 </div>
                             </div>
                         </div>
                         </div>
+                        </div>
                         <h1>Datos del Representante</h1>
                         <div class="row">
-                        <div class="col-lg-6 col-md-6 col-sm-6 col-xs-12">
+                        <div class="col-lg-12 col-md-6 col-sm-6 col-xs-12">
                                 <div class="form-example-int">
                                     <div class="form-group">
                                         <label>Representante:</label>
                                         <div class="nk-int-st">
-                                        <input type="text" name="representantem" id="representantem" class="form-control input-sm" >
+                                        <input type="text" name="representantem" id="representantem" class="form-control input-sm" readonly>
                                         </div>
                                     </div>
                                 </div>
@@ -259,18 +261,18 @@ if ($result) {
                                     <div class="form-group">
                                         <label>DUI:</label>
                                         <div class="nk-int-st">
-                                           <input type="text" name="duim" id="duim" class="form-control input-sm">
+                                           <input type="text" name="duim" id="duim" class="form-control input-sm" readonly>
                                         </div>
                                      </div>                            
                                 </div>
                             </div>
 
                              <div class="col-lg-6 col-md-6 col-sm-6 col-xs-10">
-                                <div class="form-example-int mg-t-15">
+                                <div class="form-example-int">
                                     <div class="form-group">
                                         <label>NIT:</label>
                                         <div class="nk-int-st">
-                                           <input type="text" name="nitm" id="nitm" class="form-control input-sm">
+                                           <input type="text" name="nitm" id="nitm" class="form-control input-sm" readonly>
                                         </div>
                                      </div>                            
                                 </div>
@@ -278,22 +280,22 @@ if ($result) {
                             </div>
                             
                         <div class="row">
-                         <div class="col-lg-4 col-md-4 col-sm-4 col-xs-12" >
+                         <div class="col-lg-6 col-md-6 col-sm-6 col-xs-12" >
                                 <div class="form-example-int mg-t-15">
                                     <div class="form-group">
                                         <label>Celular:</label>
                                         <div class="nk-int-st">
-                                           <input type="text" name="celm" id="celm" class="form-control input-sm">
+                                           <input type="text" name="celm" id="celm" class="form-control input-sm" readonly>
                                         </div>
                                      </div>                            
                                 </div>
                             </div>
-                            <div class="col-lg-4 col-md-4 col-sm-4 col-xs-12">
+                            <div class="col-lg-6 col-md-6 col-sm-6 col-xs-12">
                                 <div class="form-example-int mg-t-15">
                                     <div class="form-group">
                                         <label>E-mail:</label>
                                         <div class="nk-int-st">
-                                           <input type="text" name="emailm" id="emailm" class="form-control input-sm">
+                                           <input type="text" name="emailm" id="emailm" class="form-control input-sm" readonly>
                                         </div>
                                      </div>                            
                                 </div>
