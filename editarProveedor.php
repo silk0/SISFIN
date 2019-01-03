@@ -1,20 +1,19 @@
 <?php
 $id = $_REQUEST["id"];
 include "config/conexion.php";
-$result = $conexion->query("select * from tfiador where id_fiador=" . $id);
+$result = $conexion->query("select * from tproveedor where id_proveedor=" . $id);
 if ($result) {
     while ($fila = $result->fetch_object()) {
-        $idR               = $fila->id_fiador;
+        $idR               = $fila->id_proveedor;
         $nombreR           = $fila->nombre;
-        $apellidoR         = $fila->apellido;
         $direccionR        = $fila->direccion;
+        $telefonoR         = $fila->telefono;
+        $representanteR    = $fila->representante;
         $duiR              = $fila->dui;
         $nitR              = $fila->nit;
-        $correoR           = $fila->correo;
-        $trabajoR          = $fila->profecion;
-        $salarioR          = $fila->salario;
-        $telefonoR         = $fila->telefono;
         $celularR          = $fila->celular;
+        $emailR           = $fila->email;
+       
        }
 }
 
@@ -25,7 +24,7 @@ if ($result) {
 <head>
     <meta charset="utf-8">
     <meta http-equiv="x-ua-compatible" content="ie=edge">
-    <title>Ingreso de Fiadores | SISFIN</title>
+    <title>Modificación de Proveedores | SISFIN</title>
     <meta name="description" content="">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <!-- favicon
@@ -70,18 +69,94 @@ if ($result) {
     <!-- style CSS
 		============================================ -->
     <link rel="stylesheet" href="style.css">
+
+    <!-- notification CSS
+        ============================================ -->
+    <link rel="stylesheet" href="css/notification/notification.css">
     <!-- responsive CSS
 		============================================ -->
     <link rel="stylesheet" href="css/responsive.css">
     <!-- modernizr JS
 		============================================ -->
+
+
     <script src="js/vendor/modernizr-2.8.3.min.js"></script>
 </head>
-<SCRIPT  language=JavaScript> 
+<SCRIPT  language=JavaScript>   
+function notify(titulo,texto,from, align, icon, type, animIn, animOut){
+        $.growl({
+            icon: icon,
+            title: titulo+" ",
+            message: texto,
+            url: ''
+        },{
+                element: 'body',
+                type: type,
+                allow_dismiss: true,
+                placement: {
+                        from: from,
+                        align: align
+                },
+                offset: {
+                    x: 20,
+                    y: 85
+                },
+                spacing: 10,
+                z_index: 1031,
+                delay: 2500,
+                timer: 1000,
+                url_target: '_blank',
+                mouse_over: false,
+                animate: {
+                        enter: animIn,
+                        exit: animOut
+                },
+                icon_type: 'class',
+                template: '<div data-growl="container" class="alert" role="alert">' +
+                                '<button type="button" class="close" data-growl="dismiss">' +
+                                    '<span aria-hidden="true">&times;</span>' +
+                                    '<span class="sr-only">Close</span>' +
+                                '</button>' +
+                                '<span data-growl="icon"></span>' +
+                                '<span data-growl="title"></span>' +
+                                '<span data-growl="message"></span>' +
+                                '<a href="#" data-growl="url"></a>' +
+                            '</div>'
+        });
+    }
 function go(){
-        document.form.submit();  
-       
-} 
+
+    //Validaciones
+   if(document.getElementById('nombre').value==""){
+    //    alert("El campo nombre es obligatorio");
+    //    prueba :p
+     notify(' Advertencia:','El campo Nombre es obligatorio.','top', 'right', 'any', 'warning');
+       document.getElementById("nombre").focus();
+   }else if(document.getElementById('telefono').value=="" ){
+        notify(' Advertencia:','El campo telefono es obligatorio', 'top', 'right', 'any', 'warning');
+       document.getElementById("telefono").focus();
+   }else if(document.getElementById('direc').value==""){
+        notify(' Advertencia:','El campo Direccion es obligatorio', 'top', 'right', 'any', 'warning');
+       document.getElementById("direc").focus();
+   }else if(document.getElementById('representante').value==""){
+        notify(' Advertencia:','El campo Representante es obligatorio','top', 'right', 'any', 'warning');
+       document.getElementById("representante").focus();
+   }else if(document.getElementById('dui').value==""){
+        notify(' Advertencia:','El campo DUI es obligatorio', 'top', 'right', 'any', 'warning');
+       document.getElementById("dui").focus();
+   }else if(document.getElementById('nit').value==""){
+        notify(' Advertencia:','El campo NIT es obligatorio', 'top', 'right', 'any', 'warning');
+       document.getElementById("nit").focus();
+   }else if(document.getElementById('celular').value=="" ){
+        notify(' Advertencia:','Ingrese Celular', 'top', 'right', 'any', 'warning');
+       document.getElementById("celular").focus();
+   }else if(document.getElementById('email').value==""){
+        notify(' Advertencia:','El campo E-mail es obligatorio,','top', 'right', 'any', 'warning');
+       document.getElementById("email").focus();
+   }else{
+      document.form.submit();  
+   }   
+}
 
 </script> 
 <body>
@@ -113,8 +188,8 @@ function go(){
 										<i class="notika-icon notika-form"></i>
 									</div>
 									<div class="breadcomb-ctn">
-										<h2>Modificación de datos del fiador.</h2>
-										<p>Formulario de datos personales <span class="bread-ntd">para fiadores.</span></p>
+										<h2>Modificación de proveedores.</h2>
+										<p>Formulario de datos personales<span class="bread-ntd">para un  proveedor.</span></p>
 									</div>
 								</div>
 							</div>
@@ -137,132 +212,111 @@ function go(){
                 <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
                     <div class="form-example-wrap">
                         <div class="cmp-tb-hd">
-                            <h2>Datos del Fiador.</h2>
+                            <h2>Datos del Proveedor</h2>
                             
                         </div>
-                        <form id="form" name="form" method="post" action="editarFiador.php?bandera=1">
-                        <input type="hidden" name="baccion" id="baccion" value="<?php echo $idR; ?>">
+                        <form name="form" method="post" action="editarProveedor.php?bandera=1">
                         
+                        <input type="hidden" name="baccion" id="baccion" value="<?php echo $idR; ?>">
                         <div class="row">
-                            <div class="col-lg-6 col-md-6 col-sm-6 col-xs-12">
+                            <div class="col-lg-8 col-md-8 col-sm-8 col-xs-12">
                                 <div class="form-example-int">
                                     <div class="form-group">
                                         <label>Nombre:</label>
                                         <div class="nk-int-st">
-                                        <input type="text" id="nombre" name="nombre" class="form-control input-sm" placeholder="Ingrese su nombre." value="<?php echo $nombreR; ?>" required>
+                                        <input type="text" id="nombre" name="nombre" class="form-control input-sm" placeholder="Ingrese el nombre del proveedor." value="<?php echo $nombreR; ?>" required>
                                         </div>
                                     </div>
                                 </div>
                             </div>
-                            <div class="col-lg-6 col-md-6 col-sm-6 col-xs-12">
+                            <div class="col-lg-4 col-md-4 col-sm-4 col-xs-12">
                                 <div class="form-example-int">
                                     <div class="form-group">
-                                        <label>Apellido:</label>
+                                        <label>Teléfono:</label>
                                         <div class="nk-int-st">
-                                        <input type="text" id="apellido" name="apellido" class="form-control input-sm" placeholder="Ingrese su apellido." value="<?php echo $apellidoR; ?>" required>
+                                        <input type="text" id="telefono" name="telefono" class="form-control input-sm" data-mask="9999-9999" placeholder="Ingrese el número de teléfono." value="<?php echo $telefonoR; ?>" required>
                                         </div>
                                     </div>
                                 </div>
                             </div>
 
                         </div>
+                        <div class="form-example-int mg-t-15">
+                            <div class="form-group">
+                                <label>Dirección:</label>
+                                <div class="nk-int-st">
+                                    <input type="text" id="direc" name="direc" class="form-control input-sm" placeholder="Ingrese la dirección del proveedor." value="<?php echo $direccionR; ?>" required>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="cmp-tb-hd">
+                            <h2>Datos del representante del proveedor</h2>
+                            
+                        </div>
                         <div class="row">
+                           <div class="col-lg-8 col-md-8 col-sm-8 col-xs-12">
+                                <div class="form-example-int mg-t-15">
+                                    <div class="form-group">
+                                        <label>Representante:</label>
+                                        <div class="nk-int-st">
+                                        <input type="text" id="representante" name="representante" class="form-control input-sm" placeholder="Ingrese el nombre." value="<?php echo $representanteR; ?>" required>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+
                             <div class="col-lg-4 col-md-4 col-sm-4 col-xs-12">
                                 <div class="form-example-int mg-t-15">
                                     <div class="form-group">
                                         <label>DUI:</label>
                                         <div class="nk-int-st">
-                                           <input type="text" id="dui"name="dui" class="form-control input-sm" data-mask="99999999-9" placeholder="Ingrese su DUI." value="<?php echo $duiR; ?>" required>
+                                           <input type="text" id="dui" name="dui" class="form-control input-sm" data-mask="99999999-9" placeholder="Ingrese el DUI." value="<?php echo $duiR; ?>" required>
                                         </div>
                                      </div>                            
                                 </div>
                             </div>
 
-                             <div class="col-lg-4 col-md-4 col-sm-4 col-xs-10">
-                                <div class="form-example-int mg-t-15">
-                                    <div class="form-group">
-                                        <label>NIT:</label>
-                                        <div class="nk-int-st">
-                                           <input type="text" id="nit" name="nit" class="form-control input-sm" data-mask="9999-999999-999-9" placeholder="Ingrese su NIT." value="<?php echo $nitR; ?>" required>
-                                        </div>
-                                     </div>                            
-                                </div>
-                            </div>
                         </div>
-                        
-                        <div class="form-example-int mg-t-15">
-                            <div class="form-group">
-                                <label>Dirección:</label>
-                                <div class="nk-int-st">
-                                    <input type="text" id="direc" name="direc" class="form-control input-sm" placeholder="Ingrese su dirección." value="<?php echo $direccionR; ?>" required>
-                                </div>
-                            </div>
-                        </div>
-                        
-                        
+                            
                         <!-- FILA PARA DATOS CORTOS -->
                         
                          <!-- FIN DE FILA PARA DATOS CORTOS -->
                       
                         <div class="row">
-                            <div class="col-lg-4 col-md-4 col-sm-4 col-xs-12">
+                            
+                             <div class="col-lg-4 col-md-4 col-sm-4 col-xs-12">
                                 <div class="form-example-int mg-t-15">
                                     <div class="form-group">
-                                        <label>Teléfono:</label>
+                                        <label>NIT:</label>
                                         <div class="nk-int-st">
-                                           <input type="text" id="telefono" name="telefono" class="form-control input-sm" data-mask="9999-9999" placeholder="Ingrese Telefono." value="<?php echo $telefonoR; ?>"required>
+                                           <input type="text" id="nit" name="nit" class="form-control input-sm" data-mask="9999-999999-999-9" placeholder="Ingrese el NIT." value="<?php echo $nitR; ?>" required>
                                         </div>
                                      </div>                            
                                 </div>
-                            </div>
+                            </div> 
+                             
 
                              <div class="col-lg-4 col-md-4 col-sm-4 col-xs-12" >
                                 <div class="form-example-int mg-t-15">
                                     <div class="form-group">
                                         <label>Celular:</label>
                                         <div class="nk-int-st">
-                                           <input type="text" id="celular" name="celular" class="form-control input-sm" data-mask="9999-9999" placeholder="Ingrese Celular." value="<?php echo $celularR; ?>" required>
+                                           <input type="text" id="celular" name="celular" class="form-control input-sm" data-mask="9999-9999" placeholder="Ingrese celular."  value="<?php echo $celularR; ?>" required>
                                         </div>
                                      </div>                            
                                 </div>
                             </div>
-                            <div class="col-lg-4 col-md-4 col-sm-4 col-xs-12">
+                             <div class="col-lg-4 col-md-4 col-sm-4 col-xs-12">
                                 <div class="form-example-int mg-t-15">
                                     <div class="form-group">
                                         <label>E-mail:</label>
                                         <div class="nk-int-st">
-                                           <input type="text" id="email" name="email" class="form-control input-sm" placeholder="Ingrese el E-mail" value="<?php echo $correoR; ?>">
+                                           <input type="text" id="email" name="email" class="form-control input-sm" placeholder="Ingrese el E-mail." value="<?php echo $emailR; ?>">
                                         </div>
                                      </div>                            
                                 </div>
                             </div>
-                        </div>
-                        
-                            
-                            <div class="row">
-                            <div class="col-lg-6 col-md-6 col-sm-6 col-xs-12">
-                                <div class="form-example-int">
-                                    <div class="form-group">
-                                        <label>Trabajo que realiza:</label>
-                                        <div class="nk-int-st">
-                                        <input type="text" id="trabajo" name="trabajo" class="form-control input-sm" placeholder="Ingrese el trabajo que realiza el fiador." value="<?php echo $trabajoR; ?>" required>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="col-lg-6 col-md-6 col-sm-6 col-xs-12">
-                                <div class="form-example-int">
-                                    <div class="form-group">
-                                        <label>Salario:</label>
-                                        <div class="nk-int-st">
-                                        <input type="text" id="salario" name="salario" class="form-control input-sm" placeholder="Ingrese el salario del fiador." value="<?php echo $salarioR; ?>" required>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-
-                        </div>
-                       
+                        </div>  
                         <div class="form-example-int mg-t-15">
                             <button class="btn btn-success notika-btn-success" onclick="go();">Modificar.</button>
                         </div>
@@ -331,6 +385,11 @@ function go(){
     <!--  Chat JS
 		============================================ -->
     <script src="js/chat/jquery.chat.js"></script>
+
+    <!--  notification JS
+        ============================================ -->
+        <script src="js/notification/bootstrap-growl.min.js"></script>
+        <script src="js/notification/notification-active.js"></script>
     <!--  todo JS
 		============================================ -->
     <script src="js/todo/jquery.todo.js"></script>
@@ -343,7 +402,9 @@ function go(){
     <!-- main JS
 		============================================ -->
     <script src="js/main.js"></script>
-	<!-- tawk chat JS
+
+       
+<!-- nose 
 		============================================ -->
     <!-- <script src="js/tawk-chat.js"></script> -->
 </body>
@@ -355,23 +416,24 @@ $bandera = $_REQUEST['bandera'];
 $baccion  = $_REQUEST["baccion"];
 if ($bandera==1) {
 $nombre     = $_REQUEST['nombre'];
-$apellido   = $_REQUEST['apellido'];
+$telefono   = $_REQUEST['telefono'];
 $direccion  = $_REQUEST['direc'];
+$representante  = $_REQUEST['representante'];
 $dui        = $_REQUEST['dui'];
 $nit        = $_REQUEST['nit'];
-$email      = $_REQUEST['email'];
-$telefono   = $_REQUEST['telefono'];
 $celular    = $_REQUEST['celular'];
-$trabajo    = $_REQUEST['trabajo'];
-$salario    = $_REQUEST['salario'];
+$email      = $_REQUEST['email'];
+
+
+
 msg($nombre);
 
-    $consulta  = "UPDATE tfiador set nombre='" . $nombre . "',apellido='" . $apellido . "',direccion='" . $direccion . "',dui='" . $dui . "',nit='" . $nit . "',correo='" . $email . "',profecion='" . $trabajo . "',salario='" . $salario . "',telefono='" . $telefono . "',celular='" . $celular . "' where id_fiador='" . $baccion . "'";
+    $consulta  = "UPDATE tproveedor set nombre='" . $nombre . "',direccion='" . $direccion . "',telefono='" . $telefono . "',representante='" . $representante . "',dui='" . $dui . "',nit='" . $nit . "',celular='" . $celular . "',email='" . $email . "' where id_proveedor='" . $baccion . "'";
     $resultado = $conexion->query($consulta);
     msg("antes if php");
       if ($resultado) {
           
-          msg("Se modificacon los datos correctamente");
+          msg("Se modificaron los datos correctamente");
       } else {
           msg("Error al insertar los datos");
       }
@@ -381,7 +443,7 @@ function msg($texto)
 {
     echo "<script type='text/javascript'>";
     echo "alert('$texto');";
-    echo "document.location.href='mostrarFiadores.php';";
+    echo "document.location.href='mostrarProveedores.php';";
     echo "</script>";
 }
 ?>
