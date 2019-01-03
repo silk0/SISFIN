@@ -59,7 +59,8 @@
 <script  language=JavaScript> 
 function go(){
     //validacion respectiva me da hueva
-        document.form.submit();  
+    document.getElementById("bandera").value="add";
+    document.form.submit(); 
 }
 function confirmar(id,op)
         {
@@ -166,7 +167,7 @@ function enviar(id){
                             <h2>Datos de la Categoria</h2>
                             
                         </div>
-                        <form name="form" method="post" action="ingresarCategoria.php?bandera=1">
+                        <form id="form"name="form" method="post" action="">
                         <input type="hidden" name="bandera" id="bandera">
                         <input type="hidden" name="baccion" id="baccion">
                         
@@ -223,6 +224,7 @@ function enviar(id){
                                         
                                         <th>Categoria</th>
                                         <th>Modificar</th>
+                                        <th>Estado</th>
                                         <th>Dar Alta/ Dar Baja</th>
                                         
                                     </tr>
@@ -270,6 +272,7 @@ if ($result) {
                                        
                                         <th>Categoria</th>
                                         <th>Modificar</th>
+                                        <th>Estado</th>
                                         <th>Dar Alta/ Dar Baja</th>
                                         
                                        
@@ -373,14 +376,15 @@ if ($result) {
 </html>
 <?php
 include "config/conexion.php";
-$accion = $_REQUEST['bandera'];
+$bandera  = $_REQUEST["bandera"];
 $baccion = $_REQUEST["baccion"];
-if($accion==1){
-$nombre     = $_POST['nombre'];
+$nombre     = $_REQUEST["nombre"];
+if($bandera=="add"){
+
 $query = "SELECT categoria FROM tcategoria WHERE categoria like '%".$nombre."';";
 $result = $conexion->query($query);
 if($result->num_rows == 0){   
-$consulta  = "INSERT INTO tcategoria VALUES('null','" .$nombre. "')";
+$consulta  = "INSERT INTO tcategoria VALUES('null','" .$nombre. "','1')";
     $resultado = $conexion->query($consulta);
       if($resultado){
           msg("Se agregaron los datos correctamente");
@@ -391,6 +395,25 @@ $consulta  = "INSERT INTO tcategoria VALUES('null','" .$nombre. "')";
   msg("Esta categoria ya existe");
 }
 }
+if ($bandera == "desactivar") {
+    $consulta = "UPDATE tcategoria SET estado = '0' WHERE id_categoria = '".$baccion."'";
+      $resultado = $conexion->query($consulta);
+      if ($resultado) {
+          msg("Categoria desactivada con exito");
+      } else {
+          msg("No se pudo realizar la acción");
+      }
+  }
+  if ($bandera == "activar") {
+    $consulta = "UPDATE tcategoria SET estado = '1' WHERE id_categoria = '".$baccion."'";
+      $resultado = $conexion->query($consulta);
+      if ($resultado) {
+          msg("Categoria activada con exito");
+      } else {
+          msg("No se pudo realizar la acción");
+      }
+  }
+  
 function msg($texto)
 {
     echo "<script type='text/javascript'>";
