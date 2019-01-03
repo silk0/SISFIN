@@ -1,3 +1,15 @@
+<?php
+include "config/conexion.php";
+$resultc = $conexion->query("select id_producto as id from tproducto");
+if ($resultc) {
+
+  while ($filac = $resultc->fetch_object()) {
+    $temp=$filac->id;
+   
+     }
+}   
+//$numero=sprintf("%03s",$temp+1);  
+?>
 <!doctype html>
 <html class="no-js" lang="">
 
@@ -146,7 +158,7 @@ function enviar(id){
                                     <div class="form-group">
                                         <label>Código:</label>
                                         <div class="nk-int-st">
-                                        <input type="text" name="nombre" class="form-control input-sm" data-mask="99999999" placeholder="Ingrese el código del producto." >
+                                        <input type="text" name="codigo" id="codigo" class="form-control input-sm" placeholder="Codigo del producto." readonly>
                                         </div>
                                     </div>
                                 </div>
@@ -156,7 +168,7 @@ function enviar(id){
                                     <div class="form-group">
                                         <label>Nombre:</label>
                                         <div class="nk-int-st">
-                                        <input type="text" name="nombre" class="form-control input-sm" placeholder="Ingrese el nombre del producto." >
+                                        <input type="text" name="nombre" id="nombre" class="form-control input-sm" placeholder="Ingrese el nombre del producto." >
                                         </div>
                                     </div>
                                 </div>
@@ -166,7 +178,7 @@ function enviar(id){
                                     <div class="form-group">
                                         <label>Stock Mínimo:</label>
                                         <div class="nk-int-st">
-                                        <input type="text" name="nombre" class="form-control input-sm" placeholder="Ingrese el stock minimo deseado." >
+                                        <input type="text" name="stock" class="form-control input-sm" placeholder="Ingrese el stock minimo deseado." >
                                         </div>
                                     </div>
                                 </div>
@@ -179,7 +191,7 @@ function enviar(id){
                                     <div class="form-group">
                                         <label>Precio de Compra:</label>
                                         <div class="nk-int-st">
-                                           <input type="text" name="pcompra" class="form-control input-sm" readonly placeholder="Precio de compra." value="0.00">
+                                           <input type="text" name="pcompra" id="pcompra" class="form-control input-sm" readonly placeholder="Precio de compra." value="0.00">
                                         </div>
                                      </div>                            
                                 </div>
@@ -190,7 +202,7 @@ function enviar(id){
                                     <div class="form-group">
                                         <label>Margen de Ganancia:</label>
                                         <div class="nk-int-st">
-                                           <input type="text" name="mganancia" class="form-control input-sm"  placeholder="Ingrese el margen deseado %." >
+                                           <input type="text" name="mganancia" id="mganacia" class="form-control input-sm"  placeholder="Ingrese el margen deseado %." >
                                         </div>
                                      </div>                            
                                 </div>
@@ -200,7 +212,7 @@ function enviar(id){
                                     <div class="form-group">
                                         <label>Precio de Venta:</label>
                                         <div class="nk-int-st">
-                                           <input type="text" name="pventa" class="form-control input-sm"  placeholder="Ingrese el precio de venta deseado." readonly value="0.00">
+                                           <input type="text" name="pventa" id="pventa" class="form-control input-sm"  placeholder="Ingrese el precio de venta deseado." readonly value="0.00">
                                         </div>
                                      </div>                            
                                 </div>
@@ -248,7 +260,7 @@ function enviar(id){
                             <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
                                 <div class="form-group">
                                     <div class="nk-int-st">
-                                        <textarea class="form-control" name="observ" rows="3" placeholder="Escriba aquí la descripción deseada acerca del producto..."></textarea required>
+                                        <textarea class="form-control" name="descrip" id="descrip" rows="3" placeholder="Escriba aquí la descripción deseada acerca del producto..."></textarea required>
                                     </div>
                                 </div>
                             </div>
@@ -431,7 +443,22 @@ if ($result) {
 		============================================ -->
         <script src="js/bootstrap-select/bootstrap-select.js"></script>
 
-    
+<script type="text/javascript">
+//genracion de codigo
+        $(document).ready(function () {
+                $("#nombre").keyup(function () {
+                    var value = $(this).val();
+                    $cod = value.substr(0, 4).toUpperCase();
+                    if (value != "") {
+                        var numero = Math.floor(Math.random() * (9999 - 1000)) + 1000;
+                        $codigo = $cod + numero;
+                        $("#codigo").val($codigo);
+                    } else {
+                        $("#codigo").val("");
+                    }
+                });
+            });
+    </script>
 </body>
 
 </html>

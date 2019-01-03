@@ -128,9 +128,6 @@ function go(){
    }else if(document.getElementById('telefono').value=="" && document.getElementById('celular').value==""){
         notify(' Advertencia:','Es necesario por lo menos un numero de telefono', 'top', 'right', 'any', 'warning');
        document.getElementById("telefono").focus();
-   }else if(document.getElementById('email').value==""){
-        notify(' Advertencia:','El campo E-mail es obligatorio,','top', 'right', 'any', 'warning');
-       document.getElementById("email").focus();
    }else if(document.getElementById('tipo').value=="Seleccione"){
         notify(' Advertencia:','Seleccione un tipo de Ingreso', 'top', 'right', 'any', 'warning');
        document.getElementById("tipo").focus();
@@ -600,13 +597,25 @@ $observ  = $_POST['observ'];
       if ($resultado) {
         msgI("Los datos fueron almacenados con exito");
       } else {
-        msgE('Error','No se pudo realizar el registro','top', 'right', 'any', 'danger');
+        msgE("Los datos no pudieron almacenarce");
       }     
 }
 function msgI($texto)
 {
     echo "<script type='text/javascript'>";
     echo "notify('Exito','$texto','top', 'right', 'any', 'success');";
+    echo "</script>";
+}
+function msgA($texto)
+{
+    echo "<script type='text/javascript'>";
+    echo "notify('Advertencia','$texto','top', 'right', 'any', 'warning');";
+    echo "</script>";
+}
+function msgE($texto)
+{
+    echo "<script type='text/javascript'>";
+    echo "notify('Error','$texto','top', 'right', 'any', 'danger');";
     echo "</script>";
 }
 ?>

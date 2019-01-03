@@ -22,6 +22,9 @@ if ($result) {
     <title>Registrar compra | SISFIN</title>
     <meta name="description" content="">
     <meta name="viewport" content="width=device-width, initial-scale=1">
+     <!-- notification CSS
+		============================================ -->
+    <link rel="stylesheet" href="css/notification/notification.css">
     <!-- favicon
 		============================================ -->
     <link rel="shortcut icon" type="image/x-icon" href="img/favicon.ico">
@@ -71,6 +74,62 @@ if ($result) {
 		============================================ -->
     <script src="js/vendor/modernizr-2.8.3.min.js"></script>
     <script>
+        function notify(titulo,texto,from, align, icon, type, animIn, animOut){
+		$.growl({
+			icon: icon,
+			title: titulo+" ",
+			message: texto,
+			url: ''
+		},{
+				element: 'body',
+				type: type,
+				allow_dismiss: true,
+				placement: {
+						from: from,
+						align: align
+				},
+				offset: {
+					x: 20,
+					y: 85
+				},
+				spacing: 10,
+				z_index: 1031,
+				delay: 2500,
+				timer: 1000,
+				url_target: '_blank',
+				mouse_over: false,
+				animate: {
+						enter: animIn,
+						exit: animOut
+				},
+				icon_type: 'class',
+				template: '<div data-growl="container" class="alert" role="alert">' +
+								'<button type="button" class="close" data-growl="dismiss">' +
+									'<span aria-hidden="true">&times;</span>' +
+									'<span class="sr-only">Close</span>' +
+								'</button>' +
+								'<span data-growl="icon"></span>' +
+								'<span data-growl="title"></span>' +
+								'<span data-growl="message"></span>' +
+								'<a href="#" data-growl="url"></a>' +
+							'</div>'
+		});
+	}
+        function go(){
+
+    //Validaciones
+   if(document.getElementById('precioco').value==""){
+ 
+     notify(' Advertencia:','El campo precio de compra es obligatorio.','top', 'right', 'any', 'warning');
+       document.getElementById("precioco").focus();
+   }else if(document.getElementById('cantidad').value==""){
+        notify(' Advertencia:','El campo Cantidad es obligatorio,','top', 'right', 'any', 'warning');
+       document.getElementById("cantidad").focus();
+   }else{
+      document.form.submit();  
+   }   
+} 
+
         function edit(id)
         {
             document.location.href="editarProducto.php?id="+id;
@@ -137,7 +196,10 @@ if ($result) {
                             <h2>Datos de la compra&nbsp;&nbsp;<?php echo $fecha=strftime( "%d-%m-%Y", time()); ?></h2>
                             
                         </div>
+                         <form name="form" method="post" action='registrarCompra.php?bandera=1&id=<?php echo $idR;?>'>
                         <input type="hidden" id="fechac" name="fechac" value="<?php echo $fecha;?>">
+                        <input type="hidden" id="id" name="id" value="<?php echo $idR;?>">
+                     
                        <div class="row">
                             <div class="col-lg-4 col-md-4 col-sm-4 col-xs-12">
                                 <div class="form-example-int">
@@ -171,12 +233,22 @@ if ($result) {
                                     </div>
                                 </div>
                             </div>
-                            <div class="col-lg-2 col-md-2 col-sm-2 col-xs-12">
+                            <div class="col-lg-1 col-md-1 col-sm-1 col-xs-12">
                                 <div class="form-example-int">
                                     <div class="form-group">
                                         <label>Cantidad:</label>
                                         <div class="nk-int-st">
                                         <input type="text" name="cantidad" id="cantidad" class="form-control input-sm" placeholder="00" >
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-lg-1 col-md-1 col-sm-1 col-xs-12">
+                                <div class="form-example-int">
+                                    <div class="form-group">
+                                        <label>Subtotal:</label>
+                                        <div class="nk-int-st">
+                                        <input type="text" name="subtotal" id="subtotal" class="form-control input-sm" placeholder="00" >
                                         </div>
                                     </div>
                                 </div>
@@ -199,8 +271,9 @@ if ($result) {
                         
                         
                         <div class="form-example-int mg-t-15">
-                            <button class="btn btn-success notika-btn-success" style="margin-left: 500px;" >Guardar.</button>
+                            <button class="btn btn-success notika-btn-success" style="margin-left: 500px;" onclick="go()" >Guardar.</button>
                         </div>
+                        </form>
                     </div>
                 </div>
             </div>
@@ -214,6 +287,7 @@ if ($result) {
     <!-- jquery
 		============================================ -->
     <script src="js/vendor/jquery-1.12.4.min.js"></script>
+    
     <!-- bootstrap JS
 		============================================ -->
     <script src="js/bootstrap.min.js"></script>
@@ -277,9 +351,39 @@ if ($result) {
     <!-- main JS
 		============================================ -->
     <script src="js/main.js"></script>
+     <!--  notification JS
+		============================================ -->
+        <script src="js/notification/bootstrap-growl.min.js"></script>
+    <script src="js/notification/notification-active.js"></script>
 	<!-- tawk chat JS
 		============================================ -->
     <!-- <script src="js/tawk-chat.js"></script> -->
 </body>
 
 </html>
+<?php
+include "config/conexion.php";
+
+$accion=$_REQUEST['bandera'];
+
+if($accion==1){
+  $precio=$_POST['precioco'];
+  $cantidad  = $_POST['cantidad'];
+    $consulta  = "INSERT INTO tcompras VALUES('null','" .$idR. "','" .$idprov. "',now(),'" .$precio. "','" .$cantidad. "')";
+    $resultado = $conexion->query($consulta);
+      if ($resultado) {
+        msgI("Los datos fueron almacenados con exito");
+      } else {
+        msgI('Error, no se ingreso en la bd.');
+      }     
+
+}else{
+   msgI('Error');
+}
+function msgI($texto)
+{
+    echo "<script type='text/javascript'>";
+    echo "notify('Exito','$texto','top', 'right', 'any', 'success');";
+    echo "</script>";
+}
+?>

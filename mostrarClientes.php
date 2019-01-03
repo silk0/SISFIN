@@ -1,3 +1,4 @@
+
 <!doctype html>
 <html class="no-js" lang="">
 
@@ -7,6 +8,9 @@
     <title>Lista de Clientes | SISFIN</title>
     <meta name="description" content="">
     <meta name="viewport" content="width=device-width, initial-scale=1">
+     <!-- notification CSS
+		============================================ -->
+        <link rel="stylesheet" href="css/notification/notification.css">
     <!-- favicon
 		============================================ -->
     <link rel="shortcut icon" type="image/x-icon" href="img/favicon.ico">
@@ -94,6 +98,52 @@ function edit(id,nom,ape,dui,nit,direc,tel,cel,email,tipo,prof,sal,ob)
         function modify(id){
        document.location.href="editarCliente.php?id="+id;
    }
+
+</script> 
+<SCRIPT  language=JavaScript> 
+function notify(titulo,texto,from, align, icon, type, animIn, animOut){
+		$.growl({
+			icon: icon,
+			title: titulo+" ",
+			message: texto,
+			url: ''
+		},{
+				element: 'body',
+				type: type,
+				allow_dismiss: true,
+				placement: {
+						from: from,
+						align: align
+				},
+				offset: {
+					x: 20,
+					y: 85
+				},
+				spacing: 10,
+				z_index: 1031,
+				delay: 2500,
+				timer: 1000,
+				url_target: '_blank',
+				mouse_over: false,
+				animate: {
+						enter: animIn,
+						exit: animOut
+				},
+				icon_type: 'class',
+				template: '<div data-growl="container" class="alert" role="alert">' +
+								'<button type="button" class="close" data-growl="dismiss">' +
+									'<span aria-hidden="true">&times;</span>' +
+									'<span class="sr-only">Close</span>' +
+								'</button>' +
+								'<span data-growl="icon"></span>' +
+								'<span data-growl="title"></span>' +
+								'<span data-growl="message"></span>' +
+								'<a href="#" data-growl="url"></a>' +
+							'</div>'
+		});
+	}
+	
+
 
 </script> 
 <body>
@@ -215,7 +265,7 @@ if ($result) {
                                     <div class="form-group">
                                         <label>Nombre:</label>
                                         <div class="nk-int-st">
-                                        <input type="text" name="nombrem" id="nombrem" class="form-control input-sm" >
+                                        <input type="text" name="nombrem" id="nombrem" class="form-control input-sm" readonly>
                                         </div>
                                     </div>
                                 </div>
@@ -225,7 +275,7 @@ if ($result) {
                                     <div class="form-group">
                                         <label>Apellido:</label>
                                         <div class="nk-int-st">
-                                        <input type="text" name="apellidom" id="apellidom" class="form-control input-sm">
+                                        <input type="text" name="apellidom" id="apellidom" class="form-control input-sm" readonly>
                                         </div>
                                     </div>
                                 </div>
@@ -238,7 +288,7 @@ if ($result) {
                                     <div class="form-group">
                                         <label>DUI:</label>
                                         <div class="nk-int-st">
-                                           <input type="text" name="duim" id="duim" class="form-control input-sm">
+                                           <input type="text" name="duim" id="duim" class="form-control input-sm" readonly>
                                         </div>
                                      </div>                            
                                 </div>
@@ -249,7 +299,7 @@ if ($result) {
                                     <div class="form-group">
                                         <label>NIT:</label>
                                         <div class="nk-int-st">
-                                           <input type="text" name="nitm" id="nitm" class="form-control input-sm">
+                                           <input type="text" name="nitm" id="nitm" class="form-control input-sm" readonly>
                                         </div>
                                      </div>                            
                                 </div>
@@ -260,7 +310,7 @@ if ($result) {
                             <div class="form-group">
                                 <label>Dirección:</label>
                                 <div class="nk-int-st">
-                                    <input type="text" name="direcm" id="direcm"class="form-control input-sm">
+                                    <input type="text" name="direcm" id="direcm"class="form-control input-sm" readonly>
                                 </div>
                             </div>
                         </div>
@@ -270,7 +320,7 @@ if ($result) {
                                     <div class="form-group">
                                         <label>Teléfono:</label>
                                         <div class="nk-int-st">
-                                           <input type="text" name="telm" id="telm" class="form-control input-sm">
+                                           <input type="text" name="telm" id="telm" class="form-control input-sm" readonly>
                                         </div>
                                      </div>                            
                                 </div>
@@ -281,7 +331,7 @@ if ($result) {
                                     <div class="form-group">
                                         <label>Celular:</label>
                                         <div class="nk-int-st">
-                                           <input type="text" name="celm" id="celm" class="form-control input-sm">
+                                           <input type="text" name="celm" id="celm" class="form-control input-sm" readonly>
                                         </div>
                                      </div>                            
                                 </div>
@@ -291,7 +341,7 @@ if ($result) {
                                     <div class="form-group">
                                         <label>E-mail:</label>
                                         <div class="nk-int-st">
-                                           <input type="text" name="emailm" id="emailm" class="form-control input-sm">
+                                           <input type="text" name="emailm" id="emailm" class="form-control input-sm" readonly>
                                         </div>
                                      </div>                            
                                 </div>
@@ -303,7 +353,7 @@ if ($result) {
                                     <div class="form-group">
                                         <label>Tipo de Ingreso</label>
                                         <div class="nk-int-st">
-                                           <input type="text" name="tipom" id="tipom" class="form-control input-sm" placeholder="Ingrese Profecion u oficio">
+                                           <input type="text" name="tipom" id="tipom" class="form-control input-sm" placeholder="Ingrese Profecion u oficio" readonly>
                                         </div>
                                      </div>                            
                                 </div>
@@ -313,7 +363,7 @@ if ($result) {
                                     <div class="form-group">
                                         <label>Profecion u oficio</label>
                                         <div class="nk-int-st">
-                                           <input type="text" name="profecion" id="profecion" class="form-control input-sm" placeholder="Ingrese Profecion u oficio">
+                                           <input type="text" name="profecion" id="profecion" class="form-control input-sm" placeholder="Ingrese Profecion u oficio" readonly>
                                         </div>
                                      </div>                            
                                 </div>
@@ -323,7 +373,7 @@ if ($result) {
                                     <div class="form-group">
                                         <label>Ingreso Promedio $ (mensual)</label>
                                         <div class="nk-int-st">
-                                           <input type="number" name="salm" id="salm" class="form-control input-sm" placeholder="Introduzca Ingreso Promedio">
+                                           <input type="number" name="salm" id="salm" class="form-control input-sm" placeholder="Introduzca Ingreso Promedio" readonly>
                                         </div>
                                      </div>                            
                                 </div>
@@ -342,7 +392,7 @@ if ($result) {
                             <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
                                 <div class="form-group">
                                     <div class="nk-int-st">
-                                        <textarea class="form-control" name="observm" id="observm" rows="5" placeholder="Escriba aquí las observaciones deseadas acerca del cliente..."></textarea>
+                                        <textarea class="form-control" name="observm" id="observm" rows="5" placeholder="Escriba aquí las observaciones deseadas acerca del cliente..." readonly></textarea>
                                     </div>
                                 </div>
                             </div>
@@ -351,8 +401,7 @@ if ($result) {
 
                                             </div>
                                             <div class="modal-footer">
-                                                <button type="button" class="btn btn-default" data-dismiss="modal">Save changes</button>
-                                                <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+                                                <button type="button" class="btn btn-default" data-dismiss="modal">Cerrar</button>
                                             </div>
                                         </div>
                                     </div>
@@ -435,7 +484,55 @@ if ($result) {
 	<!-- tawk chat JS
 		============================================ -->
     <script src="js/tawk-chat.js"></script>
+    <!--  notification JS
+		============================================ -->
+    <script src="js/notification/bootstrap-growl.min.js"></script>
+    <script src="js/notification/notification-active.js"></script>
    
 </body>
 
 </html>
+<?php
+include "config/conexion.php";
+$accion = $_REQUEST['bandera'];
+$baccion  = $_REQUEST["idfiador"];
+if($accion==1){
+$nombre   = $_POST['nombre'];
+$apellido   = $_POST['apellido'];
+$direccion   = $_POST['direc'];
+$dui  = $_POST['dui'];
+$nit   = $_POST['nit'];
+$email   = $_POST['email'];
+$tel   = $_POST['telefono'];
+$cel  = $_POST['celular'];
+$tipo=$_POST['tipo'];
+$prof=$_POST['profecion'];
+$salario=$_POST['salario'];
+$observ  = $_POST['observ'];
+$consulta  = "UPDATE tclientes set nombre='" . $nombre . "',apellido='" . $apellido . "',direccion='" . $direccion . "',dui='" . $dui . "',nit='" . $nit . "',profecion='". $prof ."',tipo_ingreso='".$tipo."',salario='" . $salario . "',telefono='" . $tel . "',celular='" . $cel . "',correo='" . $email . "',observaciones='".$observ."' where id_cliente='" . $baccion . "'";
+$resultado = $conexion->query($consulta);
+  if ($resultado) {   
+      msgI("Se modificaron los datos con exito");
+  } else {
+      msgE("cocurrio un error en el registro de los archivos");
+  }   
+}
+function msgI($texto)
+{
+    echo "<script type='text/javascript'>";
+    echo "notify('Exito','$texto','top', 'right', 'any', 'warning');";
+    echo "</script>";
+}
+function msgA($texto)
+{
+    echo "<script type='text/javascript'>";
+    echo "notify('Advertencia','$texto','top', 'right', 'any', 'warning');";
+    echo "</script>";
+}
+function msgE($texto)
+{
+    echo "<script type='text/javascript'>";
+    echo "notify('Error','$texto','top', 'right', 'any', 'danger');";
+    echo "</script>";
+}
+?>

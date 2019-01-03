@@ -381,7 +381,7 @@ function msg($texto)
 {
     echo "<script type='text/javascript'>";
     echo "alert('$texto');";
-    echo "document.location.href='mostrarFiadores.php';";
+    echo "document.location.href='mostrarFiador.php';";
     echo "</script>";
 }
 ?>
