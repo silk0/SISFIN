@@ -60,8 +60,12 @@
     <script src="js/vendor/modernizr-2.8.3.min.js"></script>
     <script>
     function modify(id){
-        alert(id);
+       
          document.location.href="registrarCompra.php?id="+id;
+    }
+     function kardex(id){
+   
+         document.location.href="kardex.php?id="+id;
     }
     </script>
 </head>
@@ -152,7 +156,7 @@ if ($result) {
         
         echo "<td>
         <div class='button-icon-btn'>
-        <button class='btn btn-info info-icon-notika btn-reco-mg btn-button-mg' ><i class='notika-icon notika-search'></i></button>
+        <button class='btn btn-info info-icon-notika btn-reco-mg btn-button-mg' data-toggle='tooltip' data-placement='bottom' title='Ver tarjeta kardex.' onclick='kardex(" . $fila->id_producto. ")' ><i class='notika-icon notika-search'></i></button>
         <button class='btn btn-lightgreen lightgreen-icon-notika btn-reco-mg btn-button-mg' data-toggle='tooltip' data-placement='bottom' title='Hacer una compra.' onclick='modify(" . $fila->id_producto. ")'><i class='notika-icon notika-up-arrow'></i></button>
         </div>
         </td>";

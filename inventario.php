@@ -175,7 +175,7 @@ function notify(titulo,texto,from, align, icon, type, animIn, animOut){
 										<i class="notika-icon notika-form"></i>
 									</div>
 									<div class="breadcomb-ctn">
-										<h2>Lista de clientes.</h2>
+										<h2>Lista de Productos.</h2>
 										<p>Datos personales de clientes <span class="bread-ntd">para un nuevo cliente.</span></p>
 									</div>
 								</div>
@@ -204,30 +204,36 @@ function notify(titulo,texto,from, align, icon, type, animIn, animOut){
                             <table id="data-table-basic" class="table table-striped">
                                 <thead>
                                     <tr>
-                                        
+                                    <th>Codigo</th>
                                         <th>Nombre</th>
-                                        <th>Apellido</th> 
-                                        <th>Profecion</th>
-                                        <th>Teléfono</th>
-                                        <th>Celular</th>
-                                        <th>E-mail</th>
-                                        <th>Opciones</th>
-                                       
+                                        <th>Proveedor</th> 
+                                        <th>Precio Compra</th>
+                                        <th>Precio Venta</th>
+                                        <th>Stock</th>
+                                        <th>Estado</th>
+                                        <th>Opciones</th>  
                                     </tr>
                                 </thead>
                                 <tbody>
                       <?php
 include "config/conexion.php";
-$result = $conexion->query("SELECT * from tclientes ORDER BY id_cliente");
+$result = $conexion->query("SELECT tcategoria.categoria,tproveedor.nombre as proveedor,tproducto.nombre,precio_compra,precio_venta,codigo,stock,tproducto.estado FROM tproducto INNER JOIN tproveedor ON tproducto.id_proveedor = tproveedor.id_proveedor INNER JOIN tcategoria ON tproducto.id_categoria = tcategoria.id_categoria
+ORDER BY codigo");
 if ($result) {
     while ($fila = $result->fetch_object()) {
         echo "<tr>";
+        echo "<td>" . $fila->codigo . "</td>";
         echo "<td>" . $fila->nombre . "</td>";
-        echo "<td>" . $fila->apellido . "</td>";
-        echo "<td>" . $fila->profecion . "</td>";  
-        echo "<td>" . $fila->telefono . "</td>";
-        echo "<td>" . $fila->celular . "</td>";
-        echo "<td>" . $fila->correo . "</td>";
+        echo "<td>" . $fila->proveedor . "</td>";  
+        echo "<td>" . $fila->precio_compra . "</td>";
+        echo "<td>" . $fila->precio_venta . "</td>";
+        echo "<td>" . $fila->stock . "</td>";
+        if($fila->estado==1){
+            echo "<td>Activo</td>";
+        }else{
+            echo "<td>Inactivo</td>";
+        }
+       
         echo "<td>
         <div class='button-icon-btn'>
         <button class='btn btn-info info-icon-notika btn-reco-mg btn-button-mg' onclick=\"edit('$fila->id_cliente','$fila->nombre','$fila->apellido','$fila->dui','$fila->nit','$fila->direccion','$fila->telefono','$fila->celular','$fila->correo','$fila->tipo_ingreso','$fila->profecion','$fila->salario','$fila->observaciones')\";><i class='notika-icon notika-search'></i></button>
@@ -443,7 +449,7 @@ if ($result) {
 		============================================ -->
     <script src="js/sparkline/jquery.sparkline.min.js"></script>
     <script src="js/sparkline/sparkline-active.js"></script>
-     <!-- flot JS
+  <!-- flot JS
 		============================================ -->
         <script src="js/flot/jquery.flot.js"></script>
     <script src="js/flot/jquery.flot.resize.js"></script>
