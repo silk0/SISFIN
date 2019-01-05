@@ -111,76 +111,78 @@
 		</div>
 	</div>
 	<!-- Breadcomb area End-->
-    <!-- Data Table area Start-->
-    <div class="data-table-area">
+    
+     <div class="normal-table-area">
         <div class="container">
-            <div class="row">
+    <div class="row">
                 <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
-                    <div class="data-table-list">
+                    <div class="normal-table-list mg-t-30">
                         <div class="basic-tb-hd">
-                            
+                            <h2>Listado de movimientos.</h2>
+                            <!-- <p>Use contextual classes (<code>.info, .warning, .success, .danger</code>) to color table rows or individual cells.</p> -->
                         </div>
-                        <div class="table-responsive">
-                            <table id="data-table-basic" class="table table-striped">
+                        <div class="bsc-tbl-cls">
+                            <table class="table table-hover table-striped table-condensed">
                                 <thead>
-                                   <tr>
-                                        
-                                        <th>Fecha</th>
-                                        <th>Descripción</th>
-                                        <th>Cantidad</th>
-                                        <th>V Unitario</th>
-                                        <th>Cantidad</th>
-                                        <th>V Unitario</th>
-                                        <th>CantidadS</th>
-                                        
-                                       
+                                    <tr>
+                                    
+                                    <th class="active">Fecha</th>
+                                    <th class="active">Descripción</th>
+                                    <th colspan="3" class="warning">Entradas</th>
+                                    <th colspan="3" class="danger">Salidas</th>
+                                    <th colspan="3" class="info">Saldo</th>
+                                    
                                     </tr>
                                 </thead>
                                 <tbody>
-                      <?php
-include "config/conexion.php";
-$result = $conexion->query("SELECT * from tfiador ORDER BY id_fiador");
-if ($result) {
-    while ($fila = $result->fetch_object()) {
-        echo "<tr>";
-        echo "<td>" . $fila->nombre . "</td>";
-        echo "<td>" . $fila->apellido . "</td>";
-        echo "<td>" . $fila->dui . "</td>";  
-        echo "<td>" . $fila->telefono . "</td>";
-        echo "<td>" . $fila->celular . "</td>";
-        echo "<td>" . $fila->correo . "</td>";
-        echo "<td>
-        <div class='button-icon-btn'>
-        <button class='btn btn-info info-icon-notika btn-reco-mg btn-button-mg' ><i class='notika-icon notika-search'></i></button>
-        <button class='btn btn-lightgreen lightgreen-icon-notika btn-reco-mg btn-button-mg' onclick='modify(" . $fila->id_fiador. ")'><i class='notika-icon notika-menus'></i></button>
-        </div>
-        </td>";
-        echo "</tr>";
-
-    }
-}
-?>
-                                </tbody>
-                                <tfoot>
-                                    <tr>
-                                    <th>Fecha</th>
-                                    <th>Descripción</th>
-                                    <th>Cantidad</th>
-                                    <th>V Unitario</th>
-                                    <th>Cantidad</th>
-                                    <th>V Unitario</th>
-                                    <th>CantidadS</th>
-                                    
+                                    <tr class="active">
+                                        <td></td>
+                                        <td></td>
+                                        <td class="warning">Cantidad</td>
+                                        <td class="danger">V.Unitario</td>
+                                        <td class="info">V.Total</td>
+                                        <td class="warning">Cantidad</td>
+                                        <td class="danger">V.Unitario</td>
+                                        <td class="info">V.Total</td>
+                                        <td class="warning">Cantidad</td>
+                                        <td class="danger">V.Unitario</td>
+                                        <td class="info">V.Total</td>                       
                                     </tr>
-                                </tfoot>
+                                    <tr class="active">
+                                        <td>10/10/2018</td>
+                                        <td>Primer ingreso.</td>
+                                        <td class="warning">10</td>
+                                        <td class="danger">2.50</td>
+                                        <td class="info">25.00</td>
+                                        <td class="warning">0.00</td>
+                                        <td class="danger">0.00</td>
+                                        <td class="info">0.00</td>
+                                        <td class="warning">10</td>
+                                        <td class="danger">2.50</td>
+                                        <td class="info">25.00</td>    
+                                    </tr>
+                                    <tr class="active">
+                                        <td>11/10/2018</td>
+                                        <td>Primera venta.</td>              
+                                        <td class="warning">0.00</td>
+                                        <td class="danger">0.00</td>
+                                        <td class="info">0.00</td>
+                                        <td class="warning">10</td>
+                                        <td class="danger">2.50</td>
+                                        <td class="info">25.00</td>
+                                        <td class="warning">10</td>
+                                        <td class="danger">2.50</td>
+                                        <td class="info">25.00</td>    
+                                    </tr>
+                                    
+                                </tbody>
                             </table>
                         </div>
                     </div>
                 </div>
             </div>
-        </div>
+         </div>
     </div>
-    <!-- Data Table area End-->
         <!-- Start Footer area-->
     <?php include "footer.php";?>
     <!-- End Footer area-->
@@ -249,7 +251,7 @@ if ($result) {
     <script src="js/main.js"></script>
 	<!-- tawk chat JS
 		============================================ -->
-    <script src="js/tawk-chat.js"></script>
+    <!-- <script src="js/tawk-chat.js"></script> -->
 </body>
 
 </html>
