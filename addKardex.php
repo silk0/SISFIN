@@ -20,7 +20,7 @@ if ($bandera == 'enviar') {
 if ($bandera=="add") {
   //codigo para guardar en la tabla kardex
   //Primero obgtendremos el numero de productos disponibles del que queremos Agregar
-  $consulta="select * from productos where idproductos=".$idproducto;
+  $consulta="select * from tproducto where id_productos=".$idproducto;
   $resultado=$conexion->query($consulta);
   if ($resultado) {
     while ($fila=$resultado->fetch_object()) {
@@ -29,7 +29,7 @@ if ($bandera=="add") {
     }
   }
   //Obtendremos el ultimo valor total del saldo en el kardex
-  $consulta1="select * from kardex where idproducto='".$idproducto."' order by idkardex";
+  $consulta1="select * from kardex where id_producto='".$idproducto."' order by id_kardex";
   $resultado1=$conexion->query($consulta1);
   if($resultado1->num_rows<1)
   {
@@ -57,17 +57,17 @@ if ($bandera=="add") {
         //msg("Exito Compra");
         //AHORA A ACTUALIZAR LOS NUEVOS VALORES QUE TENDRA DICHO Producto
         //nuevo precio del productos
-        $tporcen=$valorUnitarioS*$margen;
-        $nuevoPrecio=$vunitario/(1-$margen);
-        $nuevoPrecio=number_format($nuevoPrecio, 2, ".", "");
-        $consulta4="UPDATE productos set cantidadproductos='".$cantidadP."',preciocompra='".$vunitario."',precioventa='".$nuevoPrecio."' where idproductos='".$idproducto."'";
-        $resultado = $conexion->query($consulta4);
-        if ($resultado) {
+        // $tporcen=$valorUnitarioS*$margen;
+        // $nuevoPrecio=$vunitario/(1-$margen);
+        // $nuevoPrecio=number_format($nuevoPrecio, 2, ".", "");
+        // $consulta4="UPDATE productos set cantidadproductos='".$cantidadP."',preciocompra='".$vunitario."',precioventa='".$nuevoPrecio."' where idproductos='".$idproducto."'";
+        // $resultado = $conexion->query($consulta4);
+        // if ($resultado) {
           //  msg("Exito Producto");
           header('Location:kardex.php?id='.$idproducto);
-        } else {
-            //msg("No Exito Producto");
-        }
+        // } else {
+        //     //msg("No Exito Producto");
+        // }
       } else {
         msg(mysqli_error($conexion));
     }
@@ -84,14 +84,14 @@ if ($bandera=="add") {
         //msg("Exito Compra");
         //AHORA A ACTUALIZAR LOS NUEVOS VALORES QUE TENDRA DICHO Producto
         //nuevo precio del productos
-        $consulta4="UPDATE productos set cantidadproductos='".$cantidadP."'where idproductos='".$idproducto."'";
-        $resultado = $conexion->query($consulta4);
-        if ($resultado) {
-          //  msg("Exito Producto");
+        // $consulta4="UPDATE productos set cantidadproductos='".$cantidadP."'where idproductos='".$idproducto."'";
+        // $resultado = $conexion->query($consulta4);
+        // if ($resultado) {
+        //   //  msg("Exito Producto");
           header('Location:kardex.php?id='.$idproducto);
-        } else {
-            //msg("No Exito Producto");
-        }
+        // } else {
+        //     //msg("No Exito Producto");
+        // }
       } else {
         msg(mysqli_error($conexion));
     }
