@@ -6,18 +6,21 @@
                     <ul class="nav nav-tabs notika-menu-wrap menu-it-icon-pro">
                         <li><a data-toggle="tab" href="#Home"><i class="notika-icon notika-support"></i> Clientes</a>
                         </li>
-                        <li><a data-toggle="tab" href="#mailbox"><i class="notika-icon notika-house"></i> Activo Fijo</a>
-                        </li>
-                        <li><a data-toggle="tab" href="#Interface"><i class="notika-icon notika-edit"></i> Cuentas X Cobrar</a>
-                        </li>
-                        <li><a data-toggle="tab" href="#Charts"><i class="notika-icon notika-bar-chart"></i> Estadisticas</a>
-                        </li>
                         <li><a data-toggle="tab" href="#Tables"><i class="notika-icon notika-finance"></i> Fiadores</a>
                         </li>
                         <li><a data-toggle="tab" href="#Forms"><i class="notika-icon notika-form"></i> Inventario</a>
                         </li>
                         <li><a data-toggle="tab" href="#Appviews"><i class="notika-icon notika-app"></i> Proveedores</a>
                         </li>
+                       
+                        <li><a data-toggle="tab" href="#Interface"><i class="notika-icon notika-edit"></i> Cuentas X Cobrar</a>
+                        </li>
+                        <li><a data-toggle="tab" href="#mailbox"><i class="notika-icon notika-house"></i> Activo Fijo</a>
+                        </li>
+                        <li><a data-toggle="tab" href="#Charts"><i class="notika-icon notika-bar-chart"></i> Estadisticas</a>
+                        </li>
+                        
+                        
                                                
                     </ul>
                     <div class="tab-content custom-menu-content">
@@ -39,17 +42,27 @@
                         
                         <div id="mailbox" class="tab-pane notika-tab-menu-bg animated flipInX">
                             <ul class="notika-main-menu-dropdown">
-                                <li><a href="inbox.html">Inbox</a>
+                                <li><a href="inbox.html">Registrar</a>
                                 </li>
-                                <li><a href="view-email.html">View Email</a>
+                                <li><a href="inbox.html">Lista de Activos</a>
                                 </li>
-                                <li><a href="compose-email.html">Compose Email</a>
+                                <li><a href="compose-email.html">Ecargados</a>
+                                </li>
+                                <li><a href="compose-email.html">Instituciones</a>
+                                </li>
+                                <li><a href="compose-email.html">Depratamentos</a>
+                                </li>
+                                <li><a href="compose-email.html">Tipos de Activos</a>
+                                </li>
+                                <li><a href="compose-email.html">Clasificion de Activos</a>
+                                </li>
+                                <li><a href="view-email.html">Estado</a>
                                 </li>
                             </ul>
                         </div>
                         <div id="Interface" class="tab-pane notika-tab-menu-bg animated flipInX">
                             <ul class="notika-main-menu-dropdown">
-                                <li><a href="animations.html">Animations</a>
+                                <li><a href="animations.html">Ventas</a>
                                 </li>
                                 <li><a href="google-map.html">Google Map</a>
                                 </li>
@@ -81,10 +94,10 @@
                                 </li> 
                                 <li><a href="mostrarFiadores.php">Mostrar</a>
                                 </li>    
-                                 <li><a href="normal-table.html">Normal Table</a>
+                                 <!-- <li><a href="normal-table.html">Normal Table</a>
                                 </li>                                
                                 <li><a href="data-table.html">Data Table</a>
-                                </li>
+                                </li> -->
                             </ul>
                         </div>
                        
@@ -99,10 +112,10 @@
                                 </li>
                                 <li><a href="ingresarCategoria.php">Registrar Categoria</a>
                                 </li>
-                                <li><a href="form-components.html">Form Components</a>
+                                <!-- <li><a href="form-components.html">Form Components</a>
                                 </li>
                                 <li><a href="form-examples.html">Form Examples</a>
-                                </li>
+                                </li> -->
                             </ul>
                         </div>
                         
@@ -112,7 +125,7 @@
                                 </li>
                                 <li><a href="mostrarProveedores.php">Mostrar</a>
                                 </li>
-                                <li><a href="notification.html">Notifications</a>
+                                <!-- <li><a href="notification.html">Notifications</a>
                                 </li>
                                 <li><a href="alert.html">Alerts</a>
                                 </li>
@@ -131,7 +144,7 @@
                                 <li><a href="tooltips.html">Tooltips</a>
                                 </li>
                                 <li><a href="dropdown.html">Dropdowns</a>
-                                </li>
+                                </li> -->
                             </ul>
                         </div>
                         <div id="Page" class="tab-pane notika-tab-menu-bg animated flipInX">

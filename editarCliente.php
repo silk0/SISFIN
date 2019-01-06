@@ -446,6 +446,7 @@ function recuperar(id){
                         
                         <div class="form-example-int mg-t-15">
                             <button type="button" class="btn btn-success notika-btn-success" onclick="go();">Guardar Cambios</button>
+                            <button type="reset" class="btn btn-warning notika-btn-warning">Restablecer</button>
                             <button type="button" class="btn btn-warning notika-btn-warning" onclick="back();">Cancelar</button>
                          
                         </div>               
