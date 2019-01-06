@@ -29,11 +29,11 @@
                                 </li>
                                 <li><a href="mostrarClientes.php">Mostrar Clientes</a>
                                 </li>
-                                <li><a href="fiadores.php">Fiadores</a>
+                                <!-- <li><a href="fiadores.php">Fiadores</a>
                                 </li>
                                 <li><a href="carteras.php">Carteras de Clientes</a>
                                 </li>                               
-                               
+                                -->
                             </ul>
                         </div>
                         

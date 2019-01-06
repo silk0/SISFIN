@@ -250,7 +250,7 @@ function recuperar(id){
                             <h2>Datos del Cliente</h2>
                             
                         </div>
-                        <form name="form" method="post" action="mostrarClientes.php?bandera=1">
+                        <form name="form" method="post" action="../SISFIN/scriptsphp/modificarCliente.php?bandera=1">
                         <input type="hidden" id="idfiador" name="idfiador" value="<?php echo $idR; ?>">
                         <div class="row">
                             <div class="col-lg-6 col-md-6 col-sm-6 col-xs-12">
