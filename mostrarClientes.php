@@ -70,7 +70,7 @@ function go(){
         document.form.submit();  
 } 
 function edit(id,nom,ape,dui,nit,direc,tel,cel,email,tipo,prof,sal,ob)
-        {
+     {
          // document.getElementById("baccion2").value=id;
           document.getElementById("nombrem").value=nom;
           document.getElementById("apellidom").value=ape;
@@ -78,22 +78,13 @@ function edit(id,nom,ape,dui,nit,direc,tel,cel,email,tipo,prof,sal,ob)
           document.getElementById("nitm").value=nit;
           document.getElementById("direcm").value=direc;
           document.getElementById("telm").value=tel;
-         //$("#baccion2").val(id);
           document.getElementById("celm").value=cel;
           document.getElementById("emailm").value=email;
           document.getElementById("tipom").value=tipo;
           document.getElementById("profecion").value=prof;
           document.getElementById("salm").value=sal;
           document.getElementById("observm").value=ob;
-         //$("#nomb").val(nom);
-        //$("#marc").val(marca);
-          //$("#num").val(num);
-          //$("#donad").val(don);
-          //$("#descr").val(des);
           $("#ModalInfo").modal();
-        //Ya manda todos los datos correcatamente
-          
-          
         }
         function modify(id){
        document.location.href="editarCliente.php?id="+id;
