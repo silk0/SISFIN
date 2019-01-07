@@ -48,7 +48,7 @@
                                 </li>
                                 <li><a href="compose-email.html">Ecargados</a>
                                 </li>
-                                <li><a href="compose-email.html">Instituciones</a>
+                                <li><a href="listaInstituciones.php">Instituciones</a>
                                 </li>
                                 <li><a href="compose-email.html">Depratamentos</a>
                                 </li>
