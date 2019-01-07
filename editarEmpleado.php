@@ -1,3 +1,22 @@
+<?php
+$id = $_REQUEST["id"];
+include "config/conexion.php";
+$result = $conexion->query("select * from templeados where id_empleado=" . $id);
+if ($result) {
+    while ($fila = $result->fetch_object()) {
+        $idR               = $fila->id_empleado;
+        $nombreR           = $fila->nombre;
+        $apellidoR         = $fila->apellido;
+        $direccionR        = $fila->zona;
+        $duiR              = $fila->dui;
+        $usuarioR          = $fila->usuario;
+        $contrasenaR       = $fila->pass;
+        $nivelR            = $fila->nivel;
+        
+       }
+}
+
+?>
 <!doctype html>
 <html class="no-js" lang="">
 
@@ -199,7 +218,8 @@ function go(){
                             <h2>Datos del Empleado.</h2>
                             
                         </div>
-                        <form name="form" method="post" action="ingresarEmpleado.php?bandera=1">
+                        <form name="form" method="post" action="editarEmpleado.php?bandera=1">
+                        <input type="hidden" name="baccion" id="baccion" value="<?php echo $idR; ?>">
                        
                         <div class="row">
                             <div class="col-lg-6 col-md-6 col-sm-6 col-xs-12">
@@ -207,7 +227,7 @@ function go(){
                                     <div class="form-group">
                                         <label>Nombre:</label>
                                         <div class="nk-int-st">
-                                        <input type="text" id="nombre" name="nombre" class="form-control input-sm" placeholder="Ingrese su nombre." required >
+                                        <input type="text" id="nombre" name="nombre" class="form-control input-sm" placeholder="Ingrese su nombre." value="<?php echo $nombreR; ?>" required >
                                         </div>
                                     </div>
                                 </div>
@@ -217,7 +237,7 @@ function go(){
                                     <div class="form-group">
                                         <label>Apellido:</label>
                                         <div class="nk-int-st">
-                                        <input type="text" id="apellido" name="apellido" class="form-control input-sm" placeholder="Ingrese su apellido."  required>
+                                        <input type="text" id="apellido" name="apellido" class="form-control input-sm" placeholder="Ingrese su apellido." value="<?php echo $apellidoR; ?>" required>
                                         </div>
                                     </div>
                                 </div>
@@ -230,7 +250,7 @@ function go(){
                                     <div class="form-group">
                                         <label>DUI:</label>
                                         <div class="nk-int-st">
-                                           <input type="text" id="dui"name="dui" class="form-control input-sm" data-mask="99999999-9" placeholder="Ingrese su DUI." required>
+                                           <input type="text" id="dui"name="dui" class="form-control input-sm" data-mask="99999999-9" placeholder="Ingrese su DUI." value="<?php echo $duiR; ?>" required>
                                         </div>
                                      </div>                            
                                 </div>
@@ -241,9 +261,27 @@ function go(){
                                 <div class="bootstrap-select fm-cmp-mg">
                                     <select class="selectpicker" data-live-search="true" name="nivel" id="nivel">
                                     <option value="Seleccione">Seleccione</option>
-                                            <option>1</option>
-											<option>2</option>
-											<option>3</option>
+                                    <?php
+                                    if($nivelR=="1"){
+                                        ?>
+                                        <option selected>1</option>
+                                        <option>2</option>
+                                        <option>3</option>
+                                        <?php
+                                    }else if($nivelR=="2"){
+                                        ?>
+                                        <option>1</option>
+                                        <option selected>2</option>
+                                        <option>2</option>
+                                        <?php
+                                    }else if($nivelR=="3"){
+                                        ?>
+                                        <option>1</option>
+                                        <option>2</option>
+                                        <option selected>3</option>
+                                        <?php
+                                    }
+                                    ?>
 										</select>
                                 </div>
                             </div>
@@ -254,7 +292,7 @@ function go(){
                             <div class="form-group">
                                 <label>Dirección:</label>
                                 <div class="nk-int-st">
-                                    <input type="text" id="direc" name="direc" class="form-control input-sm" placeholder="Ingrese su dirección." required>
+                                    <input type="text" id="direc" name="direc" class="form-control input-sm" placeholder="Ingrese su dirección." value="<?php echo $direccionR; ?>" required>
                                 </div>
                             </div>
                         </div>
@@ -272,7 +310,7 @@ function go(){
                                     <div class="form-group">
                                         <label>Usuario:</label>
                                         <div class="nk-int-st">
-                                        <input type="text" id="usuario" name="usuario" class="form-control input-sm" placeholder="Ingrese un usuario." required>
+                                        <input type="text" id="usuario" name="usuario" class="form-control input-sm" placeholder="Ingrese un usuario." value="<?php echo $usuarioR; ?>" required>
                                         </div>
                                     </div>
                                 </div>
@@ -282,7 +320,7 @@ function go(){
                                     <div class="form-group">
                                         <label>Contraseña:</label>
                                         <div class="nk-int-st">
-                                        <input type="text" id="contrasena" name="contrasena" class="form-control input-sm" placeholder="Ingrese una contraseña para su respectivo usuario." required>
+                                        <input type="text" id="contrasena" name="contrasena" class="form-control input-sm" placeholder="Ingrese una contraseña para su respectivo usuario." value="<?php echo $contrasenaR; ?>" required>
                                         </div>
                                     </div>
                                 </div>
@@ -292,7 +330,7 @@ function go(){
                         </div>
                        
                         <div class="form-example-int mg-t-15">
-                            <button class="btn btn-success notika-btn-success" onclick="go();">Guardar.</button>
+                            <button class="btn btn-success notika-btn-success" onclick="go();">Modificar.</button>
                         </div>
                         </form>
                     </div>
@@ -390,6 +428,7 @@ function go(){
 <?php
 include "config/conexion.php";
 $accion = $_REQUEST['bandera'];
+$baccion  = $_REQUEST["baccion"];
 if($accion==1){
 $nombre     = $_POST['nombre'];
 $apellido   = $_POST['apellido'];
@@ -400,10 +439,10 @@ $contrasena = $_POST['contrasena'];
 $nivel      = $_POST['nivel'];
 
 
-    $consulta  = "INSERT INTO templeados VALUES('null','" .$nombre. "','" .$apellido. "','" .$direccion. "','" .$dui. "','" .$usuario. "','" .$contrasena. "','" .$nivel. "')";
+$consulta  = "UPDATE templeados set nombre='" . $nombre . "',apellido='" . $apellido . "',zona='" . $direccion . "',dui='" . $dui . "',usuario='" . $usuario . "',pass='" . $contrasena . "',nivel='" . $nivel . "' where id_empleado='" . $baccion . "'";
     $resultado = $conexion->query($consulta);
       if ($resultado) {
-          msg("Se agregaron los datos correctamente");
+          msg("Se modificaron los datos correctamente");
       } else {
           msg("Error al insertar los datos");
       }
@@ -412,7 +451,7 @@ function msg($texto)
 {
     echo "<script type='text/javascript'>";
     echo "alert('$texto');";
-    echo "document.location.href='ingresarEmpleado.php';";
+    echo "document.location.href='mostrarEmpleados.php';";
     echo "</script>";
 }
 ?>

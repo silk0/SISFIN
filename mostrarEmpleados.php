@@ -4,7 +4,7 @@
 <head>
     <meta charset="utf-8">
     <meta http-equiv="x-ua-compatible" content="ie=edge">
-    <title>Lista de Fiadores| SISFIN</title>
+    <title>Lista de Empleados| SISFIN</title>
     <meta name="description" content="">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <!-- favicon
@@ -61,34 +61,8 @@
     <script>
     function modify(id){
        
-        document.location.href="editarFiador.php?id="+id;
+        document.location.href="editarEmpleado.php?id="+id;
     }
-    function edit(id,nom,ape,dire,dui,nit,corre,profe,sal,tel,cel)
-        {
-         // document.getElementById("baccion2").value=id;
-          document.getElementById("nombrem").value=nom;
-          document.getElementById("apellidom").value=ape;
-          document.getElementById("direccionm").value=dire;
-          document.getElementById("duim").value=dui;
-          document.getElementById("nitm").value=nit;
-          document.getElementById("correom").value=corre;
-          document.getElementById("profem").value=profe;
-          document.getElementById("salm").value=sal;
-          document.getElementById("telm").value=tel;
-          document.getElementById("celm").value=cel;
-         //$("#baccion2").val(id);
-          
-          
-         //$("#nomb").val(nom);
-        //$("#marc").val(marca);
-          //$("#num").val(num);
-          //$("#donad").val(don);
-          //$("#descr").val(des);
-          $("#ModalInfo").modal();
-        //Ya manda todos los datos correcatamente
-          
-          
-        }
     </script>
 </head>
 
@@ -120,8 +94,8 @@
 										<i class="notika-icon notika-windows"></i>
 									</div>
 									<div class="breadcomb-ctn">
-										<h2>Lista de fiadores</h2>
-										<p>Datos de personales<span class="bread-ntd"> de fiadores.</span></p>
+										<h2>Lista de empleados</h2>
+										<p>Datos de personales<span class="bread-ntd"> de empleados.</span></p>
 									</div>
 								</div>
 							</div>
@@ -154,9 +128,9 @@
                                         <th>Nombre</th>
                                         <th>Apellido</th>
                                         <th>DUI</th>
-                                        <th>Teléfono</th>
-                                        <th>Celular</th>
-                                        <th>E-mail</th>
+                                        <th>Dirección</th>
+                                        <th>Usuario</th>
+                                        <th>Nivel</th>
                                         <th>Opciones</th>
                                        
                                     </tr>
@@ -164,20 +138,20 @@
                                 <tbody>
                       <?php
 include "config/conexion.php";
-$result = $conexion->query("SELECT * from tfiador ORDER BY id_fiador");
+$result = $conexion->query("SELECT * from templeados ORDER BY id_empleado");
 if ($result) {
     while ($fila = $result->fetch_object()) {
         echo "<tr>";
         echo "<td>" . $fila->nombre . "</td>";
         echo "<td>" . $fila->apellido . "</td>";
         echo "<td>" . $fila->dui . "</td>";  
-        echo "<td>" . $fila->telefono . "</td>";
-        echo "<td>" . $fila->celular . "</td>";
-        echo "<td>" . $fila->correo . "</td>";
+        echo "<td>" . $fila->zona . "</td>";
+        echo "<td>" . $fila->usuario . "</td>";
+        echo "<td>" . $fila->nivel . "</td>";
         echo "<td>
         <div class='button-icon-btn'>
-       <button class='btn btn-lightgreen lightgreen-icon-notika btn-reco-mg btn-button-mg' onclick='modify(" . $fila->id_fiador. ")'><i class='notika-icon notika-menus'></i></button>
-       <button title='Ver' class='btn btn-info info-icon-notika btn-reco-mg btn-button-mg' onclick=\"edit('$fila->id_fiador','$fila->nombre','$fila->apellido','$fila->direccion','$fila->dui','$fila->nit','$fila->correo','$fila->profecion','$fila->salario','$fila->telefono','$fila->celular')\";><i class='notika-icon notika-search'></i></button>
+        
+        <button class='btn btn-lightgreen lightgreen-icon-notika btn-reco-mg btn-button-mg' onclick='modify(" . $fila->id_empleado. ")'><i class='notika-icon notika-menus'></i></button>
         </div>
         </td>";
         echo "</tr>";
@@ -191,9 +165,9 @@ if ($result) {
                                         <th>Nombre</th>
                                         <th>Apellido</th>
                                         <th>DUI</th>
-                                        <th>Teléfono</th>
-                                        <th>Celular</th>
-                                        <th>E-mail</th>
+                                        <th>Dirección</th>
+                                        <th>Usuario</th>
+                                        <th>Nivel</th>
                                         <th>Opciones</th>
                                     </tr>
                                 </tfoot>
@@ -205,115 +179,6 @@ if ($result) {
         </div>
     </div>
     <!-- Data Table area End-->
-    <!-- MODAL PARA FIADOR -->
- <div class="modal animated shake" id="ModalInfo" role="dialog">
-                                    <div class="modal-dialog modal-large">
-                                        <div class="modal-content">
-                                            <div class="modal-header">
-                                                <button type="button" class="close" data-dismiss="modal">&times;</button>
-                                            </div>
-                                            <div class="modal-body">
-                                          
-
-        <h1>Datos del Proveedor</h1>
-        <div class="row">
-                            <div class="col-lg-6 col-md-6 col-sm-6 col-xs-12">
-                                <div class="form-example-int">
-                                    <div class="form-group">
-                                        <label>Nombre:</label>
-                                        <div class="nk-int-st">
-                                        <input type="text" name="nombrem" id="nombrem" class="form-control input-sm" readonly>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="col-lg-6 col-md-6 col-sm-6 col-xs-12">
-                                <div class="form-example-int">
-                                    <div class="form-group">
-                                        <label>Teléfono:</label>
-                                        <div class="nk-int-st">
-                                           <input type="text" name="telm" id="telm" class="form-control input-sm"readonly>
-                                        </div>
-                                     </div>                            
-                                </div>
-                            </div>
-                            <div class="col-lg-12 col-md-6 col-sm-6 col-xs-12">
-                            <div class="form-example-int">
-                            <div class="form-group">
-                                <label>Dirección:</label>
-                                <div class="nk-int-st">
-                                    <input type="text" name="direcm" id="direcm"class="form-control input-sm" readonly>
-                                </div>
-                            </div>
-                        </div>
-                        </div>
-                        </div>
-                        <h1>Datos del Representante</h1>
-                        <div class="row">
-                        <div class="col-lg-12 col-md-6 col-sm-6 col-xs-12">
-                                <div class="form-example-int">
-                                    <div class="form-group">
-                                        <label>Representante:</label>
-                                        <div class="nk-int-st">
-                                        <input type="text" name="representantem" id="representantem" class="form-control input-sm" readonly>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="col-lg-6 col-md-6 col-sm-6 col-xs-12">
-                                <div class="form-example-int">
-                                    <div class="form-group">
-                                        <label>DUI:</label>
-                                        <div class="nk-int-st">
-                                           <input type="text" name="duim" id="duim" class="form-control input-sm" readonly>
-                                        </div>
-                                     </div>                            
-                                </div>
-                            </div>
-
-                             <div class="col-lg-6 col-md-6 col-sm-6 col-xs-10">
-                                <div class="form-example-int">
-                                    <div class="form-group">
-                                        <label>NIT:</label>
-                                        <div class="nk-int-st">
-                                           <input type="text" name="nitm" id="nitm" class="form-control input-sm" readonly>
-                                        </div>
-                                     </div>                            
-                                </div>
-                            </div>
-                            </div>
-                            
-                        <div class="row">
-                         <div class="col-lg-6 col-md-6 col-sm-6 col-xs-12" >
-                                <div class="form-example-int mg-t-15">
-                                    <div class="form-group">
-                                        <label>Celular:</label>
-                                        <div class="nk-int-st">
-                                           <input type="text" name="celm" id="celm" class="form-control input-sm" readonly>
-                                        </div>
-                                     </div>                            
-                                </div>
-                            </div>
-                            <div class="col-lg-6 col-md-6 col-sm-6 col-xs-12">
-                                <div class="form-example-int mg-t-15">
-                                    <div class="form-group">
-                                        <label>E-mail:</label>
-                                        <div class="nk-int-st">
-                                           <input type="text" name="emailm" id="emailm" class="form-control input-sm" readonly>
-                                        </div>
-                                     </div>                            
-                                </div>
-                            </div>
-                        </div>
-                        </div>
-                                            <div class="modal-footer">
-                                             <button type="button" class="btn btn-default" data-dismiss="modal">Cerrar</button>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-            <!-- FIN PARA MODAL DE FIADOR -->
-    
         <!-- Start Footer area-->
     <?php include "footer.php";?>
     <!-- End Footer area-->
