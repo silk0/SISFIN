@@ -250,7 +250,7 @@ function recuperar(id){
                             <h2>Datos del Cliente</h2>
                             
                         </div>
-                        <form name="form" method="post" action="mostrarClientes.php?bandera=1">
+                        <form name="form" method="post" action="../SISFIN/scriptsphp/modificarCliente.php?bandera=1">
                         <input type="hidden" id="idfiador" name="idfiador" value="<?php echo $idR; ?>">
                         <div class="row">
                             <div class="col-lg-6 col-md-6 col-sm-6 col-xs-12">
@@ -446,6 +446,7 @@ function recuperar(id){
                         
                         <div class="form-example-int mg-t-15">
                             <button type="button" class="btn btn-success notika-btn-success" onclick="go();">Guardar Cambios</button>
+                            <button type="reset" class="btn btn-warning notika-btn-warning">Restablecer</button>
                             <button type="button" class="btn btn-warning notika-btn-warning" onclick="back();">Cancelar</button>
                          
                         </div>               

@@ -69,22 +69,27 @@ function go(){
     //validacion respectiva me da hueva
         document.form.submit();  
 } 
-function edit(id,nom,ape,dui,nit,direc,tel,cel,email,tipo,prof,sal,ob)
+function edit(id,prov,cat,nom,descrip,pc,pv,margen,stockm,stock,cod,estado)
         {
          // document.getElementById("baccion2").value=id;
-          document.getElementById("nombrem").value=nom;
-          document.getElementById("apellidom").value=ape;
-          document.getElementById("duim").value=dui;
-          document.getElementById("nitm").value=nit;
-          document.getElementById("direcm").value=direc;
-          document.getElementById("telm").value=tel;
+          document.getElementById("nombre").value=nom;
+          document.getElementById("codigo").value=cod;
+          document.getElementById("stock").value=stockm;
+          document.getElementById("categoria").value=cat;
+           document.getElementById("proveedor").value=prov;
+           document.getElementById("pventa").value=pv;
          //$("#baccion2").val(id);
-          document.getElementById("celm").value=cel;
-          document.getElementById("emailm").value=email;
-          document.getElementById("tipom").value=tipo;
-          document.getElementById("profecion").value=prof;
-          document.getElementById("salm").value=sal;
-          document.getElementById("observm").value=ob;
+           document.getElementById("pcompra").value=pc;
+          document.getElementById("mganancia").value=margen;
+           document.getElementById("stockm").value=stockm;
+           if(estado==1){
+               estado="Activo";
+           }else{
+               estado="Inactivo";
+           }
+           document.getElementById("estado").value=estado;
+           document.getElementById("descrip").value=descrip;
+        //   document.getElementById("observm").value=ob;
          //$("#nomb").val(nom);
         //$("#marc").val(marca);
           //$("#num").val(num);
@@ -96,7 +101,7 @@ function edit(id,nom,ape,dui,nit,direc,tel,cel,email,tipo,prof,sal,ob)
           
         }
         function modify(id){
-       document.location.href="editarCliente.php?id="+id;
+       document.location.href="editarProducto.php?id="+id;
    }
 
 </script> 
@@ -207,8 +212,8 @@ function notify(titulo,texto,from, align, icon, type, animIn, animOut){
                                     <th>Codigo</th>
                                         <th>Nombre</th>
                                         <th>Proveedor</th> 
-                                        <th>Precio Compra</th>
-                                        <th>Precio Venta</th>
+                                        <th>Precio Compra $</th>
+                                        <th>Precio Venta $</th>
                                         <th>Stock</th>
                                         <th>Estado</th>
                                         <th>Opciones</th>  
@@ -217,7 +222,7 @@ function notify(titulo,texto,from, align, icon, type, animIn, animOut){
                                 <tbody>
                       <?php
 include "config/conexion.php";
-$result = $conexion->query("SELECT tcategoria.categoria,tproveedor.nombre as proveedor,tproducto.nombre,precio_compra,precio_venta,codigo,stock,tproducto.estado FROM tproducto INNER JOIN tproveedor ON tproducto.id_proveedor = tproveedor.id_proveedor INNER JOIN tcategoria ON tproducto.id_categoria = tcategoria.id_categoria
+$result = $conexion->query("SELECT tcategoria.categoria,tproveedor.nombre as proveedor,tproducto.nombre,id_producto,margen,stock_minimo,descripcion,precio_compra,precio_venta,codigo,stock,tproducto.estado FROM tproducto INNER JOIN tproveedor ON tproducto.id_proveedor = tproveedor.id_proveedor INNER JOIN tcategoria ON tproducto.id_categoria = tcategoria.id_categoria
 ORDER BY codigo");
 if ($result) {
     while ($fila = $result->fetch_object()) {
@@ -236,8 +241,8 @@ if ($result) {
        
         echo "<td>
         <div class='button-icon-btn'>
-        <button class='btn btn-info info-icon-notika btn-reco-mg btn-button-mg' onclick=\"edit('$fila->id_cliente','$fila->nombre','$fila->apellido','$fila->dui','$fila->nit','$fila->direccion','$fila->telefono','$fila->celular','$fila->correo','$fila->tipo_ingreso','$fila->profecion','$fila->salario','$fila->observaciones')\";><i class='notika-icon notika-search'></i></button>
-        <button class='btn btn-lightgreen lightgreen-icon-notika btn-reco-mg btn-button-mg' onclick='modify(" . $fila->id_cliente. ")'><i class='notika-icon notika-menus'></i></button>
+        <button class='btn btn-info info-icon-notika btn-reco-mg btn-button-mg' onclick=\"edit('$fila->id_producto','$fila->proveedor','$fila->categoria','$fila->nombre','$fila->descripcion','$fila->precio_compra','$fila->precio_venta','$fila->margen','$fila->stock_minimo','$fila->stock','$fila->codigo','$fila->estado')\";><i class='notika-icon notika-search'></i></button>
+        <button class='btn btn-lightgreen lightgreen-icon-notika btn-reco-mg btn-button-mg' onclick='modify(" . $fila->id_producto. ")'><i class='notika-icon notika-menus'></i></button>
         </div>
         </td>";
         echo "</tr>";
@@ -264,133 +269,138 @@ if ($result) {
                                             <div class="modal-body">
                                           
 
-        <h1>Datos del cliente</h1>
-<div class="row">
-                            <div class="col-lg-6 col-md-6 col-sm-6 col-xs-12">
+        <h1>Datos del Producto</h1>
+        <div class="row">
+                            <div class="col-lg-2 col-md-2 col-sm-2 col-xs-12">
+                                <div class="form-example-int">
+                                    <div class="form-group">
+                                        <label>Código:</label>
+                                        <div class="nk-int-st">
+                                        <input type="text" name="codigo" id="codigo" class="form-control input-sm" placeholder="Codigo del producto." readonly>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-lg-4 col-md-4 col-sm-4 col-xs-12">
                                 <div class="form-example-int">
                                     <div class="form-group">
                                         <label>Nombre:</label>
                                         <div class="nk-int-st">
-                                        <input type="text" name="nombrem" id="nombrem" class="form-control input-sm" readonly>
+                                        <input type="text" name="nombre" id="nombre" class="form-control input-sm" placeholder="Ingrese el nombre del producto." readonly>
                                         </div>
                                     </div>
                                 </div>
                             </div>
-                            <div class="col-lg-6 col-md-6 col-sm-6 col-xs-12">
+                            <div class="col-lg-3 col-md-3 col-sm-3 col-xs-12">
                                 <div class="form-example-int">
                                     <div class="form-group">
-                                        <label>Apellido:</label>
+                                        <label>Proveedor:</label>
                                         <div class="nk-int-st">
-                                        <input type="text" name="apellidom" id="apellidom" class="form-control input-sm" readonly>
+                                           <input type="text" name="proveedor" id="proveedor" class="form-control input-sm"  placeholder="Nombre del proveedor." readonly>
+                                           
                                         </div>
-                                    </div>
+                                     </div>                            
                                 </div>
                             </div>
+                            <div class="col-lg-3 col-md-3 col-sm-3 col-xs-12">
+                                <div class="form-example-int">
+                                    <div class="form-group">
+                                        <label>Categoria:</label>
+                                        <div class="nk-int-st">
+                                           <input type="text" name="categoria" id="categoria" class="form-control input-sm"  placeholder="Nombre del proveedor." readonly>
+                                           
+                                        </div>
+                                     </div>                            
+                                </div>
+                            </div>
+                           
+                           
+
+                      
 
                         </div>
                         <div class="row">
-                            <div class="col-lg-6 col-md-6 col-sm-6 col-xs-12">
+                            <div class="col-lg-2 col-md-2 col-sm-2 col-xs-12">
                                 <div class="form-example-int mg-t-15">
                                     <div class="form-group">
-                                        <label>DUI:</label>
+                                        <label>Precio de Compra ($):</label>
                                         <div class="nk-int-st">
-                                           <input type="text" name="duim" id="duim" class="form-control input-sm" readonly>
+                                           <input type="text" name="pcompra" id="pcompra" class="form-control input-sm" readonly placeholder="Precio de compra." readonly>
                                         </div>
                                      </div>                            
                                 </div>
                             </div>
 
-                             <div class="col-lg-6 col-md-6 col-sm-6 col-xs-10">
+                             <div class="col-lg-2 col-md-2 col-sm-2 col-xs-12">
                                 <div class="form-example-int mg-t-15">
                                     <div class="form-group">
-                                        <label>NIT:</label>
+                                        <label>Margen de Ganancia (%):</label>
                                         <div class="nk-int-st">
-                                           <input type="text" name="nitm" id="nitm" class="form-control input-sm" readonly>
+                                           <input type="text" name="mganancia" id="mganancia" class="form-control input-sm"  placeholder="Ingrese el margen deseado %." readonly>
                                         </div>
                                      </div>                            
+                                </div>
+                            </div>
+                            <div class="col-lg-2 col-md-2 col-sm-2 col-xs-12">
+                                <div class="form-example-int mg-t-15">
+                                    <div class="form-group">
+                                        <label>Precio de Venta ($):</label>
+                                        <div class="nk-int-st">
+                                           <input type="text" name="pventa" id="pventa" class="form-control input-sm"  placeholder="Ingrese el precio de venta deseado." readonly>
+                                        </div>
+                                     </div>                            
+                                </div>
+                            </div>
+                            <div class="col-lg-2 col-md-2 col-sm-2 col-xs-12">
+                                <div class="form-example-int mg-t-15">
+                                    <div class="form-group">
+                                        <label>Stock Mínimo Requerido:</label>
+                                        <div class="nk-int-st">
+                                        <input type="text" name="stockm" id="stockm" class="form-control input-sm" placeholder="Ingrese el stock minimo" readonly>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-lg-2 col-md-2 col-sm-2 col-xs-12">
+                                <div class="form-example-int mg-t-15">
+                                    <div class="form-group">
+                                        <label>Stock Actual en Inventarios:</label>
+                                        <div class="nk-int-st">
+                                        <input type="text" name="stock" id="stock" class="form-control input-sm" placeholder="Ingrese el stock minimo" readonly>
+                                        </div>
+                                    </div>
                                 </div>
                             </div>
                             
-                            </div>
-                            <div class="form-example-int mg-t-15">
-                            <div class="form-group">
-                                <label>Dirección:</label>
-                                <div class="nk-int-st">
-                                    <input type="text" name="direcm" id="direcm"class="form-control input-sm" readonly>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="row">
-                            <div class="col-lg-4 col-md-4 col-sm-4 col-xs-12">
-                                <div class="form-example-int mg-t-15">
+                            <div class="col-lg-2 col-md-2 col-sm-2 col-xs-12">
+                                <div class="form-example-int mg-t-30">
                                     <div class="form-group">
-                                        <label>Teléfono:</label>
+                                        <label>Estado</label>
                                         <div class="nk-int-st">
-                                           <input type="text" name="telm" id="telm" class="form-control input-sm" readonly>
+                                        <input type="text" name="estado" id="estado" class="form-control input-sm" placeholder="Ingrese el stock minimo" readonly>
                                         </div>
-                                     </div>                            
+                                    </div>
                                 </div>
                             </div>
+                    
 
-                             <div class="col-lg-4 col-md-4 col-sm-4 col-xs-12" >
-                                <div class="form-example-int mg-t-15">
-                                    <div class="form-group">
-                                        <label>Celular:</label>
-                                        <div class="nk-int-st">
-                                           <input type="text" name="celm" id="celm" class="form-control input-sm" readonly>
-                                        </div>
-                                     </div>                            
-                                </div>
-                            </div>
-                            <div class="col-lg-4 col-md-4 col-sm-4 col-xs-12">
-                                <div class="form-example-int mg-t-15">
-                                    <div class="form-group">
-                                        <label>E-mail:</label>
-                                        <div class="nk-int-st">
-                                           <input type="text" name="emailm" id="emailm" class="form-control input-sm" readonly>
-                                        </div>
-                                     </div>                            
-                                </div>
-                            </div>
                         </div>
-                        <div class="row">
-                        <div class="col-lg-4 col-md-4 col-sm-4 col-xs-12" >
-                                <div class="form-example-int mg-t-15">
-                                    <div class="form-group">
-                                        <label>Tipo de Ingreso</label>
-                                        <div class="nk-int-st">
-                                           <input type="text" name="tipom" id="tipom" class="form-control input-sm" placeholder="Ingrese Profecion u oficio" readonly>
-                                        </div>
-                                     </div>                            
-                                </div>
-                            </div>
-                             <div class="col-lg-4 col-md-4 col-sm-4 col-xs-12" >
-                                <div class="form-example-int mg-t-15">
-                                    <div class="form-group">
-                                        <label>Profecion u oficio</label>
-                                        <div class="nk-int-st">
-                                           <input type="text" name="profecion" id="profecion" class="form-control input-sm" placeholder="Ingrese Profecion u oficio" readonly>
-                                        </div>
-                                     </div>                            
-                                </div>
-                            </div>
-                            <div class="col-lg-4 col-md-4 col-sm-4 col-xs-12">
-                                <div class="form-example-int mg-t-15">
-                                    <div class="form-group">
-                                        <label>Ingreso Promedio $ (mensual)</label>
-                                        <div class="nk-int-st">
-                                           <input type="number" name="salm" id="salm" class="form-control input-sm" placeholder="Introduzca Ingreso Promedio" readonly>
-                                        </div>
-                                     </div>                            
-                                </div>
-                            </div>
-                        </div>
+                    
+                        
+                        
+                        <!-- FILA PARA DATOS CORTOS -->
+                        
+                         <!-- FIN DE FILA PARA DATOS CORTOS -->
+                      
+                    
+                        <!-- salrios-->
+                    
                         
                             
                         <div class="row">
                             <div class="col-lg-8 col-md-12 col-sm-12 col-xs-12">
                                 <div class="floating-numner form-rlt-mg">
-                                    <p>Observaciones:</p>
+                                    <p>Descripción:</p>
                                 </div>
                             </div>
                         </div>
@@ -398,11 +408,12 @@ if ($result) {
                             <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
                                 <div class="form-group">
                                     <div class="nk-int-st">
-                                        <textarea class="form-control" name="observm" id="observm" rows="5" placeholder="Escriba aquí las observaciones deseadas acerca del cliente..." readonly></textarea>
+                                        <textarea class="form-control" name="descrip" id="descrip" rows="3" placeholder="Escriba aquí la descripción deseada acerca del producto..."></textarea readonly>
                                     </div>
                                 </div>
                             </div>
                         </div>
+                         
 
 
                                             </div>
@@ -482,6 +493,37 @@ if ($result) {
 	<!-- tawk chat JS
 		============================================ -->
     <script src="js/tawk-chat.js"></script>
+     <!--  notification JS
+		============================================ -->
+        <script src="js/notification/bootstrap-growl.min.js"></script>
+    <script src="js/notification/notification-active.js"></script>
 </body>
 
 </html>
+<?php
+include "config/conexion.php";
+$accion = $_REQUEST['bandera'];
+if($accion==1){
+      msgI("Se modificaron los datos con exito");
+  } else if($accion==2) {
+      msgE("cocurrio un error en el registro de los archivos");
+  }   
+function msgI($texto)
+{
+    echo "<script type='text/javascript'>";
+    echo "notify('Exito','$texto','top', 'right', 'any', 'success');";
+    echo "</script>";
+}
+function msgA($texto)
+{
+    echo "<script type='text/javascript'>";
+    echo "notify('Advertencia','$texto','top', 'right', 'any', 'warning');";
+    echo "</script>";
+}
+function msgE($texto)
+{
+    echo "<script type='text/javascript'>";
+    echo "notify('Error','$texto','top', 'right', 'any', 'danger');";
+    echo "</script>";
+}
+?>
