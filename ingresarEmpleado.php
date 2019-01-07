@@ -267,7 +267,17 @@ function go(){
                         
                             
                             <div class="row">
-                            <div class="col-lg-12 col-md-12 col-sm-6 col-xs-12">
+                            <div class="col-lg-6 col-md-6 col-sm-6 col-xs-12">
+                                <div class="form-example-int">
+                                    <div class="form-group">
+                                        <label>Usuario:</label>
+                                        <div class="nk-int-st">
+                                        <input type="text" id="usuario" name="usuario" class="form-control input-sm" placeholder="Ingrese un usuario." required>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-lg-6 col-md-6 col-sm-6 col-xs-12">
                                 <div class="form-example-int">
                                     <div class="form-group">
                                         <label>Contraseña:</label>
