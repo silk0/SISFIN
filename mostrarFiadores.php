@@ -215,7 +215,7 @@ if ($result) {
                                             <div class="modal-body">
                                           
 
-        <h1>Datos del Proveedor</h1>
+        <h1>Datos del Fiador</h1>
         <div class="row">
                             <div class="col-lg-6 col-md-6 col-sm-6 col-xs-12">
                                 <div class="form-example-int">
@@ -230,37 +230,27 @@ if ($result) {
                             <div class="col-lg-6 col-md-6 col-sm-6 col-xs-12">
                                 <div class="form-example-int">
                                     <div class="form-group">
-                                        <label>Teléfono:</label>
+                                        <label>Apellido:</label>
                                         <div class="nk-int-st">
-                                           <input type="text" name="telm" id="telm" class="form-control input-sm"readonly>
+                                        <input type="text" name="apellidom" id="apellidom" class="form-control input-sm" readonly>
                                         </div>
-                                     </div>                            
+                                    </div>
                                 </div>
                             </div>
+                            
                             <div class="col-lg-12 col-md-6 col-sm-6 col-xs-12">
                             <div class="form-example-int">
                             <div class="form-group">
                                 <label>Dirección:</label>
                                 <div class="nk-int-st">
-                                    <input type="text" name="direcm" id="direcm"class="form-control input-sm" readonly>
+                                    <input type="text" name="direccionm" id="direccionm"class="form-control input-sm" readonly>
                                 </div>
                             </div>
                         </div>
                         </div>
                         </div>
-                        <h1>Datos del Representante</h1>
                         <div class="row">
-                        <div class="col-lg-12 col-md-6 col-sm-6 col-xs-12">
-                                <div class="form-example-int">
-                                    <div class="form-group">
-                                        <label>Representante:</label>
-                                        <div class="nk-int-st">
-                                        <input type="text" name="representantem" id="representantem" class="form-control input-sm" readonly>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="col-lg-6 col-md-6 col-sm-6 col-xs-12">
+                        <div class="col-lg-6 col-md-6 col-sm-6 col-xs-12">
                                 <div class="form-example-int">
                                     <div class="form-group">
                                         <label>DUI:</label>
@@ -270,8 +260,7 @@ if ($result) {
                                      </div>                            
                                 </div>
                             </div>
-
-                             <div class="col-lg-6 col-md-6 col-sm-6 col-xs-10">
+                            <div class="col-lg-6 col-md-6 col-sm-6 col-xs-12">
                                 <div class="form-example-int">
                                     <div class="form-group">
                                         <label>NIT:</label>
@@ -281,10 +270,53 @@ if ($result) {
                                      </div>                            
                                 </div>
                             </div>
+                        <div class="col-lg-6 col-md-6 col-sm-6 col-xs-12">
+                                <div class="form-example-int">
+                                    <div class="form-group">
+                                        <label>Correo:</label>
+                                        <div class="nk-int-st">
+                                        <input type="text" name="correom" id="correom" class="form-control input-sm" readonly>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-lg-6 col-md-6 col-sm-6 col-xs-12">
+                                <div class="form-example-int">
+                                    <div class="form-group">
+                                        <label>Profesión:</label>
+                                        <div class="nk-int-st">
+                                        <input type="text" name="profem" id="profem" class="form-control input-sm" readonly>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-lg-6 col-md-6 col-sm-6 col-xs-12">
+                                <div class="form-example-int">
+                                    <div class="form-group">
+                                        <label>Salario:</label>
+                                        <div class="nk-int-st">
+                                        <input type="text" name="salm" id="salm" class="form-control input-sm" readonly>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-lg-6 col-md-6 col-sm-6 col-xs-12">
+                                <div class="form-example-int">
+                                    <div class="form-group">
+                                        <label>Telefono:</label>
+                                        <div class="nk-int-st">
+                                        <input type="text" name="telm" id="telm" class="form-control input-sm" readonly>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                           
+
+                             
                             </div>
                             
                         <div class="row">
-                         <div class="col-lg-6 col-md-6 col-sm-6 col-xs-12" >
+                         <div class="col-lg-12 col-md-12 col-sm-6 col-xs-12" >
                                 <div class="form-example-int mg-t-15">
                                     <div class="form-group">
                                         <label>Celular:</label>
@@ -294,16 +326,7 @@ if ($result) {
                                      </div>                            
                                 </div>
                             </div>
-                            <div class="col-lg-6 col-md-6 col-sm-6 col-xs-12">
-                                <div class="form-example-int mg-t-15">
-                                    <div class="form-group">
-                                        <label>E-mail:</label>
-                                        <div class="nk-int-st">
-                                           <input type="text" name="emailm" id="emailm" class="form-control input-sm" readonly>
-                                        </div>
-                                     </div>                            
-                                </div>
-                            </div>
+                            
                         </div>
                         </div>
                                             <div class="modal-footer">
