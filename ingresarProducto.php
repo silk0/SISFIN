@@ -383,7 +383,7 @@ function enviarC(id){
                         </div>-->
                         
                         <div class="form-example-int mg-t-15">
-                            <button tipe="button "class="btn btn-success notika-btn-success" onclick="go();">Guardar.</button>
+                            <button type="button" class="btn btn-success notika-btn-success" onclick="go();">Guardar.</button>
                         </div>
                         </form>
                     </div>
