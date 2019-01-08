@@ -408,9 +408,9 @@ if ($bandera == "desactivar") {
     $consulta = "UPDATE tcategoria SET estado = '1' WHERE id_categoria = '".$baccion."'";
       $resultado = $conexion->query($consulta);
       if ($resultado) {
-          msg("Categoria activada con exito");
+          msgI("Categoria activada con exito");
       } else {
-          msg("No se pudo realizar la acción");
+          msgE("No se pudo realizar la acción");
       }
   }
   
@@ -419,6 +419,24 @@ function msg($texto)
     echo "<script type='text/javascript'>";
     echo "alert('$texto');";
     echo "document.location.href='ingresarCategoria.php';";
+    echo "</script>";
+}
+function msgI($texto)
+{
+    echo "<script type='text/javascript'>";
+    echo "notify('Exito','$texto','top', 'right', 'any', 'success');";
+    echo "</script>";
+}
+function msgA($texto)
+{
+    echo "<script type='text/javascript'>";
+    echo "notify('Advertencia','$texto','top', 'right', 'any', 'warning');";
+    echo "</script>";
+}
+function msgE($texto)
+{
+    echo "<script type='text/javascript'>";
+    echo "notify('Error','$texto','top', 'right', 'any', 'danger');";
     echo "</script>";
 }
 ?>

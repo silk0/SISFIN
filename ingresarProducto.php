@@ -72,9 +72,42 @@ if ($resultc) {
     <script src="js/vendor/modernizr-2.8.3.min.js"></script>
 </head>
 <SCRIPT  language=JavaScript> 
+
 function go(){
-    //validacion respectiva me da hueva
-        document.form.submit();  
+
+    //Validaciones
+   if(document.getElementById('nombre').value==""){
+    //    alert("El campo nombre es obligatorio");
+    //    prueba :p
+     notify(' Advertencia:','El campo Nombre es obligatorio.','top', 'right', 'any', 'warning');
+       document.getElementById("nombre").focus();
+   }else if(document.getElementById('apellido').value==""){
+        notify(' Advertencia:','El campo Apellido es obligatorio,','top', 'right', 'any', 'warning');
+       document.getElementById("apellido").focus();
+   }else if(document.getElementById('dui').value==""){
+        notify(' Advertencia:','El campo DUI es obligatorio','top', 'right', 'any', 'warning');
+       document.getElementById("dui").focus();
+   }else if(document.getElementById('nit').value==""){
+        notify(' Advertencia:','El campo NIT es obligatorio', 'top', 'right', 'any', 'warning');
+       document.getElementById("nit").focus();
+   }else if(document.getElementById('direc').value==""){
+        notify(' Advertencia:','El campo Direccion es obligatorio', 'top', 'right', 'any', 'warning');
+       document.getElementById("direc").focus();
+   }else if(document.getElementById('telefono').value=="" && document.getElementById('celular').value==""){
+        notify(' Advertencia:','Ingrese telefono', 'top', 'right', 'any', 'warning');
+       document.getElementById("telefono").focus();
+   }else if(document.getElementById('email').value==""){
+        notify(' Advertencia:','El campo E-mail es obligatorio,','top', 'right', 'any', 'warning');
+       document.getElementById("email").focus();
+   }else if(document.getElementById('trabajo').value==""){
+        notify(' Advertencia:','El campo Tabajo que realiza es obligatorio', 'top', 'right', 'any', 'warning');
+       document.getElementById("trabajo").focus();
+   }else if(document.getElementById('salario').value==""){
+        notify(' Advertencia:','El campo Salario  es obligatorio', 'top', 'right', 'any', 'warning');
+       document.getElementById("salario").focus();
+   }else{
+      document.form.submit();  
+   }   
 }
 function enviar(id){
     
@@ -294,17 +327,12 @@ function enviarC(id){
                             <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
                                 <div class="form-group">
                                     <div class="nk-int-st">
-                                        <textarea class="form-control" name="descrip" id="descrip" rows="3" placeholder="Escriba aquí la descripción deseada acerca del producto..."></textarea required>
+                                        <textarea class="form-control" name="descrip" id="descrip" rows="3" placeholder="Escriba aquí la descripción deseada acerca del producto..."></textarea >
                                     </div>
                                 </div>
                             </div>
                         </div>
-                       <!-- <div class="form-example-int mg-t-15">
-                            <div class="fm-checkbox">
-                                <label><input type="checkbox" name="estado" class="i-checks"> <i></i> Estado.</label>
-                                <label for="">Checkee para activar</label>
-                            </div>
-                        </div>-->
+                      
                         
                         <div class="form-example-int mg-t-15">
                             <button class="btn btn-success notika-btn-success" onclick="go();">Guardar.</button>

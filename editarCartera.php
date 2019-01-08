@@ -1,3 +1,16 @@
+<?php
+$id = $_REQUEST["id"];
+include "config/conexion.php";
+$result = $conexion->query("select * from tcartera where id_cartera=" . $id);
+if ($result) {
+    while ($fila = $result->fetch_object()) {
+        $idR               = $fila->id_cartera;
+        $nombreR           = $fila->nombre;
+        
+       }
+}
+
+?>
 <!doctype html>
 <html class="no-js" lang="">
 
@@ -49,11 +62,6 @@
     <!-- style CSS
 		============================================ -->
     <link rel="stylesheet" href="style.css">
-
-    <!-- notification CSS
-        ============================================ -->
-    <link rel="stylesheet" href="css/notification/notification.css">
-
     <!-- responsive CSS
 		============================================ -->
     <link rel="stylesheet" href="css/responsive.css">
@@ -63,14 +71,9 @@
 </head>
 <script  language=JavaScript> 
 function go(){
-   if(document.getElementById('nombre').value==""){
-    notify(' Advertencia:','El campo Categoria es obligatorio.','top', 'right', 'any', 'warning');
-    document.getElementById("nombre").focus();
-        
-}else{
-
-    document.form.submit();
-}
+    //validacion respectiva me da hueva
+   
+    document.form.submit(); 
 }
 function confirmar(id,op)
         {
@@ -114,7 +117,7 @@ function enviar(id){
         success: function(response){
             alert(response);
             document.getElementById("nombre").value=response;
-            document.getElementById("idcartera").value=id;
+            document.getElementById("idcategoria").value=id;
         }
     });
 } 
@@ -178,9 +181,8 @@ function enviar(id){
                             <h2>Datos de Cartera</h2>
                             
                         </div>
-                        <form id="form"name="form" method="post" action="">
-                        <input type="hidden" name="bandera" id="bandera">
-                        <input type="hidden" name="baccion" id="baccion">
+                        <form name="form" method="post" action="editarCartera.php?bandera=1">
+                        <input type="hidden" name="baccion" id="baccion" value="<?php echo $idR; ?>">
 
                         <div class="row">
                             <div class="col-lg-6 col-md-6 col-sm-6 col-xs-12">
@@ -188,7 +190,7 @@ function enviar(id){
                                     <div class="form-group">
                                         <label>Cartera:</label>
                                         <div class="nk-int-st">
-                                        <input type="text" class="form-control input-sm" placeholder="Ingrese  nombre de cartera." id="nombre" name="nombre">
+                                        <input type="text" class="form-control input-sm" placeholder="Ingrese  nombre de cartera." id="nombre" name="nombre" value="<?php echo $nombreR; ?>">
                                         </div>
                                     </div>
                                 </div>
@@ -211,7 +213,7 @@ function enviar(id){
                         </br>
                         
                         <div class="form-example-int mg-t-15">
-                            <button class="btn btn-success notika-btn-success" style="margin-left: 500px;" onclick="go();">Guardar.</button>
+                            <button class="btn btn-success notika-btn-success" style="margin-left: 500px;" onclick="go();">Modificar.</button>
                             <button type="button" data-toggle="modal" data-target="#myModalone" class="btn btn-success notika-btn-success">Ver Carteras</button>
                         </div>
                         </form>
@@ -259,6 +261,10 @@ if ($result) {
         <button class='btn btn-lightgreen lightgreen-icon-notika btn-reco-mg btn-button-mg' data-dismiss='modal' onclick=\"modificar('$fila->id_cartera')\";><i class='notika-icon notika-menus'></i></button>
          </div>
         </td>";
+        
+        
+        
+       
         
         echo "</tr>";
 
@@ -363,12 +369,6 @@ if ($result) {
     <!-- plugins JS
 		============================================ -->
     <script src="js/plugins.js"></script>
-
-     <!--  notification JS
-        ============================================ -->
-        <script src="js/notification/bootstrap-growl.min.js"></script>
-        <script src="js/notification/notification-active.js"></script>
-
         <!-- Input Mask JS
 		============================================ -->
     <script src="js/jasny-bootstrap.min.js"></script>
@@ -383,63 +383,50 @@ if ($result) {
 </html>
 <?php
 include "config/conexion.php";
-$bandera  = $_REQUEST["bandera"];
-$baccion = $_REQUEST["baccion"];
-$nombre     = $_REQUEST["nombre"];
-if($bandera=="add"){
+$bandera = $_REQUEST['bandera'];
+$baccion  = $_REQUEST["baccion"];
 
+if ($bandera==1) {
+    $nombre     = $_REQUEST['nombre'];
+    msg($nombre);
 $query = "SELECT nombre FROM tcartera WHERE nombre like '%".$nombre."';";
 $result = $conexion->query($query);
 if($result->num_rows == 0){   
-$consulta  = "INSERT INTO tcartera VALUES('null','" .$nombre. "')";
+    $consulta  = "UPDATE tcartera set nombre='" . $nombre . "' where id_cartera='" . $baccion . "'";
     $resultado = $conexion->query($consulta);
       if($resultado){
-          msgI("Se agregaron los datos correctamente");
+          msg("Se modificaron los datos correctamente");
       } else {
-          msgE("Error al insertar los datos");
+          msg("Error al insertar los datos");
       }
 }else{
-  msgA("Esta cartera ya existe");
+  msg("Esta cartera ya existe");
 }
 }
 if ($bandera == "desactivar") {
     $consulta = "UPDATE tcategoria SET estado = '0' WHERE id_categoria = '".$baccion."'";
       $resultado = $conexion->query($consulta);
       if ($resultado) {
-          msgI("Categoria desactivada con exito");
+          msg("Categoria desactivada con exito");
       } else {
-          msgE("No se pudo realizar la acción");
+          msg("No se pudo realizar la acción");
       }
   }
   if ($bandera == "activar") {
     $consulta = "UPDATE tcategoria SET estado = '1' WHERE id_categoria = '".$baccion."'";
       $resultado = $conexion->query($consulta);
       if ($resultado) {
-          msgI("Categoria activada con exito");
+          msg("Categoria activada con exito");
       } else {
-          msgE("No se pudo realizar la acción");
+          msg("No se pudo realizar la acción");
       }
   }
   
-
-
-function msgI($texto)
+function msg($texto)
 {
     echo "<script type='text/javascript'>";
-    echo "notify('Exito','$texto','top', 'right', 'any', 'success');";
+    echo "alert('$texto');";
+    echo "document.location.href='ingresoCartera.php';";
     echo "</script>";
 }
-function msgA($texto)
-{
-    echo "<script type='text/javascript'>";
-    echo "notify('Advertencia','$texto','top', 'right', 'any', 'warning');";
-    echo "</script>";
-}
-function msgE($texto)
-{
-    echo "<script type='text/javascript'>";
-    echo "notify('Error','$texto','top', 'right', 'any', 'danger');";
-    echo "</script>";
-}
-
 ?>
