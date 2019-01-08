@@ -137,6 +137,35 @@ if ($result) {
         function regresar(){
             document.location.href="comprarProductos.php";
         }
+        function kardex(bandera,id,fechaR,descripcionR,accion,cantidadR,vunitarioR,subtotalR){
+          // alert(bandera);
+          // alert(id);
+          // alert(fechaR);
+          // alert(descripcionR);
+          // alert(accion);
+          // alert(cantidadR);
+          // alert(vunitarioR);
+          // alert(subtotalR);
+          var parametros={
+            "bandera":bandera,
+            "id" :id,
+            "fechaR" :fechaR,
+            "descripcionR" :descripcionR,
+            "accion" :accion,
+            "cantidadR" :cantidadR,
+            "vunitarioR" :vunitarioR,
+            "subtotalR" :subtotalR
+          };
+          $.ajax({
+            data: parametros,
+            url: "addKardex.php",
+            type:"post",
+            success: function(response){
+              alert(response);
+              document.location.href="Kardex.php?id="+id;
+            }
+          });
+        }
     </script>
 </head>
 
@@ -365,10 +394,10 @@ if ($result) {
 include "config/conexion.php";
 
 $accion=$_REQUEST['bandera'];
-
-if($accion==1){
   $precio=$_POST['precioco'];
   $cantidad  = $_POST['cantidad'];
+if($accion==1){
+
     $consulta  = "INSERT INTO tcompras VALUES('null','" .$idR. "','" .$idprov. "',now(),'" .$precio. "','" .$cantidad. "')";
     $resultado = $conexion->query($consulta);
       if ($resultado) {
@@ -395,15 +424,26 @@ if($accion==1){
            msgI('Error actualizando datos');
         }
         msgI("Los datos fueron almacenados con exito");
+        msgk($idR,$cantidad,$precio);
       } else {
         msgI('Error, no se ingreso en la bd.');
       }     
 
 }
-function msgI($texto)
+function msgK($idR,$cantidad,$precio)
 {
+     $subtotal=$cantidad*$precio;
+    $fecha2=strftime( "%Y-%m-%d", time());
     echo "<script type='text/javascript'>";
-    echo "notify('Exito','$texto','top', 'right', 'any', 'success');";
+    // echo "alert('Hola msgk');";
+    echo "kardex('add','".$idR."','".$fecha2."','Compra de producto.','1','".$cantidad."','".$precio."','".$subtotal."');";
     echo "</script>";
+}
+function msgI($texto){
+   echo "<script type='text/javascript'>";
+    echo "notify('Exito','$texto','top', 'right', 'any', 'success');";
+    
+    echo "</script>";
+    msgK();
 }
 ?>

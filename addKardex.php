@@ -20,11 +20,11 @@ if ($bandera == 'enviar') {
 if ($bandera=="add") {
   //codigo para guardar en la tabla kardex
   //Primero obgtendremos el numero de productos disponibles del que queremos Agregar
-  $consulta="select * from tproducto where id_productos=".$idproducto;
+  $consulta="select * from tproducto where id_producto=".$idproducto;
   $resultado=$conexion->query($consulta);
   if ($resultado) {
     while ($fila=$resultado->fetch_object()) {
-      $cantidadP=$fila->cantidadproductos;
+      $cantidadP=$fila->stock;
       $margen=($fila->margen)/100;
     }
   }
@@ -34,12 +34,14 @@ if ($bandera=="add") {
   if($resultado1->num_rows<1)
   {
     $valorTotalAnterior=0;
+    $descripcion="Primer ingreso de productos.";
   }else {
     if ($resultado1) {
       while ($fila1=$resultado1->fetch_object()) {
         $valorTotalAnterior=$fila1->vtotals;
       }
     }else {
+      echo "Error en consulta resultado1";
         msg(mysqli_error($conexion));
     }
   }
@@ -64,7 +66,8 @@ if ($bandera=="add") {
         // $resultado = $conexion->query($consulta4);
         // if ($resultado) {
           //  msg("Exito Producto");
-          header('Location:kardex.php?id='.$idproducto);
+          // header('Location:Kardex.php?id='.$idproducto);
+          echo "Guardo compra kardex";
         // } else {
         //     //msg("No Exito Producto");
         // }
@@ -88,7 +91,8 @@ if ($bandera=="add") {
         // $resultado = $conexion->query($consulta4);
         // if ($resultado) {
         //   //  msg("Exito Producto");
-          header('Location:kardex.php?id='.$idproducto);
+        echo "Guardo venta";
+          // header('Location:kardex.php?id='.$idproducto);
         // } else {
         //     //msg("No Exito Producto");
         // }

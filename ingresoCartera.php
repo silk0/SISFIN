@@ -49,6 +49,11 @@
     <!-- style CSS
 		============================================ -->
     <link rel="stylesheet" href="style.css">
+
+    <!-- notification CSS
+        ============================================ -->
+    <link rel="stylesheet" href="css/notification/notification.css">
+
     <!-- responsive CSS
 		============================================ -->
     <link rel="stylesheet" href="css/responsive.css">
@@ -58,9 +63,14 @@
 </head>
 <script  language=JavaScript> 
 function go(){
-    //validacion respectiva me da hueva
-    document.getElementById("bandera").value="add";
-    document.form.submit(); 
+   if(document.getElementById('nombre').value==""){
+    notify(' Advertencia:','El campo Categoria es obligatorio.','top', 'right', 'any', 'warning');
+    document.getElementById("nombre").focus();
+        
+}else{
+
+    document.form.submit();
+}
 }
 function confirmar(id,op)
         {
@@ -353,6 +363,12 @@ if ($result) {
     <!-- plugins JS
 		============================================ -->
     <script src="js/plugins.js"></script>
+
+     <!--  notification JS
+        ============================================ -->
+        <script src="js/notification/bootstrap-growl.min.js"></script>
+        <script src="js/notification/notification-active.js"></script>
+
         <!-- Input Mask JS
 		============================================ -->
     <script src="js/jasny-bootstrap.min.js"></script>
@@ -378,38 +394,52 @@ if($result->num_rows == 0){
 $consulta  = "INSERT INTO tcartera VALUES('null','" .$nombre. "')";
     $resultado = $conexion->query($consulta);
       if($resultado){
-          msg("Se agregaron los datos correctamente");
+          msgI("Se agregaron los datos correctamente");
       } else {
-          msg("Error al insertar los datos");
+          msgE("Error al insertar los datos");
       }
 }else{
-  msg("Esta cartera ya existe");
+  msgA("Esta cartera ya existe");
 }
 }
 if ($bandera == "desactivar") {
     $consulta = "UPDATE tcategoria SET estado = '0' WHERE id_categoria = '".$baccion."'";
       $resultado = $conexion->query($consulta);
       if ($resultado) {
-          msg("Categoria desactivada con exito");
+          msgI("Categoria desactivada con exito");
       } else {
-          msg("No se pudo realizar la acción");
+          msgE("No se pudo realizar la acción");
       }
   }
   if ($bandera == "activar") {
     $consulta = "UPDATE tcategoria SET estado = '1' WHERE id_categoria = '".$baccion."'";
       $resultado = $conexion->query($consulta);
       if ($resultado) {
-          msg("Categoria activada con exito");
+          msgI("Categoria activada con exito");
       } else {
-          msg("No se pudo realizar la acción");
+          msgE("No se pudo realizar la acción");
       }
   }
   
-function msg($texto)
+
+
+function msgI($texto)
 {
     echo "<script type='text/javascript'>";
-    echo "alert('$texto');";
-    echo "document.location.href='ingresoCartera.php';";
+    echo "notify('Exito','$texto','top', 'right', 'any', 'success');";
     echo "</script>";
 }
+function msgA($texto)
+{
+    echo "<script type='text/javascript'>";
+    echo "notify('Advertencia','$texto','top', 'right', 'any', 'warning');";
+    echo "</script>";
+}
+function msgE($texto)
+{
+    echo "<script type='text/javascript'>";
+    echo "notify('Error','$texto','top', 'right', 'any', 'danger');";
+    echo "</script>";
+}
+
 ?>

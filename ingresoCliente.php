@@ -109,8 +109,6 @@ function go(){
 
     //Validaciones
    if(document.getElementById('nombre').value==""){
-    //    alert("El campo nombre es obligatorio");
-    //    prueba :p
      notify(' Advertencia:','El campo Nombre es obligatorio.','top', 'right', 'any', 'warning');
        document.getElementById("nombre").focus();
    }else if(document.getElementById('apellido').value==""){
