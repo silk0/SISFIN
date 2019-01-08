@@ -53,6 +53,9 @@
     <!-- style CSS
 		============================================ -->
     <link rel="stylesheet" href="style.css">
+    <!-- notification CSS
+        ============================================ -->
+    <link rel="stylesheet" href="css/notification/notification.css">
     <!-- responsive CSS
 		============================================ -->
     <link rel="stylesheet" href="css/responsive.css">
@@ -103,7 +106,19 @@ function notify(titulo,texto,from, align, icon, type, animIn, animOut){
 		});
 	}
 function go(){
-    document.form.submit(); 
+
+    //Validaciones
+   if(document.getElementById('inst').value==""){
+    //    alert("El campo nombre es obligatorio");
+    //    prueba :p
+     notify(' Advertencia:','El campo Nombre es obligatorio.','top', 'right', 'any', 'warning');
+       document.getElementById("inst").focus();
+   }else if(document.getElementById('corr').value==""){
+        notify(' Advertencia:','El campo Correlativo es obligatorio,','top', 'right', 'any', 'warning');
+       document.getElementById("corr").focus();
+   }else{
+      document.form.submit();  
+   }   
 }
 function tabla(){
     document.location.href="listaInstituciones.php"; 
@@ -284,6 +299,11 @@ function modificar(id){
     <!-- main JS
 		============================================ -->
     <script src="js/main.js"></script>
+<!--  notification JS
+        ============================================ -->
+        <script src="js/notification/bootstrap-growl.min.js"></script>
+        <script src="js/notification/notification-active.js"></script>
+    
 	<!-- tawk chat JS
 		============================================ -->
     <!-- <script src="js/tawk-chat.js"></script> -->

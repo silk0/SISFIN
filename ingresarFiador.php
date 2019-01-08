@@ -429,9 +429,9 @@ $salario    = $_POST['salario'];
     $consulta  = "INSERT INTO tfiador VALUES('null','" .$nombre. "','" .$apellido. "','" .$direccion. "','" .$dui. "','" .$nit. "','" .$email. "','" .$trabajo. "','" .$salario. "','" .$telefono. "','" .$celular. "')";
     $resultado = $conexion->query($consulta);
       if ($resultado) {
-          msg("Se agregaron los datos correctamente");
+          msgI("Se agregaron los datos correctamente");
       } else {
-          msg("Error al insertar los datos");
+          msgE("Error al insertar los datos");
       }
 }
 function msg($texto)
@@ -439,6 +439,24 @@ function msg($texto)
     echo "<script type='text/javascript'>";
     echo "alert('$texto');";
     echo "document.location.href='ingresarFiador.php';";
+    echo "</script>";
+}
+function msgI($texto)
+{
+    echo "<script type='text/javascript'>";
+    echo "notify('Exito','$texto','top', 'right', 'any', 'success');";
+    echo "</script>";
+}
+function msgA($texto)
+{
+    echo "<script type='text/javascript'>";
+    echo "notify('Advertencia','$texto','top', 'right', 'any', 'warning');";
+    echo "</script>";
+}
+function msgE($texto)
+{
+    echo "<script type='text/javascript'>";
+    echo "notify('Error','$texto','top', 'right', 'any', 'danger');";
     echo "</script>";
 }
 ?>
