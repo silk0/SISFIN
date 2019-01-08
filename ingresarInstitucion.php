@@ -117,7 +117,7 @@ function go(){
         notify(' Advertencia:','El campo Correlativo es obligatorio,','top', 'right', 'any', 'warning');
        document.getElementById("corr").focus();
    }else{
-      document.form.submit();  
+      document.form.submit();     
    }   
 }
 function tabla(){
@@ -186,8 +186,9 @@ function modificar(id){
                             <h2>Datos de Institución</h2>
                             
                         </div>
-                        <form name="form" method="post" action="ingresarInstitucion.php?bandera=1">
+                        <form name="form" method="post">
                         <div class="row">
+                        <input type="hidden" id="bandera" name="bandera" value="1">
                             <div class="col-lg-6 col-md-6 col-sm-6 col-xs-12">
                                 <div class="form-example-int">
                                     <div class="form-group">
@@ -219,7 +220,7 @@ function modificar(id){
                             </div>
                             </div>
                         <div class="form-example-int mg-t-15">
-                            <button class="btn btn-success notika-btn-success" style="margin-left: 500px;" onclick="go();" >Guardar</button>
+                            <button type="button" class="btn btn-success notika-btn-success" style="margin-left: 500px;" onclick="go();" >Guardar</button>
                             <button type="button" class="btn btn-success notika-btn-success" onclick="tabla();">Cancelar</button>
                         </div>
                         </form>
@@ -316,7 +317,7 @@ function modificar(id){
 </html>
 <?php
 include "config/conexion.php";
-$accion = $_REQUEST['bandera'];
+$accion = $_POST['bandera'];
 if($accion==1){
 $inst   = $_POST['inst'];
 $corr   = $_POST['corr'];
