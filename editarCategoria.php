@@ -154,7 +154,6 @@ function enviar(id){
                             
                         </div>
                         <form name="form" method="post" action="editarCategoria.php?bandera=1">
-                        
                         <input type="hidden" name="baccion" id="baccion" value="<?php echo $idR; ?>">
                         
 

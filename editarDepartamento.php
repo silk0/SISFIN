@@ -1,3 +1,18 @@
+<?php
+$id = $_REQUEST["id"];
+include "config/conexion.php";
+$result = $conexion->query("select * from tdepartamento where id_departamento=" . $id);
+if ($result) {
+    while ($fila = $result->fetch_object()) {
+        $idR               = $fila->id_departamento;
+        $idinstitucionR    = $fila->id_institucion;
+        $departamentoR     = $fila->nombre;
+        $correlativoR      = $fila->correlativo;
+        
+       }
+}
+
+?>
 <!doctype html>
 <html class="no-js" lang="">
 
@@ -62,44 +77,17 @@
 <script  language=JavaScript> 
 function go(){
     //validacion respectiva me da hueva
-    document.getElementById("bandera").value="add";
-    document.form.submit(); 
-}
-function confirmar(id,op)
-        {
-          if (op==1) {
-            if (confirm("!!Advertencia!! Desea Desactivar Este Registro?")) {
-            document.getElementById('bandera').value='desactivar';
-            document.getElementById('baccion').value=id;
-
-            document.form.submit();
-          }else
-          {
-            alert("No entra");
-          }
-          }else{
-            if (confirm("!!Advertencia!! Desea Activar Este Registro?")) {
-            document.getElementById('bandera').value='activar';
-            document.getElementById('baccion').value=id;
-            document.form.submit();
-          }else
-          {
-            alert("No entra");
-          }
-          }
-
-
-        } 
+        document.form.submit();  
+} 
 function modificar(id){
        
        document.location.href="editarDepartamento.php?id="+id;
    }
-   
 function enviar(id){
     
     $.ajax({
         data:{"id":id},
-        url: 'scriptsphp/recuperarCategoria.php',
+        url: 'scriptsphp/recuperarDepartamento.php',
         type: 'post',
         beforeSend: function(){
             alert("Por favor espere...");
@@ -107,11 +95,10 @@ function enviar(id){
         success: function(response){
             alert(response);
             document.getElementById("nombre").value=response;
-            document.getElementById("idcategoria").value=id;
+            document.getElementById("iddepartamento").value=id;
         }
     });
 } 
-
 </script> 
 
 <body>
@@ -170,9 +157,9 @@ function enviar(id){
                             <h2>Datos del Departamento</h2>
                             
                         </div>
-                        <form id="form"name="form" method="post" action="">
-                        <input type="hidden" name="bandera" id="bandera">
-                        <input type="hidden" name="baccion" id="baccion">
+                        
+                        <form name="form" method="post" action="editarDepartamento.php?bandera=1">
+                        <input type="hidden" name="baccion" id="baccion" value="<?php echo $idR; ?>">
                         
 
                         <div class="row">
@@ -181,7 +168,7 @@ function enviar(id){
                                     <div class="form-group">
                                         <label>Departamento:</label>
                                         <div class="nk-int-st">
-                                        <input type="text" class="form-control input-sm" placeholder="Ingrese  nombre de departamento." id="departamento" name="departamento">
+                                        <input type="text" class="form-control input-sm" placeholder="Ingrese  nombre de departamento." id="departamento" name="departamento" value="<?php echo $departamentoR; ?>">
                                         </div>
                                     </div>
                                 </div>
@@ -196,14 +183,21 @@ function enviar(id){
                                     <select class="selectpicker" data-live-search="true" name="institucion" id="institucion">
                                     <option value="Seleccione">Seleccione</option>
                                     <?php
-                                     include 'config/conexion.php';
-                                     $result = $conexion->query("select id_institucion as id,nombre FROM tinstitucion");
-                                     if ($result) {
+                                    include 'config/conexion.php';
+                                    $result = $conexion->query("select id_institucion as id,nombre FROM tinstitucion");
+                                    if ($result) {
                                          while ($fila = $result->fetch_object()) {
-                                             echo "<option value='".$fila->id."'>".$fila->nombre."</option>";
+                                             if ($fila->id == $idinstitucionR ) {
+                                                echo '<option value="' . $fila->id. '" selected>' . $fila->nombre . '</opcion>';
+                                            }else {
+                                                echo '<option value="' . $fila->id . '">' . $fila->nombre . '</opcion>';
                                             }
                                         }
-                                        ?>
+                                    }else {
+                                        echo '<option value="">Error en la BD</opcion>';
+                                    }
+                                    ?>
+                                   
                                     </select>
                                 </div>
                                 </div>
@@ -212,7 +206,7 @@ function enviar(id){
                                     <div class="form-group">
                                         <label>Correlativo:</label>
                                         <div class="nk-int-st">
-                                        <input type="text" class="form-control input-sm" placeholder="Ingrese  un correlativo para departamento." id="correlativo" name="correlativo">
+                                        <input type="text" class="form-control input-sm" placeholder="Ingrese  un correlativo para departamento." id="correlativo" name="correlativo" value="<?php echo $correlativoR; ?>">
                                         </div>
                                     </div>
                                 </div>
@@ -222,8 +216,8 @@ function enviar(id){
                             </div>
                             </div>
                            <div class="form-example-int mg-t-15">
-                            <button class="btn btn-success notika-btn-success" style="margin-left: 500px;" onclick="go();" >Guardar.</button>
-                            <button type="button" data-toggle="modal" data-target="#myModalone" class="btn btn-success notika-btn-success">Ver Categorias</button>
+                            <button class="btn btn-success notika-btn-success" style="margin-left: 500px;" onclick="go();" >Modificar.</button>
+                            <button type="button" data-toggle="modal" data-target="#myModalone" class="btn btn-success notika-btn-success">Ver Departamentos</button>
                         </div>
                         </form>
                     </div>
@@ -395,45 +389,30 @@ if ($result) {
 </html>
 <?php
 include "config/conexion.php";
-$bandera  = $_REQUEST["bandera"];
+$bandera  = $_REQUEST['bandera'];
 $baccion = $_REQUEST["baccion"];
-$departamento     = $_REQUEST["departamento"];
-$institucion      = $_REQUEST["institucion"];
-$correlativo     = $_REQUEST["correlativo"];
-if($bandera=="add"){
+if($bandera==1){
+$institucion      = $_REQUEST['institucion'];
+$departamento     = $_REQUEST['departamento'];
+msg($departamento);
+$correlativo     = $_REQUEST['correlativo'];
 
 $query = "SELECT nombre FROM tdepartamento WHERE nombre like '%".$departamento."';";
 $result = $conexion->query($query);
 if($result->num_rows == 0){   
-$consulta  = "INSERT INTO tdepartamento VALUES('null','" .$institucion. "','" .$departamento. "','" .$correlativo. "')";
+    $consulta  = "UPDATE tdepartamento set id_institucion='" . $institucion . "',nombre='" . $departamento . "',correlativo='" . $correlativo . "' where id_departamento='" . $baccion . "'";
     $resultado = $conexion->query($consulta);
+    msg("antes if php");
       if($resultado){
-          msg("Se agregaron los datos correctamente");
+          msg("Se modificaron los datos correctamente");
       } else {
           msg("Error al insertar los datos");
       }
 }else{
-  msg("Esta categoria ya existe");
+  msg("Esta departamento ya existe");
 }
 }
-if ($bandera == "desactivar") {
-    $consulta = "UPDATE tcategoria SET estado = '0' WHERE id_categoria = '".$baccion."'";
-      $resultado = $conexion->query($consulta);
-      if ($resultado) {
-          msg("Categoria desactivada con exito");
-      } else {
-          msg("No se pudo realizar la acción");
-      }
-  }
-  if ($bandera == "activar") {
-    $consulta = "UPDATE tcategoria SET estado = '1' WHERE id_categoria = '".$baccion."'";
-      $resultado = $conexion->query($consulta);
-      if ($resultado) {
-          msg("Categoria activada con exito");
-      } else {
-          msg("No se pudo realizar la acción");
-      }
-  }
+
   
 function msg($texto)
 {
