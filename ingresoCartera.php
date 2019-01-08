@@ -65,9 +65,8 @@
 function go(){
    if(document.getElementById('nombre').value==""){
     notify(' Advertencia:','El campo Categoria es obligatorio.','top', 'right', 'any', 'warning');
-    document.getElementById("nombre").focus();
-        
-}else{
+    document.getElementById("nombre").focus();       
+   }else{
 
     document.form.submit();
 }
