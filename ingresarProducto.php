@@ -34,6 +34,10 @@ if ($resultc) {
     <!-- font awesome CSS
 		============================================ -->
     <link rel="stylesheet" href="css/font-awesome.min.css">
+
+    <!-- notification CSS
+        ============================================ -->
+    <link rel="stylesheet" href="css/notification/notification.css">
     <!-- owl.carousel CSS
 		============================================ -->
     <link rel="stylesheet" href="css/owl.carousel.css">
@@ -72,7 +76,48 @@ if ($resultc) {
     <script src="js/vendor/modernizr-2.8.3.min.js"></script>
 </head>
 <SCRIPT  language=JavaScript> 
-
+  
+function notify(titulo,texto,from, align, icon, type, animIn, animOut){
+        $.growl({
+            icon: icon,
+            title: titulo+" ",
+            message: texto,
+            url: ''
+        },{
+                element: 'body',
+                type: type,
+                allow_dismiss: true,
+                placement: {
+                        from: from,
+                        align: align
+                },
+                offset: {
+                    x: 20,
+                    y: 85
+                },
+                spacing: 10,
+                z_index: 1031,
+                delay: 2500,
+                timer: 1000,
+                url_target: '_blank',
+                mouse_over: false,
+                animate: {
+                        enter: animIn,
+                        exit: animOut
+                },
+                icon_type: 'class',
+                template: '<div data-growl="container" class="alert" role="alert">' +
+                                '<button type="button" class="close" data-growl="dismiss">' +
+                                    '<span aria-hidden="true">&times;</span>' +
+                                    '<span class="sr-only">Close</span>' +
+                                '</button>' +
+                                '<span data-growl="icon"></span>' +
+                                '<span data-growl="title"></span>' +
+                                '<span data-growl="message"></span>' +
+                                '<a href="#" data-growl="url"></a>' +
+                            '</div>'
+        });
+    }   
 function go(){
 
     //Validaciones
@@ -81,30 +126,27 @@ function go(){
     //    prueba :p
      notify(' Advertencia:','El campo Nombre es obligatorio.','top', 'right', 'any', 'warning');
        document.getElementById("nombre").focus();
-   }else if(document.getElementById('apellido').value==""){
-        notify(' Advertencia:','El campo Apellido es obligatorio,','top', 'right', 'any', 'warning');
-       document.getElementById("apellido").focus();
-   }else if(document.getElementById('dui').value==""){
-        notify(' Advertencia:','El campo DUI es obligatorio','top', 'right', 'any', 'warning');
-       document.getElementById("dui").focus();
-   }else if(document.getElementById('nit').value==""){
-        notify(' Advertencia:','El campo NIT es obligatorio', 'top', 'right', 'any', 'warning');
-       document.getElementById("nit").focus();
-   }else if(document.getElementById('direc').value==""){
-        notify(' Advertencia:','El campo Direccion es obligatorio', 'top', 'right', 'any', 'warning');
-       document.getElementById("direc").focus();
-   }else if(document.getElementById('telefono').value=="" && document.getElementById('celular').value==""){
-        notify(' Advertencia:','Ingrese telefono', 'top', 'right', 'any', 'warning');
-       document.getElementById("telefono").focus();
-   }else if(document.getElementById('email').value==""){
-        notify(' Advertencia:','El campo E-mail es obligatorio,','top', 'right', 'any', 'warning');
-       document.getElementById("email").focus();
-   }else if(document.getElementById('trabajo').value==""){
-        notify(' Advertencia:','El campo Tabajo que realiza es obligatorio', 'top', 'right', 'any', 'warning');
-       document.getElementById("trabajo").focus();
-   }else if(document.getElementById('salario').value==""){
-        notify(' Advertencia:','El campo Salario  es obligatorio', 'top', 'right', 'any', 'warning');
-       document.getElementById("salario").focus();
+   }else if(document.getElementById('stock').value==""){
+        notify(' Advertencia:','El campo Stock es obligatorio,','top', 'right', 'any', 'warning');
+       document.getElementById("stock").focus();
+   }else if(document.getElementById('categoria').value==""){
+        notify(' Advertencia:','El campo Categoria es obligatorio','top', 'right', 'any', 'warning');
+       document.getElementById("categoria").focus();
+   }else if(document.getElementById('pcompra').value==""){
+        notify(' Advertencia:','El campo Precio de Compra es obligatorio', 'top', 'right', 'any', 'warning');
+       document.getElementById("pcompra").focus();
+   }else if(document.getElementById('mganancia').value==""){
+        notify(' Advertencia:','El campo Margen de Ganancia es obligatorio', 'top', 'right', 'any', 'warning');
+       document.getElementById("mganancia").focus();
+   }else if(document.getElementById('pventa').value=="" && document.getElementById('celular').value==""){
+        notify(' Advertencia:','El campo Precio de venta es obligatorio', 'top', 'right', 'any', 'warning');
+       document.getElementById("pventa").focus();
+   }else if(document.getElementById('proveedor').value==""){
+        notify(' Advertencia:','El campo Proveedor es obligatorio,','top', 'right', 'any', 'warning');
+       document.getElementById("proveedor").focus();
+   }else if(document.getElementById('descrip').value==""){
+        notify(' Advertencia:','El campo Descripcion es obligatorio', 'top', 'right', 'any', 'warning');
+       document.getElementById("descrip").focus();
    }else{
       document.form.submit();  
    }   
@@ -171,7 +213,7 @@ function enviarC(id){
 										<i class="notika-icon notika-form"></i>
 									</div>
 									<div class="breadcomb-ctn">
-										<h2>Rgistro de producto.</h2>
+										<h2>Registro de Producto.</h2>
 										<p>Formulario de datos <span class="bread-ntd">para un nuevo producto.</span></p>
 									</div>
 								</div>
@@ -198,7 +240,8 @@ function enviarC(id){
                             <h2>Datos del Producto</h2>
                             
                         </div>
-                        <form name="form" method="post" action="ingresarProducto.php?bandera=1">
+                        <form name="form" method="post">
+                         <input type="hidden" id="bandera" name="bandera" value="1">
                         <input type="hidden" id="idproveedor" name="idproveedor">
                         <input type="hidden" id="idcat" name="idcat">
                         <div class="row">
@@ -227,7 +270,7 @@ function enviarC(id){
                                     <div class="form-group">
                                         <label>Stock Mínimo:</label>
                                         <div class="nk-int-st">
-                                        <input type="text" name="stock" class="form-control input-sm" placeholder="Ingrese el stock minimo" >
+                                        <input type="text" name="stock" id="stock" class="form-control input-sm" placeholder="Ingrese el stock minimo" >
                                         </div>
                                     </div>
                                 </div>
@@ -327,15 +370,20 @@ function enviarC(id){
                             <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
                                 <div class="form-group">
                                     <div class="nk-int-st">
-                                        <textarea class="form-control" name="descrip" id="descrip" rows="3" placeholder="Escriba aquí la descripción deseada acerca del producto..."></textarea >
+                                        <textarea class="form-control" name="descrip" id="descrip" rows="3" placeholder="Escriba aquí la descripción deseada acerca del producto..."></textarea required>
                                     </div>
                                 </div>
                             </div>
                         </div>
-                      
+                       <!-- <div class="form-example-int mg-t-15">
+                            <div class="fm-checkbox">
+                                <label><input type="checkbox" name="estado" class="i-checks"> <i></i> Estado.</label>
+                                <label for="">Checkee para activar</label>
+                            </div>
+                        </div>-->
                         
                         <div class="form-example-int mg-t-15">
-                            <button class="btn btn-success notika-btn-success" onclick="go();">Guardar.</button>
+                            <button tipe="button "class="btn btn-success notika-btn-success" onclick="go();">Guardar.</button>
                         </div>
                         </form>
                     </div>
@@ -575,6 +623,11 @@ if ($result) {
         <!-- Input Mask JS
 		============================================ -->
     <script src="js/jasny-bootstrap.min.js"></script>
+
+    <!--  notification JS
+        ============================================ -->
+        <script src="js/notification/bootstrap-growl.min.js"></script>
+        <script src="js/notification/notification-active.js"></script>
     <!-- main JS
 		============================================ -->
     <script src="js/main.js"></script>
@@ -606,7 +659,7 @@ if ($result) {
 </html>
 <?php
 include "config/conexion.php";
-$accion = $_REQUEST['bandera'];
+$accion = $_POST['bandera'];
 if($accion==1){
 $codigo = $_POST['codigo'];
 $nombre   = $_POST['nombre'];
@@ -621,9 +674,9 @@ $descrip   = $_POST['descrip'];
     $consulta  = "INSERT INTO tproducto VALUES('null','".$proveedor."','".$categoria."','" .$nombre. "','" .$descrip. "','" .$pcompra. "','" .$pventa. "','" .$mganancia. "','" .$stock. "','0','" .$codigo. "','1')";
     $resultado = $conexion->query($consulta);
       if ($resultado) {
-          msg("Se agregaron los datos correctamente");
+          msgI("Se agregaron los datos correctamente");
       } else {
-          msg("Error al insertar los datos");
+          msgE("Error al insertar los datos");
       }
 }
 function msg($texto)
@@ -631,6 +684,25 @@ function msg($texto)
     echo "<script type='text/javascript'>";
     echo "alert('$texto');";
     echo "document.location.href='ingresarProducto.php';";
+    echo "</script>";
+}
+
+function msgI($texto)
+{
+    echo "<script type='text/javascript'>";
+    echo "notify('Exito','$texto','top', 'right', 'any', 'success');";
+    echo "</script>";
+}
+function msgA($texto)
+{
+    echo "<script type='text/javascript'>";
+    echo "notify('Advertencia','$texto','top', 'right', 'any', 'warning');";
+    echo "</script>";
+}
+function msgE($texto)
+{
+    echo "<script type='text/javascript'>";
+    echo "notify('Error','$texto','top', 'right', 'any', 'danger');";
     echo "</script>";
 }
 ?>
