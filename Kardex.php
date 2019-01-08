@@ -1,3 +1,17 @@
+<?php
+$id = $_REQUEST["id"];
+include "config/conexion.php";
+$result = $conexion->query("select p.id_producto as idp, p.nombre as namep,prov.id_proveedor as idprov,prov.nombre as nameprov from tproducto as p,tproveedor as prov  where p.id_proveedor=prov.id_proveedor and id_producto=" . $id);
+if ($result) {
+    while ($fila = $result->fetch_object()) {
+        $idR            = $fila->idp;
+        $nombreprod     = $fila->namep;
+        $idprov         = $fila->idprov;
+        $nombreprov      = $fila->nameprov;       
+       }
+}
+
+?>
 <!doctype html>
 <html class="no-js" lang="">
 
@@ -148,33 +162,39 @@
                                         <td class="danger">V.Unitario</td>
                                         <td class="info">V.Total</td>                       
                                     </tr>
-                                    <tr class="active">
-                                        <td>10/10/2018</td>
-                                        <td>Primer ingreso.</td>
-                                        <td class="warning">10</td>
-                                        <td class="danger">2.50</td>
-                                        <td class="info">25.00</td>
-                                        <td class="warning">0.00</td>
-                                        <td class="danger">0.00</td>
-                                        <td class="info">0.00</td>
-                                        <td class="warning">10</td>
-                                        <td class="danger">2.50</td>
-                                        <td class="info">25.00</td>    
-                                    </tr>
-                                    <tr class="active">
-                                        <td>11/10/2018</td>
-                                        <td>Primera venta.</td>              
-                                        <td class="warning">0.00</td>
-                                        <td class="danger">0.00</td>
-                                        <td class="info">0.00</td>
-                                        <td class="warning">10</td>
-                                        <td class="danger">2.50</td>
-                                        <td class="info">25.00</td>
-                                        <td class="warning">10</td>
-                                        <td class="danger">2.50</td>
-                                        <td class="info">25.00</td>    
-                                    </tr>
-                                    
+                                     <?php
+                      include 'config/conexion.php';
+                      $result = $conexion->query("select * from kardex where id_producto=".$id);
+                      if ($result) {
+                        while ($fila = $result->fetch_object()) {
+                          echo "<tr>";
+                          echo "<td>".$fila->fecha."</td>";
+                          echo "<td>".$fila->descripcion."</td>";
+                          if ($fila->movimiento==1){
+                            echo "<td class='warning'>".$fila->cantidad."</td>";
+                            echo "<td class='danger'>".$fila->vunitario."</td>";
+                            $total=($fila->cantidad)*$fila->vunitario;
+                            echo "<td class='info'>".$total."</td>";
+                            echo "<td class='warning'>0</td>";
+                            echo "<td class='danger'>0</td>";
+                            echo "<td class='info'>0</td>";
+                          }else {
+                            echo "<td class='warning'>0</td>";
+                            echo "<td class='danger'>0</td>";
+                            echo "<td class='info'>0</td>";
+                            echo "<td class='warning'>".$fila->cantidad."</td>";
+                            echo "<td class='danger'>".$fila->vunitario."</td>";
+                            $total=($fila->cantidad)*$fila->vunitario;
+                            echo "<td class='info'>".$total."</td>";
+                          }
+                          echo "<td class='warning'>".$fila->cantidads."</td>";
+                          echo "<td class='danger'>".$fila->vunitarios."</td>";
+                          echo "<td class='info'>".$fila->vtotals."</td>";
+
+                          echo "</tr>";
+                           }
+                      }
+                       ?>
                                 </tbody>
                             </table>
                         </div>
