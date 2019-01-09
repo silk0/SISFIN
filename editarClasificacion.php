@@ -1,12 +1,30 @@
+<?php
+$id = $_REQUEST["id"];
+include "config/conexion.php";
+$result = $conexion->query("select * from tdepartamento where id_departamento=" . $id);
+if ($result) {
+    while ($fila = $result->fetch_object()) {
+        $idR               = $fila->id_departamento;
+        $idinstitucionR    = $fila->id_institucion;
+        $departamentoR     = $fila->nombre;
+        $correlativoR      = $fila->correlativo;
+        
+       }
+}
+
+?>
 <!doctype html>
 <html class="no-js" lang="">
 
 <head>
     <meta charset="utf-8">
     <meta http-equiv="x-ua-compatible" content="ie=edge">
-    <title>Ingreso de Cartera | SISFIN</title>
+    <title>Ingreso de Departamento | SISFIN</title>
     <meta name="description" content="">
     <meta name="viewport" content="width=device-width, initial-scale=1">
+    <!-- bootstrap select CSS
+		============================================ -->
+        <link rel="stylesheet" href="css/bootstrap-select/bootstrap-select.css">
     <!-- favicon
 		============================================ -->
     <link rel="shortcut icon" type="image/x-icon" href="img/favicon.ico">
@@ -49,11 +67,6 @@
     <!-- style CSS
 		============================================ -->
     <link rel="stylesheet" href="style.css">
-
-    <!-- notification CSS
-        ============================================ -->
-    <link rel="stylesheet" href="css/notification/notification.css">
-
     <!-- responsive CSS
 		============================================ -->
     <link rel="stylesheet" href="css/responsive.css">
@@ -62,93 +75,19 @@
     <script src="js/vendor/modernizr-2.8.3.min.js"></script>
 </head>
 <script  language=JavaScript> 
-
-function notify(titulo,texto,from, align, icon, type, animIn, animOut){
-        $.growl({
-            icon: icon,
-            title: titulo+" ",
-            message: texto,
-            url: ''
-        },{
-                element: 'body',
-                type: type,
-                allow_dismiss: true,
-                placement: {
-                        from: from,
-                        align: align
-                },
-                offset: {
-                    x: 20,
-                    y: 85
-                },
-                spacing: 10,
-                z_index: 1031,
-                delay: 2500,
-                timer: 1000,
-                url_target: '_blank',
-                mouse_over: false,
-                animate: {
-                        enter: animIn,
-                        exit: animOut
-                },
-                icon_type: 'class',
-                template: '<div data-growl="container" class="alert" role="alert">' +
-                                '<button type="button" class="close" data-growl="dismiss">' +
-                                    '<span aria-hidden="true">&times;</span>' +
-                                    '<span class="sr-only">Close</span>' +
-                                '</button>' +
-                                '<span data-growl="icon"></span>' +
-                                '<span data-growl="title"></span>' +
-                                '<span data-growl="message"></span>' +
-                                '<a href="#" data-growl="url"></a>' +
-                            '</div>'
-        });
-    }
-    
 function go(){
-   if(document.getElementById('nombre').value==""){
-    notify(' Advertencia:','El campo Categoria es obligatorio.','top', 'right', 'any', 'warning');
-    document.getElementById("nombre").focus();       
-   }else{
-
-    document.form.submit();
-}
-}
-function confirmar(id,op)
-        {
-          if (op==1) {
-            if (confirm("!!Advertencia!! Desea Desactivar Este Registro?")) {
-            document.getElementById('bandera').value='desactivar';
-            document.getElementById('baccion').value=id;
-
-            document.form.submit();
-          }else
-          {
-            alert("No entra");
-          }
-          }else{
-            if (confirm("!!Advertencia!! Desea Activar Este Registro?")) {
-            document.getElementById('bandera').value='activar';
-            document.getElementById('baccion').value=id;
-            document.form.submit();
-          }else
-          {
-            alert("No entra");
-          }
-          }
-
-
-        } 
+    //validacion respectiva me da hueva
+        document.form.submit();  
+} 
 function modificar(id){
        
-       document.location.href="editarCartera.php?id="+id;
+       document.location.href="editarDepartamento.php?id="+id;
    }
-   
 function enviar(id){
     
     $.ajax({
         data:{"id":id},
-        url: 'scriptsphp/recuperarCartera.php',
+        url: 'scriptsphp/recuperarDepartamento.php',
         type: 'post',
         beforeSend: function(){
             alert("Por favor espere...");
@@ -156,13 +95,11 @@ function enviar(id){
         success: function(response){
             alert(response);
             document.getElementById("nombre").value=response;
-            document.getElementById("idcartera").value=id;
+            document.getElementById("iddepartamento").value=id;
         }
     });
 } 
-
 </script> 
-
 
 <body>
     <!--[if lt IE 8]>
@@ -193,8 +130,8 @@ function enviar(id){
 										<i class="notika-icon notika-form"></i>
 									</div>
 									<div class="breadcomb-ctn">
-										<h2>Registro de Cartera.</h2>
-										<p>Formulario de cartera <span class="bread-ntd">.</span></p>
+										<h2>Registro de Departamento.</h2>
+										<p>Formulario de departamento <span class="bread-ntd">.</span></p>
 									</div>
 								</div>
 							</div>
@@ -217,51 +154,77 @@ function enviar(id){
                 <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
                     <div class="form-example-wrap">
                         <div class="cmp-tb-hd">
-                            <h2>Datos de Cartera</h2>
+                            <h2>Datos del Departamento</h2>
                             
                         </div>
-                        <form id="form"name="form" method="post" action="">
-                        <input type="hidden" name="bandera" id="bandera">
-                        <input type="hidden" name="baccion" id="baccion">
+                        
+                        <form name="form" method="post" action="editarDepartamento.php?bandera=1">
+                        <input type="hidden" name="baccion" id="baccion" value="<?php echo $idR; ?>">
+                        
 
                         <div class="row">
                             <div class="col-lg-6 col-md-6 col-sm-6 col-xs-12">
                                 <div class="form-example-int">
                                     <div class="form-group">
-                                        <label>Cartera:</label>
+                                        <label>Departamento:</label>
                                         <div class="nk-int-st">
-                                        <input type="text" class="form-control input-sm" placeholder="Ingrese  nombre de cartera." id="nombre" name="nombre">
+                                        <input type="text" class="form-control input-sm" placeholder="Ingrese  nombre de departamento." id="departamento" name="departamento" value="<?php echo $departamentoR; ?>">
                                         </div>
                                     </div>
                                 </div>
+                                <div class="col-lg-1 col-md-1 col-sm-1 col-xs-12">
+                               <div class="">
                             </div>
-                            
-                        
-                        
-                        
-                        
-                        
-                        <!-- FILA PARA DATOS CORTOS -->
-                        
-                         <!-- FIN DE FILA PARA DATOS CORTOS -->
-                        
-                        
-                        
-
-                        </br>
-                        <br>
-                        </br>
-                        
-                        <div class="form-example-int mg-t-15">
-                            <button class="btn btn-success notika-btn-success" style="margin-left: 500px;" onclick="go();">Guardar.</button>
-                            <button type="button" data-toggle="modal" data-target="#myModalone" class="btn btn-success notika-btn-success">Ver Carteras</button>
+                            </div>
+                            </div>
+                            <div class="col-lg-6 col-md-6 col-sm-6 col-xs-12">
+                            <label>Institución</label>
+                                <div class="bootstrap-select fm-cmp-mg">
+                                    <select class="selectpicker" data-live-search="true" name="institucion" id="institucion">
+                                    <option value="Seleccione">Seleccione</option>
+                                    <?php
+                                    include 'config/conexion.php';
+                                    $result = $conexion->query("select id_institucion as id,nombre FROM tinstitucion");
+                                    if ($result) {
+                                         while ($fila = $result->fetch_object()) {
+                                             if ($fila->id == $idinstitucionR ) {
+                                                echo '<option value="' . $fila->id. '" selected>' . $fila->nombre . '</opcion>';
+                                            }else {
+                                                echo '<option value="' . $fila->id . '">' . $fila->nombre . '</opcion>';
+                                            }
+                                        }
+                                    }else {
+                                        echo '<option value="">Error en la BD</opcion>';
+                                    }
+                                    ?>
+                                   
+                                    </select>
+                                </div>
+                                </div>
+                                <div class="col-lg-12 col-md-12 col-sm-6 col-xs-12">
+                                <div class="form-example-int">
+                                    <div class="form-group">
+                                        <label>Correlativo:</label>
+                                        <div class="nk-int-st">
+                                        <input type="text" class="form-control input-sm" placeholder="Ingrese  un correlativo para departamento." id="correlativo" name="correlativo" value="<?php echo $correlativoR; ?>">
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="col-lg-1 col-md-1 col-sm-1 col-xs-12">
+                               <div class="">
+                            </div>
+                            </div>
+                            </div>
+                           <div class="form-example-int mg-t-15">
+                            <button class="btn btn-success notika-btn-success" style="margin-left: 500px;" onclick="go();" >Modificar.</button>
+                            <button type="button" data-toggle="modal" data-target="#myModalone" class="btn btn-success notika-btn-success">Ver Departamentos</button>
                         </div>
                         </form>
                     </div>
                 </div>
             </div>
-             <!-- MODAL PARA CATEGORIAS -->
-             <div class="modal animated shake" id="myModalone" role="dialog">
+            <!-- MODAL PARA CATEGORIAS -->
+            <div class="modal animated shake" id="myModalone" role="dialog">
                                     <div class="modal-dialog modal-large">
                                         <div class="modal-content">
                                             <div class="modal-header">
@@ -275,14 +238,15 @@ function enviar(id){
                 <div class="col-lg-7 col-md-7 col-sm-7 col-xs-7">
                     <div class="data-table-list">
                         <div class="basic-tb-hd">
-                            <h2>Seleccione una de las carteras de la siguiente  tabla.</h2>
+                            <h2>Seleccione una de las categorias de la siguiente  tabla.</h2>
                         </div>
                         <div class="table-responsive">
                             <table id="data-table-basic" class="table table-striped">
                                 <thead>
                                     <tr>
-                                        
-                                        <th>Cartera</th>
+                                        <th>Correlativo</th>
+                                        <th>Departamento</th>
+                                        <th>Institución</th>
                                         <th>Modificar</th>
                                         
                                         
@@ -291,17 +255,18 @@ function enviar(id){
                                 <tbody>
                                         <?php
 include "config/conexion.php";
-$result = $conexion->query("SELECT * from tcartera ORDER BY id_cartera");
+$result = $conexion->query("SELECT * from tdepartamento ORDER BY id_departamento");
 if ($result) {
     while ($fila = $result->fetch_object()) {
         echo "<tr>";
+        echo "<td>" . $fila->correlativo . "</td>";
         echo "<td>" . $fila->nombre . "</td>";
+        echo "<td>" . $fila->id_institucion . "</td>";
         echo "<td>
         <div class='button-icon-btn'>
-        <button class='btn btn-lightgreen lightgreen-icon-notika btn-reco-mg btn-button-mg' data-dismiss='modal' onclick=\"modificar('$fila->id_cartera')\";><i class='notika-icon notika-menus'></i></button>
+        <button class='btn btn-lightgreen lightgreen-icon-notika btn-reco-mg btn-button-mg' data-dismiss='modal' onclick=\"modificar('$fila->id_departamento')\";><i class='notika-icon notika-menus'></i></button>
          </div>
         </td>";
-        
         echo "</tr>";
 
     }
@@ -314,9 +279,10 @@ if ($result) {
                                 <tfoot>
                                     <tr>
                                        
-                                        <th>Categoria</th>
+                                        <th>Correlativo</th>
+                                        <th>Departamento</th>
+                                        <th>Institución</th>
                                         <th>Modificar</th>
-                                        
                                         
                                        
                                     </tr>
@@ -405,15 +371,13 @@ if ($result) {
     <!-- plugins JS
 		============================================ -->
     <script src="js/plugins.js"></script>
-
-     <!--  notification JS
-        ============================================ -->
-        <script src="js/notification/bootstrap-growl.min.js"></script>
-        <script src="js/notification/notification-active.js"></script>
-
         <!-- Input Mask JS
 		============================================ -->
     <script src="js/jasny-bootstrap.min.js"></script>
+     <!-- bootstrap select JS
+		============================================ -->
+        <script src="js/bootstrap-select/bootstrap-select.js"></script>
+
     <!-- main JS
 		============================================ -->
     <script src="js/main.js"></script>
@@ -425,63 +389,36 @@ if ($result) {
 </html>
 <?php
 include "config/conexion.php";
-$bandera  = $_REQUEST["bandera"];
+$bandera  = $_REQUEST['bandera'];
 $baccion = $_REQUEST["baccion"];
-$nombre     = $_REQUEST["nombre"];
-if($bandera=="add"){
+if($bandera==1){
+$institucion      = $_REQUEST['institucion'];
+$departamento     = $_REQUEST['departamento'];
+msg($departamento);
+$correlativo     = $_REQUEST['correlativo'];
 
-$query = "SELECT nombre FROM tcartera WHERE nombre like '%".$nombre."';";
+$query = "SELECT nombre FROM tdepartamento WHERE nombre like '%".$departamento."';";
 $result = $conexion->query($query);
 if($result->num_rows == 0){   
-$consulta  = "INSERT INTO tcartera VALUES('null','" .$nombre. "')";
+    $consulta  = "UPDATE tdepartamento set id_institucion='" . $institucion . "',nombre='" . $departamento . "',correlativo='" . $correlativo . "' where id_departamento='" . $baccion . "'";
     $resultado = $conexion->query($consulta);
+    msg("antes if php");
       if($resultado){
-          msgI("Se agregaron los datos correctamente");
+          msg("Se modificaron los datos correctamente");
       } else {
-          msgE("Error al insertar los datos");
+          msg("Error al insertar los datos");
       }
 }else{
-  msgA("Esta cartera ya existe");
+  msg("Esta departamento ya existe");
 }
 }
-if ($bandera == "desactivar") {
-    $consulta = "UPDATE tcategoria SET estado = '0' WHERE id_categoria = '".$baccion."'";
-      $resultado = $conexion->query($consulta);
-      if ($resultado) {
-          msgI("Categoria desactivada con exito");
-      } else {
-          msgE("No se pudo realizar la acción");
-      }
-  }
-  if ($bandera == "activar") {
-    $consulta = "UPDATE tcategoria SET estado = '1' WHERE id_categoria = '".$baccion."'";
-      $resultado = $conexion->query($consulta);
-      if ($resultado) {
-          msgI("Categoria activada con exito");
-      } else {
-          msgE("No se pudo realizar la acción");
-      }
-  }
+
   
-
-
-function msgI($texto)
+function msg($texto)
 {
     echo "<script type='text/javascript'>";
-    echo "notify('Exito','$texto','top', 'right', 'any', 'success');";
+    echo "alert('$texto');";
+    echo "document.location.href='ingresarDepartamento.php';";
     echo "</script>";
 }
-function msgA($texto)
-{
-    echo "<script type='text/javascript'>";
-    echo "notify('Advertencia','$texto','top', 'right', 'any', 'warning');";
-    echo "</script>";
-}
-function msgE($texto)
-{
-    echo "<script type='text/javascript'>";
-    echo "notify('Error','$texto','top', 'right', 'any', 'danger');";
-    echo "</script>";
-}
-
 ?>
