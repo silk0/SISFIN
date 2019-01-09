@@ -76,6 +76,10 @@ function go(){
         document.form.submit();  
        
 } 
+function back(){
+        document.location.href="/SISFIN/listaEncargado.php";
+    }
+
 
 </script> 
 <body>
@@ -134,8 +138,8 @@ function go(){
                             <h2>Datos del Encargado.</h2>
                             
                         </div>
-                        <form id="form" name="form" method="post" action="editarEncargado.php?bandera=1">
-                        <input type="hidden" name="baccion" id="baccion" value="<?php echo $idR; ?>">
+                        <form id="form" name="form" method="post" action="../SISFIN/scriptsphp/modificarEncargado.php?bandera=1&idE=<?php echo $idR; ?>">
+                        
                         
                         <div class="row">
                             <div class="col-lg-12 col-md-12 col-sm-6 col-xs-12">
@@ -186,7 +190,9 @@ function go(){
                            
                        
                         <div class="form-example-int mg-t-15">
-                            <button class="btn btn-success notika-btn-success" onclick="go();">Modificar.</button>
+                            <button class="btn btn-success notika-btn-success" onclick="go();">Modificar</button>
+                            <button type="reset" class="btn btn-warning notika-btn-warning">Restablecer</button>
+                            <button type="button" class="btn btn-warning notika-btn-warning" onclick="back();">Cancelar</button>
                         </div>
                         </form>
                     </div>
@@ -271,33 +277,3 @@ function go(){
 </body>
 
 </html>
-<?php
-include "config/conexion.php";
-$bandera = $_REQUEST['bandera'];
-$baccion  = $_REQUEST["baccion"];
-if ($bandera==1) {
-$nombre     = $_REQUEST['nombre'];
-$apellido   = $_REQUEST['apellido'];
-$dui        = $_REQUEST['dui'];
-
-msg($nombre);
-
-    $consulta  = "UPDATE tencargado set nombre='" . $nombre . "',apellido='" . $apellido . "',dui='" . $dui . "' where id_encargado='" . $baccion . "'";
-    $resultado = $conexion->query($consulta);
-    msg("antes if php");
-      if ($resultado) {
-          
-          msg("Se modificacon los datos correctamente");
-      } else {
-          msg("Error al insertar los datos");
-      }
-    }
-
-function msg($texto)
-{
-    echo "<script type='text/javascript'>";
-    echo "alert('$texto');";
-    echo "document.location.href='mostrarEncargado.php';";
-    echo "</script>";
-}
-?>

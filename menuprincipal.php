@@ -46,11 +46,11 @@
                                 </li>
                                 <li><a href="inbox.html">Lista de Activos</a>
                                 </li>
-                                <li><a href="compose-email.html">Ecargados</a>
+                                <li><a href="listaEncargado.php">Encargados</a>
                                 </li>
                                 <li><a href="listaInstituciones.php">Instituciones</a>
                                 </li>
-                                <li><a href="compose-email.html">Depratamentos</a>
+                                <li><a href="listaDepartamentos.php">Departamentos</a>
                                 </li>
                                 <li><a href="compose-email.html">Tipos de Activos</a>
                                 </li>

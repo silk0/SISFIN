@@ -19,7 +19,7 @@ if ($result) {
 <head>
     <meta charset="utf-8">
     <meta http-equiv="x-ua-compatible" content="ie=edge">
-    <title>Ingreso de Departamento | SISFIN</title>
+    <title>Editar de Departamento | SISFIN</title>
     <meta name="description" content="">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <!-- bootstrap select CSS
@@ -77,28 +77,18 @@ if ($result) {
 <script  language=JavaScript> 
 function go(){
     //validacion respectiva me da hueva
+    
         document.form.submit();  
 } 
+
+function back(){
+        document.location.href="/SISFIN/listaDepartamentos.php";
+    }
 function modificar(id){
        
        document.location.href="editarDepartamento.php?id="+id;
    }
-function enviar(id){
-    
-    $.ajax({
-        data:{"id":id},
-        url: 'scriptsphp/recuperarDepartamento.php',
-        type: 'post',
-        beforeSend: function(){
-            alert("Por favor espere...");
-        },
-        success: function(response){
-            alert(response);
-            document.getElementById("nombre").value=response;
-            document.getElementById("iddepartamento").value=id;
-        }
-    });
-} 
+
 </script> 
 
 <body>
@@ -158,17 +148,18 @@ function enviar(id){
                             
                         </div>
                         
-                        <form name="form" method="post" action="editarDepartamento.php?bandera=1">
-                        <input type="hidden" name="baccion" id="baccion" value="<?php echo $idR; ?>">
+                        <form name="form" method="post" action="../SISFIN/scriptsphp//modificarDpto.php?bandera=1&idD=<?php echo $idR; ?>">
                         
+                        <!--  -->
 
                         <div class="row">
+                 
                             <div class="col-lg-6 col-md-6 col-sm-6 col-xs-12">
                                 <div class="form-example-int">
                                     <div class="form-group">
                                         <label>Departamento:</label>
                                         <div class="nk-int-st">
-                                        <input type="text" class="form-control input-sm" placeholder="Ingrese  nombre de departamento." id="departamento" name="departamento" value="<?php echo $departamentoR; ?>">
+                                        <input type="text" id="departamento" name="departamento" class="form-control input-sm" placeholder="Ingrese  nombre de departamento." value="<?php echo $departamentoR; ?>">
                                         </div>
                                     </div>
                                 </div>
@@ -178,6 +169,7 @@ function enviar(id){
                             </div>
                             </div>
                             <div class="col-lg-6 col-md-6 col-sm-6 col-xs-12">
+                            
                             <label>Institución</label>
                                 <div class="bootstrap-select fm-cmp-mg">
                                     <select class="selectpicker" data-live-search="true" name="institucion" id="institucion">
@@ -205,8 +197,9 @@ function enviar(id){
                                 <div class="form-example-int">
                                     <div class="form-group">
                                         <label>Correlativo:</label>
+                                      
                                         <div class="nk-int-st">
-                                        <input type="text" class="form-control input-sm" placeholder="Ingrese  un correlativo para departamento." id="correlativo" name="correlativo" value="<?php echo $correlativoR; ?>">
+                                        <input type="text" id="correlativo" name="correlativo" class="form-control input-sm" placeholder="Ingrese  un correlativo para departamento." value="<?php echo $correlativoR; ?>" readonly>
                                         </div>
                                     </div>
                                 </div>
@@ -216,97 +209,23 @@ function enviar(id){
                             </div>
                             </div>
                            <div class="form-example-int mg-t-15">
-                            <button class="btn btn-success notika-btn-success" style="margin-left: 500px;" onclick="go();" >Modificar.</button>
-                            <button type="button" data-toggle="modal" data-target="#myModalone" class="btn btn-success notika-btn-success">Ver Departamentos</button>
+                            <button class="btn btn-success notika-btn-success" style="margin-left: 500px;" onclick="go();" >Modificar</button>
+                            <button type="reset" class="btn btn-warning notika-btn-warning">Restablecer</button>
+                            <button type="button" class="btn btn-warning notika-btn-warning" onclick="back();">Cancelar</button>
                         </div>
                         </form>
                     </div>
                 </div>
             </div>
-            <!-- MODAL PARA CATEGORIAS -->
-            <div class="modal animated shake" id="myModalone" role="dialog">
-                                    <div class="modal-dialog modal-large">
-                                        <div class="modal-content">
-                                            <div class="modal-header">
-                                                <button type="button" class="close" data-dismiss="modal">&times;</button>
-                                            </div>
-                                            <div class="modal-body">
-                                               <!-- Data Table area Start-->
-    <div class="data-table-area">
-        <div class="container">
-            <div class="row">
-                <div class="col-lg-7 col-md-7 col-sm-7 col-xs-7">
-                    <div class="data-table-list">
-                        <div class="basic-tb-hd">
-                            <h2>Seleccione una de las categorias de la siguiente  tabla.</h2>
-                        </div>
-                        <div class="table-responsive">
-                            <table id="data-table-basic" class="table table-striped">
-                                <thead>
-                                    <tr>
-                                        <th>Correlativo</th>
-                                        <th>Departamento</th>
-                                        <th>Institución</th>
-                                        <th>Modificar</th>
-                                        
-                                        
-                                    </tr>
-                                </thead>
-                                <tbody>
-                                        <?php
-include "config/conexion.php";
-$result = $conexion->query("SELECT * from tdepartamento ORDER BY id_departamento");
-if ($result) {
-    while ($fila = $result->fetch_object()) {
-        echo "<tr>";
-        echo "<td>" . $fila->correlativo . "</td>";
-        echo "<td>" . $fila->nombre . "</td>";
-        echo "<td>" . $fila->id_institucion . "</td>";
-        echo "<td>
-        <div class='button-icon-btn'>
-        <button class='btn btn-lightgreen lightgreen-icon-notika btn-reco-mg btn-button-mg' data-dismiss='modal' onclick=\"modificar('$fila->id_departamento')\";><i class='notika-icon notika-menus'></i></button>
-         </div>
-        </td>";
-        echo "</tr>";
-
-    }
-}
-?>
-                                
-                                   
-                                    
-                                </tbody>
-                                <tfoot>
-                                    <tr>
-                                       
-                                        <th>Correlativo</th>
-                                        <th>Departamento</th>
-                                        <th>Institución</th>
-                                        <th>Modificar</th>
-                                        
-                                       
-                                    </tr>
-                                </tfoot>
-                            </table>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </div>
-    <!-- Data Table area End-->
-</div>
-                                            <div class="modal-footer">
-                                                <button type="button" class="btn btn-default" data-dismiss="modal">Listo</button>
-                                               
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-            <!-- FIN PARA MODAL DE FIADOR -->
+          
             
             
     </div>
+    </div>
+          
+            
+            
+          </div>
     <!-- Form Examples area End-->
     <!-- Start Footer area-->
     <?php include "footer.php";?>
@@ -387,38 +306,3 @@ if ($result) {
 </body>
 
 </html>
-<?php
-include "config/conexion.php";
-$bandera  = $_REQUEST['bandera'];
-$baccion = $_REQUEST["baccion"];
-if($bandera==1){
-$institucion      = $_REQUEST['institucion'];
-$departamento     = $_REQUEST['departamento'];
-msg($departamento);
-$correlativo     = $_REQUEST['correlativo'];
-
-$query = "SELECT nombre FROM tdepartamento WHERE nombre like '%".$departamento."';";
-$result = $conexion->query($query);
-if($result->num_rows == 0){   
-    $consulta  = "UPDATE tdepartamento set id_institucion='" . $institucion . "',nombre='" . $departamento . "',correlativo='" . $correlativo . "' where id_departamento='" . $baccion . "'";
-    $resultado = $conexion->query($consulta);
-    msg("antes if php");
-      if($resultado){
-          msg("Se modificaron los datos correctamente");
-      } else {
-          msg("Error al insertar los datos");
-      }
-}else{
-  msg("Esta departamento ya existe");
-}
-}
-
-  
-function msg($texto)
-{
-    echo "<script type='text/javascript'>";
-    echo "alert('$texto');";
-    echo "document.location.href='ingresarDepartamento.php';";
-    echo "</script>";
-}
-?>

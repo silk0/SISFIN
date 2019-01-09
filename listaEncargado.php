@@ -7,6 +7,9 @@
     <title>Lista de Encargados| SISFIN</title>
     <meta name="description" content="">
     <meta name="viewport" content="width=device-width, initial-scale=1">
+     <!-- notification CSS
+		============================================ -->
+        <link rel="stylesheet" href="css/notification/notification.css">
     <!-- favicon
 		============================================ -->
     <link rel="shortcut icon" type="image/x-icon" href="img/favicon.ico">
@@ -59,36 +62,63 @@
 		============================================ -->
     <script src="js/vendor/modernizr-2.8.3.min.js"></script>
     <script>
+        function go(){
+    //validacion respectiva me da hueva
+    document.location.href="ingresarEncargado.php"; 
+} 
+function modify(id){
+       document.location.href="editarInstitucion.php?id="+id;
+   }
+
+</script> 
+<SCRIPT  language=JavaScript> 
+function notify(titulo,texto,from, align, icon, type, animIn, animOut){
+		$.growl({
+			icon: icon,
+			title: titulo+" ",
+			message: texto,
+			url: ''
+		},{
+				element: 'body',
+				type: type,
+				allow_dismiss: true,
+				placement: {
+						from: from,
+						align: align
+				},
+				offset: {
+					x: 20,
+					y: 85
+				},
+				spacing: 10,
+				z_index: 1031,
+				delay: 2500,
+				timer: 1000,
+				url_target: '_blank',
+				mouse_over: false,
+				animate: {
+						enter: animIn,
+						exit: animOut
+				},
+				icon_type: 'class',
+				template: '<div data-growl="container" class="alert" role="alert">' +
+								'<button type="button" class="close" data-growl="dismiss">' +
+									'<span aria-hidden="true">&times;</span>' +
+									'<span class="sr-only">Close</span>' +
+								'</button>' +
+								'<span data-growl="icon"></span>' +
+								'<span data-growl="title"></span>' +
+								'<span data-growl="message"></span>' +
+								'<a href="#" data-growl="url"></a>' +
+							'</div>'
+		});
+	}
+ 
     function modify(id){
        
         document.location.href="editarEncargado.php?id="+id;
     }
-    function edit(id,nom,ape,dire,dui,nit,corre,profe,sal,tel,cel)
-        {
-         // document.getElementById("baccion2").value=id;
-          document.getElementById("nombrem").value=nom;
-          document.getElementById("apellidom").value=ape;
-          document.getElementById("direccionm").value=dire;
-          document.getElementById("duim").value=dui;
-          document.getElementById("nitm").value=nit;
-          document.getElementById("correom").value=corre;
-          document.getElementById("profem").value=profe;
-          document.getElementById("salm").value=sal;
-          document.getElementById("telm").value=tel;
-          document.getElementById("celm").value=cel;
-         //$("#baccion2").val(id);
-          
-          
-         //$("#nomb").val(nom);
-        //$("#marc").val(marca);
-          //$("#num").val(num);
-          //$("#donad").val(don);
-          //$("#descr").val(des);
-          $("#ModalInfo").modal();
-        //Ya manda todos los datos correcatamente
-          
-          
-        }
+  
     </script>
 </head>
 
@@ -128,7 +158,9 @@
 							<div class="col-lg-6 col-md-6 col-sm-6 col-xs-3">
 								<div class="breadcomb-report">
 									<button data-toggle="tooltip" data-placement="left" title="Download Report" class="btn"><i class="notika-icon notika-sent"></i></button>
-								</div>
+                                    <button class="btn btn-primary notika-btn-primary" onclick="go();">+ Agregar Nuevo</button>
+                                
+                                </div>
 							</div>
 						</div>
 					</div>
@@ -398,6 +430,39 @@ if ($result) {
 	<!-- tawk chat JS
 		============================================ -->
     <script src="js/tawk-chat.js"></script>
+       <!--  notification JS
+		============================================ -->
+        <script src="js/notification/bootstrap-growl.min.js"></script>
+    <script src="js/notification/notification-active.js"></script>
 </body>
 
 </html>
+<?php
+include "config/conexion.php";
+$accion = $_REQUEST['bandera'];
+if($accion==1){
+      msgI("Se modificaron los datos con exito");
+  } else if($accion==2) {
+      msgE("cocurrio un error en el registro de los archivos");
+  }else if($accion==3) {
+    msgA("Los datos que se ingresaron ya existen");
+}   
+function msgI($texto)
+{
+    echo "<script type='text/javascript'>";
+    echo "notify('Exito','$texto','top', 'right', 'any', 'success');";
+    echo "</script>";
+}
+function msgA($texto)
+{
+    echo "<script type='text/javascript'>";
+    echo "notify('Advertencia','$texto','top', 'right', 'any', 'warning');";
+    echo "</script>";
+}
+function msgE($texto)
+{
+    echo "<script type='text/javascript'>";
+    echo "notify('Error','$texto','top', 'right', 'any', 'danger');";
+    echo "</script>";
+}
+?>
