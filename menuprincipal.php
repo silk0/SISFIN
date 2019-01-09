@@ -42,9 +42,9 @@
                         
                         <div id="mailbox" class="tab-pane notika-tab-menu-bg animated flipInX">
                             <ul class="notika-main-menu-dropdown">
-                                <li><a href="inbox.html">Registrar</a>
+                                <li><a href="registrarAF.php">Registrar</a>
                                 </li>
-                                <li><a href="inbox.html">Lista de Activos</a>
+                                <li><a href="listaAF.php">Lista de Activos</a>
                                 </li>
                                 <li><a href="listaEncargado.php">Encargados</a>
                                 </li>
@@ -52,9 +52,9 @@
                                 </li>
                                 <li><a href="listaDepartamentos.php">Departamentos</a>
                                 </li>
-                                <li><a href="compose-email.html">Tipos de Activos</a>
+                                <li><a href="listTipos.php">Tipos de Activos</a>
                                 </li>
-                                <li><a href="compose-email.html">Clasificion de Activos</a>
+                                <li><a href="listaClasificacion.php">Clasificion de Activos</a>
                                 </li>
                                 <li><a href="view-email.html">Estado</a>
                                 </li>
