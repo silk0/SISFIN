@@ -430,7 +430,7 @@ if($accion==1){
       }     
 
 }
-function msgK($idR=null,$cantidad=null,$precio=null)
+function msgk($idR,$cantidad,$precio)
 {
      $subtotal=$cantidad*$precio;
     $fecha2=strftime( "%Y-%m-%d", time());
@@ -445,6 +445,6 @@ function msgI($texto){
     echo "notify('Exito','$texto','top', 'right', 'any', 'success');";
     
     echo "</script>";
-    msgK();
+    msgk();
 }
 ?>
