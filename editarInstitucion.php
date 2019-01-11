@@ -148,6 +148,7 @@ function back(){
                                 <div class="form-example-int">
                                     <div class="form-group">
                                         <label>Categoria:</label>
+                                      
                                         <div class="nk-int-st">
                                         <input type="text" id="inst" name="inst" class="form-control input-sm" placeholder="Ingrese Nombre de la Institucion" value="<?php echo $nombreR;?>">
                                         </div>

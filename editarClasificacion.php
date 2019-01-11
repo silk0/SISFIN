@@ -79,6 +79,10 @@ function go(){
     //validacion respectiva me da hueva
         document.form.submit();  
 } 
+function back(){
+    //validacion respectiva me da hueva
+    document.location.href="listaClasificacion.php"; 
+}
 function confirmar(id,op)
         {
           if (op==1) {
@@ -184,8 +188,8 @@ function enviar(id){
                             <h2>Datos de Clasificación</h2>
                             
                         </div>
-                        <form name="form" method="post" action="editarClasificacion.php?bandera=1">
-                        <input type="hidden" name="baccion" id="baccion" value="<?php echo $idR; ?>">
+                        <form name="form" method="post" action="../SISFIN/scriptsphp/modificarClasificacion.php?bandera=1&idC=<?php echo $idR; ?>">
+                       
                         
 
                         <div class="row">
@@ -233,93 +237,13 @@ function enviar(id){
                             </div>
                            <div class="form-example-int mg-t-15">
                             <button class="btn btn-success notika-btn-success" style="margin-left: 500px;" onclick="go();" >Modificar.</button>
-                            <button type="button" data-toggle="modal" data-target="#myModalone" class="btn btn-success notika-btn-success">Ver Clasificaciones</button>
-                        </div>
+                            <button type="reset" class="btn btn-warning notika-btn-warning">Restablecer</button>
+                            <button type="button" class="btn btn-warning notika-btn-warning" onclick="back();">Cancelar</button></div>
                         </form>
                     </div>
                 </div>
             </div>
-            <!-- MODAL PARA CATEGORIAS -->
-            <div class="modal animated shake" id="myModalone" role="dialog">
-                                    <div class="modal-dialog modal-large">
-                                        <div class="modal-content">
-                                            <div class="modal-header">
-                                                <button type="button" class="close" data-dismiss="modal">&times;</button>
-                                            </div>
-                                            <div class="modal-body">
-                                               <!-- Data Table area Start-->
-    <div class="data-table-area">
-        <div class="container">
-            <div class="row">
-                <div class="col-lg-7 col-md-7 col-sm-7 col-xs-7">
-                    <div class="data-table-list">
-                        <div class="basic-tb-hd">
-                            <h2>Seleccione una de las clasificaciones de la siguiente  tabla.</h2>
-                        </div>
-                        <div class="table-responsive">
-                            <table id="data-table-basic" class="table table-striped">
-                                <thead>
-                                    <tr>
-                                        <th>Correlativo</th>
-                                        <th>Clasificación</th>
-                                        <th>Tiempo Depreciación</th>
-                                        <th>Modificar</th>
-                                        
-                                        
-                                    </tr>
-                                </thead>
-                                <tbody>
-                                        <?php
-include "config/conexion.php";
-$result = $conexion->query("SELECT * from tclasificacion ORDER BY id_clasificaion");
-if ($result) {
-    while ($fila = $result->fetch_object()) {
-        echo "<tr>";
-        echo "<td>" . $fila->correlativo . "</td>";
-        echo "<td>" . $fila->nombre . "</td>";
-        echo "<td>" . $fila->tiempo_depreciacion . "</td>";
-        echo "<td>
-        <div class='button-icon-btn'>
-        <button class='btn btn-lightgreen lightgreen-icon-notika btn-reco-mg btn-button-mg' data-dismiss='modal' onclick=\"modificar('$fila->id_clasificaion')\";><i class='notika-icon notika-menus'></i></button>
-         </div>
-        </td>";
-        echo "</tr>";
-
-    }
-}
-?>
-                                
-                                   
-                                    
-                                </tbody>
-                                <tfoot>
-                                    <tr>
-                                       
-                                        <th>Correlativo</th>
-                                        <th>Clasificación</th>
-                                        <th>Tiempo Depreciación</th>
-                                        <th>Modificar</th>
-                                        
-                                       
-                                    </tr>
-                                </tfoot>
-                            </table>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </div>
-    <!-- Data Table area End-->
-</div>
-                                            <div class="modal-footer">
-                                                <button type="button" class="btn btn-default" data-dismiss="modal">Listo</button>
-                                               
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-            <!-- FIN PARA MODAL DE FIADOR -->
+            
             
             
     </div>
@@ -404,25 +328,6 @@ if ($result) {
 
 </html>
 <?php
-include "config/conexion.php";
-$bandera = $_REQUEST['bandera'];
-$baccion  = $_REQUEST["baccion"];
-if ($bandera==1) {
-$clasificacion  = $_REQUEST['clasificacion'];
-$correlativo    = $_REQUEST['correlativo'];
-$depreciacion   = $_REQUEST['depreciacion'];
-msg($clasificacion);
-
-    $consulta  = "UPDATE tclasificacion set nombre='" . $clasificacion . "',correlativo='" . $correlativo . "',tiempo_depreciacion='" . $depreciacion . "' where id_clasificaion='" . $baccion . "'";
-    $resultado = $conexion->query($consulta);
-    msg("antes if php");
-      if ($resultado) {
-          
-          msg("Se modificacon los datos correctamente");
-      } else {
-          msg("Error al insertar los datos");
-      }
-    }
 
 function msg($texto)
 {

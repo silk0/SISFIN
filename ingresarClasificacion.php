@@ -7,6 +7,9 @@
     <title>Ingreso de Clasificación | SISFIN</title>
     <meta name="description" content="">
     <meta name="viewport" content="width=device-width, initial-scale=1">
+    <!-- notification CSS
+        ============================================ -->
+        <link rel="stylesheet" href="css/notification/notification.css">
     <!-- bootstrap select CSS
 		============================================ -->
         <link rel="stylesheet" href="css/bootstrap-select/bootstrap-select.css">
@@ -73,7 +76,47 @@ function modificar(id){
 function back(){
     document.location.href="listaclasificacion.php"; 
 }
-
+function notify(titulo,texto,from, align, icon, type, animIn, animOut){
+		$.growl({
+			icon: icon,
+			title: titulo+" ",
+			message: texto,
+			url: ''
+		},{
+				element: 'body',
+				type: type,
+				allow_dismiss: true,
+				placement: {
+						from: from,
+						align: align
+				},
+				offset: {
+					x: 20,
+					y: 85
+				},
+				spacing: 10,
+				z_index: 1031,
+				delay: 2500,
+				timer: 1000,
+				url_target: '_blank',
+				mouse_over: false,
+				animate: {
+						enter: animIn,
+						exit: animOut
+				},
+				icon_type: 'class',
+				template: '<div data-growl="container" class="alert" role="alert">' +
+								'<button type="button" class="close" data-growl="dismiss">' +
+									'<span aria-hidden="true">&times;</span>' +
+									'<span class="sr-only">Close</span>' +
+								'</button>' +
+								'<span data-growl="icon"></span>' +
+								'<span data-growl="title"></span>' +
+								'<span data-growl="message"></span>' +
+								'<a href="#" data-growl="url"></a>' +
+							'</div>'
+		});
+	}
 </script> 
 
 <body>
@@ -133,8 +176,8 @@ function back(){
                             
                         </div>
                         <form id="form"name="form" method="post" action="">
-                        <input type="hidden" name="bandera" id="bandera">
-                        <input type="hidden" name="baccion" id="baccion">
+                        <input type="hidden" name="bandera" id="bandera" value="1">
+                 
                         
 
                         <div class="row">
@@ -269,39 +312,52 @@ function back(){
 	<!-- tawk chat JS
 		============================================ -->
     <!-- <script src="js/tawk-chat.js"></script> -->
+     <!--  notification JS
+		============================================ -->
+        <script src="js/notification/bootstrap-growl.min.js"></script>
+    <script src="js/notification/notification-active.js"></script>
 </body>
 
 </html>
 <?php
 include "config/conexion.php";
 $bandera  = $_REQUEST["bandera"];
-$baccion = $_REQUEST["baccion"];
-$clasificacion     = $_REQUEST["clasificacion"];
-$depreciacion      = $_REQUEST["depreciacion"];
-$correlativo       = $_REQUEST["correlativo"];
-if($bandera=="add"){
 
+if($bandera==1){
+    $clasificacion     = $_REQUEST["clasificacion"];
+    $depreciacion      = $_REQUEST["depreciacion"];
+    $correlativo       = $_REQUEST["correlativo"];
 $query = "SELECT nombre FROM tclasificacion WHERE nombre like '%".$clasificacion."';";
 $result = $conexion->query($query);
 if($result->num_rows == 0){   
 $consulta  = "INSERT INTO tclasificacion VALUES('null','" .$clasificacion. "','" .$correlativo. "','" .$depreciacion. "')";
     $resultado = $conexion->query($consulta);
       if($resultado){
-          msg("Se agregaron los datos correctamente");
+          msgI("Se agregaron los datos correctamente");
       } else {
-          msg("Error al insertar los datos");
+          msgE("Error al insertar los datos");
       }
 }else{
   msg("Esta clasificacion ya existe");
 }
 }
 
-  
-function msg($texto)
+function msgI($texto)
 {
     echo "<script type='text/javascript'>";
-    echo "alert('$texto');";
-    echo "document.location.href='ingresarClasificacion.php';";
+    echo "notify('Exito','$texto','top', 'right', 'any', 'success');";
+    echo "</script>";
+}
+function msgA($texto)
+{
+    echo "<script type='text/javascript'>";
+    echo "notify('Advertencia','$texto','top', 'right', 'any', 'warning');";
+    echo "</script>";
+}
+function msgE($texto)
+{
+    echo "<script type='text/javascript'>";
+    echo "notify('Error','$texto','top', 'right', 'any', 'danger');";
     echo "</script>";
 }
 ?>
