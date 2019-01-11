@@ -80,7 +80,7 @@ function go(){
       document.form.submit();  
    }   
 } 
-}
+
 function enviar(){
     
     $.ajax({
