@@ -42,7 +42,7 @@
                         
                         <div id="mailbox" class="tab-pane notika-tab-menu-bg animated flipInX">
                             <ul class="notika-main-menu-dropdown">
-                                <li><a href="registrarAF.php">Registrar</a>
+                                <li><a href="ingresarAF.php">Registrar</a>
                                 </li>
                                 <li><a href="listaAF.php">Lista de Activos</a>
                                 </li>

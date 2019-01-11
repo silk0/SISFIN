@@ -1,25 +1,15 @@
-<?php
-include "config/conexion.php";
-$resultc = $conexion->query("select id_departamento as id from tdepartamento");
-                     if ($resultc) {
-
-                       while ($filac = $resultc->fetch_object()) {
-                         $temp=$filac->id;
-                        
-                          }
-                     }   
-                     $codigo=sprintf("2%04s",$temp+1);           
-
-?>
 <!doctype html>
 <html class="no-js" lang="">
 
 <head>
     <meta charset="utf-8">
     <meta http-equiv="x-ua-compatible" content="ie=edge">
-    <title>Ingreso de Departamento | SISFIN</title>
+    <title>Ingreso de Activo Fijo| SISFIN</title>
     <meta name="description" content="">
     <meta name="viewport" content="width=device-width, initial-scale=1">
+     <!-- datapicker CSS
+		============================================ -->
+        <link rel="stylesheet" href="css/datapicker/datepicker3.css">
     <!-- bootstrap select CSS
 		============================================ -->
         <link rel="stylesheet" href="css/bootstrap-select/bootstrap-select.css">
@@ -79,7 +69,7 @@ function go(){
     document.form.submit(); 
 }
 function tabla(){
-    document.location.href="listaDepartamentos.php"; 
+    document.location.href="listaAF.php"; 
 }
  
 
@@ -117,8 +107,8 @@ function tabla(){
 										<i class="notika-icon notika-form"></i>
 									</div>
 									<div class="breadcomb-ctn">
-										<h2>Registro de Departamento.</h2>
-										<p>Formulario de departamento <span class="bread-ntd">.</span></p>
+										<h2>Registro de Activo Fijo.</h2>
+										<p>Formulario de Activo Fijo <span class="bread-ntd">.</span></p>
 									</div>
 								</div>
 							</div>
@@ -141,7 +131,7 @@ function tabla(){
                 <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
                     <div class="form-example-wrap">
                         <div class="cmp-tb-hd">
-                            <h2>Datos del Departamento</h2>
+                            <h2>Datos del Activo Fijo</h2>
                             
                         </div>
                         <form id="form"name="form" method="post" action="">
@@ -149,22 +139,8 @@ function tabla(){
                        
 
                         <div class="row">
-                            <div class="col-lg-6 col-md-6 col-sm-6 col-xs-12">
-                                <div class="form-example-int">
-                                    <div class="form-group">
-                                        <label>Departamento:</label>
-                                        <div class="nk-int-st">
-                                        <input type="text" class="form-control input-sm" placeholder="Ingrese  nombre de departamento." id="departamento" name="departamento">
-                                        </div>
-                                    </div>
-                                </div>
-                                <div class="col-lg-1 col-md-1 col-sm-1 col-xs-12">
-                               <div class="">
-                            </div>
-                            </div>
-                            </div>
-                            <div class="col-lg-6 col-md-6 col-sm-6 col-xs-12">
-                            <label>Institución</label>
+                        <div class="col-lg-4 col-md-4 col-sm-4 col-xs-12">
+                            <label>Tipo Activo (falta)</label>
                                 <div class="bootstrap-select fm-cmp-mg">
                                     <select class="selectpicker" data-live-search="true" name="institucion" id="institucion">
                                     <option value="Seleccione">Seleccione</option>
@@ -180,12 +156,152 @@ function tabla(){
                                     </select>
                                 </div>
                                 </div>
-                                <div class="col-lg-12 col-md-12 col-sm-6 col-xs-12">
+                            <div class="col-lg-4 col-md-4 col-sm-4 col-xs-12">
+                            <label>Departamento</label>
+                                <div class="bootstrap-select fm-cmp-mg">
+                                    <select class="selectpicker" data-live-search="true" name="institucion" id="institucion">
+                                    <option value="Seleccione">Seleccione</option>
+                                    <?php
+                                     include 'config/conexion.php';
+                                     $result = $conexion->query("select id_institucion as id,nombre FROM tinstitucion");
+                                     if ($result) {
+                                         while ($fila = $result->fetch_object()) {
+                                             echo "<option value='".$fila->id."'>".$fila->nombre."</option>";
+                                            }
+                                        }
+                                        ?>
+                                    </select>
+                                </div>
+                                </div>
+                                <div class="col-lg-4 col-md-4 col-sm-4 col-xs-12">
+                            <label>Proveedor</label>
+                                <div class="bootstrap-select fm-cmp-mg">
+                                    <select class="selectpicker" data-live-search="true" name="institucion" id="institucion">
+                                    <option value="Seleccione">Seleccione</option>
+                                    <?php
+                                     include 'config/conexion.php';
+                                     $result = $conexion->query("select id_institucion as id,nombre FROM tinstitucion");
+                                     if ($result) {
+                                         while ($fila = $result->fetch_object()) {
+                                             echo "<option value='".$fila->id."'>".$fila->nombre."</option>";
+                                            }
+                                        }
+                                        ?>
+                                    </select>
+                                </div>
+                                </div>
+                                <div class="col-lg-4 col-md-4 col-sm-4 col-xs-12 mg-t-20">
+                            <label>Usuario</label>
+                                <div class="bootstrap-select fm-cmp-mg">
+                                    <select class="selectpicker" data-live-search="true" name="institucion" id="institucion">
+                                    <option value="Seleccione">Seleccione</option>
+                                    <?php
+                                     include 'config/conexion.php';
+                                     $result = $conexion->query("select id_institucion as id,nombre FROM tinstitucion");
+                                     if ($result) {
+                                         while ($fila = $result->fetch_object()) {
+                                             echo "<option value='".$fila->id."'>".$fila->nombre."</option>";
+                                            }
+                                        }
+                                        ?>
+                                    </select>
+                                </div>
+                                </div>
+                                <div class="col-lg-4 col-md-4 col-sm-4 col-xs-12 mg-t-20">
+                            <label>Encargado</label>
+                                <div class="bootstrap-select fm-cmp-mg">
+                                    <select class="selectpicker" data-live-search="true" name="institucion" id="institucion">
+                                    <option value="Seleccione">Seleccione</option>
+                                    <?php
+                                     include 'config/conexion.php';
+                                     $result = $conexion->query("select id_institucion as id,nombre FROM tinstitucion");
+                                     if ($result) {
+                                         while ($fila = $result->fetch_object()) {
+                                             echo "<option value='".$fila->id."'>".$fila->nombre."</option>";
+                                            }
+                                        }
+                                        ?>
+                                    </select>
+                                </div>
+                                </div>
+                                <div class="col-lg-4 col-md-4 col-sm-4 col-xs-12 mg-t-20">
+                            <label>Estado</label>
+                                <div class="bootstrap-select fm-cmp-mg">
+                                    <select class="selectpicker" data-live-search="true" name="institucion" id="institucion">
+                                    <option value="Seleccione">Seleccione</option>
+                                    <?php
+                                     include 'config/conexion.php';
+                                     $result = $conexion->query("select id_institucion as id,nombre FROM tinstitucion");
+                                     if ($result) {
+                                         while ($fila = $result->fetch_object()) {
+                                             echo "<option value='".$fila->id."'>".$fila->nombre."</option>";
+                                            }
+                                        }
+                                        ?>
+                                    </select>
+                                </div>
+                                </div>
+                                <div class="col-lg-4 col-md-4 col-sm-4 col-xs-12 mg-t-20">
+                                <div class="form-example-int">
+                                    <div class="form-group">
+                                        <label>Estado:</label>
+                                        <div class="nk-int-st">
+                                        <input type="text" class="form-control input-sm" placeholder="Ingrese  un correlativo para departamento." id="correlativo" name="correlativo">
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="col-lg-1 col-md-1 col-sm-1 col-xs-12">
+                               <div class="">
+                            </div>
+                            </div>
+                            </div>
+                               
+                            <div class="col-lg-4 col-md-4 col-sm-4 col-xs-12 mg-t-15">
+                                <div class="form-group nk-datapk-ctm" id="data_2">
+                                    <label>Fecha de Adquicición:</label>
+                                    <div class="input-group date nk-int-st">
+                                        <span class="input-group-addon"></span>
+                                        <input type="text" class="form-control" data-mask="99/99/9999" value="today">
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-lg-3 col-md-3 col-sm-3 col-xs-12 mg-t-20">
                                 <div class="form-example-int">
                                     <div class="form-group">
                                         <label>Correlativo:</label>
                                         <div class="nk-int-st">
-                                        <input type="text" class="form-control input-sm" placeholder="Ingrese  un correlativo para departamento." id="correlativo" name="correlativo" value="<?php echo $codigo;?>">
+                                        <input type="text" class="form-control input-sm" placeholder="Correlativo" id="correlativo" name="correlativo" readonly>
+                                        
+                                    </div>
+                                        
+                                    </div>
+                                    
+                                </div>
+                               
+                            </div>
+                            <div class="col-lg-1 col-md-1 col-sm-1 col-xs-12 mg-t-20">
+									<button type="button" data-toggle="modal" title="Generar Correlativo" data-target="#myModaloneCat" class="btn btn-success success-icon-notika btn-reco-mg btn-button-mg waves-effect"><i class="notika-icon notika-house"></i></button>
+                                    </div>
+                            <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12 mg-t-20">
+                                <div class="form-example-int">
+                                    <div class="form-group">
+                                        <label>Descripción:</label>
+                                        <div class="nk-int-st">
+                                        <input type="text" class="form-control input-sm" placeholder="Ingrese  un correlativo para departamento." id="correlativo" name="correlativo">
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="col-lg-1 col-md-1 col-sm-1 col-xs-12">
+                               <div class="">
+                            </div>
+                            </div>
+                            </div>
+                            <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12 mg-t-20">
+                                <div class="form-example-int">
+                                    <div class="form-group">
+                                        <label>Observaciones:</label>
+                                        <div class="nk-int-st">
+                                        <input type="text" class="form-control input-sm" placeholder="Ingrese  un correlativo para departamento." id="correlativo" name="correlativo">
                                         </div>
                                     </div>
                                 </div>
@@ -282,6 +398,10 @@ function tabla(){
 	<!-- tawk chat JS
 		============================================ -->
     <!-- <script src="js/tawk-chat.js"></script> -->
+       <!-- datapicker JS
+		============================================ -->
+        <script src="js/datapicker/bootstrap-datepicker.js"></script>
+    <script src="js/datapicker/datepicker-active.js"></script>
 </body>
 
 </html>

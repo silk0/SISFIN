@@ -1,6 +1,6 @@
 <?php
 include "config/conexion.php";
-$resultc = $conexion->query("select id_departamento as id from tdepartamento");
+$resultc = $conexion->query("select id_institucion as id from tinstitucion");
                      if ($resultc) {
 
                        while ($filac = $resultc->fetch_object()) {
@@ -8,7 +8,7 @@ $resultc = $conexion->query("select id_departamento as id from tdepartamento");
                         
                           }
                      }   
-                     $codigo=sprintf("2%04s",$temp+1);           
+                     $codigo=sprintf("1%04s",$temp+1);           
 
 ?>
 <!doctype html>
@@ -17,7 +17,7 @@ $resultc = $conexion->query("select id_departamento as id from tdepartamento");
 <head>
     <meta charset="utf-8">
     <meta http-equiv="x-ua-compatible" content="ie=edge">
-    <title>Ingreso de Departamento | SISFIN</title>
+    <title>Ingreso de Tipo Activo | SISFIN</title>
     <meta name="description" content="">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <!-- bootstrap select CSS
@@ -117,8 +117,8 @@ function tabla(){
 										<i class="notika-icon notika-form"></i>
 									</div>
 									<div class="breadcomb-ctn">
-										<h2>Registro de Departamento.</h2>
-										<p>Formulario de departamento <span class="bread-ntd">.</span></p>
+										<h2>Registro de Tipo Activo.</h2>
+										<p>Formulario de Tipo Activo <span class="bread-ntd">.</span></p>
 									</div>
 								</div>
 							</div>
@@ -152,7 +152,7 @@ function tabla(){
                             <div class="col-lg-6 col-md-6 col-sm-6 col-xs-12">
                                 <div class="form-example-int">
                                     <div class="form-group">
-                                        <label>Departamento:</label>
+                                        <label>Tipo Activo:</label>
                                         <div class="nk-int-st">
                                         <input type="text" class="form-control input-sm" placeholder="Ingrese  nombre de departamento." id="departamento" name="departamento">
                                         </div>
@@ -164,7 +164,7 @@ function tabla(){
                             </div>
                             </div>
                             <div class="col-lg-6 col-md-6 col-sm-6 col-xs-12">
-                            <label>Institución</label>
+                            <label>Calsificacion:</label>
                                 <div class="bootstrap-select fm-cmp-mg">
                                     <select class="selectpicker" data-live-search="true" name="institucion" id="institucion">
                                     <option value="Seleccione">Seleccione</option>
@@ -185,7 +185,7 @@ function tabla(){
                                     <div class="form-group">
                                         <label>Correlativo:</label>
                                         <div class="nk-int-st">
-                                        <input type="text" class="form-control input-sm" placeholder="Ingrese  un correlativo para departamento." id="correlativo" name="correlativo" value="<?php echo $codigo;?>">
+                                        <input type="text" class="form-control input-sm" placeholder="Ingrese  un correlativo para departamento." id="correlativo" name="correlativo" value="<?php echo $codigo;?>" readonly>
                                         </div>
                                     </div>
                                 </div>
