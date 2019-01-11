@@ -430,7 +430,7 @@ if($accion==1){
       }     
 
 }
-function msgK($idR,$cantidad,$precio)
+function msgk($idR,$cantidad,$precio)
 {
      $subtotal=$cantidad*$precio;
     $fecha2=strftime( "%Y-%m-%d", time());
@@ -439,11 +439,12 @@ function msgK($idR,$cantidad,$precio)
     echo "kardex('add','".$idR."','".$fecha2."','Compra de producto.','1','".$cantidad."','".$precio."','".$subtotal."');";
     echo "</script>";
 }
+
 function msgI($texto){
    echo "<script type='text/javascript'>";
     echo "notify('Exito','$texto','top', 'right', 'any', 'success');";
     
     echo "</script>";
-    msgK();
+  
 }
 ?>
