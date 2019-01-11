@@ -439,6 +439,7 @@ function msgK($idR,$cantidad,$precio)
     echo "kardex('add','".$idR."','".$fecha2."','Compra de producto.','1','".$cantidad."','".$precio."','".$subtotal."');";
     echo "</script>";
 }
+
 function msgI($texto){
    echo "<script type='text/javascript'>";
     echo "notify('Exito','$texto','top', 'right', 'any', 'success');";
