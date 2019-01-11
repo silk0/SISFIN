@@ -52,7 +52,7 @@
                                 </li>
                                 <li><a href="listaDepartamentos.php">Departamentos</a>
                                 </li>
-                                <li><a href="listTipos.php">Tipos de Activos</a>
+                                <li><a href="listaTipoActivo.php">Tipos de Activos</a>
                                 </li>
                                 <li><a href="listaClasificacion.php">Clasificion de Activos</a>
                                 </li>

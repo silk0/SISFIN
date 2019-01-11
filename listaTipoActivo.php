@@ -1,16 +1,16 @@
-<!--  -->
+
 <!doctype html>
 <html class="no-js" lang="">
 
 <head>
     <meta charset="utf-8">
     <meta http-equiv="x-ua-compatible" content="ie=edge">
-    <title>Ingreso de Tipo Activo | SISFIN</title>
+    <title>Lista Tipo Activo | SISFIN</title>
     <meta name="description" content="">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <!-- bootstrap select CSS
+     <!-- notification CSS
 		============================================ -->
-        <link rel="stylesheet" href="css/bootstrap-select/bootstrap-select.css">
+        <link rel="stylesheet" href="css/notification/notification.css">
     <!-- favicon
 		============================================ -->
     <link rel="shortcut icon" type="image/x-icon" href="img/favicon.ico">
@@ -48,7 +48,10 @@
     <link rel="stylesheet" href="css/wave/waves.min.css">
     <link rel="stylesheet" href="css/wave/button.css">
     <!-- main CSS
+    ============================================ -->
+     <!-- Data Table JS
 		============================================ -->
+    <link rel="stylesheet" href="css/jquery.dataTables.min.css">
     <link rel="stylesheet" href="css/main.css">
     <!-- style CSS
 		============================================ -->
@@ -59,21 +62,16 @@
     <!-- modernizr JS
 		============================================ -->
     <script src="js/vendor/modernizr-2.8.3.min.js"></script>
-      <!-- notification CSS
-        ============================================ -->
-        <link rel="stylesheet" href="css/notification/notification.css">
+
 </head>
-<script  language=JavaScript> 
+<SCRIPT  language=JavaScript> 
 function go(){
     //validacion respectiva me da hueva
-    
-    document.form.submit(); 
- 
-}
-function tabla(){
-    document.location.href="listaTipoActivo.php"; 
-}
- 
+    document.location.href="ingresarTipoActivo.php"; 
+} 
+
+</script> 
+<SCRIPT  language=JavaScript> 
 function notify(titulo,texto,from, align, icon, type, animIn, animOut){
 		$.growl({
 			icon: icon,
@@ -82,7 +80,7 @@ function notify(titulo,texto,from, align, icon, type, animIn, animOut){
 			url: ''
 		},{
 				element: 'body',
-				type: type, 
+				type: type,
 				allow_dismiss: true,
 				placement: {
 						from: from,
@@ -115,28 +113,14 @@ function notify(titulo,texto,from, align, icon, type, animIn, animOut){
 							'</div>'
 		});
 	}
-   
-
-function enviar(){
-    
-    $.ajax({
-        data:{"id":1},
-        url: 'scriptsphp/recuperarCorrelativo.php',
-        type: 'post',
-        beforeSend: function(){
-          notify('Exito','Codigo Generado','top', 'right', 'any', 'success');
-        },
-        success: function(response){
-     
-            document.getElementById("correlativo").value=response;
-          
-        }
-    });
-} 
+  function modificar(id){
+       
+       document.location.href="editarTipoActivo.php?id="+id;
+   }
+	
 
 
 </script> 
-
 <body>
     <!--[if lt IE 8]>
             <p class="browserupgrade">You are using an <strong>outdated</strong> browser. Please <a href="http://browsehappy.com/">upgrade your browser</a> to improve your experience.</p>
@@ -166,101 +150,74 @@ function enviar(){
 										<i class="notika-icon notika-form"></i>
 									</div>
 									<div class="breadcomb-ctn">
-										<h2>Registro de Tipo Activo.</h2>
-										<p>Formulario de Tipo Activo <span class="bread-ntd">.</span></p>
+										<h2>Lista Tipo Activo.</h2>
+										<p>Datos <span class="bread-ntd">de Tipo Activo</span></p>
 									</div>
 								</div>
 							</div>
-							<!-- <div class="col-lg-6 col-md-6 col-sm-6 col-xs-3">
+							<div class="col-lg-6 col-md-6 col-sm-6 col-xs-3">
 								<div class="breadcomb-report">
 									<button data-toggle="tooltip" data-placement="left" title="Download Report" class="btn"><i class="notika-icon notika-sent"></i></button>
-								</div>
-							</div> -->
+                       
+                                    <button class="btn btn-primary notika-btn-primary" onclick="go();">+ Agregar Nuevo</button>
+                                </div>
+							</div>
 						</div>
 					</div>
 				</div>
 			</div>
 		</div>
 	</div>
-	<!-- Breadcomb area End-->
-    <!-- Form Examples area start-->
-    <div class="form-example-area">
+  <!-- Breadcomb area End-->
+  <!-- Data Table area Start-->
+  <div class="data-table-area">
         <div class="container">
             <div class="row">
                 <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
-                    <div class="form-example-wrap">
-                        <div class="cmp-tb-hd">
-                            <h2>Datos del Tipo Activo</h2>
-                            
-                        </div>
-                        <form id="form"name="form" method="post" action="">
-                        <input type="hidden" name="bandera" id="bandera" value="1">
-                     
-                       
+                    <div class="data-table-list">
+                        <div class="basic-tb-hd">
+                             </div>
+                        <div class="table-responsive">
+                            <table id="data-table-basic" class="table table-striped">
+                                <thead>
+                                    <tr>
+                                        
+                                        <th>Tipo Activo</th>
+                                        <th>Clasificacion</th>
+                                        <th>Correlativo</th> 
+                                        <th>Modificar</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                      <?php
+include "config/conexion.php";
+$result = $conexion->query("SELECT ttipo_activo.nombre, tclasificacion.nombre as clasi, ttipo_activo.correlativo, ttipo_activo.id_tipo FROM ttipo_activo INNER JOIN tclasificacion ON ttipo_activo.id_clasificacion = tclasificacion.id_clasificaion ORDER BY id_tipo");
+if ($result) {
+    while ($fila = $result->fetch_object()) {
+        echo "<tr>";
+        echo "<td>" . $fila->nombre . "</td>";
+        echo "<td>" . $fila->clasi . "</td>";
+        echo "<td>" . $fila->correlativo . "</td>";
+        echo "<td>
+        <div class='button-icon-btn'>
+        <button class='btn btn-lightgreen lightgreen-icon-notika btn-reco-mg btn-button-mg' onclick='modificar(" . $fila->id_tipo. ")'><i class='notika-icon notika-menus'></i></button>
+        </div>
+        </td>";
+        echo "</tr>";
 
-                        <div class="row">
-                            <div class="col-lg-6 col-md-6 col-sm-6 col-xs-12">
-                                <div class="form-example-int">
-                                    <div class="form-group">
-                                        <label>Tipo Activo:</label>
-                                        <div class="nk-int-st">
-                                        <input type="text" class="form-control input-sm" placeholder="Ingrese  nombre de departamento." id="tipo" name="tipo">
-                                        </div>
-                                    </div>
-                                </div>
-                                <div class="col-lg-1 col-md-1 col-sm-1 col-xs-12">
-                               <div class="">
-                            </div>
-                            </div>
-                            </div>
-                            <div class="col-lg-6 col-md-6 col-sm-6 col-xs-12">
-                            <label>Calsificacion:</label>
-                                <div class="bootstrap-select fm-cmp-mg">
-                                    <select class="selectpicker" data-live-search="true" name="clasi" id="clasi">
-                                    <option value="Seleccione">Seleccione</option>
-                                    <?php
-                                     include 'config/conexion.php';
-                                     $result = $conexion->query("select id_clasificaion as id,nombre FROM tclasificacion");
-                                     if ($result) {
-                                         while ($fila = $result->fetch_object()) {
-                                             echo "<option value='".$fila->id."'>".$fila->nombre."</option>";
-                                            }
-                                        }
-                                        ?>
-                                    </select>
-                                </div>
-                                </div>
-                                <div class="col-lg-10 col-md-10 col-sm-10 col-xs-12">
-                                <div class="form-example-int">
-                                    <div class="form-group">
-                                        <label>Correlativo:</label>
-                                        <div class="nk-int-st">
-                                        <input type="text" class="form-control input-sm" placeholder="Ingrese  un correlativo para departamento." id="correlativo" name="correlativo" readonly>
-                                        </div>
-                                    </div>
-                                </div>
-                                
-                            </div>
-                            <div class="col-lg-2 col-md-2 col-sm-2 col-xs-12">
-                               <div class="">
-                                   <br>
-								  	<button type="button" title="Generar Correlativo" onclick="enviar();" class="btn btn-success success-icon-notika btn-reco-mg btn-button-mg waves-effect"><i class="notika-icon notika-house"></i></button>
-								</div>
-                            </div>
-                           <div class="form-example-int mg-t-15">
-                            <button class="btn btn-success notika-btn-success" style="margin-left: 500px;" onclick="go();" >Guardar.</button>
-                            <button type="button" class="btn btn-success notika-btn-success" onclick="tabla();">Cancelar</button>
+    }
+}
+?>
+                      </tbody>
+                            </table>
                         </div>
-                        </form>
                     </div>
                 </div>
             </div>
-            
-            
+        </div>
     </div>
-    </div>
-    </div>
-    <!-- Form Examples area End-->
+    <!-- Data Table area End-->
+
     <!-- Start Footer area-->
     <?php include "footer.php";?>
     <!-- End Footer area-->
@@ -297,9 +254,9 @@ function enviar(){
 		============================================ -->
     <script src="js/sparkline/jquery.sparkline.min.js"></script>
     <script src="js/sparkline/sparkline-active.js"></script>
-    <!-- flot JS
+     <!-- flot JS
 		============================================ -->
-    <script src="js/flot/jquery.flot.js"></script>
+        <script src="js/flot/jquery.flot.js"></script>
     <script src="js/flot/jquery.flot.resize.js"></script>
     <script src="js/flot/flot-active.js"></script>
     <!-- knob JS
@@ -307,71 +264,52 @@ function enviar(){
     <script src="js/knob/jquery.knob.js"></script>
     <script src="js/knob/jquery.appear.js"></script>
     <script src="js/knob/knob-active.js"></script>
-    <!-- icheck JS
-		============================================ -->
-    <script src="js/icheck/icheck.min.js"></script>
-    <script src="js/icheck/icheck-active.js"></script>
-    <!--  wave JS
-		============================================ -->
-    <script src="js/wave/waves.min.js"></script>
-    <script src="js/wave/wave-active.js"></script>
     <!--  Chat JS
 		============================================ -->
     <script src="js/chat/jquery.chat.js"></script>
     <!--  todo JS
 		============================================ -->
     <script src="js/todo/jquery.todo.js"></script>
+	<!--  wave JS
+		============================================ -->
+    <script src="js/wave/waves.min.js"></script>
+    <script src="js/wave/wave-active.js"></script>
     <!-- plugins JS
 		============================================ -->
     <script src="js/plugins.js"></script>
-        <!-- Input Mask JS
+    <!-- Data Table JS
 		============================================ -->
-    <script src="js/jasny-bootstrap.min.js"></script>
-     <!-- bootstrap select JS
-		============================================ -->
-        <script src="js/bootstrap-select/bootstrap-select.js"></script>
-
+    <script src="js/data-table/jquery.dataTables.min.js"></script>
+    <script src="js/data-table/data-table-act.js"></script>
     <!-- main JS
 		============================================ -->
     <script src="js/main.js"></script>
 	<!-- tawk chat JS
 		============================================ -->
-    <!-- <script src="js/tawk-chat.js"></script> -->
-       <!--  notification JS
+    <script src="js/tawk-chat.js"></script>
+     <!--  notification JS
 		============================================ -->
-    <script src="js/notification/bootstrap-growl.min.js"></script>
+        <script src="js/notification/bootstrap-growl.min.js"></script>
     <script src="js/notification/notification-active.js"></script>
 </body>
 
 </html>
 <?php
 include "config/conexion.php";
-$bandera  = $_REQUEST["bandera"];
-
-if($bandera==1){
-$tipo     = $_REQUEST["tipo"];
-$clasi      = $_REQUEST["clasi"];
-$correlativo     = $_REQUEST["correlativo"];
-
-  
-$consulta  = "INSERT INTO ttipo_activo VALUES('null','" .$clasi. "','" .$tipo. "','" .$correlativo. "')";
-    $resultado = $conexion->query($consulta);
-      if($resultado){
-          msgI("Se agregaron los datos correctamente");
-     
-      } else {
-          msgE("Error al insertar los datos");
-      }
-
-}
-
+$accion = $_REQUEST['bandera'];
+if($accion==1){
+      msgI("Se modificaron los datos con exito");
+  } else if($accion==2) {
+      msgE("cocurrio un error en el registro de los archivos");
+  }else if($accion==3) {
+    msgA("Los datos que se ingresaron ya existen");
+}   
 function msgI($texto)
 {
     echo "<script type='text/javascript'>";
     echo "notify('Exito','$texto','top', 'right', 'any', 'success');";
     echo "</script>";
 }
-
 function msgA($texto)
 {
     echo "<script type='text/javascript'>";

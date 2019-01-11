@@ -120,7 +120,7 @@ function modificar(id){
 										<i class="notika-icon notika-form"></i>
 									</div>
 									<div class="breadcomb-ctn">
-										<h2>Registro de Departamento.</h2>
+										<h2>Editar Departamento.</h2>
 										<p>Formulario de departamento <span class="bread-ntd">.</span></p>
 									</div>
 								</div>

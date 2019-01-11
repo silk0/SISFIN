@@ -205,11 +205,8 @@ function back(){
                                     </div>
                                 </div>
                             </div>
-
-                        </div>
-                        <div class="row">
-                            <div class="col-lg-12 col-md-12 col-sm-4 col-xs-12">
-                                <div class="form-example-int mg-t-15">
+                            <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
+                                <div class="form-example-int ">
                                     <div class="form-group">
                                         <label>DUI:</label>
                                         <div class="nk-int-st">
@@ -218,7 +215,8 @@ function back(){
                                      </div>                            
                                 </div>
                             </div>
-                        </div>
+
+                      
                         
                         
                         
@@ -238,6 +236,7 @@ function back(){
             </div>
             
             
+    </div>
     </div>
     <!-- Form Examples area End-->
     <!-- Start Footer area-->

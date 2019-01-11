@@ -67,6 +67,22 @@ function go(){
     //validacion respectiva me da hueva
     document.form.submit(); 
 }
+function enviar(){
+    
+    $.ajax({
+        data:{"id":4},
+        url: 'scriptsphp/recuperarCorrelativo.php',
+        type: 'post',
+        beforeSend: function(){
+          notify('Exito','Codigo Generado','top', 'right', 'any', 'success');
+        },
+        success: function(response){
+     
+            document.getElementById("correlativo").value=response;
+          
+        }
+    });
+}
 
 function modificar(id){
        
@@ -195,7 +211,7 @@ function notify(titulo,texto,from, align, icon, type, animIn, animOut){
                             </div>
                             </div>
                             </div>
-                           <div class="col-lg-6 col-md-6 col-sm-6 col-xs-12">
+                           <div class="col-lg-4 col-md-4 col-sm-4 col-xs-12">
                                 <div class="form-example-int">
                                     <div class="form-group">
                                         <label>Correlativo:</label>
@@ -208,6 +224,12 @@ function notify(titulo,texto,from, align, icon, type, animIn, animOut){
                                <div class="">
                             </div>
                             </div>
+                            </div>
+                            <div class="col-lg-2 col-md-2 col-sm-2 col-xs-12">
+                               <div class="">
+                                   <br>
+								  	<button type="button" title="Generar Correlativo" onclick="enviar();" class="btn btn-success success-icon-notika btn-reco-mg btn-button-mg waves-effect"><i class="notika-icon notika-house"></i></button>
+								</div>
                             </div>
                             <div class="col-lg-6 col-md-6 col-sm-6 col-xs-12">
                                 <div class="form-example-int">

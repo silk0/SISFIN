@@ -1,3 +1,17 @@
+<?php
+$id = $_REQUEST["id"];
+include "config/conexion.php";
+$result = $conexion->query("select * from ttipo_activo where id_tipo=" . $id);
+if ($result) {
+    while ($fila = $result->fetch_object()) {
+        $idR           = $fila->id_tipo;
+        $nombreR       = $fila->nombre;
+        $idclasR       = $fila->id_clasificacion;
+        $corrR         = $fila->correlativo;
+       }
+}
+
+?>
 
 <!doctype html>
 <html class="no-js" lang="">
@@ -5,8 +19,9 @@
 <head>
     <meta charset="utf-8">
     <meta http-equiv="x-ua-compatible" content="ie=edge">
-    <title>Ingreso de Departamento | SISFIN</title>
+    <title>Editar Institución | SISFIN</title>
     <meta name="description" content="">
+
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <!-- bootstrap select CSS
 		============================================ -->
@@ -56,100 +71,18 @@
     <!-- responsive CSS
 		============================================ -->
     <link rel="stylesheet" href="css/responsive.css">
-
-    <!-- notification CSS
-        ============================================ -->
-    <link rel="stylesheet" href="css/notification/notification.css">
-
     <!-- modernizr JS
 		============================================ -->
     <script src="js/vendor/modernizr-2.8.3.min.js"></script>
 </head>
 <script  language=JavaScript> 
 
-function notify(titulo,texto,from, align, icon, type, animIn, animOut){
-        $.growl({
-            icon: icon,
-            title: titulo+" ",
-            message: texto,
-            url: ''
-        },{
-                element: 'body',
-                type: type,
-                allow_dismiss: true,
-                placement: {
-                        from: from,
-                        align: align
-                },
-                offset: {
-                    x: 20,
-                    y: 85
-                },
-                spacing: 10,
-                z_index: 1031,
-                delay: 2500,
-                timer: 1000,
-                url_target: '_blank',
-                mouse_over: false,
-                animate: {
-                        enter: animIn,
-                        exit: animOut
-                },
-                icon_type: 'class',
-                template: '<div data-growl="container" class="alert" role="alert">' +
-                                '<button type="button" class="close" data-growl="dismiss">' +
-                                    '<span aria-hidden="true">&times;</span>' +
-                                    '<span class="sr-only">Close</span>' +
-                                '</button>' +
-                                '<span data-growl="icon"></span>' +
-                                '<span data-growl="title"></span>' +
-                                '<span data-growl="message"></span>' +
-                                '<a href="#" data-growl="url"></a>' +
-                            '</div>'
-        });
-    }
-    function enviar(){
-    
-    $.ajax({
-        data:{"id":3},
-        url: 'scriptsphp/recuperarCorrelativo.php',
-        type: 'post',
-        beforeSend: function(){
-          notify('Exito','Codigo Generado','top', 'right', 'any', 'success');
-        },
-        success: function(response){
-     
-            document.getElementById("correlativo").value=response;
-          
-        }
-    });
-} 
-
 function go(){
-
-    //Validaciones
-   if(document.getElementById('departamento').value==""){
-    //    alert("El campo nombre es obligatorio");
-    //    prueba :p
-     notify(' Advertencia:','El campo Departamento es obligatorio.','top', 'right', 'any', 'warning');
-       document.getElementById("departamento").focus();
-   }else if(document.getElementById('institucion').value==""){
-        notify(' Advertencia:','El campo Institución es obligatorio,','top', 'right', 'any', 'warning');
-       document.getElementById("institucion").focus();
-   }else if(document.getElementById('correlativo').value==""){
-        notify(' Advertencia:','El campo Correlativo es obligatorio','top', 'right', 'any', 'warning');
-       document.getElementById("correlativo").focus();
-   }else{
-      document.form.submit();  
-   }   
+    document.form.submit(); 
 }
-function tabla(){
-    document.location.href="listaDepartamentos.php"; 
-}
- 
-
-   
-
+function back(){
+        document.location.href="/SISFIN/listaTipoActivo.php";
+    }
 
 </script> 
 
@@ -182,8 +115,8 @@ function tabla(){
 										<i class="notika-icon notika-form"></i>
 									</div>
 									<div class="breadcomb-ctn">
-										<h2>Registro de Departamento.</h2>
-										<p>Formulario de departamento <span class="bread-ntd">.</span></p>
+										<h2>Editar Tipo Activo.</h2>
+										<p>Formulario de Tipo Activo <span class="bread-ntd">.</span></p>
 									</div>
 								</div>
 							</div>
@@ -206,21 +139,21 @@ function tabla(){
                 <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
                     <div class="form-example-wrap">
                         <div class="cmp-tb-hd">
-                            <h2>Datos del Departamento</h2>
+                            <h2>Datos de Tipo Activo</h2>
                             
                         </div>
-                        <form id="form"name="form" method="post" action="">
+                        <form id="form"name="form" method="post" action="../SISFIN/scriptsphp/modificarTipo.php?bandera=1&idD=<?php echo $idR; ?>">
+                        
+                     
                        
 
                         <div class="row">
-                             <input type="hidden" name="bandera" id="bandera" value="1">
-                       
                             <div class="col-lg-6 col-md-6 col-sm-6 col-xs-12">
                                 <div class="form-example-int">
                                     <div class="form-group">
-                                        <label>Departamento:</label>
+                                        <label>Tipo Activo:</label>
                                         <div class="nk-int-st">
-                                        <input type="text" class="form-control input-sm" placeholder="Ingrese  nombre de departamento." id="departamento" name="departamento" required>
+                                        <input type="text" class="form-control input-sm" placeholder="Ingrese  nombre de departamento." id="tipo" name="tipo" value="<?php echo $nombreR; ?>">
                                         </div>
                                     </div>
                                 </div>
@@ -232,39 +165,41 @@ function tabla(){
                             <div class="col-lg-6 col-md-6 col-sm-6 col-xs-12">
                             <label>Institución</label>
                                 <div class="bootstrap-select fm-cmp-mg">
-                                    <select class="selectpicker" data-live-search="true" name="institucion" id="institucion" > 
-                                    <option value="Seleccione">Seleccione</option required>
+                                    <select class="selectpicker" data-live-search="true" name="institucion" id="institucion">
+                                    <option value="Seleccione">Seleccione</option>
                                     <?php
-                                     include 'config/conexion.php';
-                                     $result = $conexion->query("select id_institucion as id,nombre FROM tinstitucion");
-                                     if ($result) {
+                                    include 'config/conexion.php';
+                                    $result = $conexion->query("select id_institucion as id,nombre FROM tinstitucion");
+                                    if ($result) {
                                          while ($fila = $result->fetch_object()) {
-                                             echo "<option value='".$fila->id."'>".$fila->nombre."</option>";
+                                             if ($fila->id == $idclasR ) {
+                                                echo '<option value="' . $fila->id. '" selected>' . $fila->nombre . '</opcion>';
+                                            }else {
+                                                echo '<option value="' . $fila->id . '">' . $fila->nombre . '</opcion>';
                                             }
                                         }
-                                        ?>
+                                    }else {
+                                        echo '<option value="">Error en la BD</opcion>';
+                                    }
+                                    ?>
+                                   
                                     </select>
                                 </div>
                                 </div>
-                                <div class="col-lg-10 col-md-10 col-sm-0 col-xs-12">
+                                <div class="col-lg-10 col-md-10 col-sm-10 col-xs-12">
                                 <div class="form-example-int">
                                     <div class="form-group">
                                         <label>Correlativo:</label>
                                         <div class="nk-int-st">
-                                        <input type="text" class="form-control input-sm" placeholder="Correlativo " id="correlativo" name="correlativo">
+                                        <input type="text" class="form-control input-sm" placeholder="Ingrese  un correlativo para departamento." id="correlativo" name="correlativo" readonly  value="<?php echo $corrR; ?>">
                                         </div>
                                     </div>
                                 </div>
                                 
                             </div>
-                            <div class="col-lg-2 col-md-2 col-sm-2 col-xs-12">
-                               <div class="">
-                                   <br>
-								  	<button type="button" title="Generar Correlativo" onclick="enviar();" class="btn btn-success success-icon-notika btn-reco-mg btn-button-mg waves-effect"><i class="notika-icon notika-house"></i></button>
-								</div>
-                            </div>
+                            
                            <div class="form-example-int mg-t-15">
-                            <button type="button" class="btn btn-success notika-btn-success" style="margin-left: 500px;" onclick="go();" >Guardar.</button>
+                            <button class="btn btn-success notika-btn-success" style="margin-left: 500px;" onclick="go();" >Guardar.</button>
                             <button type="button" class="btn btn-success notika-btn-success" onclick="tabla();">Cancelar</button>
                         </div>
                         </form>
@@ -273,6 +208,8 @@ function tabla(){
             </div>
             
             
+    </div>
+    </div>
     </div>
     <!-- Form Examples area End-->
     <!-- Start Footer area-->
@@ -341,73 +278,16 @@ function tabla(){
         <!-- Input Mask JS
 		============================================ -->
     <script src="js/jasny-bootstrap.min.js"></script>
-     <!-- bootstrap select JS
-		============================================ -->
-        <script src="js/bootstrap-select/bootstrap-select.js"></script>
-
     <!-- main JS
 		============================================ -->
     <script src="js/main.js"></script>
-
-    <!--  notification JS
-        ============================================ -->
-        <script src="js/notification/bootstrap-growl.min.js"></script>
-        <script src="js/notification/notification-active.js"></script>
-
 	<!-- tawk chat JS
 		============================================ -->
     <!-- <script src="js/tawk-chat.js"></script> -->
+     <!--  notification JS
+		============================================ -->
+        <script src="js/notification/bootstrap-growl.min.js"></script>
+    <script src="js/notification/notification-active.js"></script>
 </body>
 
 </html>
-<?php
-include "config/conexion.php";
-$bandera  = $_POST["bandera"];
-$departamento     = $_POST["departamento"];
-$institucion      = $_POST["institucion"];
-$correlativo     = $_POST["correlativo"];
-if($bandera==1){
-
-$query = "SELECT nombre FROM tdepartamento WHERE nombre like '%".$departamento."';";
-$result = $conexion->query($query);
-if($result->num_rows == 0){   
-$consulta  = "INSERT INTO tdepartamento VALUES('null','" .$institucion. "','" .$departamento. "','" .$correlativo. "')";
-    $resultado = $conexion->query($consulta);
-      if($resultado){
-          msgI("Se agregaron los datos correctamente");
-      } else {
-          msgE("Error al insertar los datos");
-      }
-}else{
-  msgA("Esta Departamento ya existe");
-}
-}
-
-  
-function msg($texto)
-{
-    echo "<script type='text/javascript'>";
-    echo "alert('$texto');";
-    echo "document.location.href='ingresarProducto.php';";
-    echo "</script>";
-}
-
-function msgI($texto)
-{
-    echo "<script type='text/javascript'>";
-    echo "notify('Exito','$texto','top', 'right', 'any', 'success');";
-    echo "</script>";
-}
-function msgA($texto)
-{
-    echo "<script type='text/javascript'>";
-    echo "notify('Advertencia','$texto','top', 'right', 'any', 'warning');";
-    echo "</script>";
-}
-function msgE($texto)
-{
-    echo "<script type='text/javascript'>";
-    echo "notify('Error','$texto','top', 'right', 'any', 'danger');";
-    echo "</script>";
-}
-?>

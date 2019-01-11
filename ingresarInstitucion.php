@@ -1,16 +1,4 @@
-<?php
-include "config/conexion.php";
-$resultc = $conexion->query("select id_institucion as id from tinstitucion");
-                     if ($resultc) {
 
-                       while ($filac = $resultc->fetch_object()) {
-                         $temp=$filac->id;
-                        
-                          }
-                     }   
-                     $codigo=sprintf("1%04s",$temp+1);           
-
-?>
 <!doctype html>
 <html class="no-js" lang="">
 
@@ -77,6 +65,22 @@ $resultc = $conexion->query("select id_institucion as id from tinstitucion");
     <script src="js/vendor/modernizr-2.8.3.min.js"></script>
 </head>
 <script  language=JavaScript> 
+function enviar(){
+    
+    $.ajax({
+        data:{"id":2},
+        url: 'scriptsphp/recuperarCorrelativo.php',
+        type: 'post',
+        beforeSend: function(){
+          notify('Exito','Correlativo Generado','top', 'right', 'any', 'success');
+        },
+        success: function(response){
+     
+            document.getElementById("corr").value=response;
+          
+        }
+    });
+}
 function notify(titulo,texto,from, align, icon, type, animIn, animOut){
 		$.growl({
 			icon: icon,
@@ -85,7 +89,7 @@ function notify(titulo,texto,from, align, icon, type, animIn, animOut){
 			url: ''
 		},{
 				element: 'body',
-				type: type,
+				type: type, 
 				allow_dismiss: true,
 				placement: {
 						from: from,
@@ -217,20 +221,22 @@ function modificar(id){
 								               </div>
                             </div>
                             </div>
-                            <div class="col-lg-6 col-md-6 col-sm-6 col-xs-12">
+                            <div class="col-lg-4 col-md-4 col-sm-4 col-xs-12">
                                 <div class="form-example-int">
                                     <div class="form-group">
                                         <label>Correlativo:</label>
                                         <div class="nk-int-st">
-                                        <input type="number" id="corr" name="corr" class="form-control input-sm" placeholder="Ingrese Correlativo" value="<?php echo $codigo;?>" readonly>
+                                        <input type="number" id="corr" name="corr" class="form-control input-sm" placeholder="Correlativo" readonly>
                                         </div>
                                     </div>
                                 </div>
-                                <div class="col-lg-1 col-md-1 col-sm-1 col-xs-12">
-                               <div class="">
-                               
-								               </div>
+                                
                             </div>
+                            <div class="col-lg-2 col-md-2 col-sm-2 col-xs-12">
+                               <div class="">
+                                   <br>
+								  	<button type="button" title="Generar Correlativo" onclick="enviar();" class="btn btn-success success-icon-notika btn-reco-mg btn-button-mg waves-effect"><i class="notika-icon notika-house"></i></button>
+								</div>
                             </div>
                         <div class="form-example-int mg-t-15">
                             <button type="button" class="btn btn-success notika-btn-success" style="margin-left: 500px;" onclick="go();" >Guardar</button>
