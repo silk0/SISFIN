@@ -1,3 +1,16 @@
+<?php
+include "config/conexion.php";
+$resultc = $conexion->query("select id_institucion as id from tinstitucion");
+                     if ($resultc) {
+
+                       while ($filac = $resultc->fetch_object()) {
+                         $temp=$filac->id;
+                        
+                          }
+                     }   
+                     $codigo=sprintf("1%04s",$temp+1);           
+
+?>
 <!doctype html>
 <html class="no-js" lang="">
 
@@ -209,7 +222,7 @@ function modificar(id){
                                     <div class="form-group">
                                         <label>Correlativo:</label>
                                         <div class="nk-int-st">
-                                        <input type="number" id="corr" name="corr" class="form-control input-sm" placeholder="Ingrese Correlativo" >
+                                        <input type="number" id="corr" name="corr" class="form-control input-sm" placeholder="Ingrese Correlativo" value="<?php echo $codigo;?>" readonly>
                                         </div>
                                     </div>
                                 </div>

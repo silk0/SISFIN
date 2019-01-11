@@ -1,11 +1,12 @@
 (function ($) {
  "use strict";
   $('#data_1 .input-group.date').datepicker({
-		todayBtn: "linked",
-		keyboardNavigation: false,
-		forceParse: false,
-		calendarWeeks: true,
-		autoclose: true
+	startView: 1,
+	todayBtn: "linked",
+	keyboardNavigation: false,
+	forceParse: false,
+	autoclose: true,
+	format: "dd/mm/yyyy"
 	});
 
 	$('#data_2 .input-group.date').datepicker({

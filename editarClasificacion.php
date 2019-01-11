@@ -1,13 +1,13 @@
 <?php
 $id = $_REQUEST["id"];
 include "config/conexion.php";
-$result = $conexion->query("select * from tdepartamento where id_departamento=" . $id);
+$result = $conexion->query("select * from tclasificacion where id_clasificaion=" . $id);
 if ($result) {
     while ($fila = $result->fetch_object()) {
-        $idR               = $fila->id_departamento;
-        $idinstitucionR    = $fila->id_institucion;
-        $departamentoR     = $fila->nombre;
+        $idR               = $fila->id_clasificaion;
+        $nombreR           = $fila->nombre;
         $correlativoR      = $fila->correlativo;
+        $depreciacionR     = $fila->tiempo_depreciacion;
         
        }
 }
@@ -19,7 +19,7 @@ if ($result) {
 <head>
     <meta charset="utf-8">
     <meta http-equiv="x-ua-compatible" content="ie=edge">
-    <title>Ingreso de Departamento | SISFIN</title>
+    <title>Modificación de Clasificación | SISFIN</title>
     <meta name="description" content="">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <!-- bootstrap select CSS
@@ -79,15 +79,41 @@ function go(){
     //validacion respectiva me da hueva
         document.form.submit();  
 } 
+function confirmar(id,op)
+        {
+          if (op==1) {
+            if (confirm("!!Advertencia!! Desea Desactivar Este Registro?")) {
+            document.getElementById('bandera').value='desactivar';
+            document.getElementById('baccion').value=id;
+
+            document.form.submit();
+          }else
+          {
+            alert("No entra");
+          }
+          }else{
+            if (confirm("!!Advertencia!! Desea Activar Este Registro?")) {
+            document.getElementById('bandera').value='activar';
+            document.getElementById('baccion').value=id;
+            document.form.submit();
+          }else
+          {
+            alert("No entra");
+          }
+          }
+
+
+        } 
 function modificar(id){
        
-       document.location.href="editarDepartamento.php?id="+id;
+       document.location.href="editarClasificacion.php?id="+id;
    }
+   
 function enviar(id){
     
     $.ajax({
         data:{"id":id},
-        url: 'scriptsphp/recuperarDepartamento.php',
+        url: 'scriptsphp/recuperarClasificacion.php',
         type: 'post',
         beforeSend: function(){
             alert("Por favor espere...");
@@ -95,10 +121,11 @@ function enviar(id){
         success: function(response){
             alert(response);
             document.getElementById("nombre").value=response;
-            document.getElementById("iddepartamento").value=id;
+            document.getElementById("idclasificaion").value=id;
         }
     });
 } 
+
 </script> 
 
 <body>
@@ -130,8 +157,8 @@ function enviar(id){
 										<i class="notika-icon notika-form"></i>
 									</div>
 									<div class="breadcomb-ctn">
-										<h2>Registro de Departamento.</h2>
-										<p>Formulario de departamento <span class="bread-ntd">.</span></p>
+										<h2>Registro de Clasificación.</h2>
+										<p>Formulario de clasificación <span class="bread-ntd">.</span></p>
 									</div>
 								</div>
 							</div>
@@ -154,21 +181,20 @@ function enviar(id){
                 <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
                     <div class="form-example-wrap">
                         <div class="cmp-tb-hd">
-                            <h2>Datos del Departamento</h2>
+                            <h2>Datos de Clasificación</h2>
                             
                         </div>
-                        
-                        <form name="form" method="post" action="editarDepartamento.php?bandera=1">
+                        <form name="form" method="post" action="editarClasificacion.php?bandera=1">
                         <input type="hidden" name="baccion" id="baccion" value="<?php echo $idR; ?>">
                         
 
                         <div class="row">
-                            <div class="col-lg-6 col-md-6 col-sm-6 col-xs-12">
+                            <div class="col-lg-12 col-md-12 col-sm-6 col-xs-12">
                                 <div class="form-example-int">
                                     <div class="form-group">
-                                        <label>Departamento:</label>
+                                        <label>Clasificación:</label>
                                         <div class="nk-int-st">
-                                        <input type="text" class="form-control input-sm" placeholder="Ingrese  nombre de departamento." id="departamento" name="departamento" value="<?php echo $departamentoR; ?>">
+                                        <input type="text" class="form-control input-sm" placeholder="Ingrese  nombre de clasificación." id="clasificacion" name="clasificacion" value="<?php echo $nombreR; ?>">
                                         </div>
                                     </div>
                                 </div>
@@ -177,31 +203,7 @@ function enviar(id){
                             </div>
                             </div>
                             </div>
-                            <div class="col-lg-6 col-md-6 col-sm-6 col-xs-12">
-                            <label>Institución</label>
-                                <div class="bootstrap-select fm-cmp-mg">
-                                    <select class="selectpicker" data-live-search="true" name="institucion" id="institucion">
-                                    <option value="Seleccione">Seleccione</option>
-                                    <?php
-                                    include 'config/conexion.php';
-                                    $result = $conexion->query("select id_institucion as id,nombre FROM tinstitucion");
-                                    if ($result) {
-                                         while ($fila = $result->fetch_object()) {
-                                             if ($fila->id == $idinstitucionR ) {
-                                                echo '<option value="' . $fila->id. '" selected>' . $fila->nombre . '</opcion>';
-                                            }else {
-                                                echo '<option value="' . $fila->id . '">' . $fila->nombre . '</opcion>';
-                                            }
-                                        }
-                                    }else {
-                                        echo '<option value="">Error en la BD</opcion>';
-                                    }
-                                    ?>
-                                   
-                                    </select>
-                                </div>
-                                </div>
-                                <div class="col-lg-12 col-md-12 col-sm-6 col-xs-12">
+                           <div class="col-lg-6 col-md-6 col-sm-6 col-xs-12">
                                 <div class="form-example-int">
                                     <div class="form-group">
                                         <label>Correlativo:</label>
@@ -215,9 +217,23 @@ function enviar(id){
                             </div>
                             </div>
                             </div>
+                            <div class="col-lg-6 col-md-6 col-sm-6 col-xs-12">
+                                <div class="form-example-int">
+                                    <div class="form-group">
+                                        <label>Depreciación:</label>
+                                        <div class="nk-int-st">
+                                        <input type="text" class="form-control input-sm" placeholder="Ingrese el tiempo de años para la depreciación." id="depreciacion" name="depreciacion" value="<?php echo $depreciacionR; ?>">
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="col-lg-1 col-md-1 col-sm-1 col-xs-12">
+                               <div class="">
+                            </div>
+                            </div>
+                            </div>
                            <div class="form-example-int mg-t-15">
                             <button class="btn btn-success notika-btn-success" style="margin-left: 500px;" onclick="go();" >Modificar.</button>
-                            <button type="button" data-toggle="modal" data-target="#myModalone" class="btn btn-success notika-btn-success">Ver Departamentos</button>
+                            <button type="button" data-toggle="modal" data-target="#myModalone" class="btn btn-success notika-btn-success">Ver Clasificaciones</button>
                         </div>
                         </form>
                     </div>
@@ -238,15 +254,15 @@ function enviar(id){
                 <div class="col-lg-7 col-md-7 col-sm-7 col-xs-7">
                     <div class="data-table-list">
                         <div class="basic-tb-hd">
-                            <h2>Seleccione una de las categorias de la siguiente  tabla.</h2>
+                            <h2>Seleccione una de las clasificaciones de la siguiente  tabla.</h2>
                         </div>
                         <div class="table-responsive">
                             <table id="data-table-basic" class="table table-striped">
                                 <thead>
                                     <tr>
                                         <th>Correlativo</th>
-                                        <th>Departamento</th>
-                                        <th>Institución</th>
+                                        <th>Clasificación</th>
+                                        <th>Tiempo Depreciación</th>
                                         <th>Modificar</th>
                                         
                                         
@@ -255,16 +271,16 @@ function enviar(id){
                                 <tbody>
                                         <?php
 include "config/conexion.php";
-$result = $conexion->query("SELECT * from tdepartamento ORDER BY id_departamento");
+$result = $conexion->query("SELECT * from tclasificacion ORDER BY id_clasificaion");
 if ($result) {
     while ($fila = $result->fetch_object()) {
         echo "<tr>";
         echo "<td>" . $fila->correlativo . "</td>";
         echo "<td>" . $fila->nombre . "</td>";
-        echo "<td>" . $fila->id_institucion . "</td>";
+        echo "<td>" . $fila->tiempo_depreciacion . "</td>";
         echo "<td>
         <div class='button-icon-btn'>
-        <button class='btn btn-lightgreen lightgreen-icon-notika btn-reco-mg btn-button-mg' data-dismiss='modal' onclick=\"modificar('$fila->id_departamento')\";><i class='notika-icon notika-menus'></i></button>
+        <button class='btn btn-lightgreen lightgreen-icon-notika btn-reco-mg btn-button-mg' data-dismiss='modal' onclick=\"modificar('$fila->id_clasificaion')\";><i class='notika-icon notika-menus'></i></button>
          </div>
         </td>";
         echo "</tr>";
@@ -280,8 +296,8 @@ if ($result) {
                                     <tr>
                                        
                                         <th>Correlativo</th>
-                                        <th>Departamento</th>
-                                        <th>Institución</th>
+                                        <th>Clasificación</th>
+                                        <th>Tiempo Depreciación</th>
                                         <th>Modificar</th>
                                         
                                        
@@ -389,36 +405,30 @@ if ($result) {
 </html>
 <?php
 include "config/conexion.php";
-$bandera  = $_REQUEST['bandera'];
-$baccion = $_REQUEST["baccion"];
-if($bandera==1){
-$institucion      = $_REQUEST['institucion'];
-$departamento     = $_REQUEST['departamento'];
-msg($departamento);
-$correlativo     = $_REQUEST['correlativo'];
+$bandera = $_REQUEST['bandera'];
+$baccion  = $_REQUEST["baccion"];
+if ($bandera==1) {
+$clasificacion  = $_REQUEST['clasificacion'];
+$correlativo    = $_REQUEST['correlativo'];
+$depreciacion   = $_REQUEST['depreciacion'];
+msg($clasificacion);
 
-$query = "SELECT nombre FROM tdepartamento WHERE nombre like '%".$departamento."';";
-$result = $conexion->query($query);
-if($result->num_rows == 0){   
-    $consulta  = "UPDATE tdepartamento set id_institucion='" . $institucion . "',nombre='" . $departamento . "',correlativo='" . $correlativo . "' where id_departamento='" . $baccion . "'";
+    $consulta  = "UPDATE tclasificacion set nombre='" . $clasificacion . "',correlativo='" . $correlativo . "',tiempo_depreciacion='" . $depreciacion . "' where id_clasificaion='" . $baccion . "'";
     $resultado = $conexion->query($consulta);
     msg("antes if php");
-      if($resultado){
-          msg("Se modificaron los datos correctamente");
+      if ($resultado) {
+          
+          msg("Se modificacon los datos correctamente");
       } else {
           msg("Error al insertar los datos");
       }
-}else{
-  msg("Esta departamento ya existe");
-}
-}
+    }
 
-  
 function msg($texto)
 {
     echo "<script type='text/javascript'>";
     echo "alert('$texto');";
-    echo "document.location.href='ingresarDepartamento.php';";
+    echo "document.location.href='ingresarClasificacion.php';";
     echo "</script>";
 }
 ?>

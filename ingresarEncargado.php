@@ -103,7 +103,22 @@ function notify(titulo,texto,from, align, icon, type, animIn, animOut){
         });
     }
 function go(){
-      document.form.submit();   
+
+    //Validaciones
+   if(document.getElementById('nombre').value==""){
+    //    alert("El campo nombre es obligatorio");
+    //    prueba :p
+     notify(' Advertencia:','El campo Nombre es obligatorio.','top', 'right', 'any', 'warning');
+       document.getElementById("nombre").focus();
+   }else if(document.getElementById('apellido').value==""){
+        notify(' Advertencia:','El campo Apellido es obligatorio,','top', 'right', 'any', 'warning');
+       document.getElementById("apellido").focus();
+   }else if(document.getElementById('dui').value==""){
+        notify(' Advertencia:','El campo DUI es obligatorio','top', 'right', 'any', 'warning');
+       document.getElementById("dui").focus();
+   }else{
+      document.form.submit();  
+   }   
 }
 function back(){
     document.location.href="listaEncargado.php"; 
@@ -166,9 +181,10 @@ function back(){
                             <h2>Datos del Encargo.</h2>
                             
                         </div>
-                        <form name="form" method="post" action="ingresarEncargado.php?bandera=1">
+                        <form name="form" method="post"
                        
                         <div class="row">
+                         <input type="hidden" id="bandera" name="bandera" value="1">
                             <div class="col-lg-12 col-md-12 col-sm-6 col-xs-12">
                                 <div class="form-example-int">
                                     <div class="form-group">
@@ -213,8 +229,8 @@ function back(){
                      
                        
                         <div class="form-example-int mg-t-15">
-                            <button class="btn btn-success notika-btn-success" onclick="go();">Guardar</button>
-                            <button class="btn btn-success notika-btn-success" onclick="back();">Cancelar</button>
+                            <button  type="button" class="btn btn-success notika-btn-success" onclick="go();">Guardar</button>
+                            <button  class="btn btn-success notika-btn-success" onclick="back();">Cancelar</button>
                         </div>
                         </form>
                     </div>
@@ -308,7 +324,7 @@ function back(){
 </html>
 <?php
 include "config/conexion.php";
-$accion = $_REQUEST['bandera'];
+$accion = $_POST['bandera'];
 if($accion==1){
 $nombre     = $_POST['nombre'];
 $apellido   = $_POST['apellido'];
@@ -318,16 +334,35 @@ $dui        = $_POST['dui'];
     $consulta  = "INSERT INTO tencargado VALUES('null','" .$nombre. "','" .$apellido. "','" .$dui. "')";
     $resultado = $conexion->query($consulta);
       if ($resultado) {
-          msg("Se agregaron los datos correctamente");
+          msgI("Se agregaron los datos correctamente");
       } else {
-          msg("Error al insertar los datos");
+          msgE("Error al insertar los datos");
       }
 }
 function msg($texto)
 {
     echo "<script type='text/javascript'>";
     echo "alert('$texto');";
-    echo "document.location.href='ingresarEncargado.php';";
+    echo "document.location.href='ingresarProducto.php';";
+    echo "</script>";
+}
+
+function msgI($texto)
+{
+    echo "<script type='text/javascript'>";
+    echo "notify('Exito','$texto','top', 'right', 'any', 'success');";
+    echo "</script>";
+}
+function msgA($texto)
+{
+    echo "<script type='text/javascript'>";
+    echo "notify('Advertencia','$texto','top', 'right', 'any', 'warning');";
+    echo "</script>";
+}
+function msgE($texto)
+{
+    echo "<script type='text/javascript'>";
+    echo "notify('Error','$texto','top', 'right', 'any', 'danger');";
     echo "</script>";
 }
 ?>

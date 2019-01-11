@@ -1,10 +1,23 @@
+<?php
+include "config/conexion.php";
+$resultc = $conexion->query("select id_institucion as id from tinstitucion");
+                     if ($resultc) {
+
+                       while ($filac = $resultc->fetch_object()) {
+                         $temp=$filac->id;
+                        
+                          }
+                     }   
+                     $codigo=sprintf("1%04s",$temp+1);           
+
+?>
 <!doctype html>
 <html class="no-js" lang="">
 
 <head>
     <meta charset="utf-8">
     <meta http-equiv="x-ua-compatible" content="ie=edge">
-    <title>Ingreso de Clasificación | SISFIN</title>
+    <title>Ingreso de Tipo Activo | SISFIN</title>
     <meta name="description" content="">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <!-- bootstrap select CSS
@@ -62,17 +75,16 @@
 <script  language=JavaScript> 
 function go(){
     //validacion respectiva me da hueva
+    
     document.form.submit(); 
 }
-
-function modificar(id){
-       
-       document.location.href="editarClasificacion.php?id="+id;
-   }
-   
-function back(){
-    document.location.href="listaclasificacion.php"; 
+function tabla(){
+    document.location.href="listaDepartamentos.php"; 
 }
+ 
+
+   
+
 
 </script> 
 
@@ -105,8 +117,8 @@ function back(){
 										<i class="notika-icon notika-form"></i>
 									</div>
 									<div class="breadcomb-ctn">
-										<h2>Registro de Clasificación.</h2>
-										<p>Formulario de clasificación <span class="bread-ntd">.</span></p>
+										<h2>Registro de Tipo Activo.</h2>
+										<p>Formulario de Tipo Activo <span class="bread-ntd">.</span></p>
 									</div>
 								</div>
 							</div>
@@ -129,35 +141,20 @@ function back(){
                 <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
                     <div class="form-example-wrap">
                         <div class="cmp-tb-hd">
-                            <h2>Datos de Clasificación</h2>
+                            <h2>Datos del Departamento</h2>
                             
                         </div>
                         <form id="form"name="form" method="post" action="">
-                        <input type="hidden" name="bandera" id="bandera">
-                        <input type="hidden" name="baccion" id="baccion">
-                        
+                        <input type="hidden" name="bandera" id="bandera" value="1">
+                       
 
                         <div class="row">
-                            <div class="col-lg-12 col-md-12 col-sm-6 col-xs-12">
+                            <div class="col-lg-6 col-md-6 col-sm-6 col-xs-12">
                                 <div class="form-example-int">
                                     <div class="form-group">
-                                        <label>Clasificación:</label>
+                                        <label>Tipo Activo:</label>
                                         <div class="nk-int-st">
-                                        <input type="text" class="form-control input-sm" placeholder="Ingrese  nombre de clasificación." id="clasificacion" name="clasificacion">
-                                        </div>
-                                    </div>
-                                </div>
-                                <div class="col-lg-1 col-md-1 col-sm-1 col-xs-12">
-                               <div class="">
-                            </div>
-                            </div>
-                            </div>
-                           <div class="col-lg-6 col-md-6 col-sm-6 col-xs-12">
-                                <div class="form-example-int">
-                                    <div class="form-group">
-                                        <label>Correlativo:</label>
-                                        <div class="nk-int-st">
-                                        <input type="text" class="form-control input-sm" placeholder="Ingrese  un correlativo para departamento." id="correlativo" name="correlativo">
+                                        <input type="text" class="form-control input-sm" placeholder="Ingrese  nombre de departamento." id="departamento" name="departamento">
                                         </div>
                                     </div>
                                 </div>
@@ -167,11 +164,28 @@ function back(){
                             </div>
                             </div>
                             <div class="col-lg-6 col-md-6 col-sm-6 col-xs-12">
+                            <label>Calsificacion:</label>
+                                <div class="bootstrap-select fm-cmp-mg">
+                                    <select class="selectpicker" data-live-search="true" name="institucion" id="institucion">
+                                    <option value="Seleccione">Seleccione</option>
+                                    <?php
+                                     include 'config/conexion.php';
+                                     $result = $conexion->query("select id_institucion as id,nombre FROM tinstitucion");
+                                     if ($result) {
+                                         while ($fila = $result->fetch_object()) {
+                                             echo "<option value='".$fila->id."'>".$fila->nombre."</option>";
+                                            }
+                                        }
+                                        ?>
+                                    </select>
+                                </div>
+                                </div>
+                                <div class="col-lg-12 col-md-12 col-sm-6 col-xs-12">
                                 <div class="form-example-int">
                                     <div class="form-group">
-                                        <label>Depreciación:</label>
+                                        <label>Correlativo:</label>
                                         <div class="nk-int-st">
-                                        <input type="text" class="form-control input-sm" placeholder="Ingrese el tiempo de años para la depreciación." id="depreciacion" name="depreciacion">
+                                        <input type="text" class="form-control input-sm" placeholder="Ingrese  un correlativo para departamento." id="correlativo" name="correlativo" value="<?php echo $codigo;?>" readonly>
                                         </div>
                                     </div>
                                 </div>
@@ -181,14 +195,13 @@ function back(){
                             </div>
                             </div>
                            <div class="form-example-int mg-t-15">
-                            <button class="btn btn-success notika-btn-success" style="margin-left: 500px;" onclick="go();" >Guardar</button>
-                            <button type="button" class="btn btn-success notika-btn-success" onclick="back();">Cancelar</button>
+                            <button class="btn btn-success notika-btn-success" style="margin-left: 500px;" onclick="go();" >Guardar.</button>
+                            <button type="button" class="btn btn-success notika-btn-success" onclick="tabla();">Cancelar</button>
                         </div>
                         </form>
                     </div>
                 </div>
             </div>
-          
             
             
     </div>
@@ -275,16 +288,15 @@ function back(){
 <?php
 include "config/conexion.php";
 $bandera  = $_REQUEST["bandera"];
-$baccion = $_REQUEST["baccion"];
-$clasificacion     = $_REQUEST["clasificacion"];
-$depreciacion      = $_REQUEST["depreciacion"];
-$correlativo       = $_REQUEST["correlativo"];
-if($bandera=="add"){
+$departamento     = $_REQUEST["departamento"];
+$institucion      = $_REQUEST["institucion"];
+$correlativo     = $_REQUEST["correlativo"];
+if($bandera==1){
 
-$query = "SELECT nombre FROM tclasificacion WHERE nombre like '%".$clasificacion."';";
+$query = "SELECT nombre FROM tdepartamento WHERE nombre like '%".$departamento."';";
 $result = $conexion->query($query);
 if($result->num_rows == 0){   
-$consulta  = "INSERT INTO tclasificacion VALUES('null','" .$clasificacion. "','" .$correlativo. "','" .$depreciacion. "')";
+$consulta  = "INSERT INTO tdepartamento VALUES('null','" .$institucion. "','" .$departamento. "','" .$correlativo. "')";
     $resultado = $conexion->query($consulta);
       if($resultado){
           msg("Se agregaron los datos correctamente");
@@ -292,7 +304,7 @@ $consulta  = "INSERT INTO tclasificacion VALUES('null','" .$clasificacion. "','"
           msg("Error al insertar los datos");
       }
 }else{
-  msg("Esta clasificacion ya existe");
+  msg("Esta Departamento ya existe");
 }
 }
 
@@ -301,7 +313,7 @@ function msg($texto)
 {
     echo "<script type='text/javascript'>";
     echo "alert('$texto');";
-    echo "document.location.href='ingresarClasificacion.php';";
+    echo "document.location.href='ingresarDepartamento.php';";
     echo "</script>";
 }
 ?>
