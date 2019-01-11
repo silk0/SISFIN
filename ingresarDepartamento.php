@@ -55,15 +55,77 @@
     <!-- responsive CSS
 		============================================ -->
     <link rel="stylesheet" href="css/responsive.css">
+
+    <!-- notification CSS
+        ============================================ -->
+    <link rel="stylesheet" href="css/notification/notification.css">
+
     <!-- modernizr JS
 		============================================ -->
     <script src="js/vendor/modernizr-2.8.3.min.js"></script>
 </head>
 <script  language=JavaScript> 
+
+function notify(titulo,texto,from, align, icon, type, animIn, animOut){
+        $.growl({
+            icon: icon,
+            title: titulo+" ",
+            message: texto,
+            url: ''
+        },{
+                element: 'body',
+                type: type,
+                allow_dismiss: true,
+                placement: {
+                        from: from,
+                        align: align
+                },
+                offset: {
+                    x: 20,
+                    y: 85
+                },
+                spacing: 10,
+                z_index: 1031,
+                delay: 2500,
+                timer: 1000,
+                url_target: '_blank',
+                mouse_over: false,
+                animate: {
+                        enter: animIn,
+                        exit: animOut
+                },
+                icon_type: 'class',
+                template: '<div data-growl="container" class="alert" role="alert">' +
+                                '<button type="button" class="close" data-growl="dismiss">' +
+                                    '<span aria-hidden="true">&times;</span>' +
+                                    '<span class="sr-only">Close</span>' +
+                                '</button>' +
+                                '<span data-growl="icon"></span>' +
+                                '<span data-growl="title"></span>' +
+                                '<span data-growl="message"></span>' +
+                                '<a href="#" data-growl="url"></a>' +
+                            '</div>'
+        });
+    }
+
+
 function go(){
-    //validacion respectiva me da hueva
-    
-    document.form.submit(); 
+
+    //Validaciones
+   if(document.getElementById('departamento').value==""){
+    //    alert("El campo nombre es obligatorio");
+    //    prueba :p
+     notify(' Advertencia:','El campo Departamento es obligatorio.','top', 'right', 'any', 'warning');
+       document.getElementById("departamento").focus();
+   }else if(document.getElementById('institucion').value==""){
+        notify(' Advertencia:','El campo Institución es obligatorio,','top', 'right', 'any', 'warning');
+       document.getElementById("institucion").focus();
+   }else if(document.getElementById('correlativo').value==""){
+        notify(' Advertencia:','El campo Correlativo es obligatorio','top', 'right', 'any', 'warning');
+       document.getElementById("correlativo").focus();
+   }else{
+      document.form.submit();  
+   }   
 }
 function tabla(){
     document.location.href="listaDepartamentos.php"; 
@@ -132,16 +194,17 @@ function tabla(){
                             
                         </div>
                         <form id="form"name="form" method="post" action="">
-                        <input type="hidden" name="bandera" id="bandera" value="1">
                        
 
                         <div class="row">
+                             <input type="hidden" name="bandera" id="bandera" value="1">
+                       
                             <div class="col-lg-6 col-md-6 col-sm-6 col-xs-12">
                                 <div class="form-example-int">
                                     <div class="form-group">
                                         <label>Departamento:</label>
                                         <div class="nk-int-st">
-                                        <input type="text" class="form-control input-sm" placeholder="Ingrese  nombre de departamento." id="departamento" name="departamento">
+                                        <input type="text" class="form-control input-sm" placeholder="Ingrese  nombre de departamento." id="departamento" name="departamento" required>
                                         </div>
                                     </div>
                                 </div>
@@ -153,8 +216,8 @@ function tabla(){
                             <div class="col-lg-6 col-md-6 col-sm-6 col-xs-12">
                             <label>Institución</label>
                                 <div class="bootstrap-select fm-cmp-mg">
-                                    <select class="selectpicker" data-live-search="true" name="institucion" id="institucion">
-                                    <option value="Seleccione">Seleccione</option>
+                                    <select class="selectpicker" data-live-search="true" name="institucion" id="institucion" > 
+                                    <option value="Seleccione">Seleccione</option required>
                                     <?php
                                      include 'config/conexion.php';
                                      $result = $conexion->query("select id_institucion as id,nombre FROM tinstitucion");
@@ -172,7 +235,7 @@ function tabla(){
                                     <div class="form-group">
                                         <label>Correlativo:</label>
                                         <div class="nk-int-st">
-                                        <input type="text" class="form-control input-sm" placeholder="Ingrese  un correlativo para departamento." id="correlativo" name="correlativo">
+                                        <input type="text" class="form-control input-sm" placeholder="Ingrese  un correlativo para departamento." id="correlativo" name="correlativo" required>
                                         </div>
                                     </div>
                                 </div>
@@ -182,7 +245,7 @@ function tabla(){
                             </div>
                             </div>
                            <div class="form-example-int mg-t-15">
-                            <button class="btn btn-success notika-btn-success" style="margin-left: 500px;" onclick="go();" >Guardar.</button>
+                            <button type="button" class="btn btn-success notika-btn-success" style="margin-left: 500px;" onclick="go();" >Guardar.</button>
                             <button type="button" class="btn btn-success notika-btn-success" onclick="tabla();">Cancelar</button>
                         </div>
                         </form>
@@ -266,6 +329,12 @@ function tabla(){
     <!-- main JS
 		============================================ -->
     <script src="js/main.js"></script>
+
+    <!--  notification JS
+        ============================================ -->
+        <script src="js/notification/bootstrap-growl.min.js"></script>
+        <script src="js/notification/notification-active.js"></script>
+
 	<!-- tawk chat JS
 		============================================ -->
     <!-- <script src="js/tawk-chat.js"></script> -->
@@ -274,10 +343,10 @@ function tabla(){
 </html>
 <?php
 include "config/conexion.php";
-$bandera  = $_REQUEST["bandera"];
-$departamento     = $_REQUEST["departamento"];
-$institucion      = $_REQUEST["institucion"];
-$correlativo     = $_REQUEST["correlativo"];
+$bandera  = $_POST["bandera"];
+$departamento     = $_POST["departamento"];
+$institucion      = $_POST["institucion"];
+$correlativo     = $_POST["correlativo"];
 if($bandera==1){
 
 $query = "SELECT nombre FROM tdepartamento WHERE nombre like '%".$departamento."';";
@@ -286,12 +355,12 @@ if($result->num_rows == 0){
 $consulta  = "INSERT INTO tdepartamento VALUES('null','" .$institucion. "','" .$departamento. "','" .$correlativo. "')";
     $resultado = $conexion->query($consulta);
       if($resultado){
-          msg("Se agregaron los datos correctamente");
+          msgI("Se agregaron los datos correctamente");
       } else {
-          msg("Error al insertar los datos");
+          msgE("Error al insertar los datos");
       }
 }else{
-  msg("Esta Departamento ya existe");
+  msgA("Esta Departamento ya existe");
 }
 }
 
@@ -300,7 +369,26 @@ function msg($texto)
 {
     echo "<script type='text/javascript'>";
     echo "alert('$texto');";
-    echo "document.location.href='ingresarDepartamento.php';";
+    echo "document.location.href='ingresarProducto.php';";
+    echo "</script>";
+}
+
+function msgI($texto)
+{
+    echo "<script type='text/javascript'>";
+    echo "notify('Exito','$texto','top', 'right', 'any', 'success');";
+    echo "</script>";
+}
+function msgA($texto)
+{
+    echo "<script type='text/javascript'>";
+    echo "notify('Advertencia','$texto','top', 'right', 'any', 'warning');";
+    echo "</script>";
+}
+function msgE($texto)
+{
+    echo "<script type='text/javascript'>";
+    echo "notify('Error','$texto','top', 'right', 'any', 'danger');";
     echo "</script>";
 }
 ?>
