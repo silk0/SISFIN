@@ -1,7 +1,7 @@
 <?php
 $id = $_REQUEST["id"];
 include "config/conexion.php";
-$result = $conexion->query("select p.precio_compra as precioco ,p.id_producto as idp, p.nombre as namep,prov.id_proveedor as idprov,prov.nombre as nameprov from tproducto as p,tproveedor as prov  where p.id_proveedor=prov.id_proveedor and id_producto=" . $id);
+$result = $conexion->query("select p.precio_compra as precioco ,p.stock as stock,p.id_producto as idp, p.nombre as namep,prov.id_proveedor as idprov,prov.nombre as nameprov from tproducto as p,tproveedor as prov  where p.id_proveedor=prov.id_proveedor and id_producto=" . $id);
 if ($result) {
     while ($fila = $result->fetch_object()) {
         $idR               = $fila->idp;
@@ -9,6 +9,7 @@ if ($result) {
         $idprov         = $fila->idprov;
         $nombreprov        = $fila->nameprov;
         $precioco= $fila->precioco;
+        $cantidad= $fila->stock;
        }
 }
 
@@ -41,7 +42,7 @@ if ($result) {
 		============================================ -->
     <link rel="stylesheet" href="css/owl.carousel.css">
     <link rel="stylesheet" href="css/owl.theme.css">
-    <link rel="stylesheet" href="css/owl.transitions.css">
+    <link rel="stylesheet" href|="css/owl.transitions.css">
     <!-- meanmenu CSS
 		============================================ -->
     <link rel="stylesheet" href="css/meanmenu/meanmenu.min.css">
@@ -118,7 +119,14 @@ if ($result) {
         function go(){
 
     //Validaciones
-   if(document.getElementById('precioco').value==""){
+    var can=document.getElementById("cantidad").value;
+    var canr=document.getElementById("cantidadr").value;
+    if (can<canr) {
+        alert(can);
+        alert(canr);
+        notify(' Advertencia:','No puede devolver mas productos de los que dispone.','top', 'right', 'any', 'warning');
+    }else{
+         if(document.getElementById('precioco').value==""){
  
      notify(' Advertencia:','El campo precio de compra es obligatorio.','top', 'right', 'any', 'warning');
        document.getElementById("precioco").focus();
@@ -128,7 +136,17 @@ if ($result) {
    }else{
       document.form.submit();  
    }   
+    }
+  
 } 
+    function calcular(){
+        
+        var precioco= document.getElementById("precioco").value;
+        var cantidad=document.getElementById("cantidad").value;
+     
+        var subtotal=precioco*cantidad; 
+        document.getElementById("subtotal").value=subtotal;
+    }
 
         function edit(id)
         {
@@ -225,9 +243,10 @@ if ($result) {
                             <h2>Datos de la devolución&nbsp;&nbsp;<?php echo $fecha=strftime( "%d-%m-%Y", time()); ?></h2>
                             
                         </div>
-                         <form name="form" method="post" action='registrarCompra.php?bandera=1&id=<?php echo $idR;?>'>
+                         <form name="form" method="post" action='devolverCompra.php?bandera=1&id=<?php echo $idR;?>'>
                         <input type="hidden" id="fechac" name="fechac" value="<?php echo $fecha;?>">
                         <input type="hidden" id="id" name="id" value="<?php echo $idR;?>">
+                        <input type="hidden" id="cantidadr" name="cantidadr" value="<?php echo $cantidad;?>">
                      
                        <div class="row">
                             <div class="col-lg-4 col-md-4 col-sm-4 col-xs-12">
@@ -257,7 +276,7 @@ if ($result) {
                                     <div class="form-group">
                                         <label>Precio de compra:</label>
                                         <div class="nk-int-st">
-                                        <input type="text" name="precioco" id="precioco" class="form-control input-sm" placeholder="$0.00"  value="<?php echo $precioco; ?>" >
+                                        <input type="text" name="precioco" readonly="true" id="precioco" class="form-control input-sm" placeholder="$0.00"  value="<?php echo $precioco; ?>" >
                                         </div>
                                     </div>
                                 </div>
@@ -267,7 +286,7 @@ if ($result) {
                                     <div class="form-group">
                                         <label>Cantidad:</label>
                                         <div class="nk-int-st">
-                                        <input type="text" name="cantidad" id="cantidad" class="form-control input-sm" placeholder="00" >
+                                        <input type="text" name="cantidad" id="cantidad" class="form-control input-sm" placeholder="00" onkeyup="calcular()">
                                         </div>
                                     </div>
                                 </div>
@@ -300,7 +319,7 @@ if ($result) {
                         
                         
                         <div class="form-example-int mg-t-15">
-                            <button class="btn btn-success notika-btn-success" style="margin-left: 500px;" onclick="go()" >Guardar.</button>
+                            <button type="button" class="btn btn-success notika-btn-success" style="margin-left: 500px;" onclick="go()" >Guardar.</button>
                         </div>
                         </form>
                     </div>
@@ -396,6 +415,7 @@ include "config/conexion.php";
 $accion=$_REQUEST['bandera'];
   $precio=$_POST['precioco'];
   $cantidad  = $_POST['cantidad'];
+
 if($accion==1){
 
     $consulta  = "INSERT INTO tcompras VALUES('null','" .$idR. "','" .$idprov. "',now(),'" .$precio. "','" .$cantidad. "')";
@@ -413,10 +433,10 @@ if($accion==1){
            msgI('Error consulta cantidad anterior.');
         }
         // Ahora vamos a actualizar el stock actual y establecer el precio de venta 
-        $margen=$margen/100;
-        $nprecioventa=($margen*$precio)+$precio;
-        $nstock=$cantidadAnterior+$cantidad;
-        $consulta2  = "UPDATE tproducto set precio_compra='" . $precio . "',precio_venta='" . $nprecioventa . "',stock='" . $nstock . "' where id_producto='" . $idR . "'";
+        // $margen=$margen/100;
+        // $nprecioventa=($margen*$precio)+$precio;
+        $nstock=$cantidadAnterior-$cantidad;
+        $consulta2  = "UPDATE tproducto set stock='" . $nstock . "' where id_producto='" . $idR . "'";
         $resultado2 = $conexion->query($consulta2);
         if($resultado2){
 
@@ -436,7 +456,7 @@ function msgK($idR,$cantidad,$precio)
     $fecha2=strftime( "%Y-%m-%d", time());
     echo "<script type='text/javascript'>";
     // echo "alert('Hola msgk');";
-    echo "kardex('add','".$idR."','".$fecha2."','Compra de producto.','1','".$cantidad."','".$precio."','".$subtotal."');";
+    echo "kardex('add','".$idR."','".$fecha2."','Devolucion de producto.','2','".$cantidad."','".$precio."','".$subtotal."');";
     echo "</script>";
 }
 function msgI($texto){
