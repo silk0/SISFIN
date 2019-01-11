@@ -430,7 +430,7 @@ if($accion==1){
       }     
 
 }
-function msgK($idR,$cantidad,$precio)
+function msgK($idR=null,$cantidad=null,$precio=null)
 {
      $subtotal=$cantidad*$precio;
     $fecha2=strftime( "%Y-%m-%d", time());
