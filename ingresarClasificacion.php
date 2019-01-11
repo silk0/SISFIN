@@ -64,9 +64,23 @@
 </head>
 <script  language=JavaScript> 
 function go(){
-    //validacion respectiva me da hueva
-    document.form.submit(); 
-}
+
+    //Validaciones
+   if(document.getElementById('clasificacion').value==""){
+    //    alert("El campo nombre es obligatorio");
+    //    prueba :p
+     notify(' Advertencia:','El campo Clasificación es obligatorio.','top', 'right', 'any', 'warning');
+       document.getElementById("clasificacion").focus();
+   }else if(document.getElementById('correlativo').value==""){
+        notify(' Advertencia:','El campo Correlativo es obligatorio,','top', 'right', 'any', 'warning');
+       document.getElementById("correlativo").focus();
+   }else if(document.getElementById('depreciacion').value==""){
+        notify(' Advertencia:','El campo Depreciación es obligatorio','top', 'right', 'any', 'warning');
+       document.getElementById("depreciacion").focus();
+   }else{
+      document.form.submit();  
+   }   
+} 
 
 function modificar(id){
        
@@ -176,11 +190,12 @@ function notify(titulo,texto,from, align, icon, type, animIn, animOut){
                             
                         </div>
                         <form id="form"name="form" method="post" action="">
-                        <input type="hidden" name="bandera" id="bandera" value="1">
+                       
                  
                         
 
                         <div class="row">
+                             <input type="hidden" name="bandera" id="bandera" value="1">
                             <div class="col-lg-12 col-md-12 col-sm-6 col-xs-12">
                                 <div class="form-example-int">
                                     <div class="form-group">
@@ -224,7 +239,7 @@ function notify(titulo,texto,from, align, icon, type, animIn, animOut){
                             </div>
                             </div>
                            <div class="form-example-int mg-t-15">
-                            <button class="btn btn-success notika-btn-success" style="margin-left: 500px;" onclick="go();" >Guardar</button>
+                            <button type="button" class="btn btn-success notika-btn-success" style="margin-left: 500px;" onclick="go();" >Guardar</button>
                             <button type="button" class="btn btn-success notika-btn-success" onclick="back();">Cancelar</button>
                         </div>
                         </form>
@@ -338,7 +353,7 @@ $consulta  = "INSERT INTO tclasificacion VALUES('null','" .$clasificacion. "','"
           msgE("Error al insertar los datos");
       }
 }else{
-  msg("Esta clasificacion ya existe");
+  msgA("Esta clasificacion ya existe");
 }
 }
 
