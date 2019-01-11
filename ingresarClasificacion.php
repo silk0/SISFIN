@@ -107,7 +107,7 @@ function enviar(id){
         success: function(response){
             alert(response);
             document.getElementById("nombre").value=response;
-            document.getElementById("idclasificacion").value=id;
+            document.getElementById("idclasificaion").value=id;
         }
     });
 } 
