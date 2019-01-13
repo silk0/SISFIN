@@ -233,7 +233,7 @@ function notify(titulo,texto,from, align, icon, type, animIn, animOut){
                                     <div class="form-group">
                                         <label>Correlativo:</label>
                                         <div class="nk-int-st">
-                                        <input type="text" class="form-control input-sm" placeholder="Ingrese  un correlativo para departamento." id="correlativo" name="correlativo">
+                                        <input type="text" class="form-control input-sm" placeholder="Ingrese  un correlativo para departamento." id="correlativo" name="correlativo" readonly>
                                         </div>
                                     </div>
                                 </div>

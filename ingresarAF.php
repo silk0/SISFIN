@@ -190,23 +190,7 @@ function tabla(){
                                     </select>
                                 </div>
                                 </div>
-                                <div class="col-lg-4 col-md-4 col-sm-4 col-xs-12 mg-t-20">
-                            <label>Usuario</label>
-                                <div class="bootstrap-select fm-cmp-mg">
-                                    <select class="selectpicker" data-live-search="true" name="institucion" id="institucion">
-                                    <option value="Seleccione">Seleccione</option>
-                                    <?php
-                                     include 'config/conexion.php';
-                                     $result = $conexion->query("select id_institucion as id,nombre FROM tinstitucion");
-                                     if ($result) {
-                                         while ($fila = $result->fetch_object()) {
-                                             echo "<option value='".$fila->id."'>".$fila->nombre."</option>";
-                                            }
-                                        }
-                                        ?>
-                                    </select>
-                                </div>
-                                </div>
+                              
                                 <div class="col-lg-4 col-md-4 col-sm-4 col-xs-12 mg-t-20">
                             <label>Encargado</label>
                                 <div class="bootstrap-select fm-cmp-mg">
@@ -224,8 +208,19 @@ function tabla(){
                                     </select>
                                 </div>
                                 </div>
-                                <div class="col-lg-4 col-md-4 col-sm-4 col-xs-12 mg-t-20">
-                            <label>Estado</label>
+                          
+                               
+                            <div class="col-lg-4 col-md-4 col-sm-4 col-xs-12 mg-t-15">
+                                <div class="form-group nk-datapk-ctm" id="data_2">
+                                    <label>Fecha de Adquicición:</label>
+                                    <div class="input-group date nk-int-st">
+                                        <span class="input-group-addon"></span>
+                                        <input type="text" class="form-control" data-mask="99/99/9999">
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-lg-4 col-md-4 col-sm-4 col-xs-12 mg-t-20">
+                            <label>Tipo de Uso</label>
                                 <div class="bootstrap-select fm-cmp-mg">
                                     <select class="selectpicker" data-live-search="true" name="institucion" id="institucion">
                                     <option value="Seleccione">Seleccione</option>
@@ -241,31 +236,7 @@ function tabla(){
                                     </select>
                                 </div>
                                 </div>
-                                <div class="col-lg-4 col-md-4 col-sm-4 col-xs-12 mg-t-20">
-                                <div class="form-example-int">
-                                    <div class="form-group">
-                                        <label>Estado:</label>
-                                        <div class="nk-int-st">
-                                        <input type="text" class="form-control input-sm" placeholder="Ingrese  un correlativo para departamento." id="correlativo" name="correlativo">
-                                        </div>
-                                    </div>
-                                </div>
-                                <div class="col-lg-1 col-md-1 col-sm-1 col-xs-12">
-                               <div class="">
-                            </div>
-                            </div>
-                            </div>
-                               
-                            <div class="col-lg-4 col-md-4 col-sm-4 col-xs-12 mg-t-15">
-                                <div class="form-group nk-datapk-ctm" id="data_2">
-                                    <label>Fecha de Adquicición:</label>
-                                    <div class="input-group date nk-int-st">
-                                        <span class="input-group-addon"></span>
-                                        <input type="text" class="form-control" data-mask="99/99/9999" value="today">
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="col-lg-3 col-md-3 col-sm-3 col-xs-12 mg-t-20">
+                            <div class="col-lg-6 col-md-6 col-sm-6 col-xs-12 mg-t-20">
                                 <div class="form-example-int">
                                     <div class="form-group">
                                         <label>Correlativo:</label>
