@@ -4,9 +4,9 @@
             <div class="row">
                 <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
                     <ul class="nav nav-tabs notika-menu-wrap menu-it-icon-pro">
-                        <li><a data-toggle="tab" href="#Home"><i class="notika-icon notika-support"></i> Clientes</a>
+                    <li><a data-toggle="tab" href="#Home"><i class="notika-icon notika-finance"></i>Clientes</a>
                         </li>
-                        <li><a data-toggle="tab" href="#Tables"><i class="notika-icon notika-finance"></i> Fiadores</a>
+                        <li><a data-toggle="tab" href="#Tables"><i class="notika-icon notika-support"></i> Empleados</a>
                         </li>
                         <li><a data-toggle="tab" href="#Forms"><i class="notika-icon notika-form"></i> Inventario</a>
                         </li>
@@ -28,15 +28,16 @@
                         
                         <div id="Home" class="tab-pane in active notika-tab-menu-bg animated flipInX">
                             <ul class="notika-main-menu-dropdown">
-                                <li><a href="ingresoCliente.php">Registrar Cliente</a>
+                            <li><a href="ingresoCliente.php">Registrar Cliente</a>
                                 </li>
                                 <li><a href="mostrarClientes.php">Mostrar Clientes</a>
                                 </li>
-                                <!-- <li><a href="fiadores.php">Fiadores</a>
-                                </li>
-                                <li><a href="carteras.php">Carteras de Clientes</a>
-                                </li>                               
-                                -->
+                                <li><a href="ingresarFiador.php">Registrar Fiador</a>
+                                </li> 
+                                <li><a href="mostrarFiadores.php">Mostrar Fiadores</a>
+                                </li> 
+                            
+                               
                             </ul>
                         </div>
                         
@@ -46,18 +47,15 @@
                                 </li>
                                 <li><a href="listaAF.php">Lista de Activos</a>
                                 </li>
-                                <li><a href="listaEncargado.php">Encargados</a>
-                                </li>
                                 <li><a href="listaInstituciones.php">Instituciones</a>
                                 </li>
                                 <li><a href="listaDepartamentos.php">Departamentos</a>
                                 </li>
                                 <li><a href="listaTipoActivo.php">Tipos de Activos</a>
                                 </li>
-                                <li><a href="listaClasificacion.php">Clasificion de Activos</a>
+                                <li><a href="listaClasificacion.php">Clasificacion de Activos</a>
                                 </li>
-                                <li><a href="view-email.html">Estado</a>
-                                </li>
+                                
                             </ul>
                         </div>
                         <div id="Interface" class="tab-pane notika-tab-menu-bg animated flipInX">
@@ -90,14 +88,12 @@
                         </div>
                         <div id="Tables" class="tab-pane notika-tab-menu-bg animated flipInX">
                             <ul class="notika-main-menu-dropdown">
-                                <li><a href="ingresarFiador.php">Registrar</a>
-                                </li> 
-                                <li><a href="mostrarFiadores.php">Mostrar</a>
-                                </li>    
-                                 <!-- <li><a href="normal-table.html">Normal Table</a>
-                                </li>                                
-                                <li><a href="data-table.html">Data Table</a>
-                                </li> -->
+                                  
+                              
+                            <li><a href="fiadores.php">Registrar Empleado</a>
+                                </li>
+                                <li><a href="carteras.php">Mostrar Empleados</a>
+                                </li>   
                             </ul>
                         </div>
                        

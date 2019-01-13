@@ -1,7 +1,7 @@
 (function ($) {
  "use strict";
   $('#data_1 .input-group.date').datepicker({
-	startView: 1,
+
 	todayBtn: "linked",
 	keyboardNavigation: false,
 	forceParse: false,
