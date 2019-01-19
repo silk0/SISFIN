@@ -81,7 +81,7 @@ if ($bandera=="add") {
     $nuevoValorTotalS=number_format($nuevoValorTotalS, 2, ".", "");
     $valorUnitarioS=$nuevoValorTotalS/$productosDisponibles;
     $valorUnitarioS=number_format($valorUnitarioS, 2, ".", "");
-    $consulta3  = "INSERT INTO kardex VALUES('null','" . $idproducto . "','" . $fecha . "','" . $descripcion . "','" . $accion . "','" . $cantidad . "','" . $vunitario . "','" . $cantidadP . "','" . $valorUnitarioS . "','" . $nuevoValorTotalS . "')";
+    $consulta3  = "INSERT INTO kardex VALUES('null','" . $idproducto . "','" . $fecha . "','" . $descripcion . "','" . $accion . "','" . $cantidad . "','" . $vunitario . "','" . $productosDisponibles . "','" . $valorUnitarioS . "','" . $nuevoValorTotalS . "')";
     $resultado3 = $conexion->query($consulta3);
     if ($resultado3) {
         //msg("Exito Compra");
