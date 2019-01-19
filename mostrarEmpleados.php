@@ -147,7 +147,7 @@ if ($result) {
         echo "<td>" . $fila->dui . "</td>";  
         echo "<td>" . $fila->zona . "</td>";
         echo "<td>" . $fila->usuario . "</td>";
-        echo "<td>" . $fila->nivel . "</td>";
+        echo "<td>" . $fila->rol . "</td>";
         echo "<td>
         <div class='button-icon-btn'>
         
