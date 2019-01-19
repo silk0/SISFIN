@@ -222,7 +222,7 @@ function go(){
                             <h2>Datos del Empleado.</h2>
                             
                         </div>
-                        <form name="form" method="post" action="../SISFIN/scriptsphp/modificarFiador.php?bandera=1">
+                        <form name="form" method="post" action="../SISFIN/scriptsphp/modificarFiador.php?bandera=2">
                         <input type="hidden" name="baccion" id="baccion" value="<?php echo $idR; ?>">
                        
                         <div class="row">
@@ -436,28 +436,8 @@ function go(){
 
 </html>
 <?php
-include "config/conexion.php";
-$accion = $_REQUEST['bandera'];
-$baccion  = $_REQUEST["baccion"];
-if($accion==1){
-$nombre     = $_POST['nombre'];
-$apellido   = $_POST['apellido'];
-$direccion  = $_POST['direc'];
-$dui        = $_POST['dui'];
-$usuario    = $_POST['usuario'];
-$contrasena = $_POST['contrasena'];
-$nivel      = $_POST['nivel'];
 
 
-$consulta  = "UPDATE templeados set nombre='" . $nombre . "',apellido='" . $apellido . "',zona='" . $direccion . "',dui='" . $dui . "',usuario='" . $usuario . "',pass='" . $contrasena . "',rol='" . $nivel . "' where id_empleado='" . $baccion . "'";
-    $resultado = $conexion->query($consulta);
-      if ($resultado) {
-          msgI("Se modificaron los datos correctamente");
-      } else {
-          msgE("Error al insertar los datos");
-      }
-
-}
 function msg($texto)
 {
     echo "<script type='text/javascript'>";

@@ -242,7 +242,7 @@ function recuperar(id){
                             <h2>Datos del Fiador.</h2>
                             
                         </div>
-                        <form id="form" name="form" method="post" action="editarFiador.php?bandera=1">
+                        <form id="form" name="form" method="post" action="../SISFIN/scriptsphp/modificarFiador.php?bandera=1">
                         <input type="hidden" name="baccion" id="baccion" value="<?php echo $idR; ?>">
                         
                         <div class="row">
