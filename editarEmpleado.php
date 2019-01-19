@@ -11,7 +11,7 @@ if ($result) {
         $duiR              = $fila->dui;
         $usuarioR          = $fila->usuario;
         $contrasenaR       = $fila->pass;
-        $nivelR            = $fila->nivel;
+        $nivelR            = $fila->rol;
         
        }
 }
@@ -126,39 +126,39 @@ function notify(titulo,texto,from, align, icon, type, animIn, animOut){
     }
 function go(){
 
-    //Validaciones
-   if(document.getElementById('nombre').value==""){
-    //    alert("El campo nombre es obligatorio");
-    //    prueba :p
-     notify(' Advertencia:','El campo Nombre es obligatorio.','top', 'right', 'any', 'warning');
-       document.getElementById("nombre").focus();
-   }else if(document.getElementById('apellido').value==""){
-        notify(' Advertencia:','El campo Apellido es obligatorio,','top', 'right', 'any', 'warning');
-       document.getElementById("apellido").focus();
-   }else if(document.getElementById('dui').value==""){
-        notify(' Advertencia:','El campo DUI es obligatorio','top', 'right', 'any', 'warning');
-       document.getElementById("dui").focus();
-   }else if(document.getElementById('nit').value==""){
-        notify(' Advertencia:','El campo NIT es obligatorio', 'top', 'right', 'any', 'warning');
-       document.getElementById("nit").focus();
-   }else if(document.getElementById('direc').value==""){
-        notify(' Advertencia:','El campo Direccion es obligatorio', 'top', 'right', 'any', 'warning');
-       document.getElementById("direc").focus();
-   }else if(document.getElementById('telefono').value=="" && document.getElementById('celular').value==""){
-        notify(' Advertencia:','Ingrese telefono', 'top', 'right', 'any', 'warning');
-       document.getElementById("telefono").focus();
-   }else if(document.getElementById('email').value==""){
-        notify(' Advertencia:','El campo E-mail es obligatorio,','top', 'right', 'any', 'warning');
-       document.getElementById("email").focus();
-   }else if(document.getElementById('trabajo').value==""){
-        notify(' Advertencia:','El campo Tabajo que realiza es obligatorio', 'top', 'right', 'any', 'warning');
-       document.getElementById("trabajo").focus();
-   }else if(document.getElementById('salario').value==""){
-        notify(' Advertencia:','El campo Salario  es obligatorio', 'top', 'right', 'any', 'warning');
-       document.getElementById("salario").focus();
-   }else{
+//     //Validaciones
+//    if(document.getElementById('nombre').value==""){
+//     //    alert("El campo nombre es obligatorio");
+//     //    prueba :p
+//      notify(' Advertencia:','El campo Nombre es obligatorio.','top', 'right', 'any', 'warning');
+//        document.getElementById("nombre").focus();
+//    }else if(document.getElementById('apellido').value==""){
+//         notify(' Advertencia:','El campo Apellido es obligatorio,','top', 'right', 'any', 'warning');
+//        document.getElementById("apellido").focus();
+//    }else if(document.getElementById('dui').value==""){
+//         notify(' Advertencia:','El campo DUI es obligatorio','top', 'right', 'any', 'warning');
+//        document.getElementById("dui").focus();
+//    }else if(document.getElementById('nit').value==""){
+//         notify(' Advertencia:','El campo NIT es obligatorio', 'top', 'right', 'any', 'warning');
+//        document.getElementById("nit").focus();
+//    }else if(document.getElementById('direc').value==""){
+//         notify(' Advertencia:','El campo Direccion es obligatorio', 'top', 'right', 'any', 'warning');
+//        document.getElementById("direc").focus();
+//    }else if(document.getElementById('telefono').value=="" && document.getElementById('celular').value==""){
+//         notify(' Advertencia:','Ingrese telefono', 'top', 'right', 'any', 'warning');
+//        document.getElementById("telefono").focus();
+//    }else if(document.getElementById('email').value==""){
+//         notify(' Advertencia:','El campo E-mail es obligatorio,','top', 'right', 'any', 'warning');
+//        document.getElementById("email").focus();
+//    }else if(document.getElementById('trabajo').value==""){
+//         notify(' Advertencia:','El campo Tabajo que realiza es obligatorio', 'top', 'right', 'any', 'warning');
+//        document.getElementById("trabajo").focus();
+//    }else if(document.getElementById('salario').value==""){
+//         notify(' Advertencia:','El campo Salario  es obligatorio', 'top', 'right', 'any', 'warning');
+//        document.getElementById("salario").focus();
+//    }else{
       document.form.submit();  
-   }   
+//    }   
 }
 
 </script> 
@@ -259,26 +259,20 @@ function go(){
                                 
                                 <label>Nivel</label>
                                 <div class="bootstrap-select fm-cmp-mg">
-                                    <select class="selectpicker" data-live-search="true" name="nivel" id="nivel">
+                                    <select class="selectpicker" data-live-search="true" name="rol" id="rol">
                                     <option value="Seleccione">Seleccione</option>
                                     <?php
-                                    if($nivelR=="1"){
+                                    if($nivelR=="Administrador"){
                                         ?>
-                                        <option selected>1</option>
-                                        <option>2</option>
-                                        <option>3</option>
+                                        <option selected>Administrador</option>
+                                        <option>Vendedor</option>
+                                
                                         <?php
-                                    }else if($nivelR=="2"){
+                                    }else if($nivelR=="Vendedor"){
                                         ?>
-                                        <option>1</option>
-                                        <option selected>2</option>
-                                        <option>2</option>
-                                        <?php
-                                    }else if($nivelR=="3"){
-                                        ?>
-                                        <option>1</option>
-                                        <option>2</option>
-                                        <option selected>3</option>
+                                        <option>Administrador</option>
+                                        <option selected>Vendedor</option>
+                              
                                         <?php
                                     }
                                     ?>
@@ -305,7 +299,7 @@ function go(){
                         
                             
                             <div class="row">
-                            <div class="col-lg-6 col-md-6 col-sm-6 col-xs-12">
+                            <div class="col-lg-4 col-md-4 col-sm-4 col-xs-12">
                                 <div class="form-example-int">
                                     <div class="form-group">
                                         <label>Usuario:</label>
@@ -315,12 +309,22 @@ function go(){
                                     </div>
                                 </div>
                             </div>
-                            <div class="col-lg-6 col-md-6 col-sm-6 col-xs-12">
+                            <div class="col-lg-4 col-md-4 col-sm-4 col-xs-12">
                                 <div class="form-example-int">
                                     <div class="form-group">
                                         <label>Contraseña:</label>
                                         <div class="nk-int-st">
-                                        <input type="text" id="contrasena" name="contrasena" class="form-control input-sm" placeholder="Ingrese una contraseña para su respectivo usuario." value="<?php echo $contrasenaR; ?>" required>
+                                        <input type="password" id="contrasena" name="contrasena" class="form-control input-sm" placeholder="Ingrese una contraseña para su respectivo usuario." value="<?php echo $contrasenaR; ?>" required>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-lg-4 col-md-4 col-sm-4 col-xs-12">
+                                <div class="form-example-int">
+                                    <div class="form-group">
+                                        <label>Repita Contraseña:</label>
+                                        <div class="nk-int-st">
+                                        <input type="password" id="contrasena1" name="contrasena1" class="form-control input-sm" placeholder="Ingrese una contraseña para su respectivo usuario." value="<?php echo $contrasenaR; ?>" required>
                                         </div>
                                     </div>
                                 </div>
@@ -439,7 +443,7 @@ $contrasena = $_POST['contrasena'];
 $nivel      = $_POST['nivel'];
 
 
-$consulta  = "UPDATE templeados set nombre='" . $nombre . "',apellido='" . $apellido . "',zona='" . $direccion . "',dui='" . $dui . "',usuario='" . $usuario . "',pass='" . $contrasena . "',nivel='" . $nivel . "' where id_empleado='" . $baccion . "'";
+$consulta  = "UPDATE templeados set nombre='" . $nombre . "',apellido='" . $apellido . "',zona='" . $direccion . "',dui='" . $dui . "',usuario='" . $usuario . "',pass='" . $contrasena . "',rol='" . $nivel . "' where id_empleado='" . $baccion . "'";
     $resultado = $conexion->query($consulta);
       if ($resultado) {
           msg("Se modificaron los datos correctamente");

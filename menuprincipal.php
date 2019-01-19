@@ -90,9 +90,9 @@
                             <ul class="notika-main-menu-dropdown">
                                   
                               
-                            <li><a href="fiadores.php">Registrar Empleado</a>
+                            <li><a href="ingresarEmpleado.php">Registrar Empleado</a>
                                 </li>
-                                <li><a href="carteras.php">Mostrar Empleados</a>
+                                <li><a href="mostrarEmpleados.php">Mostrar Empleados</a>
                                 </li>   
                             </ul>
                         </div>
