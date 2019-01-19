@@ -3,7 +3,7 @@
 -- http://www.phpmyadmin.net
 --
 -- Servidor: 127.0.0.1
--- Tiempo de generación: 09-01-2019 a las 15:42:08
+-- Tiempo de generación: 20-01-2019 a las 00:28:13
 -- Versión del servidor: 5.6.24
 -- Versión de PHP: 5.6.8
 
@@ -37,16 +37,17 @@ CREATE TABLE IF NOT EXISTS `kardex` (
   `cantidads` int(11) NOT NULL,
   `vunitarios` float NOT NULL,
   `vtotals` float NOT NULL
-) ENGINE=InnoDB AUTO_INCREMENT=4 DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB AUTO_INCREMENT=30 DEFAULT CHARSET=latin1;
 
 --
 -- Volcado de datos para la tabla `kardex`
 --
 
 INSERT INTO `kardex` (`id_kardex`, `id_producto`, `fecha`, `descripcion`, `movimiento`, `cantidad`, `vunitario`, `cantidads`, `vunitarios`, `vtotals`) VALUES
-(1, 2, '0000-00-00', 'Primer ingreso de productos.', 1, 10, 3, 20, 2, 33),
-(2, 2, '0000-00-00', 'Compra de producto.', 1, 10, 3.5, 30, 2.27, 68),
-(3, 2, '2019-01-08', 'Compra de producto.', 1, 10, 2.5, 40, 2.33, 93);
+(26, 3, '2019-01-19', 'Primer ingreso de productos.', 1, 10, 25, 10, 25, 250),
+(27, 3, '2019-01-19', 'Devolucion de producto.', 2, 5, 25, 5, 25, 125),
+(28, 3, '2019-01-19', 'Devolucion de producto.', 2, 1, 25, 4, 25, 100),
+(29, 3, '2019-01-20', 'Compra de producto.', 1, 10, 20, 14, 21.43, 300);
 
 -- --------------------------------------------------------
 
@@ -120,7 +121,14 @@ CREATE TABLE IF NOT EXISTS `tclasificacion` (
   `nombre` varchar(50) NOT NULL,
   `correlativo` varchar(50) NOT NULL,
   `tiempo_depreciacion` int(10) NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=latin1;
+
+--
+-- Volcado de datos para la tabla `tclasificacion`
+--
+
+INSERT INTO `tclasificacion` (`id_clasificaion`, `nombre`, `correlativo`, `tiempo_depreciacion`) VALUES
+(1, 'jkhkjhkj', '89787', 0);
 
 -- --------------------------------------------------------
 
@@ -180,16 +188,17 @@ CREATE TABLE IF NOT EXISTS `tcompras` (
   `fecha` date NOT NULL,
   `precio` float NOT NULL,
   `cantidad` int(11) NOT NULL
-) ENGINE=InnoDB AUTO_INCREMENT=24 DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB AUTO_INCREMENT=49 DEFAULT CHARSET=latin1;
 
 --
 -- Volcado de datos para la tabla `tcompras`
 --
 
 INSERT INTO `tcompras` (`id_compras`, `id_producto`, `id_proveedor`, `fecha`, `precio`, `cantidad`) VALUES
-(21, 2, 1, '2019-01-08', 3.25, 10),
-(22, 2, 1, '2019-01-08', 3.5, 10),
-(23, 2, 1, '2019-01-08', 2.5, 10);
+(45, 3, 1, '2019-01-19', 25, 10),
+(46, 3, 1, '2019-01-19', 25, 5),
+(47, 3, 1, '2019-01-19', 25, 1),
+(48, 3, 1, '2019-01-19', 20, 10);
 
 -- --------------------------------------------------------
 
@@ -229,6 +238,21 @@ CREATE TABLE IF NOT EXISTS `tdetalle_venta` (
 -- --------------------------------------------------------
 
 --
+-- Estructura de tabla para la tabla `tdevolucion`
+--
+
+CREATE TABLE IF NOT EXISTS `tdevolucion` (
+  `id_devolucion` int(11) NOT NULL,
+  `id_producto` int(11) NOT NULL,
+  `id_proveedor` int(11) NOT NULL,
+  `fecha` date NOT NULL,
+  `precio` float NOT NULL,
+  `cantidad` int(11) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+-- --------------------------------------------------------
+
+--
 -- Estructura de tabla para la tabla `templeados`
 --
 
@@ -253,7 +277,14 @@ CREATE TABLE IF NOT EXISTS `tencargado` (
   `nombre` varchar(50) NOT NULL,
   `apellido` varchar(50) NOT NULL,
   `dui` varchar(20) NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=latin1;
+
+--
+-- Volcado de datos para la tabla `tencargado`
+--
+
+INSERT INTO `tencargado` (`id_encargado`, `nombre`, `apellido`, `dui`) VALUES
+(1, 'Marcos Alonso', 'Iniesta Messi', '23490289-3');
 
 -- --------------------------------------------------------
 
@@ -312,7 +343,7 @@ CREATE TABLE IF NOT EXISTS `tinstitucion` (
 --
 
 INSERT INTO `tinstitucion` (`id_institucion`, `nombre`, `correlativo`) VALUES
-(1, '', ''),
+(1, 'FINSEPROINSEPRO', ''),
 (2, '', ''),
 (3, '', ''),
 (4, '', ''),
@@ -374,14 +405,14 @@ CREATE TABLE IF NOT EXISTS `tproducto` (
   `stock` int(10) NOT NULL,
   `codigo` varchar(8) NOT NULL,
   `estado` int(11) NOT NULL
-) ENGINE=InnoDB AUTO_INCREMENT=3 DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB AUTO_INCREMENT=4 DEFAULT CHARSET=latin1;
 
 --
 -- Volcado de datos para la tabla `tproducto`
 --
 
 INSERT INTO `tproducto` (`id_producto`, `id_proveedor`, `id_categoria`, `nombre`, `descripcion`, `precio_compra`, `precio_venta`, `margen`, `stock_minimo`, `stock`, `codigo`, `estado`) VALUES
-(2, 1, 1, 'Lavadora LG', 'Lavadora con capacidad de 20 libras, extra clean.', 2.5, 2.625, 5, 20, 30, '000001', 1);
+(3, 1, 1, 'Lavadora Mabe', 'LAvadora bonita blanca.', 20, 22, 10, 10, 14, 'LM001', 1);
 
 -- --------------------------------------------------------
 
@@ -512,6 +543,12 @@ ALTER TABLE `tdetalle_venta`
   ADD KEY `fk_ventas` (`id_venta`), ADD KEY `fk_producto` (`id_producto`);
 
 --
+-- Indices de la tabla `tdevolucion`
+--
+ALTER TABLE `tdevolucion`
+  ADD PRIMARY KEY (`id_devolucion`), ADD KEY `fk_devpro` (`id_producto`), ADD KEY `fk_devprov` (`id_proveedor`);
+
+--
 -- Indices de la tabla `templeados`
 --
 ALTER TABLE `templeados`
@@ -591,7 +628,7 @@ ALTER TABLE `tventas`
 -- AUTO_INCREMENT de la tabla `kardex`
 --
 ALTER TABLE `kardex`
-  MODIFY `id_kardex` int(11) NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=4;
+  MODIFY `id_kardex` int(11) NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=30;
 --
 -- AUTO_INCREMENT de la tabla `tactivo`
 --
@@ -611,7 +648,7 @@ ALTER TABLE `tcategoria`
 -- AUTO_INCREMENT de la tabla `tclasificacion`
 --
 ALTER TABLE `tclasificacion`
-  MODIFY `id_clasificaion` int(10) NOT NULL AUTO_INCREMENT;
+  MODIFY `id_clasificaion` int(10) NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=2;
 --
 -- AUTO_INCREMENT de la tabla `tclientes`
 --
@@ -626,12 +663,17 @@ ALTER TABLE `tclientes_fiador`
 -- AUTO_INCREMENT de la tabla `tcompras`
 --
 ALTER TABLE `tcompras`
-  MODIFY `id_compras` int(11) NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=24;
+  MODIFY `id_compras` int(11) NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=49;
 --
 -- AUTO_INCREMENT de la tabla `tdepartamento`
 --
 ALTER TABLE `tdepartamento`
   MODIFY `id_departamento` int(10) NOT NULL AUTO_INCREMENT;
+--
+-- AUTO_INCREMENT de la tabla `tdevolucion`
+--
+ALTER TABLE `tdevolucion`
+  MODIFY `id_devolucion` int(11) NOT NULL AUTO_INCREMENT;
 --
 -- AUTO_INCREMENT de la tabla `templeados`
 --
@@ -641,7 +683,7 @@ ALTER TABLE `templeados`
 -- AUTO_INCREMENT de la tabla `tencargado`
 --
 ALTER TABLE `tencargado`
-  MODIFY `id_encargado` int(10) NOT NULL AUTO_INCREMENT;
+  MODIFY `id_encargado` int(10) NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=2;
 --
 -- AUTO_INCREMENT de la tabla `testado`
 --
@@ -676,7 +718,7 @@ ALTER TABLE `tplan_pago`
 -- AUTO_INCREMENT de la tabla `tproducto`
 --
 ALTER TABLE `tproducto`
-  MODIFY `id_producto` int(10) NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=3;
+  MODIFY `id_producto` int(10) NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=4;
 --
 -- AUTO_INCREMENT de la tabla `tproveedor`
 --
@@ -752,6 +794,13 @@ ADD CONSTRAINT `fk_venta` FOREIGN KEY (`id_venta`) REFERENCES `tventas` (`id_ven
 ALTER TABLE `tdetalle_venta`
 ADD CONSTRAINT `fk_producto` FOREIGN KEY (`id_producto`) REFERENCES `tproducto` (`id_producto`),
 ADD CONSTRAINT `fk_ventas` FOREIGN KEY (`id_venta`) REFERENCES `tventas` (`id_venta`);
+
+--
+-- Filtros para la tabla `tdevolucion`
+--
+ALTER TABLE `tdevolucion`
+ADD CONSTRAINT `fk_devpro` FOREIGN KEY (`id_producto`) REFERENCES `tproducto` (`id_producto`),
+ADD CONSTRAINT `fk_devprov` FOREIGN KEY (`id_proveedor`) REFERENCES `tproveedor` (`id_proveedor`);
 
 --
 -- Filtros para la tabla `tinventario`
