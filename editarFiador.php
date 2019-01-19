@@ -70,6 +70,10 @@ if ($result) {
     <!-- style CSS
 		============================================ -->
     <link rel="stylesheet" href="style.css">
+
+    <!-- notification CSS
+        ============================================ -->
+    <link rel="stylesheet" href="css/notification/notification.css">
     <!-- responsive CSS
 		============================================ -->
     <link rel="stylesheet" href="css/responsive.css">
@@ -79,9 +83,107 @@ if ($result) {
 </head>
 <SCRIPT  language=JavaScript> 
 function go(){
-        document.form.submit();  
-       
+
+    //Validaciones
+   if(document.getElementById('nombre').value==""){
+    //    alert("El campo nombre es obligatorio");
+    //    prueba :p
+     notify(' Advertencia:','El campo Nombre es obligatorio.','top', 'right', 'any', 'warning');
+       document.getElementById("nombre").focus();
+   }else if(document.getElementById('apellido').value==""){
+        notify(' Advertencia:','El campo Apellido es obligatorio,','top', 'right', 'any', 'warning');
+       document.getElementById("apellido").focus();
+   }else if(document.getElementById('dui').value==""){
+        notify(' Advertencia:','El campo DUI es obligatorio','top', 'right', 'any', 'warning');
+       document.getElementById("dui").focus();
+   }else if(document.getElementById('nit').value==""){
+        notify(' Advertencia:','El campo NIT es obligatorio', 'top', 'right', 'any', 'warning');
+       document.getElementById("nit").focus();
+   }else if(document.getElementById('direc').value==""){
+        notify(' Advertencia:','El campo Direccion es obligatorio', 'top', 'right', 'any', 'warning');
+       document.getElementById("direc").focus();
+   }else if(document.getElementById('telefono').value=="" && document.getElementById('celular').value==""){
+        notify(' Advertencia:','Ingrese telefono', 'top', 'right', 'any', 'warning');
+       document.getElementById("telefono").focus();
+   }else if(document.getElementById('email').value==""){
+        notify(' Advertencia:','El campo E-mail es obligatorio,','top', 'right', 'any', 'warning');
+       document.getElementById("email").focus();
+   }else if(document.getElementById('trabajo').value==""){
+        notify(' Advertencia:','El campo Tabajo que realiza es obligatorio', 'top', 'right', 'any', 'warning');
+       document.getElementById("trabajo").focus();
+   }else if(document.getElementById('salario').value==""){
+        notify(' Advertencia:','El campo Salario  es obligatorio', 'top', 'right', 'any', 'warning');
+       document.getElementById("salario").focus();
+   }else{
+      document.form.submit();  
+   }   
+}
+
+function notify(titulo,texto,from, align, icon, type, animIn, animOut){
+        $.growl({
+            icon: icon,
+            title: titulo+" ",
+            message: texto,
+            url: ''
+        },{
+                element: 'body',
+                type: type,
+                allow_dismiss: true,
+                placement: {
+                        from: from,
+                        align: align
+                },
+                offset: {
+                    x: 20,
+                    y: 85
+                },
+                spacing: 10,
+                z_index: 1031,
+                delay: 2500,
+                timer: 1000,
+                url_target: '_blank',
+                mouse_over: false,
+                animate: {
+                        enter: animIn,
+                        exit: animOut
+                },
+                icon_type: 'class',
+                template: '<div data-growl="container" class="alert" role="alert">' +
+                                '<button type="button" class="close" data-growl="dismiss">' +
+                                    '<span aria-hidden="true">&times;</span>' +
+                                    '<span class="sr-only">Close</span>' +
+                                '</button>' +
+                                '<span data-growl="icon"></span>' +
+                                '<span data-growl="title"></span>' +
+                                '<span data-growl="message"></span>' +
+                                '<a href="#" data-growl="url"></a>' +
+                            '</div>'
+        });
+    }
+
+function recuperar(id){
+    
+    $.ajax({
+        data:{"id":id},
+        url: 'scriptsphp/recuperarFiador.php',
+        type: 'post',
+        beforeSend: function(){
+            alert("Por favr espere...");
+        },
+        success: function(response){
+            alert(response);
+            document.getElementById("fiador").value=response;
+            document.getElementById("idfiador").value=id;
+        }
+    });
 } 
+        function modify(id){
+       document.location.href="editarFiador.php?id="+id;
+   }
+
+   function back(){
+        document.location.href="/SISFIN/mostrarFiadores.php";
+    }
 
 </script> 
 <body>
@@ -264,7 +366,9 @@ function go(){
                         </div>
                        
                         <div class="form-example-int mg-t-15">
-                            <button class="btn btn-success notika-btn-success" onclick="go();">Modificar.</button>
+                            <button class="btn btn-success notika-btn-success" onclick="go();">Guardar cambios.</button>
+                             <button type="reset" class="btn btn-warning notika-btn-warning">Restablecer</button>
+                            <button type="button" class="btn btn-warning notika-btn-warning" onclick="back();">Cancelar</button>
                         </div>
                         </form>
                     </div>
@@ -343,6 +447,11 @@ function go(){
     <!-- main JS
 		============================================ -->
     <script src="js/main.js"></script>
+
+     <!--  notification JS
+        ============================================ -->
+        <script src="js/notification/bootstrap-growl.min.js"></script>
+    <script src="js/notification/notification-active.js"></script>
 	<!-- tawk chat JS
 		============================================ -->
     <!-- <script src="js/tawk-chat.js"></script> -->
