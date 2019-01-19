@@ -64,6 +64,11 @@
     <script src="js/vendor/modernizr-2.8.3.min.js"></script>
     <script>
 
+        function go(){
+    //validacion respectiva me da hueva
+        document.form.submit();  
+} 
+
     function notify(titulo,texto,from, align, icon, type, animIn, animOut){
         $.growl({
             icon: icon,

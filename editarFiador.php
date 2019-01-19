@@ -168,7 +168,7 @@ function recuperar(id){
         url: 'scriptsphp/recuperarFiador.php',
         type: 'post',
         beforeSend: function(){
-            alert("Por favr espere...");
+            alert("Por favor espere...");
         },
         success: function(response){
             alert(response);
