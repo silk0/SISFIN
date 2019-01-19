@@ -55,6 +55,9 @@
     <!-- style CSS
 		============================================ -->
     <link rel="stylesheet" href="style.css">
+     <!-- notification CSS
+        ============================================ -->
+        <link rel="stylesheet" href="css/notification/notification.css">
     <!-- responsive CSS
 		============================================ -->
     <link rel="stylesheet" href="css/responsive.css">
@@ -71,6 +74,68 @@ function go(){
 function tabla(){
     document.location.href="listaAF.php"; 
 }
+function enviar(){
+        var idt=document.getElementById("tipo").value;
+        var idd=document.getElementById("dpto").value;
+       
+        if(idt=="Seleccione" || idd=="Seleccione"){
+            notify(' Advertencia:','Seleccione el tipo de activo y el departamento al que pertenece para generar correlativo','top', 'right', 'any', 'warning');
+        }else{
+            $.ajax({
+        data:{"id":5,"idd":idd,"idt":idt,},
+        url: 'scriptsphp/recuperarCorrelativo.php',
+        type: 'post',
+        beforeSend: function(){
+          notify('Exito','Codigo Generado','top', 'right', 'any', 'success');
+        },
+        success: function(response){
+            document.getElementById("correlativo").value=response;
+        }
+        });
+        }
+} 
+function notify(titulo,texto,from, align, icon, type, animIn, animOut){
+        $.growl({
+            icon: icon,
+            title: titulo+" ",
+            message: texto,
+            url: ''
+        },{
+                element: 'body',
+                type: type,
+                allow_dismiss: true,
+                placement: {
+                        from: from,
+                        align: align
+                },
+                offset: {
+                    x: 20,
+                    y: 85
+                },
+                spacing: 10,
+                z_index: 1031,
+                delay: 2500,
+                timer: 1000,
+                url_target: '_blank',
+                mouse_over: false,
+                animate: {
+                        enter: animIn,
+                        exit: animOut
+                },
+                icon_type: 'class',
+                template: '<div data-growl="container" class="alert" role="alert">' +
+                                '<button type="button" class="close" data-growl="dismiss">' +
+                                    '<span aria-hidden="true">&times;</span>' +
+                                    '<span class="sr-only">Close</span>' +
+                                '</button>' +
+                                '<span data-growl="icon"></span>' +
+                                '<span data-growl="title"></span>' +
+                                '<span data-growl="message"></span>' +
+                                '<a href="#" data-growl="url"></a>' +
+                            '</div>'
+        });
+    }
+
  
 
    
@@ -159,16 +224,17 @@ function tabla(){
                             <div class="col-lg-4 col-md-4 col-sm-4 col-xs-12">
                             <label>Departamento</label>
                                 <div class="bootstrap-select fm-cmp-mg">
-                                    <select class="selectpicker" data-live-search="true" name="institucion" id="institucion">
+                                    <select class="selectpicker" data-live-search="true" name="dpto" id="dpto">
                                     <option value="Seleccione">Seleccione</option>
                                     <?php
                                      include 'config/conexion.php';
                                      $result = $conexion->query("SELECT
-                                     finanzadb.tdepartamento.nombre,
-                                     finanzadb.tinstitucion.nombre as insti
+                                     tdepartamento.id_departamento as id,
+                                     tdepartamento.nombre,
+                                     tinstitucion.nombre as insti
                                      FROM
-                                     finanzadb.tinstitucion
-                                     INNER JOIN finanzadb.tdepartamento ON finanzadb.tdepartamento.id_institucion = finanzadb.tinstitucion.id_institucion");
+                                     tdepartamento
+                                     INNER JOIN tinstitucion ON tdepartamento.id_institucion = tinstitucion.id_institucion");
                                      if ($result) {
                                          while ($fila = $result->fetch_object()) {
                                              echo "<option value='".$fila->id."'>".$fila->nombre." - ".$fila->insti."</option>";
@@ -181,7 +247,7 @@ function tabla(){
                                 <div class="col-lg-4 col-md-4 col-sm-4 col-xs-12">
                             <label>Proveedor</label>
                                 <div class="bootstrap-select fm-cmp-mg">
-                                    <select class="selectpicker" data-live-search="true" name="institucion" id="institucion">
+                                    <select class="selectpicker" data-live-search="true" name="prov" id="prov">
                                     <option value="Seleccione">Seleccione</option>
                                     <?php
                                      include 'config/conexion.php';
@@ -199,7 +265,7 @@ function tabla(){
                                 <div class="col-lg-4 col-md-4 col-sm-4 col-xs-12 mg-t-20">
                             <label>Encargado</label>
                                 <div class="bootstrap-select fm-cmp-mg">
-                                    <select class="selectpicker" data-live-search="true" name="institucion" id="institucion">
+                                    <select class="selectpicker" data-live-search="true" name="emp" id="emp">
                                     <option value="Seleccione">Seleccione</option>
                                     <?php
                                      include 'config/conexion.php';
@@ -227,7 +293,7 @@ function tabla(){
                             <div class="col-lg-4 col-md-4 col-sm-4 col-xs-12 mg-t-20">
                             <label>Tipo de Adquicición:</label>
                                 <div class="bootstrap-select fm-cmp-mg">
-                                    <select class="selectpicker" data-live-search="true" name="institucion" id="institucion">
+                                    <select class="selectpicker" data-live-search="true" name="tipo_adq" id="tipo_adq">
                                     <option value="Seleccione">Seleccione</option>
                                     <?php
                                              echo "<option value='1'>Nuevo</option>";
@@ -282,7 +348,7 @@ function tabla(){
                                
                             </div>
                             <div class="col-lg-1 col-md-1 col-sm-1 col-xs-12 mg-t-20">
-									<button type="button" data-toggle="modal" title="Generar Correlativo" data-target="#myModaloneCat" class="btn btn-success success-icon-notika btn-reco-mg btn-button-mg waves-effect"><i class="notika-icon notika-house"></i></button>
+									<button type="button" title="Generar Correlativo" onclick="enviar();"  class="btn btn-success success-icon-notika btn-reco-mg btn-button-mg waves-effect"><i class="notika-icon notika-house"></i></button>
                                     </div>
                             <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12 mg-t-20">
                                 <div class="form-example-int">
@@ -391,6 +457,10 @@ function tabla(){
 		============================================ -->
         <script src="js/datapicker/bootstrap-datepicker.js"></script>
     <script src="js/datapicker/datepicker-active.js"></script>
+      <!--  notification JS
+        ============================================ -->
+        <script src="js/notification/bootstrap-growl.min.js"></script>
+        <script src="js/notification/notification-active.js"></script>
 </body>
 
 </html>
