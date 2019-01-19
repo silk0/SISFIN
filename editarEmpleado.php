@@ -83,6 +83,10 @@ if ($result) {
     <script src="js/vendor/modernizr-2.8.3.min.js"></script>
 </head>
 <SCRIPT  language=JavaScript>  
+
+    function back(){
+        document.location.href="/SISFIN/mostrarEmpleados.php";
+    }   
 function notify(titulo,texto,from, align, icon, type, animIn, animOut){
         $.growl({
             icon: icon,
@@ -335,6 +339,8 @@ function go(){
                        
                         <div class="form-example-int mg-t-15">
                             <button class="btn btn-success notika-btn-success" onclick="go();">Modificar.</button>
+                             <button type="reset" class="btn btn-warning notika-btn-warning">Restablecer</button>
+                             <button type="button" class="btn btn-warning notika-btn-warning" onclick="back();">Cancelar</button>
                         </div>
                         </form>
                     </div>
