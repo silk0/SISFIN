@@ -124,6 +124,11 @@ function notify(titulo,texto,from, align, icon, type, animIn, animOut){
                             '</div>'
         });
     }
+
+    function back(){
+        document.location.href="/SISFIN/mostrarProveedores.php";
+    } 
+
 function go(){
 
     //Validaciones
@@ -318,7 +323,9 @@ function go(){
                             </div>
                         </div>  
                         <div class="form-example-int mg-t-15">
-                            <button class="btn btn-success notika-btn-success" onclick="go();">Modificar.</button>
+                            <button class="btn btn-success notika-btn-success" onclick="go();">Guardar cambios.</button>
+                             <button type="reset" class="btn btn-warning notika-btn-warning">Restablecer</button>
+                             <button type="button" class="btn btn-warning notika-btn-warning" onclick="back();">Cancelar</button>
                         </div>
                         </form>
                     </div>

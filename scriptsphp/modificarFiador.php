@@ -1,5 +1,5 @@
 <?php
-include "config/conexion.php";
+include "../config/conexion.php";
 $bandera = $_REQUEST['bandera'];
 $baccion  = $_REQUEST["idfiador"];
 if ($bandera==1) {
