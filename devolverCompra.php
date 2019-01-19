@@ -121,7 +121,7 @@ if ($result) {
     //Validaciones
     var can=document.getElementById("cantidad").value;
     var canr=document.getElementById("cantidadr").value;
-    if (can<canr) {
+    if (can>canr) {
         alert(can);
         alert(canr);
         notify(' Advertencia:','No puede devolver mas productos de los que dispone.','top', 'right', 'any', 'warning');
@@ -464,6 +464,6 @@ function msgI($texto){
     echo "notify('Exito','$texto','top', 'right', 'any', 'success');";
     
     echo "</script>";
-    msgK();
+
 }
 ?>
