@@ -419,7 +419,7 @@ $accion=$_REQUEST['bandera'];
 
 if($accion==1){
 
-    $consulta  = "INSERT INTO tcompras VALUES('null','" .$idR. "','" .$idprov. "',now(),'" .$precio. "','" .$cantidad. "')";
+    $consulta  = "INSERT INTO tdevolucion VALUES('null','" .$idR. "','" .$idprov. "',now(),'" .$precio. "','" .$cantidad. "')";
     $resultado = $conexion->query($consulta);
       if ($resultado) {
         // Ahora se va a modificar la exstencia del producto
