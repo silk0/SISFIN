@@ -445,6 +445,5 @@ function msgI($texto){
     echo "notify('Exito','$texto','top', 'right', 'any', 'success');";
     
     echo "</script>";
-  
 }
 ?>
