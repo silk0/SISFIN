@@ -120,10 +120,7 @@ function notify(titulo,texto,from, align, icon, type, animIn, animOut){
     }   
 function go(){
 
-    //Validaciones
    if(document.getElementById('nombre').value==""){
-    //    alert("El campo nombre es obligatorio");
-    //    prueba :p
      notify(' Advertencia:','El campo Nombre es obligatorio.','top', 'right', 'any', 'warning');
        document.getElementById("nombre").focus();
    }else if(document.getElementById('stock').value==""){
@@ -132,15 +129,9 @@ function go(){
    }else if(document.getElementById('categoria').value==""){
         notify(' Advertencia:','El campo Categoria es obligatorio','top', 'right', 'any', 'warning');
        document.getElementById("categoria").focus();
-   }else if(document.getElementById('pcompra').value==""){
-        notify(' Advertencia:','El campo Precio de Compra es obligatorio', 'top', 'right', 'any', 'warning');
-       document.getElementById("pcompra").focus();
    }else if(document.getElementById('mganancia').value==""){
         notify(' Advertencia:','El campo Margen de Ganancia es obligatorio', 'top', 'right', 'any', 'warning');
        document.getElementById("mganancia").focus();
-   }else if(document.getElementById('pventa').value=="" && document.getElementById('celular').value==""){
-        notify(' Advertencia:','El campo Precio de venta es obligatorio', 'top', 'right', 'any', 'warning');
-       document.getElementById("pventa").focus();
    }else if(document.getElementById('proveedor').value==""){
         notify(' Advertencia:','El campo Proveedor es obligatorio,','top', 'right', 'any', 'warning');
        document.getElementById("proveedor").focus();
@@ -312,7 +303,7 @@ function enviarC(id){
                                     <div class="form-group">
                                         <label>Margen de Ganancia:</label>
                                         <div class="nk-int-st">
-                                           <input type="text" name="mganancia" id="mganacia" class="form-control input-sm"  placeholder="Ingrese el margen deseado %." >
+                                           <input type="text" name="mganancia" id="mganancia" class="form-control input-sm"  placeholder="Ingrese el margen deseado %." >
                                         </div>
                                      </div>                            
                                 </div>
