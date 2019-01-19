@@ -1,5 +1,6 @@
 <?php
 $accion=$_POST['id'];
+$idi=$_POST['idi'];
 if($accion==1){
     include "../config/conexion.php";
     $resultc = $conexion->query("select id_tipo as idr from ttipo_activo order by id_tipo");
@@ -37,13 +38,13 @@ if($accion==2){
                        }   
                         
                        if($temp<10){
-                          $codigo=sprintf("1%04s",$temp+1);
+                          $codigo=sprintf("1%02s",$temp+1);
                           echo $codigo;
                        }else if($temp>=10&&$temp<=99){
-                          $codigo=sprintf("1%04s",$temp+1); 
+                          $codigo=sprintf("1%02s",$temp+1); 
                           echo $codigo;
                        }else if($temp>99&&$temp<=999){
-                          $codigo=sprintf("1%04s",$temp+1); 
+                          $codigo=sprintf("1%02s",$temp+1); 
                           echo $codigo;
                        }
                         
@@ -59,15 +60,24 @@ $resultc = $conexion->query("select id_departamento as id from tdepartamento ord
                          $temp=$filac->id;
                         
                           }
-                     }      
+                     } 
+                     $resultc1 = $conexion->query("select id_institucion as idi from tinstitucion where id_institucion='".$idi."' order by id_institucion");
+                       if ($resultc1) {
+  
+                         while ($filac1 = $resultc1->fetch_object()) {
+                           $temp1=$filac1->idi;
+                          
+                            }
+                       }        
                        if($temp<10){
-                        $codigo=sprintf("2%04s",$temp+1); 
-                          echo $codigo;
+                         $codigo=sprintf("2%02s",$temp+1); 
+                        $codigo1=sprintf("1%02s",$temp1); 
+                          echo $codigo1."-".$codigo;
                        }else if($temp>=10&&$temp<=99){
-                        $codigo=sprintf("2%04s",$temp+1); 
+                        $codigo=sprintf("2%02s",$temp+1); 
                           echo $codigo;
                        }else if($temp>99&&$temp<=999){
-                        $codigo=sprintf("2%04s",$temp+1); 
+                        $codigo=sprintf("2%02s",$temp+1); 
                           echo $codigo;
                        }
                         

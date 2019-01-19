@@ -65,7 +65,7 @@
     <script src="js/vendor/modernizr-2.8.3.min.js"></script>
 </head>
 <script  language=JavaScript> 
-function enviar(){
+function enviar(){ 
     
     $.ajax({
         data:{"id":2},

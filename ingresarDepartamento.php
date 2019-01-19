@@ -109,9 +109,13 @@ function notify(titulo,texto,from, align, icon, type, animIn, animOut){
         });
     }
     function enviar(){
-    
-    $.ajax({
-        data:{"id":3},
+        var idi=document.getElementById("institucion").value;
+        alert(idi);
+        if(idi=="Seleccione"){
+            notify(' Advertencia:','Seleccione la Institución para generar correlativo','top', 'right', 'any', 'warning');
+        }else{
+            $.ajax({
+        data:{"id":3,"idi":idi,},
         url: 'scriptsphp/recuperarCorrelativo.php',
         type: 'post',
         beforeSend: function(){
@@ -122,7 +126,8 @@ function notify(titulo,texto,from, align, icon, type, animIn, animOut){
             document.getElementById("correlativo").value=response;
           
         }
-    });
+        });
+        }
 } 
 
 function go(){
