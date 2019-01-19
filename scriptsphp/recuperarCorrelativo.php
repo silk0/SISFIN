@@ -127,7 +127,7 @@ $resultc = $conexion->query("select id_clasificaion as id from tclasificacion or
 }
 if($accion==5){
 include "../config/conexion.php";
-$resultc = $conexion->query("select id_activo as id from tactivon order by id_activo");
+$resultc = $conexion->query("select id_activo as id from tactivo order by id_activo");
                      if ($resultc) {
                        while ($filac = $resultc->fetch_object()) {
                          $temp=$filac->id;

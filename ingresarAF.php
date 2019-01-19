@@ -68,7 +68,8 @@
 <script  language=JavaScript> 
 function go(){
     //validacion respectiva me da hueva
-    
+    var idt=document.getElementById("fech").value;
+    alert(idt);
     document.form.submit(); 
 }
 function tabla(){
@@ -199,7 +200,7 @@ function notify(titulo,texto,from, align, icon, type, animIn, animOut){
                             <h2>Datos del Activo Fijo</h2>
                             
                         </div>
-                        <form id="form"name="form" method="post" action="">
+                        <form name="form" method="post" action="">
                         <input type="hidden" name="bandera" id="bandera" value="1">
                        
 
@@ -217,7 +218,7 @@ function notify(titulo,texto,from, align, icon, type, animIn, animOut){
                                              echo "<option value='".$fila->id."'>".$fila->nombre."</option>";
                                             }
                                         }
-                                        ?>
+                                        ?> 
                                     </select>
                                 </div>
                                 </div>
@@ -286,7 +287,7 @@ function notify(titulo,texto,from, align, icon, type, animIn, animOut){
                                     <label>Fecha de Adquicición:</label>
                                     <div class="input-group date nk-int-st">
                                         <span class="input-group-addon"></span>
-                                        <input type="text" class="form-control" data-mask="99/99/9999">
+                                        <input type="text" name="fech" id="fech" class="form-control" data-mask="99/99/9999">
                                     </div>
                                 </div>
                             </div>
@@ -355,7 +356,7 @@ function notify(titulo,texto,from, align, icon, type, animIn, animOut){
                                     <div class="form-group">
                                         <label>Descripción:</label>
                                         <div class="nk-int-st">
-                                        <input type="text" class="form-control input-sm" placeholder="Ingrese  un correlativo para departamento." id="correlativo" name="correlativo">
+                                        <input type="text" class="form-control input-sm" placeholder="Ingrese  un correlativo para departamento." id="descrip" name="descrip">
                                         </div>
                                     </div>
                                 </div>
@@ -366,7 +367,7 @@ function notify(titulo,texto,from, align, icon, type, animIn, animOut){
                             </div>
                             </div>
                            <div class="form-example-int mg-t-15">
-                            <button class="btn btn-success notika-btn-success" style="margin-left: 500px;" onclick="go();" >Guardar.</button>
+                            <button type="button" class="btn btn-success notika-btn-success" style="margin-left: 500px;" onclick="go();" >Guardar.</button>
                             <button type="button" class="btn btn-success notika-btn-success" onclick="tabla();">Cancelar</button>
                         </div>
                         </form>
@@ -467,24 +468,35 @@ function notify(titulo,texto,from, align, icon, type, animIn, animOut){
 <?php
 include "config/conexion.php";
 $bandera  = $_REQUEST["bandera"];
-$departamento     = $_REQUEST["departamento"];
-$institucion      = $_REQUEST["institucion"];
-$correlativo     = $_REQUEST["correlativo"];
-if($bandera==1){
 
-$query = "SELECT nombre FROM tdepartamento WHERE nombre like '%".$departamento."';";
-$result = $conexion->query($query);
-if($result->num_rows == 0){   
-$consulta  = "INSERT INTO tdepartamento VALUES('null','" .$institucion. "','" .$departamento. "','" .$correlativo. "')";
+if($bandera==1){
+    $tipo    = $_REQUEST["tipo"];
+    $dpto     = $_REQUEST["dpto"];
+    $prov     = $_REQUEST["prov"];
+    $emp    = $_REQUEST["emp"];
+    $fech     = $_REQUEST["fech"];
+    $fechaBD = date("d-m-Y", strtotime($fech));
+    $tipo_adq     = $_REQUEST["tipo_adq"];
+    if($tipo_adq==1){
+        $tipo_adquicicion="Nuevo";
+    }else if($tipo_adq==2){
+        $tipo_adquicicion="Usado";
+    }else if($tipo_adq==3){
+        $tipo_adquicicion="Donado";
+    }
+    $precio    = $_REQUEST["precio"];
+    $marca     = $_REQUEST["marca"];
+    $correlativo     = $_REQUEST["correlativo"];
+    $descrip     = $_REQUEST["descrip"];
+
+
+$consulta  = "INSERT INTO tactivo VALUES('null','" .$tipo. "','" .$dpto. "','" .$emp. "','" .$prov. "','" .$correlativo. "','" .$fechaBD. "','" .$descrip. "','1','" .$precio. "','" .$marca. "','0','" .$tipo_adquicicion. "')";
     $resultado = $conexion->query($consulta);
       if($resultado){
           msg("Se agregaron los datos correctamente");
       } else {
           msg("Error al insertar los datos");
       }
-}else{
-  msg("Esta Departamento ya existe");
-}
 }
 
   
@@ -492,7 +504,6 @@ function msg($texto)
 {
     echo "<script type='text/javascript'>";
     echo "alert('$texto');";
-    echo "document.location.href='ingresarDepartamento.php';";
     echo "</script>";
 }
 ?>
