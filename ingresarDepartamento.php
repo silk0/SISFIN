@@ -110,7 +110,6 @@ function notify(titulo,texto,from, align, icon, type, animIn, animOut){
     }
     function enviar(){
         var idi=document.getElementById("institucion").value;
-        alert(idi);
         if(idi=="Seleccione"){
             notify(' Advertencia:','Seleccione la Institución para generar correlativo','top', 'right', 'any', 'warning');
         }else{
@@ -122,9 +121,7 @@ function notify(titulo,texto,from, align, icon, type, animIn, animOut){
           notify('Exito','Codigo Generado','top', 'right', 'any', 'success');
         },
         success: function(response){
-     
             document.getElementById("correlativo").value=response;
-          
         }
         });
         }
@@ -256,7 +253,7 @@ function tabla(){
                                     <div class="form-group">
                                         <label>Correlativo:</label>
                                         <div class="nk-int-st">
-                                        <input type="text" class="form-control input-sm" placeholder="Correlativo " id="correlativo" name="correlativo">
+                                        <input type="text" class="form-control input-sm" placeholder="Correlativo " id="correlativo" name="correlativo" readonly>
                                         </div>
                                     </div>
                                 </div>

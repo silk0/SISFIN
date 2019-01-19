@@ -142,11 +142,11 @@ function tabla(){
                         <div class="col-lg-4 col-md-4 col-sm-4 col-xs-12">
                             <label>Tipo Activo (falta)</label>
                                 <div class="bootstrap-select fm-cmp-mg">
-                                    <select class="selectpicker" data-live-search="true" name="institucion" id="institucion">
+                                    <select class="selectpicker" data-live-search="true" name="tipo" id="tipo">
                                     <option value="Seleccione">Seleccione</option>
                                     <?php
                                      include 'config/conexion.php';
-                                     $result = $conexion->query("select id_institucion as id,nombre FROM tinstitucion");
+                                     $result = $conexion->query("select id_tipo as id,nombre FROM ttipo_activo");
                                      if ($result) {
                                          while ($fila = $result->fetch_object()) {
                                              echo "<option value='".$fila->id."'>".$fila->nombre."</option>";
@@ -163,10 +163,15 @@ function tabla(){
                                     <option value="Seleccione">Seleccione</option>
                                     <?php
                                      include 'config/conexion.php';
-                                     $result = $conexion->query("select id_institucion as id,nombre FROM tinstitucion");
+                                     $result = $conexion->query("SELECT
+                                     finanzadb.tdepartamento.nombre,
+                                     finanzadb.tinstitucion.nombre as insti
+                                     FROM
+                                     finanzadb.tinstitucion
+                                     INNER JOIN finanzadb.tdepartamento ON finanzadb.tdepartamento.id_institucion = finanzadb.tinstitucion.id_institucion");
                                      if ($result) {
                                          while ($fila = $result->fetch_object()) {
-                                             echo "<option value='".$fila->id."'>".$fila->nombre."</option>";
+                                             echo "<option value='".$fila->id."'>".$fila->nombre." - ".$fila->insti."</option>";
                                             }
                                         }
                                         ?>
@@ -180,7 +185,7 @@ function tabla(){
                                     <option value="Seleccione">Seleccione</option>
                                     <?php
                                      include 'config/conexion.php';
-                                     $result = $conexion->query("select id_institucion as id,nombre FROM tinstitucion");
+                                     $result = $conexion->query("select id_proveedor as id,nombre FROM tproveedor");
                                      if ($result) {
                                          while ($fila = $result->fetch_object()) {
                                              echo "<option value='".$fila->id."'>".$fila->nombre."</option>";
@@ -198,10 +203,10 @@ function tabla(){
                                     <option value="Seleccione">Seleccione</option>
                                     <?php
                                      include 'config/conexion.php';
-                                     $result = $conexion->query("select id_institucion as id,nombre FROM tinstitucion");
+                                     $result = $conexion->query("select id_empleado as id,nombre,apellido FROM templeados");
                                      if ($result) {
                                          while ($fila = $result->fetch_object()) {
-                                             echo "<option value='".$fila->id."'>".$fila->nombre."</option>";
+                                             echo "<option value='".$fila->id."'>".$fila->nombre." ".$fila->apellido."</option>";
                                             }
                                         }
                                         ?>
@@ -220,23 +225,49 @@ function tabla(){
                                 </div>
                             </div>
                             <div class="col-lg-4 col-md-4 col-sm-4 col-xs-12 mg-t-20">
-                            <label>Tipo de Uso</label>
+                            <label>Tipo de Adquicición:</label>
                                 <div class="bootstrap-select fm-cmp-mg">
                                     <select class="selectpicker" data-live-search="true" name="institucion" id="institucion">
                                     <option value="Seleccione">Seleccione</option>
                                     <?php
-                                     include 'config/conexion.php';
-                                     $result = $conexion->query("select id_institucion as id,nombre FROM tinstitucion");
-                                     if ($result) {
-                                         while ($fila = $result->fetch_object()) {
-                                             echo "<option value='".$fila->id."'>".$fila->nombre."</option>";
-                                            }
-                                        }
+                                             echo "<option value='1'>Nuevo</option>";
+                                             echo "<option value='2'>Usado</option>";
+                                             echo "<option value='3'>Donado</option>";
+                                        
                                         ?>
                                     </select>
                                 </div>
                                 </div>
-                            <div class="col-lg-6 col-md-6 col-sm-6 col-xs-12 mg-t-20">
+                                </div>
+                                <div class="row">
+                                <div class="col-lg-3 col-md-3 col-sm-3 col-xs-12 mg-t-20">
+                                <div class="form-example-int">
+                                    <div class="form-group">
+                                        <label>Valor de Activo:</label>
+                                        <div class="nk-int-st">
+                                        <input type="number" class="form-control input-sm" placeholder="Valor del Activo" id="precio" name="precio">
+                                        
+                                    </div>
+                                        
+                                    </div>
+                                    
+                                </div>
+                               
+                            </div>
+                            <div class="col-lg-4 col-md-4 col-sm-4 col-xs-12 mg-t-20">
+                                <div class="form-example-int">
+                                    <div class="form-group">
+                                        <label>Marca:</label>
+                                        <div class="nk-int-st">
+                                        <input type="text" class="form-control input-sm" placeholder="Marca del Activo" id="marca" name="marca">  
+                                    </div>
+                                        
+                                    </div>
+                                    
+                                </div>
+                               
+                            </div>
+                            <div class="col-lg-4 col-md-4 col-sm-4 col-xs-12 mg-t-20">
                                 <div class="form-example-int">
                                     <div class="form-group">
                                         <label>Correlativo:</label>
@@ -267,26 +298,13 @@ function tabla(){
                             </div>
                             </div>
                             </div>
-                            <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12 mg-t-20">
-                                <div class="form-example-int">
-                                    <div class="form-group">
-                                        <label>Observaciones:</label>
-                                        <div class="nk-int-st">
-                                        <input type="text" class="form-control input-sm" placeholder="Ingrese  un correlativo para departamento." id="correlativo" name="correlativo">
-                                        </div>
-                                    </div>
-                                </div>
-                                <div class="col-lg-1 col-md-1 col-sm-1 col-xs-12">
-                               <div class="">
-                            </div>
-                            </div>
                             </div>
                            <div class="form-example-int mg-t-15">
                             <button class="btn btn-success notika-btn-success" style="margin-left: 500px;" onclick="go();" >Guardar.</button>
                             <button type="button" class="btn btn-success notika-btn-success" onclick="tabla();">Cancelar</button>
                         </div>
                         </form>
-                    </div>
+                    
                 </div>
             </div>
             
