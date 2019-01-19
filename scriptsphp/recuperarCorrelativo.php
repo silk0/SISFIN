@@ -10,17 +10,29 @@ if($accion==1){
                              $temp=$filac->idr;
                             
                               }
-                         }  
+                         } 
+                         $resultc1 = $conexion->query("select id_clasificaion as idi from tclasificacion where id_clasificaion='".$idi."' order by id_clasificaion");
+                         if ($resultc1) {
+    
+                           while ($filac1 = $resultc1->fetch_object()) {
+                             $temp1=$filac1->idi;
+                            
+                              }
+                         }                       
                           
                          if($temp<10){
-                            $codigo=sprintf("3%04s",$temp+1);
-                            echo $codigo;
+                          $codigo=sprintf("4%02s",$temp+1); 
+                          $codigo1=sprintf("3%02s",$temp1); 
+                          echo $codigo1."-".$codigo;
                          }else if($temp>=10&&$temp<=99){
-                            $codigo=sprintf("3%04s",$temp+1); 
-                            echo $codigo;
+                          $codigo=sprintf("4%02s",$temp+1); 
+                          $codigo1=sprintf("3%02s",$temp1); 
+                          echo $codigo1."-".$codigo;
                          }else if($temp>99&&$temp<=999){
-                            $codigo=sprintf("3%04s",$temp+1); 
-                            echo $codigo;
+                          $codigo=sprintf("4%02s",$temp+1); 
+                          $codigo1=sprintf("3%02s",$temp1); 
+                          echo $codigo1."-".$codigo;
+                          echo $codigo;
                          }
                           
                           
@@ -70,15 +82,18 @@ $resultc = $conexion->query("select id_departamento as id from tdepartamento ord
                             }
                        }        
                        if($temp<10){
-                         $codigo=sprintf("2%02s",$temp+1); 
+                        $codigo=sprintf("2%02s",$temp+1); 
                         $codigo1=sprintf("1%02s",$temp1); 
-                          echo $codigo1."-".$codigo;
+                        echo $codigo1."-".$codigo;
                        }else if($temp>=10&&$temp<=99){
                         $codigo=sprintf("2%02s",$temp+1); 
-                          echo $codigo;
+                        $codigo1=sprintf("1%02s",$temp1); 
+                        echo $codigo1."-".$codigo;
                        }else if($temp>99&&$temp<=999){
                         $codigo=sprintf("2%02s",$temp+1); 
-                          echo $codigo;
+                        $codigo1=sprintf("1%02s",$temp1); 
+                        echo $codigo1."-".$codigo;
+                        echo $codigo;
                        }
                         
                         
@@ -95,13 +110,13 @@ $resultc = $conexion->query("select id_clasificaion as id from tclasificacion or
                           }
                      }      
                        if($temp<10){
-                        $codigo=sprintf("4%04s",$temp+1); 
+                        $codigo=sprintf("3%02s",$temp+1); 
                           echo $codigo;
                        }else if($temp>=10&&$temp<=99){
-                        $codigo=sprintf("4%04s",$temp+1); 
+                        $codigo=sprintf("3%02s",$temp+1); 
                           echo $codigo;
                        }else if($temp>99&&$temp<=999){
-                        $codigo=sprintf("4%04s",$temp+1); 
+                        $codigo=sprintf("3%02s",$temp+1); 
                           echo $codigo;
                        }
                         

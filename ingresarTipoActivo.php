@@ -118,9 +118,12 @@ function notify(titulo,texto,from, align, icon, type, animIn, animOut){
    
 
 function enviar(){
-    
+  var idi=document.getElementById("clasi").value;
+        if(idi=="Seleccione"){
+            notify(' Advertencia:','Seleccione una clasificación para generar correlativo','top', 'right', 'any', 'warning');
+        }else{
     $.ajax({
-        data:{"id":1},
+        data:{"id":1,"idi":idi,},
         url: 'scriptsphp/recuperarCorrelativo.php',
         type: 'post',
         beforeSend: function(){
@@ -133,6 +136,7 @@ function enviar(){
         }
     });
 } 
+}
 
 
 </script> 
