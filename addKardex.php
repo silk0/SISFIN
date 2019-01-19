@@ -24,7 +24,7 @@ if ($bandera=="add") {
   $resultado=$conexion->query($consulta);
   if ($resultado) {
     while ($fila=$resultado->fetch_object()) {
-      $cantidadP=$fila->stock;
+      $productosDisponibles=$fila->stock;
       $margen=($fila->margen)/100;
     }
   }
@@ -33,12 +33,12 @@ if ($bandera=="add") {
   $resultado1=$conexion->query($consulta1);
   if($resultado1->num_rows<1)
   {
-    $valorTotalAnterior=0;
+    $vtotalS=0;
     $descripcion="Primer ingreso de productos.";
   }else {
     if ($resultado1) {
       while ($fila1=$resultado1->fetch_object()) {
-        $valorTotalAnterior=$fila1->vtotals;
+        $vtotalS=$fila1->vtotals;
       }
     }else {
       echo "Error en consulta resultado1";
@@ -47,13 +47,13 @@ if ($bandera=="add") {
   }
   if ($accion==1) {
     //va a ser compra
-    $cantidadP=$cantidadP+$cantidad;
-    $nuevoValorTotalS=$valorTotalAnterior+$subtotalK;
+    // $productosDisponibles=$productosDisponibles+$cantidad;
+    $nuevoValorTotalS=$vtotalS+$subtotalK;
 
     $nuevoValorTotalS=number_format($nuevoValorTotalS, 2, ".", "");
-    $valorUnitarioS=$nuevoValorTotalS/$cantidadP;
+    $valorUnitarioS=$nuevoValorTotalS/$productosDisponibles;
     $valorUnitarioS=number_format($valorUnitarioS, 2, ".", "");
-    $consulta3  = "INSERT INTO kardex VALUES('null','" . $idproducto . "','" . $fecha . "','" . $descripcion . "','" . $accion . "','" . $cantidad . "','" . $vunitario . "','" . $cantidadP . "','" . $valorUnitarioS . "','" . $nuevoValorTotalS . "')";
+    $consulta3  = "INSERT INTO kardex VALUES('null','" . $idproducto . "','" . $fecha . "','" . $descripcion . "','" . $accion . "','" . $cantidad . "','" . $vunitario . "','" . $productosDisponibles . "','" . $valorUnitarioS . "','" . $nuevoValorTotalS . "')";
     $resultado3 = $conexion->query($consulta3);
     if ($resultado3) {
         //msg("Exito Compra");
@@ -76,10 +76,10 @@ if ($bandera=="add") {
     }
   }else {
     //va a ser una venta
-    $cantidadP=$cantidadP-$cantidad;
-    $nuevoValorTotalS=$valorTotalAnterior-$subtotalK;
+    // $productosDisponibles=$productosDisponibles-$cantidad;
+    $nuevoValorTotalS=$vtotalS-$subtotalK;
     $nuevoValorTotalS=number_format($nuevoValorTotalS, 2, ".", "");
-    $valorUnitarioS=$nuevoValorTotalS/$cantidadP;
+    $valorUnitarioS=$nuevoValorTotalS/$productosDisponibles;
     $valorUnitarioS=number_format($valorUnitarioS, 2, ".", "");
     $consulta3  = "INSERT INTO kardex VALUES('null','" . $idproducto . "','" . $fecha . "','" . $descripcion . "','" . $accion . "','" . $cantidad . "','" . $vunitario . "','" . $cantidadP . "','" . $valorUnitarioS . "','" . $nuevoValorTotalS . "')";
     $resultado3 = $conexion->query($consulta3);
