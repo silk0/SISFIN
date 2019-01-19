@@ -473,16 +473,16 @@ $telefono   = $_REQUEST['telefono'];
 $celular    = $_REQUEST['celular'];
 $trabajo    = $_REQUEST['trabajo'];
 $salario    = $_REQUEST['salario'];
-msg($nombre);
+
 
     $consulta  = "UPDATE tfiador set nombre='" . $nombre . "',apellido='" . $apellido . "',direccion='" . $direccion . "',dui='" . $dui . "',nit='" . $nit . "',correo='" . $email . "',profecion='" . $trabajo . "',salario='" . $salario . "',telefono='" . $telefono . "',celular='" . $celular . "' where id_fiador='" . $baccion . "'";
     $resultado = $conexion->query($consulta);
-    msg("antes if php");
+   
       if ($resultado) {
           
-          msg("Se modificacon los datos correctamente");
+          msgI("Se modificaron los datos correctamente");
       } else {
-          msg("Error al insertar los datos");
+          msgE("Error al insertar los datos");
       }
     }
 
@@ -490,7 +490,25 @@ function msg($texto)
 {
     echo "<script type='text/javascript'>";
     echo "alert('$texto');";
-    echo "document.location.href='mostrarFiadores.php';";
+    echo "document.location.href='mostrarEmpleados.php';";
+    echo "</script>";
+}
+function msgI($texto)
+{
+    echo "<script type='text/javascript'>";
+    echo "notify('Exito','$texto','top', 'right', 'any', 'success');";
+    echo "</script>";
+}
+function msgA($texto)
+{
+    echo "<script type='text/javascript'>";
+    echo "notify('Advertencia','$texto','top', 'right', 'any', 'warning');";
+    echo "</script>";
+}
+function msgE($texto)
+{
+    echo "<script type='text/javascript'>";
+    echo "notify('Error','$texto','top', 'right', 'any', 'danger');";
     echo "</script>";
 }
 ?>
