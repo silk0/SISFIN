@@ -121,9 +121,10 @@ if ($result) {
     //Validaciones
     var can=document.getElementById("cantidad").value;
     var canr=document.getElementById("cantidadr").value;
-    if (can>canr) {
-        alert(can);
-        alert(canr);
+    alert(can);
+    alert(canr);
+    if (parseInt(can)>parseInt(canr)) {
+        
         notify(' Advertencia:','No puede devolver mas productos de los que dispone.','top', 'right', 'any', 'warning');
     }else{
          if(document.getElementById('precioco').value==""){
@@ -246,7 +247,7 @@ if ($result) {
                          <form name="form" method="post" action='devolverCompra.php?bandera=1&id=<?php echo $idR;?>'>
                         <input type="hidden" id="fechac" name="fechac" value="<?php echo $fecha;?>">
                         <input type="hidden" id="id" name="id" value="<?php echo $idR;?>">
-                        <input type="hidden" id="cantidadr" name="cantidadr" value="<?php echo $cantidad;?>">
+                        <input type="text" id="cantidadr" name="cantidadr" value="<?php echo $cantidad;?>">
                      
                        <div class="row">
                             <div class="col-lg-4 col-md-4 col-sm-4 col-xs-12">
