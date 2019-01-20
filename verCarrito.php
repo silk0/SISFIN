@@ -180,12 +180,13 @@
                           echo "<td >".$fila->codigo."</td>";
                           echo "<td>".$fila->nombre."</td>";
                           echo "<td class='warning'>".$fila->cantidad."</td>";
+                          $nuevoPrecio=number_format($fila->subtotal, 2, ".", "");
                           echo "<td class='danger'>".$fila->preciov."</td>";                        
-                          echo '<td class="info">'.$fila->subtotal.'<div class="breadcomb-report">
+                          echo '<td class="info">'.$nuevoPrecio.'<div class="breadcomb-report">
 									<button type="button" onclick="anadirCarrito('.$fila->id.')" data-toggle="tooltip" data-placement="right" title="Eliminar del carrito." class="btn"><i class="notika-icon notika-close"></i></button>
 								</div></td>';
                           
-                          $total=$total+$fila->subtotal;
+                          $total=$total+$nuevoPrecio;
                           echo "</tr>";
                            }
                           echo "<tr>";
@@ -198,7 +199,7 @@
                                 </tbody>
                             </table>
                             <br>
-
+                        <button class="btn btn-success notika-btn-success"  onclick="go();">Procesar venta.</button>
                         </div>
                     </div>
                 </div>
