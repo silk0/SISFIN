@@ -6,24 +6,23 @@
                     <div class="mobile-menu">
                         <nav id="dropdown">
                             <ul class="mobile-menu-nav">
-                                <li><a data-toggle="collapse" data-target="#Charts" href="#">Home</a>
+                                <li><a data-toggle="collapse" data-target="#Charts" href="#">Clientes</a>
                                     <ul class="collapse dropdown-header-top">
-                                        <li><a href="index.html">Dashboard One</a></li>
-                                        <li><a href="index-2.html">Dashboard Two</a></li>
-                                        <li><a href="index-3.html">Dashboard Three</a></li>
-                                        <li><a href="index-4.html">Dashboard Four</a></li>
-                                        <li><a href="analytics.html">Analytics</a></li>
-                                        <li><a href="widgets.html">Widgets</a></li>
+                                        <li><a href="ingresoCliente.php">Registrar Clientes</a></li>
+                                        <li><a href="mostrarClientes.php">Mostrar Clientes</a></li>
+                                        <li><a href="ingresarFiador.php">Registrar Fiador</a></li>
+                                        <li><a href="mostrarFiadores.php">Mostrar Fiadores</a></li>
+                                      
                                     </ul>
                                 </li>
-                                <li><a data-toggle="collapse" data-target="#demoevent" href="#">Email</a>
+                                <li><a data-toggle="collapse" data-target="#demoevent" href="#">Empleados</a>
                                     <ul id="demoevent" class="collapse dropdown-header-top">
                                         <li><a href="inbox.html">Inbox</a></li>
                                         <li><a href="view-email.html">View Email</a></li>
                                         <li><a href="compose-email.html">Compose Email</a></li>
                                     </ul>
                                 </li>
-                                <li><a data-toggle="collapse" data-target="#democrou" href="#">Interface</a>
+                                <li><a data-toggle="collapse" data-target="#democrou" href="#">Inventario</a>
                                     <ul id="democrou" class="collapse dropdown-header-top">
                                         <li><a href="animations.html">Animations</a></li>
                                         <li><a href="google-map.html">Google Map</a></li>
@@ -33,7 +32,7 @@
                                         <li><a href="wizard.html">Wizard</a></li>
                                     </ul>
                                 </li>
-                                <li><a data-toggle="collapse" data-target="#demolibra" href="#">Charts</a>
+                                <li><a data-toggle="collapse" data-target="#demolibra" href="#">Proveedores</a>
                                     <ul id="demolibra" class="collapse dropdown-header-top">
                                         <li><a href="flot-charts.html">Flot Charts</a></li>
                                         <li><a href="bar-charts.html">Bar Charts</a></li>
@@ -41,20 +40,20 @@
                                         <li><a href="area-charts.html">Area Charts</a></li>
                                     </ul>
                                 </li>
-                                <li><a data-toggle="collapse" data-target="#demodepart" href="#">Tables</a>
+                                <li><a data-toggle="collapse" data-target="#demodepart" href="#">Cuestas por Cobrar</a>
                                     <ul id="demodepart" class="collapse dropdown-header-top">
-                                        <li><a href="normal-table.html">Normal Table</a></li>
-                                        <li><a href="data-table.html">Data Table</a></li>
+                                        <li><a href="venderProductos.php">Ventas</a></li>
+                                        <li><a href="listaPlanPago.php">Plan de Pago</a></li>
                                     </ul>
                                 </li>
-                                <li><a data-toggle="collapse" data-target="#demo" href="#">Forms</a>
+                                <li><a data-toggle="collapse" data-target="#demo" href="#">Activo Fijo</a>
                                     <ul id="demo" class="collapse dropdown-header-top">
-                                        <li><a href="form-elements.html">Form Elements</a></li>
+                                        <li><a href="form-elements.html">Registrar Activo Fijo</a></li>
                                         <li><a href="form-components.html">Form Components</a></li>
                                         <li><a href="form-examples.html">Form Examples</a></li>
                                     </ul>
                                 </li>
-                                <li><a data-toggle="collapse" data-target="#Miscellaneousmob" href="#">App views</a>
+                                <li><a data-toggle="collapse" data-target="#Miscellaneousmob" href="#">Estadisticas</a>
                                     <ul id="Miscellaneousmob" class="collapse dropdown-header-top">
                                         <li><a href="notification.html">Notifications</a>
                                         </li>

@@ -13,7 +13,7 @@
                         <li><a data-toggle="tab" href="#Appviews"><i class="notika-icon notika-app"></i> Proveedores</a>
                         </li>
                        
-                        <li><a data-toggle="tab" href="#Interface"><i class="notika-icon notika-edit"></i> Cuentas X Cobrar</a>
+                        <li><a data-toggle="tab" href="#Interface"><i class="notika-icon notika-edit"></i> Cuentas por Cobrar</a>
                         </li>
                         <li><a data-toggle="tab" href="#mailbox"><i class="notika-icon notika-house"></i> Activo Fijo</a>
                         </li>
@@ -43,7 +43,7 @@
                         
                         <div id="mailbox" class="tab-pane notika-tab-menu-bg animated flipInX">
                             <ul class="notika-main-menu-dropdown">
-                                <li><a href="ingresarAF.php">Registrar</a>
+                                <li><a href="ingresarAF.php">Registrar Activo Fijo</a>
                                 </li>
                                 <li><a href="listaAF.php">Consultas de Activos</a>
                                 </li>
@@ -62,7 +62,7 @@
                             <ul class="notika-main-menu-dropdown">
                                  <li><a href="venderProductos.php">Vender</a>
                                  </li>
-                                <li><a href="planPago.php">Plan de Pago</a>
+                                <li><a href="listaPlanPago.php">Plan de Pago</a>
                                 </li>
                                 <li><a href="data-map.html">Data Maps</a>
                                 </li>
