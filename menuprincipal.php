@@ -118,9 +118,9 @@
                         
                         <div id="Appviews" class="tab-pane notika-tab-menu-bg animated flipInX">
                             <ul class="notika-main-menu-dropdown">
-                                <li><a href="ingresarProveedor.php">Registrar</a>
+                                <li><a href="ingresarProveedor.php">Registrar Proveedores</a>
                                 </li>
-                                <li><a href="mostrarProveedores.php">Mostrar</a>
+                                <li><a href="mostrarProveedores.php">Mostrar Proveedores</a>
                                 </li>
                                 <!-- <li><a href="notification.html">Notifications</a>
                                 </li>

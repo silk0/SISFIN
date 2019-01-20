@@ -1,4 +1,15 @@
 <?php
+//Codigo que muestra solo los errores exceptuando los notice.
+error_reporting(E_ALL & ~E_NOTICE);
+session_start();
+if($_SESSION["logueado"] == TRUE) {
+$usuario=$_SESSION["usuario"];
+$nombre = $_SESSION["nombre"];
+$tipo  = $_REQUEST["tipo"];
+$id  = $_REQUEST["id"];
+
+?>
+<?php
 $id = $_REQUEST["id"];
 include "config/conexion.php";
 $result = $conexion->query("select * from tfiador where id_fiador=" . $id);
@@ -511,4 +522,9 @@ function msgE($texto)
     echo "notify('Error','$texto','top', 'right', 'any', 'danger');";
     echo "</script>";
 }
+?>
+<?php 
+} else {
+    header("Location: index.php");
+    }
 ?>

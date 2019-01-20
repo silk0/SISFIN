@@ -1,3 +1,14 @@
+<?php
+//Codigo que muestra solo los errores exceptuando los notice.
+error_reporting(E_ALL & ~E_NOTICE);
+session_start();
+if($_SESSION["logueado"] == TRUE) {
+$usuario=$_SESSION["usuario"];
+$nombre = $_SESSION["nombre"];
+$tipo  = $_REQUEST["tipo"];
+$id  = $_REQUEST["id"];
+
+?>
 <!doctype html>
 <html class="no-js" lang="">
 
@@ -420,4 +431,9 @@ function msgE($texto)
     echo "notify('Error','$texto','top', 'right', 'any', 'danger');";
     echo "</script>";
 }
+?>
+<?php 
+} else {
+    header("Location: index.php");
+    }
 ?>
