@@ -13,7 +13,9 @@ if ($result->num_rows==0) {
      $consulta  = "INSERT INTO tcarrito VALUES('null','".$id."','".$cantidadDeseada."')";
     $resultado = $conexion->query($consulta);
       if ($resultado) {
-          echo "Se agregó al carrito correctamente.";
+          $resultCant = $conexion->query("SELECT * from tcarrito");
+        
+         echo "<span>".$resultCant->num_rows."</span>";
       } else {
           echo "Ocurrio un error al agregar los datos al carrito.";
       }
@@ -24,7 +26,11 @@ if ($result->num_rows==0) {
         $resultado = $conexion->query($consulta);
    
       if ($resultado) {         
-           echo "Se modifico la cantidad deseada exitosamente.";
+           //echo "Se modifico la cantidad deseada exitosamente.";
+            $resultCant = $conexion->query("SELECT * from tcarrito");
+        
+         echo "<span>".$resultCant->num_rows."</span>";
+
       } else {
           echo "Error al modificar la cantidad deseada";
       }

@@ -71,8 +71,7 @@
    
          document.location.href="kardex.php?id="+id;
     }
-    function anadirCarrito(id,stock){
-   
+    function anadirCarrito(id,stock){ 
          alert(id);
          alert(stock);
          var cantidadDeseada=document.getElementById(id).value;
@@ -90,7 +89,8 @@
             alert("Por favor espere...");
         },
         success: function(response){
-            alert(response);
+                // alert(response);
+                $("#cantidadCarrito").html(response);
             
         }
     });
