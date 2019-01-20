@@ -33,6 +33,9 @@
     <!-- font awesome CSS
 		============================================ -->
     <link rel="stylesheet" href="css/font-awesome.min.css">
+      <!-- bootstrap select CSS
+		============================================ -->
+        <link rel="stylesheet" href="css/bootstrap-select/bootstrap-select.css">
     <!-- owl.carousel CSS
 		============================================ -->
     <link rel="stylesheet" href="css/owl.carousel.css">
@@ -69,10 +72,70 @@
     <!-- responsive CSS
 		============================================ -->
     <link rel="stylesheet" href="css/responsive.css">
+     <!-- notification CSS
+        ============================================ -->
+        <link rel="stylesheet" href="css/notification/notification.css">
     <!-- modernizr JS
 		============================================ -->
     <script src="js/vendor/modernizr-2.8.3.min.js"></script>
     <script>
+      function notify(titulo,texto,from, align, icon, type, animIn, animOut){
+        $.growl({
+            icon: icon,
+            title: titulo+" ",
+            message: texto,
+            url: ''
+        },{
+                element: 'body',
+                type: type,
+                allow_dismiss: true,
+                placement: {
+                        from: from,
+                        align: align
+                },
+                offset: {
+                    x: 20,
+                    y: 85
+                },
+                spacing: 10,
+                z_index: 1031,
+                delay: 2500,
+                timer: 1000,
+                url_target: '_blank',
+                mouse_over: false,
+                animate: {
+                        enter: animIn,
+                        exit: animOut
+                },
+                icon_type: 'class',
+                template: '<div data-growl="container" class="alert" role="alert">' +
+                                '<button type="button" class="close" data-growl="dismiss">' +
+                                    '<span aria-hidden="true">&times;</span>' +
+                                    '<span class="sr-only">Close</span>' +
+                                '</button>' +
+                                '<span data-growl="icon"></span>' +
+                                '<span data-growl="title"></span>' +
+                                '<span data-growl="message"></span>' +
+                                '<a href="#" data-growl="url"></a>' +
+                            '</div>'
+        });
+    }
+
+
+      function go(){
+        if(document.getElementById('tipov').value=="Seleccione"){
+        notify(' Advertencia:','Antes de comprar, seleccione el tipo de venta.', 'top', 'right', 'any', 'warning');
+       document.getElementById("tipov").focus();
+        }else{
+          if(document.getElementById('tipov').value=="1"){
+            // Esto va a ser una cventa al contado
+            document.location.href="realizarVentaContado.php";
+          }else{
+            // Esta va as er una venta al credito
+            document.lcoation.href="realizarVentaCredito.php";
+          }
+        }
+      }
     function anadirCarrito(id){ 
          
         
@@ -133,11 +196,20 @@
 									</div>
 								</div>
 							</div>
-							<div class="col-lg-6 col-md-6 col-sm-6 col-xs-3">
-								<div class="breadcomb-report">
-									<button data-toggle="tooltip" data-placement="left" title="Download Report" class="btn"><i class="notika-icon notika-sent"></i></button>
-								</div>
-							</div>
+							<div class="col-lg-4 col-md-4 col-sm-4 col-xs-12 mg-t-20">
+                           
+                                <div class="bootstrap-select fm-cmp-mg">
+                                    <select class="selectpicker" data-live-search="true" name="tipov" id="tipov">
+                                    <option value="Seleccione">Tipo de Venta</option>
+                                    <?php
+                                             echo "<option value='1'>Credito</option>";
+                                             echo "<option value='2'>Contado</option>";
+                                           
+                                        
+                                        ?>
+                                    </select>
+                                </div>
+                                </div>
 						</div>
 					</div>
 				</div>
@@ -197,9 +269,22 @@
                       }
                        ?>
                                 </tbody>
-                            </table>
-                            <br>
-                        <button class="btn btn-success notika-btn-success"  onclick="go();">Procesar venta.</button>
+                            </table><br>
+                            
+                            <div class="row">
+                              <div class="col-lg-3 col-md-3 col-sm-3 col-xs-12 mg-t-20">
+                                <div class="form-example-int">
+                                    <div class="form-group">
+                                          <button class="btn btn-success notika-btn-success"  onclick="go();">Procesar venta.</button>
+                                        
+                                    </div>
+                                    
+                                </div>
+                               
+                            </div>
+                            
+                            </div>
+                        
                         </div>
                     </div>
                 </div>
@@ -269,9 +354,16 @@
 		============================================ -->
     <script src="js/data-table/jquery.dataTables.min.js"></script>
     <script src="js/data-table/data-table-act.js"></script>
+       <!-- bootstrap select JS
+		============================================ -->
+        <script src="js/bootstrap-select/bootstrap-select.js"></script>
     <!-- main JS
 		============================================ -->
     <script src="js/main.js"></script>
+     <!--  notification JS
+        ============================================ -->
+        <script src="js/notification/bootstrap-growl.min.js"></script>
+        <script src="js/notification/notification-active.js"></script>
 	<!-- tawk chat JS
 		============================================ -->
     <!-- <script src="js/tawk-chat.js"></script> -->
