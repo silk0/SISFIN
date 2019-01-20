@@ -68,10 +68,18 @@
 
 </head>
 <SCRIPT  language=JavaScript> 
+
+
+
 function go(){
     //validacion respectiva me da hueva
     document.location.href="IngresarAF.php"; 
 } 
+
+function baja(id,accion){
+  document.location.href="ListaAF.php?id="+id+"&accion="+accion+"&ide=1";  
+     
+}
 
 </script> 
 <SCRIPT  language=JavaScript> 
@@ -264,10 +272,10 @@ if ($result) {
         echo  "<button class='btn btn-info info-icon-notika btn-reco-mg btn-button-mg' data-toggle='tooltip' data-placement='bottom' title='Ver Activo Fijo.' onclick='modify(" . $fila->id_activo. ")'><i class='notika-icon notika-eye'></i></button>";
        
         if($fila->estado==1){
-            echo  "<button class='btn btn-danger info-icon-notika btn-reco-mg btn-button-mg' data-toggle='tooltip' data-placement='bottom' title='Hacer una devolucion sobre compra.' onclick='devo(" . $fila->id_activo. ")'><i class='notika-icon notika-down-arrow'></i></button>";
+            echo  "<button class='btn btn-danger info-icon-notika btn-reco-mg btn-button-mg' data-toggle='tooltip' data-placement='bottom' title='Hacer una devolucion sobre compra.' onclick='baja(" . $fila->id_activo. ",1)'><i class='notika-icon notika-down-arrow'></i></button>";
          }else{
         
-            echo  "<button class='btn btn-info info-icon-notika btn-reco-mg btn-button-mg' data-toggle='tooltip' data-placement='bottom' title='Hacer una compra.' onclick='modify(" . $fila->id_activo. ")'><i class='notika-icon notika-up-arrow'></i></button>";
+            echo  "<button class='btn btn-info info-icon-notika btn-reco-mg btn-button-mg' data-toggle='tooltip' data-placement='bottom' title='Hacer una compra.' onclick='baja(" . $fila->id_activo. ", 2)'><i class='notika-icon notika-up-arrow'></i></button>";
         }
        echo
         "</div>
@@ -553,7 +561,22 @@ if($accion==1){
       msgE("cocurrio un error en el registro de los archivos");
   }else if($accion==3) {
     msgA("Los datos que se ingresaron ya existen");
-}   
+}  
+
+$bandera=  $_REQUEST['accion'];
+$bandera2=  $_REQUEST['id'];
+if($bandera=1){
+    $consulta="UPDATE tactivo set estado= '0' WHERE id_activo='".$bandera2."'";
+    $resultado=$conexion->query($consulta);
+    if($resultado){
+        msgI("Exito");
+    }else{
+        msgE("Error");
+    }
+
+}
+
+
 function msgI($texto)
 {
     echo "<script type='text/javascript'>";
