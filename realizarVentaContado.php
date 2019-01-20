@@ -234,16 +234,23 @@ function notify(titulo,texto,from, align, icon, type, animIn, animOut){
                         </div>
                         <form name="form" method="post" action="">
                         <input type="hidden" name="bandera" id="bandera" value="1">
-                       
-
-                      
                                 <div class="row">
                                 <div class="col-lg-3 col-md-3 col-sm-3 col-xs-12 mg-t-20">
                                 <div class="form-example-int">
                                     <div class="form-group">
-                                        <label>Valor de Activo:</label>
+                                        <label>Codigo Venta:</label>
                                         <div class="nk-int-st">
-                                        <input type="number" class="form-control input-sm" placeholder="Valor del Activo" id="precio" name="precio">
+                                            <?php 
+                                                include 'config/conexion.php';
+                                     $result = $conexion->query("SHOW TABLE STATUS LIKE 'tventas'");
+                                     if ($result) {
+                                         while ($fila = $result->fetch_object()) {
+                                               
+                                                $codigoR=str_pad($fila->Auto_increment, 4, "0", STR_PAD_LEFT);
+                                            }
+                                        }
+                                            ?>
+                                        <input type="text" class="form-control input-sm" placeholder="Codigo" id="codigo" name="codigo" value="<?php echo $codigoR;?>">
                                         
                                     </div>
                                         
