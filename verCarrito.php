@@ -18,7 +18,7 @@
 <head>
     <meta charset="utf-8">
     <meta http-equiv="x-ua-compatible" content="ie=edge">
-    <title>Carrito de Compras| SISFIN</title>
+    <title>Plan de Pago| SISFIN</title>
     <meta name="description" content="">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <!-- favicon
@@ -74,7 +74,7 @@
     <script src="js/vendor/modernizr-2.8.3.min.js"></script>
     <script>
     function anadirCarrito(id){ 
-         alert(id);
+         
         
               $.ajax({
         data:{"id":id,"op":2},
