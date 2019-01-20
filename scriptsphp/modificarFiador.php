@@ -41,5 +41,23 @@ $salario    = $_REQUEST['salario'];
               header('Location:../mostrarEmpleados.php?bandera=2');
             }
       
+      }else if ($bandera==3) {
+$nombre     = $_REQUEST['nombre'];
+$telefono   = $_REQUEST['telefono'];
+$direccion  = $_REQUEST['direc'];
+$representante  = $_REQUEST['representante'];
+$dui        = $_REQUEST['dui'];
+$nit        = $_REQUEST['nit'];
+$celular    = $_REQUEST['celular'];
+$email      = $_REQUEST['email'];
+
+    $consulta  = "UPDATE tproveedor set nombre='" . $nombre . "',direccion='" . $direccion . "',telefono='" . $telefono . "',representante='" . $representante . "',dui='" . $dui . "',nit='" . $nit . "',celular='" . $celular . "',email='" . $email . "' where id_proveedor='" . $baccion . "'";
+          $resultado = $conexion->query($consulta);
+            if ($resultado) {
+              header('Location:../mostrarProveedores.php?bandera=1');
+            } else {
+              header('Location:../mostrarProveedores.php?bandera=2');
+            }
+      
       }
 ?>
