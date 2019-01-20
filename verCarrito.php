@@ -1,10 +1,24 @@
+<?php
+// $id = $_REQUEST["id"];
+// include "config/conexion.php";
+// $result = $conexion->query("select p.id_producto as idp, p.nombre as namep,prov.id_proveedor as idprov,prov.nombre as nameprov from tproducto as p,tproveedor as prov  where p.id_proveedor=prov.id_proveedor and id_producto=" . $id);
+// if ($result) {
+//     while ($fila = $result->fetch_object()) {
+//         $idR            = $fila->idp;
+//         $nombreprod     = $fila->namep;
+//         $idprov         = $fila->idprov;
+//         $nombreprov      = $fila->nameprov;       
+//        }
+// }
+
+?>
 <!doctype html>
 <html class="no-js" lang="">
 
 <head>
     <meta charset="utf-8">
     <meta http-equiv="x-ua-compatible" content="ie=edge">
-    <title>Vender|Devolver productos | SISFIN</title>
+    <title>Carrito de Compras| SISFIN</title>
     <meta name="description" content="">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <!-- favicon
@@ -59,30 +73,11 @@
 		============================================ -->
     <script src="js/vendor/modernizr-2.8.3.min.js"></script>
     <script>
-    function modify(id){
-       
-         document.location.href="registrarCompra.php?id="+id;
-    }
-    function devo(id){
-       
-         document.location.href="devolverCompra.php?id="+id;
-    }
-     function kardex(id){
-   
-         document.location.href="kardex.php?id="+id;
-    }
-    function anadirCarrito(id,stock){ 
-        //  alert(id);
-        //  alert(stock);
-         var cantidadDeseada=document.getElementById(id).value;
-        //  alert("Cant deseada:"+cantidadDeseada);
-         if(parseInt(cantidadDeseada)>parseInt(stock)){
-            alert("La canrtidad deseada supera a la cantidad disponible.");
-         }else{
-            //  alert("La canditdad deseada es correcta y va A ser anadida al carrito");
-             //aQUI CVA A IR EL CODIGO AJAX PARA PODER ANADIR AL CARRITO
+    function anadirCarrito(id){ 
+         alert(id);
+        
               $.ajax({
-        data:{"id":id,"cantidadDeseada":cantidadDeseada,"op":1},
+        data:{"id":id,"op":2},
         url: 'scriptsphp/ajaxCarrito.php',
         type: 'post',
         beforeSend: function(){
@@ -90,11 +85,17 @@
         },
         success: function(response){
                 // alert(response);
-                $("#cantidadCarrito").html(response);            
+                $("#cantidadCarrito").html(response);
+                document.location.href="verCarrito.php";
+            
         }
     });
     //Fin de ajax para agregar al carrito
-         }
+         
+    }
+    function modify(id){
+       
+        document.location.href="editarFiador.php?id="+id;
     }
     </script>
 </head>
@@ -127,8 +128,8 @@
 										<i class="notika-icon notika-windows"></i>
 									</div>
 									<div class="breadcomb-ctn">
-										<h2>Vender productos</h2>
-										<p>Datos de <span class="bread-ntd">la compra.</span></p>
+										<h2>Carrito de Compras</h2>
+										<p>Tabla con los productos<span class="bread-ntd"> cargados al carrito.</span></p>
 									</div>
 								</div>
 							</div>
@@ -144,78 +145,66 @@
 		</div>
 	</div>
 	<!-- Breadcomb area End-->
-    <!-- Data Table area Start-->
-    <div class="data-table-area">
+    
+     <div class="normal-table-area">
         <div class="container">
-            <div class="row">
+    <div class="row">
                 <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
-                    <div class="data-table-list">
+                    <div class="normal-table-list mg-t-30">
                         <div class="basic-tb-hd">
-                            
+                            <h2>Listado de productos.</h2>
+                            <!-- <p>Use contextual classes (<code>.info, .warning, .success, .danger</code>) to color table rows or individual cells.</p> -->
                         </div>
-                        <div class="table-responsive">
-                            <table id="data-table-basic" class="table table-striped">
+                        <div class="bsc-tbl-cls">
+                            <table class="table table-hover table-striped ">
                                 <thead>
-                                   <tr>                                       
-                                        <th>Código</th>
-                                        <th>Nombre</th>
-                                        <th>Proveedor</th>
-                                        <th>Stock</th>
-                                        <th>Cantidad</th>
-                                        <th>Opciones</th>                                       
+                                    <tr>
+                                    
+                                    <th class="active">Codigo</th>
+                                    <th class="active">Nombre</th>
+                                    <th class="warning">Cantidad</th>
+                                    <th class="danger">Precio</th>
+                                    <th class="info">Subtotal</th>
+                                    
                                     </tr>
                                 </thead>
                                 <tbody>
-                      <?php
-include "config/conexion.php";
-$result = $conexion->query("SELECT * from tproducto ORDER BY id_producto");
-if ($result) {
-    while ($fila = $result->fetch_object()) {
-        echo "<tr>";
-        echo "<td>" . $fila->codigo . "</td>";
-        echo "<td>" . $fila->nombre . "</td>";
-        // OBTENER EL NOMBRE DEL PROVEEDOR
-        $result2 = $conexion->query("SELECT * from tproveedor where id_proveedor=".$fila->id_proveedor);
-        if ($result2) {
-             while ($fila2 = $result2->fetch_object()) {
-                 echo "<td>" . $fila2->nombre . "</td>"; 
-                }
-            }
-         
-        echo "<td>" . $fila->stock . "</td>";
-        echo "<td><input type='number' name='" . $fila->id_producto . "' id='" . $fila->id_producto . "' min='1' max='" . $fila->stock . "'></td>";
-        
-        echo "<td>
-        <div class='button-icon-btn'>
-        
-        <button class='btn btn-lightgreen lightgreen-icon-notika btn-reco-mg btn-button-mg' data-toggle='tooltip' data-placement='bottom' title='Anadir al carrito.' onclick='anadirCarrito(" . $fila->id_producto. ",". $fila->stock. ")'><i class='notika-icon notika-credit-card'></i></button>
-        <button class='btn btn-lightgreen lightgreen-icon-notika btn-reco-mg btn-button-mg' data-toggle='tooltip' data-placement='bottom' title='Hacer una devolucion sobre compra.' onclick='devo(" . $fila->id_producto. ")'><i class='notika-icon notika-down-arrow'></i></button>
-        </div>
-        </td>";
-        echo "</tr>";
-
-    }
-}
-?>
+                                    
+                                     <?php
+                      include 'config/conexion.php';
+                      $result = $conexion->query("select p.id_producto as id,p.codigo as codigo, p.nombre as nombre, p.precio_venta as preciov, c.cantidad as cantidad,p.precio_venta * c.cantidad as subtotal from tcarrito as c, tproducto as p where c.id_producto=p.id_producto");
+                      if ($result) {
+                          $total=0;
+                        while ($fila = $result->fetch_object()) {
+                          echo "<tr>";
+                          echo "<td >".$fila->codigo."</td>";
+                          echo "<td>".$fila->nombre."</td>";
+                          echo "<td class='warning'>".$fila->cantidad."</td>";
+                          echo "<td class='danger'>".$fila->preciov."</td>";                        
+                          echo '<td class="info">'.$fila->subtotal.'<div class="breadcomb-report">
+									<button type="button" onclick="anadirCarrito('.$fila->id.')" data-toggle="tooltip" data-placement="left" title="Eliminar del carrito." class="btn"><i class="notika-icon notika-close"></i></button>
+								</div></td>';
+                          
+                          $total=$total+$fila->subtotal;
+                          echo "</tr>";
+                           }
+                          echo "<tr>";
+                          echo "<th colspan='4' class='danger'>Total:</td>";
+                          echo "<th class='danger'>".$total."</td>";                         
+                         
+                          echo "</tr>";
+                      }
+                       ?>
                                 </tbody>
-                                <tfoot>
-                                    <tr>
-                                        <th>Código</th>
-                                        <th>Nombre</th>
-                                        <th>Proveedor</th>
-                                        <th>Stock</th>
-                                        <th>Cantidad</th>
-                                        <th>Opciones</th>  
-                                    </tr>
-                                </tfoot>
                             </table>
+                            <br>
+
                         </div>
                     </div>
                 </div>
             </div>
-        </div>
+         </div>
     </div>
-    <!-- Data Table area End-->
         <!-- Start Footer area-->
     <?php include "footer.php";?>
     <!-- End Footer area-->
@@ -284,7 +273,7 @@ if ($result) {
     <script src="js/main.js"></script>
 	<!-- tawk chat JS
 		============================================ -->
-    <script src="js/tawk-chat.js"></script>
+    <!-- <script src="js/tawk-chat.js"></script> -->
 </body>
 
 </html>
