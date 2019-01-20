@@ -60,9 +60,9 @@
                         </div>
                         <div id="Interface" class="tab-pane notika-tab-menu-bg animated flipInX">
                             <ul class="notika-main-menu-dropdown">
-                                <li><a href="animations.html">Ventas</a>
-                                </li>
-                                <li><a href="google-map.html">Google Map</a>
+                                 <li><a href="venderProductos.php">Vender</a>
+                                 </li>
+                                <li><a href="planPago.php">Plan de Pago</a>
                                 </li>
                                 <li><a href="data-map.html">Data Maps</a>
                                 </li>
@@ -106,8 +106,7 @@
                                 </li>
                                 <li><a href="comprarProductos.php">Comprar</a>
                                 </li>
-                                <li><a href="venderProductos.php">Vender</a>
-                                </li>
+                               
                                 <li><a href="ingresarCategoria.php">Registrar Categoria</a>
                                 </li>
                                 <!-- <li><a href="form-components.html">Form Components</a>

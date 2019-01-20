@@ -72,14 +72,17 @@
          document.location.href="kardex.php?id="+id;
     }
     function anadirCarrito(id,stock){ 
-        //  alert(id);
-        //  alert(stock);
+        
          var cantidadDeseada=document.getElementById(id).value;
-        //  alert("Cant deseada:"+cantidadDeseada);
-         if(parseInt(cantidadDeseada)>parseInt(stock)){
+      
+         if(document.getElementById(id).value==""){
+            alert("Ingrese una cantidad para poder agregar al carrito.");
+         }else if(parseInt(cantidadDeseada)>parseInt(stock)){
+            
             alert("La canrtidad deseada supera a la cantidad disponible.");
+    
          }else{
-            //  alert("La canditdad deseada es correcta y va A ser anadida al carrito");
+          //  alert("La canditdad deseada es correcta y va A ser anadida al carrito");
              //aQUI CVA A IR EL CODIGO AJAX PARA PODER ANADIR AL CARRITO
               $.ajax({
         data:{"id":id,"cantidadDeseada":cantidadDeseada,"op":1},
@@ -93,7 +96,6 @@
                 $("#cantidadCarrito").html(response);            
         }
     });
-    //Fin de ajax para agregar al carrito
          }
     }
     </script>
