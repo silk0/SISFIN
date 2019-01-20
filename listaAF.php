@@ -70,7 +70,7 @@
 <SCRIPT  language=JavaScript> 
 function go(){
     //validacion respectiva me da hueva
-    document.location.href="ingresarDepartamento.php"; 
+    document.location.href="IngresarAF.php"; 
 } 
 
 </script> 
@@ -258,8 +258,19 @@ if ($result) {
        
         echo "<td>
         <div class='button-icon-btn'>
-        <button class='btn btn-lightgreen lightgreen-icon-notika btn-reco-mg btn-button-mg' onclick='modificar(" . $fila->id_activo. ")'><i class='notika-icon notika-menus'></i></button>
-        </div>
+        <button class='btn btn-lightgreen lightgreen-icon-notika btn-reco-mg btn-button-mg' data-toggle='tooltip' data-placement='bottom' title='Modificar activo.'  onclick='modificar(" . $fila->id_activo. ")'><i class='notika-icon notika-menus'></i></button>
+        ";
+        
+        echo  "<button class='btn btn-info info-icon-notika btn-reco-mg btn-button-mg' data-toggle='tooltip' data-placement='bottom' title='Ver Activo Fijo.' onclick='modify(" . $fila->id_activo. ")'><i class='notika-icon notika-eye'></i></button>";
+       
+        if($fila->estado==1){
+            echo  "<button class='btn btn-danger info-icon-notika btn-reco-mg btn-button-mg' data-toggle='tooltip' data-placement='bottom' title='Hacer una devolucion sobre compra.' onclick='devo(" . $fila->id_activo. ")'><i class='notika-icon notika-down-arrow'></i></button>";
+         }else{
+        
+            echo  "<button class='btn btn-info info-icon-notika btn-reco-mg btn-button-mg' data-toggle='tooltip' data-placement='bottom' title='Hacer una compra.' onclick='modify(" . $fila->id_activo. ")'><i class='notika-icon notika-up-arrow'></i></button>";
+        }
+       echo
+        "</div>
         </td>";
         echo "</tr>";
 
@@ -281,7 +292,7 @@ if ($result) {
                                     <th>Deprec. Acum</th>
                                     <th>T. Depreciación</th>
                                  
-                                    <th>Opciones</th>
+                                    <th>Ver Depreciación</th>
                                 </tr>
                             </thead>
                             <tbody>";
@@ -314,9 +325,9 @@ while ($fila = $result->fetch_object()) {
     echo "<td>" . $fila->tiempo_depreciacion . "</td>";
 
     echo "<td>
-    <div class='button-icon-btn'>
-    <button class='btn btn-lightgreen lightgreen-icon-notika btn-reco-mg btn-button-mg' onclick='modificar(" . $fila->id_activo. ")'><i class='notika-icon notika-menus'></i></button>
-    </div>
+    <div class='button-icon-btn'>";
+    echo  "<button class='btn btn-info info-icon-notika btn-reco-mg btn-button-mg' data-toggle='tooltip' data-placement='bottom' title='Ver Depreciación.' onclick='modify(" . $fila->id_activo. ")'><i class='notika-icon notika-eye'></i></button>";
+   echo "</div>
     </td>";
     echo "</tr>";
 
@@ -367,9 +378,10 @@ while ($fila = $result->fetch_object()) {
     echo "<td>" . $fila->emp . " ".$fila->apellido."</td>"; 
 
     echo "<td>
-    <div class='button-icon-btn'>
-    <button class='btn btn-lightgreen lightgreen-icon-notika btn-reco-mg btn-button-mg' onclick='modificar(" . $fila->id_activo. ")'><i class='notika-icon notika-menus'></i></button>
-    </div>
+    <div class='button-icon-btn'>";
+    echo  "<button class='btn btn-info info-icon-notika btn-reco-mg btn-button-mg' data-toggle='tooltip' data-placement='bottom' title='Ver Depreciación.' onclick='modify(" . $fila->id_activo. ")'><i class='notika-icon notika-eye'></i></button>";
+   
+   echo "</div>
     </td>";
     echo "</tr>";
 
@@ -423,9 +435,10 @@ while ($fila = $result->fetch_object()) {
  
 
     echo "<td>
-    <div class='button-icon-btn'>
-    <button class='btn btn-lightgreen lightgreen-icon-notika btn-reco-mg btn-button-mg' onclick='modificar(" . $fila->id_activo. ")'><i class='notika-icon notika-menus'></i></button>
-    </div>
+    <div class='button-icon-btn'>";
+    echo  "<button class='btn btn-info info-icon-notika btn-reco-mg btn-button-mg' data-toggle='tooltip' data-placement='bottom' title='Ver Depreciación.' onclick='modify(" . $fila->id_activo. ")'><i class='notika-icon notika-eye'></i></button>";
+   
+   echo "</div>
     </td>";
     echo "</tr>";
 
