@@ -1,4 +1,5 @@
 <?php 
+error_reporting(E_ALL ^ E_NOTICE);
 $id=$_POST['id'];
 $op=$_POST['op'];
 $cantidadDeseada=$_POST['cantidadDeseada'];
@@ -6,7 +7,8 @@ $cantidadDeseada=$_POST['cantidadDeseada'];
 
 // Primero validamos si existe en el carrito el producto que queremos agregar
 include "../config/conexion.php";
-$result = $conexion->query("SELECT * from tcarrito where id_producto=".$id);
+if ($op==1) {
+    $result = $conexion->query("SELECT * from tcarrito where id_producto=".$id);
 if ($result->num_rows==0) {
     //Cuando no exista ese producto, entonces se va a agrregar a ala tabla temporal
     // echo "No existe ese  producto, agregara en tcarrito";
@@ -35,6 +37,21 @@ if ($result->num_rows==0) {
           echo "Error al modificar la cantidad deseada";
       }
     }
+}else{
+    // Va a quitar del carrito
+    
+    $consulta  = "DELETE from tcarrito where id_producto='" . $id . "'";
+    $resultado = $conexion->query($consulta);
+    if($resultado){
+        $resultCant = $conexion->query("SELECT * from tcarrito");
+        
+         echo "<span>".$resultCant->num_rows."</span>";
+
+    }else{
+        echo "No se pudo eliminar el producto del carrito.";
+    }
+}
+
 
 
 ?>

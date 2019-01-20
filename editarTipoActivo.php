@@ -142,8 +142,9 @@ function back(){
                             <h2>Datos de Tipo Activo</h2>
                             
                         </div>
-                        <form id="form"name="form" method="post" action="../SISFIN/scriptsphp/modificarTipo.php?bandera=1&idD=<?php echo $idR; ?>">
-                        
+                        <form id="form"name="form" method="post" action="../SISFIN/scriptsphp/modificarTipo.php">
+                        <input type="hidden" id="bandera" name="bandera" value="1">
+                        <input type="hidden" id="idD" name="idD" value="<?php echo $idR; ?>">
                      
                        
 
@@ -164,7 +165,7 @@ function back(){
                             </div>
                             <div class="col-lg-6 col-md-6 col-sm-6 col-xs-12">
                             
-                            <label>Institución</label>
+                            <label>Clasificación</label>
                                 <div class="bootstrap-select fm-cmp-mg">
                                     <select class="selectpicker" data-live-search="true" name="clasi" id="clasi">
                                     <option value="Seleccione">Seleccione</option>

@@ -1,3 +1,4 @@
+<?php error_reporting(E_ALL ^ E_NOTICE); ?>
 <!doctype html>
 <html class="no-js" lang="">
 
@@ -520,7 +521,9 @@ if($bandera==1){
 
 
 $consulta  = "INSERT INTO tactivo VALUES('null','" .$tipo. "','" .$dpto. "','" .$emp. "','" .$prov. "','" .$correlativo. "','" .$fechaBD. "','" .$descrip. "','1','" .$precio. "','" .$marca. "','0','" .$tipo_adquicicion. "')";
-    $resultado = $conexion->query($consulta);
+// msg($consulta);    
+
+$resultado = $conexion->query($consulta);
       if($resultado){
           msgI("Se agregaron los datos correctamente");
       } else {
@@ -533,6 +536,12 @@ function msgI($texto)
 {
     echo "<script type='text/javascript'>";
     echo "notify('Exito','$texto','top', 'right', 'any', 'success');";
+    echo "</script>";
+}
+function msg($texto)
+{
+    echo "<script type='text/javascript'>";
+    echo "alert(".$texto.")";
     echo "</script>";
 }
 function msgA($texto)

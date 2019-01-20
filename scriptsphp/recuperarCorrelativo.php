@@ -1,4 +1,5 @@
 <?php
+error_reporting(E_ALL ^ E_NOTICE);
 $accion=$_POST['id'];
 $idaf=$_POST['idaf'];
 $idi=$_POST['idi'];

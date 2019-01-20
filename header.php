@@ -20,7 +20,7 @@
             <div class="row">
                 <div class="col-lg-4 col-md-4 col-sm-12 col-xs-12">
                     <div class="logo-area">
-                        <a href="index.php"><img src="img/logo/logo.png" alt="" /></a>
+                        <a href="index.php"><img src="img/logo/buho.png" height="42" width="42" alt="" /></a>
                     </div>
                 </div>
                 <div class="col-lg-8 col-md-8 col-sm-12 col-xs-12">
@@ -36,15 +36,21 @@
                                 </div>
                             </li>
                             <li  class="nav-item dropdown">
-                                <a href="#" data-toggle="dropdown" role="button" aria-expanded="false" class="nav-link dropdown-toggle" onclick="cargarCarrito()"><span><i class="notika-icon notika-mail"></i></span></a>
+                                <a href="#" data-toggle="dropdown" role="button" aria-expanded="false" class="nav-link dropdown-toggle" onclick="cargarCarrito()"><span><i class="notika-icon notika-dollar"></i></span></a>
                                 <div id="menuCarrito" role="menu" class="dropdown-menu message-dd animated zoomIn">
                                     
 
                                     
                                 </div>
                             </li>
-                            
-                            <li class="nav-item nc-al"><a href="#" data-toggle="dropdown" role="button" aria-expanded="false" class="nav-link dropdown-toggle"><span><i class="notika-icon notika-alarm"></i></span><div class="spinner4 spinner-4"></div><div id="cantidadCarrito" class="ntd-ctn"></div></a>
+<?php 
+    include "config/conexion.php";
+     $consulta  = "select * from tcarrito";
+    $resultado = $conexion->query($consulta);
+      $auxiliarCarrito=$resultado->num_rows;
+?>
+                           
+                            <li class="nav-item nc-al"><a href="#" data-toggle="dropdown" role="button" aria-expanded="false" class="nav-link dropdown-toggle"><span><i class="notika-icon notika-alarm"></i></span><div class="spinner4 spinner-4"></div><div id="cantidadCarrito" class="ntd-ctn"><?php echo $auxiliarCarrito; ?></div></a>
                                 <div role="menu" class="dropdown-menu message-dd notification-dd animated zoomIn">
                                     <div class="hd-mg-tt">
                                         <h2>Existencias abajo del mínimo o agotadas.</h2>
