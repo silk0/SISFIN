@@ -1,3 +1,27 @@
+<?php
+$id = $_REQUEST["id"];
+include "config/conexion.php";
+$result = $conexion->query("select * from tactivo where id_activo=" . $id);
+if ($result) {
+    while ($fila = $result->fetch_object()) {
+        $idR           = $fila->id_activo;
+        $idtipoR       = $fila->id_tipo;
+        $dptoR         = $fila->id_departamento;
+        $dptoR         = $fila->id_departamento;
+        $proveedorR         = $fila->id_proveedor;
+        $correlativoR  = $fila->correlativo;
+        $fechaR       = $fila->fecha_adquisicion;
+        $tipo_adqR    = $fila->tipo_adquicicion;
+        $valorR  = $fila->precio;
+        $marcaR  = $fila->marca;
+        $descripR =$fila->descripcion;
+        $estadoR  = $fila->estado;
+        $deprecR =$fila->depreciacionacum;
+
+       }
+}
+
+?>
 <!doctype html>
 <html class="no-js" lang="">
 
@@ -106,15 +130,21 @@ function go(){
 function tabla(){
     document.location.href="listaAF.php"; 
 }
+function vaciar(){
+    $("#correlativo").val("");
+   
+}
 function enviar(){
         var idt=document.getElementById("tipo").value;
         var idd=document.getElementById("dpto").value;
+        var idaf=document.getElementById("idaf").value;
        
         if(idt=="Seleccione" || idd=="Seleccione"){
             notify(' Advertencia:','Seleccione el tipo de activo y el departamento al que pertenece para generar correlativo','top', 'right', 'any', 'warning');
+            $("#correlativo").val("");
         }else{
             $.ajax({
-        data:{"id":5,"idd":idd,"idt":idt,},
+        data:{"id":6,"idd":idd,"idt":idt,"idaf":idaf,},
         url: 'scriptsphp/recuperarCorrelativo.php',
         type: 'post',
         beforeSend: function(){
@@ -231,8 +261,11 @@ function notify(titulo,texto,from, align, icon, type, animIn, animOut){
                             <h2>Datos del Activo Fijo</h2>
                             
                         </div>
-                        <form name="form" method="post" action="">
+                        <form name="form" method="post" action="../SISFIN/scriptsphp/modificarAF.php">
                         <input type="hidden" name="bandera" id="bandera" value="1">
+                        <input type="hidden" name="idaf" id="idaf" value="<?php echo $idR;?>">
+                        <input type="hidden" name="estado" id="idaf" value="<?php echo $estadoR;?>">
+                        <input type="hidden" name="deprec" id="deprec" value="<?php echo $deprecR;?>">
                        
 
                         <div class="row">
@@ -246,9 +279,13 @@ function notify(titulo,texto,from, align, icon, type, animIn, animOut){
                                      $result = $conexion->query("select id_tipo as id,nombre FROM ttipo_activo");
                                      if ($result) {
                                          while ($fila = $result->fetch_object()) {
-                                             echo "<option value='".$fila->id."'>".$fila->nombre."</option>";
+                                            if ($fila->id == $idtipoR ) {
+                                                echo '<option value="' . $fila->id. '" selected>' . $fila->nombre . '</opcion>';
+                                            }else {
+                                                echo '<option value="' . $fila->id . '">' . $fila->nombre . '</opcion>';
                                             }
                                         }
+                                    }
                                         ?> 
                                     </select>
                                 </div>
@@ -269,7 +306,11 @@ function notify(titulo,texto,from, align, icon, type, animIn, animOut){
                                      INNER JOIN tinstitucion ON tdepartamento.id_institucion = tinstitucion.id_institucion");
                                      if ($result) {
                                          while ($fila = $result->fetch_object()) {
-                                             echo "<option value='".$fila->id."'>".$fila->nombre." - ".$fila->insti."</option>";
+                                            if ($fila->id == $dptoR ) {
+                                                echo '<option value="' . $fila->id. '" selected>'.$fila->nombre." - ".$fila->insti.'</opcion>';
+                                            }else {
+                                                echo '<option value="' . $fila->id . '">' .$fila->nombre." - ".$fila->insti.'</opcion>';
+                                            }
                                             }
                                         }
                                         ?>
@@ -286,7 +327,12 @@ function notify(titulo,texto,from, align, icon, type, animIn, animOut){
                                      $result = $conexion->query("select id_proveedor as id,nombre FROM tproveedor");
                                      if ($result) {
                                          while ($fila = $result->fetch_object()) {
-                                             echo "<option value='".$fila->id."'>".$fila->nombre."</option>";
+                                            if ($fila->id == $proveedorR ) {
+                                                echo '<option value="' . $fila->id. '" selected>'.$fila->nombre.'</opcion>';
+                                            }else {
+                                                echo '<option value="' . $fila->id . '">' .$fila->nombre.'</opcion>';
+                                            }
+                                            
                                             }
                                         }
                                         ?>
@@ -304,7 +350,12 @@ function notify(titulo,texto,from, align, icon, type, animIn, animOut){
                                      $result = $conexion->query("select id_empleado as id,nombre,apellido FROM templeados");
                                      if ($result) {
                                          while ($fila = $result->fetch_object()) {
-                                             echo "<option value='".$fila->id."'>".$fila->nombre." ".$fila->apellido."</option>";
+                                            if ($fila->id == $proveedorR ) {
+                                                echo '<option value="' . $fila->id. '" selected>'.$fila->nombre." ".$fila->apellido.'</opcion>';
+                                            }else {
+                                                echo '<option value="' . $fila->id . '">'.$fila->nombre." ".$fila->apellido.'</opcion>';
+                                            }
+                                            
                                             }
                                         }
                                         ?>
@@ -318,7 +369,7 @@ function notify(titulo,texto,from, align, icon, type, animIn, animOut){
                                     <label>Fecha de Adquicición:</label>
                                     <div class="input-group date nk-int-st">
                                         <span class="input-group-addon"></span>
-                                        <input type="text" name="fech" id="fech" class="form-control" data-mask="99/99/9999">
+                                        <input type="text" name="fech" id="fech" class="form-control" data-mask="99/99/9999" value="<?php echo $fechaR;?>">
                                     </div>
                                 </div>
                             </div>
@@ -328,9 +379,21 @@ function notify(titulo,texto,from, align, icon, type, animIn, animOut){
                                     <select class="selectpicker" data-live-search="true" name="tipo_adq" id="tipo_adq">
                                     <option value="Seleccione">Seleccione</option>
                                     <?php
-                                             echo "<option value='1'>Nuevo</option>";
-                                             echo "<option value='2'>Usado</option>";
-                                             echo "<option value='3'>Donado</option>";
+                                    if($tipo_adqR=="Nuevo"){
+                                        echo "<option value='1' selected>Nuevo</option>";
+                                        echo "<option value='2'>Usado</option>";
+                                        echo "<option value='3'>Donado</option>";
+                                    }else if($tipo_adqR=="Usado"){
+                                        echo "<option value='1'>Nuevo</option>";
+                                        echo "<option value='2' selected>Usado</option>";
+                                        echo "<option value='3'>Donado</option>";
+                                    }else if($tipo_adqR=="Donado"){
+                                        echo "<option value='1'>Nuevo</option>";
+                                        echo "<option value='2'>Usado</option>";
+                                        echo "<option value='3' selected>Donado</option>";
+                                    }
+                                           
+                                             
                                         
                                         ?>
                                     </select>
@@ -343,7 +406,7 @@ function notify(titulo,texto,from, align, icon, type, animIn, animOut){
                                     <div class="form-group">
                                         <label>Valor de Activo:</label>
                                         <div class="nk-int-st">
-                                        <input type="number" class="form-control input-sm" placeholder="Valor del Activo" id="precio" name="precio">
+                                        <input type="number" class="form-control input-sm" placeholder="Valor del Activo" id="precio" name="precio" value="<?php echo $valorR;?>">
                                         
                                     </div>
                                         
@@ -357,7 +420,7 @@ function notify(titulo,texto,from, align, icon, type, animIn, animOut){
                                     <div class="form-group">
                                         <label>Marca:</label>
                                         <div class="nk-int-st">
-                                        <input type="text" class="form-control input-sm" placeholder="Marca del Activo" id="marca" name="marca">  
+                                        <input type="text" class="form-control input-sm" placeholder="Marca del Activo" id="marca" name="marca" value="<?php echo $marcaR;?>">  
                                     </div>
                                         
                                     </div>
@@ -370,7 +433,7 @@ function notify(titulo,texto,from, align, icon, type, animIn, animOut){
                                     <div class="form-group">
                                         <label>Correlativo:</label>
                                         <div class="nk-int-st">
-                                        <input type="text" class="form-control input-sm" placeholder="Correlativo" id="correlativo" name="correlativo" readonly>
+                                        <input type="text" class="form-control input-sm" placeholder="Correlativo" id="correlativo" name="correlativo" value="<?php echo $correlativoR?>" readonly>
                                         
                                     </div>
                                         
@@ -379,13 +442,13 @@ function notify(titulo,texto,from, align, icon, type, animIn, animOut){
                                 </div>
                                
                             </div>
-             
+                           
                             <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12 mg-t-20">
                                 <div class="form-example-int">
                                     <div class="form-group">
                                         <label>Descripción:</label>
                                         <div class="nk-int-st">
-                                        <input type="text" class="form-control input-sm" placeholder="Ingrese  un correlativo para departamento." id="descrip" name="descrip">
+                                        <input type="text" class="form-control input-sm" placeholder="Ingrese  un correlativo para departamento." id="descrip" name="descrip" value="<?php echo $descripR;?>">
                                         </div>
                                     </div>
                                 </div>
@@ -396,9 +459,9 @@ function notify(titulo,texto,from, align, icon, type, animIn, animOut){
                             </div>
                             </div>
                            <div class="form-example-int mg-t-15">
-                            <button type="button" class="btn btn-success notika-btn-success" style="margin-left: 500px;" onclick="go();" >Guardar.</button>
-                            <button type="button" class="btn btn-success notika-btn-success" onclick="tabla();">Cancelar</button>
-                        </div>
+                            <button type="button" class="btn btn-success notika-btn-success" onclick="go();" >Guardar Cambios</button>
+                            <button type="reset" class="btn btn-warning notika-btn-warning">Restablecer</button>
+                             <button type="button" class="btn btn-warning notika-btn-warning" onclick="tabla();">Cancelar</button></div>
                         </form>
                     
                 </div>
@@ -504,7 +567,7 @@ if($bandera==1){
     $prov     = $_REQUEST["prov"];
     $emp    = $_REQUEST["emp"];
     $fech     = $_REQUEST["fech"];
-    $fechaBD = date("Y-m-d", strtotime($fech));
+    $fechaBD = date("d-m-Y", strtotime($fech));
     $tipo_adq     = $_REQUEST["tipo_adq"];
     if($tipo_adq==1){
         $tipo_adquicicion="Nuevo";
