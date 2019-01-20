@@ -11,6 +11,9 @@
      <!-- notification CSS
 		============================================ -->
         <link rel="stylesheet" href="css/notification/notification.css">
+          <!-- bootstrap select CSS
+		============================================ -->
+        <link rel="stylesheet" href="css/bootstrap-select/bootstrap-select.css">
     <!-- favicon
 		============================================ -->
     <link rel="shortcut icon" type="image/x-icon" href="img/favicon.ico">
@@ -117,7 +120,12 @@ function notify(titulo,texto,from, align, icon, type, animIn, animOut){
        
        document.location.href="editarDepartamento.php?id="+id;
    }
-	
+   function filtrar(){
+          id=document.getElementById("op").value;
+    
+           $("#ide").val(id);
+          document.form.submit();
+        }
 
 
 </script> 
@@ -140,15 +148,39 @@ function notify(titulo,texto,from, align, icon, type, animIn, animOut){
 	<!-- Breadcomb area Start-->
 	<div class="breadcomb-area">
 		<div class="container">
+            <center>
+        <div class="col-lg-12 col-md-4 col-sm-4 col-xs-12">
+                            <label>Filtrado</label>
+                                <div class="bootstrap-select fm-cmp-mg">
+                                    <select class="selectpicker" data-live-search="true" name="op" id="op" onchange="filtrar()">
+                                    <option value="Seleccione">Seleccione</option>
+                                    <?php
+                                    
+                                             echo "<option value='1'>Mostrar Lista General de Activo Fijo</option>";
+                                             echo "<option value='2'>Mostrar Lista Depreciación de Activo Fijo</option>";
+                                             echo "<option value='3'>Mostrar Lista por Encargado</option>";
+                                             echo "<option value='4'>Mostrar Lista por Institución</option>";
+                                        
+                                        ?>
+                                    </select>
+                                </div>
+                                </div>
+                                </center>
 			<div class="row">
 				<div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
+                    
 					<div class="breadcomb-list">
 						<div class="row">
 							<div class="col-lg-6 col-md-6 col-sm-6 col-xs-12">
 								<div class="breadcomb-wp">
 									<div class="breadcomb-icon">
 										<i class="notika-icon notika-form"></i>
-									</div>
+                                    </div>
+                                    <form id="form" name="form" action="" method="GET">
+<div class="input-group " style="padding-bottom:20px;">
+  <input id="ide" type="hidden" class="form-control" name="ide" placeholder="En que año estudio el grado anterior">
+  </div>
+  </form>
 									<div class="breadcomb-ctn">
 										<h2>Lista de Activo Fijo.</h2>
 										<p>Datos <span class="bread-ntd">de Activo Fijo.</span></p>
@@ -172,47 +204,246 @@ function notify(titulo,texto,from, align, icon, type, animIn, animOut){
   <!-- Data Table area Start-->
   <div class="data-table-area">
         <div class="container">
+            
             <div class="row">
                 <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
+                    
                     <div class="data-table-list">
                         <div class="basic-tb-hd">
                              </div>
                         <div class="table-responsive">
-                            <table id="data-table-basic" class="table table-striped">
+                        <?php
+                        if(isset($_GET['ide'])){
+                            $ide=$_GET['ide'];
+                            if($ide==1){
+
+                             echo "<table id='data-table-basic' class='table table-striped'>
                                 <thead>
                                     <tr>
                                         
-                                        <th>Tipo</th>
-                                        <th>Institucion</th>
-                                        <th>Departamento</th>
-                                        <th></th>
-                                        <th>Institucion</th>
-                                        <th>Estado</th> 
+                                        <th>Descripción</th>
+                                        <th>Correlativo</th>
+                                        <th>Fecha adquicición</th>
+                                        <th>Calsificación</th>
+                                        <th>Estado</th>
                                         <th>Opciones</th>
                                     </tr>
                                 </thead>
-                                <tbody>
-                      <?php
+                                <tbody>";
+                      
 include "config/conexion.php";
-$result = $conexion->query("SELECT tdepartamento.nombre,tdepartamento.correlativo,tinstitucion.nombre as nombrei,tdepartamento.id_departamento FROM tinstitucion INNER JOIN tdepartamento ON tdepartamento.id_institucion = tinstitucion.id_institucion ORDER BY id_departamento");
+$result = $conexion->query("SELECT
+tactivo.descripcion,
+tactivo.correlativo,
+tactivo.fecha_adquisicion,
+tactivo.id_activo,
+tactivo.estado,
+tclasificacion.nombre as clasificacion
+FROM
+tactivo
+INNER JOIN ttipo_activo ON tactivo.id_tipo = ttipo_activo.id_tipo
+INNER JOIN tclasificacion ON ttipo_activo.id_clasificacion = tclasificacion.id_clasificaion");
 if ($result) {
     while ($fila = $result->fetch_object()) {
         echo "<tr>";
-        echo "<td>" . $fila->nombre . "</td>";
-        echo "<td>" . $fila->nombrei . "</td>";
+        echo "<td>" . $fila->descripcion . "</td>";
         echo "<td>" . $fila->correlativo . "</td>";
+        echo "<td>" . $fila->fecha_adquisicion . "</td>";
+        echo "<td>" . $fila->clasificacion . "</td>";
+        if($fila->estado==1){
+            echo "<td>Activo</td>";
+        }else{
+            echo "<td>Inactivo</td>";
+        }
+       
         echo "<td>
         <div class='button-icon-btn'>
-        <button class='btn btn-lightgreen lightgreen-icon-notika btn-reco-mg btn-button-mg' onclick='modificar(" . $fila->id_departamento. ")'><i class='notika-icon notika-menus'></i></button>
+        <button class='btn btn-lightgreen lightgreen-icon-notika btn-reco-mg btn-button-mg' onclick='modificar(" . $fila->id_activo. ")'><i class='notika-icon notika-menus'></i></button>
         </div>
         </td>";
         echo "</tr>";
 
     }
 }
-?>
-                      </tbody>
-                            </table>
+
+                     echo "</tbody>
+                            </table>";
+                        }else if($ide==2){
+
+                            echo "<table id='data-table-basic' class='table table-striped'>
+                            <thead>
+                                <tr>
+                                    <th>Correlativo</th>
+                                    <th>Fecha adquicición</th>
+                                    <th>Institución</th>
+                                    <th>Departamento</th>
+                                    <th>Valor</th>
+                                    <th>Deprec. Acum</th>
+                                    <th>T. Depreciación</th>
+                                 
+                                    <th>Opciones</th>
+                                </tr>
+                            </thead>
+                            <tbody>";
+                  
+include "config/conexion.php";
+$result = $conexion->query("SELECT
+tactivo.id_activo,
+tactivo.correlativo,
+tactivo.fecha_adquisicion,
+tdepartamento.nombre as dpto,
+tinstitucion.nombre as insti,
+tactivo.precio,
+tactivo.depreciacionacum,
+tclasificacion.tiempo_depreciacion
+FROM
+tactivo
+INNER JOIN tdepartamento ON tactivo.id_departamento = tdepartamento.id_departamento
+INNER JOIN tinstitucion ON tdepartamento.id_institucion = tinstitucion.id_institucion
+INNER JOIN ttipo_activo ON tactivo.id_tipo = ttipo_activo.id_tipo
+INNER JOIN tclasificacion ON ttipo_activo.id_clasificacion = tclasificacion.id_clasificaion");
+if ($result) {
+while ($fila = $result->fetch_object()) {
+    echo "<tr>";
+    echo "<td>" . $fila->correlativo . "</td>";
+    echo "<td>" . $fila->fecha_adquisicion . "</td>";
+    echo "<td>" . $fila->insti . "</td>";
+    echo "<td>" . $fila->dpto . "</td>";
+    echo "<td>" . $fila->precio . "</td>"; 
+    echo "<td>" . $fila->depreciacionacum . "</td>";
+    echo "<td>" . $fila->tiempo_depreciacion . "</td>";
+
+    echo "<td>
+    <div class='button-icon-btn'>
+    <button class='btn btn-lightgreen lightgreen-icon-notika btn-reco-mg btn-button-mg' onclick='modificar(" . $fila->id_activo. ")'><i class='notika-icon notika-menus'></i></button>
+    </div>
+    </td>";
+    echo "</tr>";
+
+}
+}
+
+                 echo "</tbody>
+                        </table>";
+
+
+                        }else if($ide==3){
+
+                            echo "<table id='data-table-basic' class='table table-striped'>
+                            <thead>
+                                <tr>
+                                    <th>Correlativo</th>
+                                    <th>Institución</th>
+                                    <th>Departamento</th>
+                                    <th>Tipo Activo</th>
+                                    <th>Encargado</th>
+                                    <th>Opciones</th>
+                                </tr>
+                            </thead>
+                            <tbody>";
+                  
+include "config/conexion.php";
+$result = $conexion->query("SELECT
+tactivo.id_activo,
+tactivo.correlativo,
+tdepartamento.nombre as dpto,
+tinstitucion.nombre as insti,
+templeados.nombre as emp,
+templeados.apellido,
+ttipo_activo.nombre as tipo
+FROM
+tactivo
+INNER JOIN tdepartamento ON tactivo.id_departamento = tdepartamento.id_departamento
+INNER JOIN tinstitucion ON tdepartamento.id_institucion = tinstitucion.id_institucion
+INNER JOIN templeados ON tactivo.id_encargado = templeados.id_empleado
+INNER JOIN ttipo_activo ON tactivo.id_tipo = ttipo_activo.id_tipo");
+if ($result) {
+while ($fila = $result->fetch_object()) {
+    echo "<tr>";
+    echo "<td>" . $fila->correlativo . "</td>";
+    echo "<td>" . $fila->insti. "</td>";
+    echo "<td>" . $fila->dpto . "</td>";
+    echo "<td>" . $fila->tipo . "</td>";
+    echo "<td>" . $fila->emp . " ".$fila->apellido."</td>"; 
+
+    echo "<td>
+    <div class='button-icon-btn'>
+    <button class='btn btn-lightgreen lightgreen-icon-notika btn-reco-mg btn-button-mg' onclick='modificar(" . $fila->id_activo. ")'><i class='notika-icon notika-menus'></i></button>
+    </div>
+    </td>";
+    echo "</tr>";
+
+}
+}
+
+                 echo "</tbody>
+                        </table>";
+
+
+                        }else if($ide==4){
+
+                            echo "<table id='data-table-basic' class='table table-striped'>
+                            <thead>
+                                <tr>
+                                    <th>Correlativo</th>
+                                    <th>Tipo</th>
+                                    <th>Institución</th>
+                                    <th>Departamento</th>
+                                    <th>Proveedor</th>
+                                    <th>Marca</th>
+                                    <th>Opciones</th>
+                                </tr>
+                            </thead>
+                            <tbody>";
+                  
+include "config/conexion.php";
+$result = $conexion->query("SELECT
+tproveedor.nombre,
+tinstitucion.nombre as insti,
+tdepartamento.nombre as dpto,
+tactivo.correlativo,
+tactivo.id_activo,
+tactivo.marca,
+ttipo_activo.nombre as tipo
+FROM
+tactivo
+INNER JOIN tdepartamento ON tactivo.id_departamento = tdepartamento.id_departamento
+INNER JOIN tinstitucion ON tdepartamento.id_institucion = tinstitucion.id_institucion
+INNER JOIN tproveedor ON tactivo.id_proveedor = tproveedor.id_proveedor
+INNER JOIN ttipo_activo ON tactivo.id_tipo = ttipo_activo.id_tipo");
+if ($result) {
+while ($fila = $result->fetch_object()) {
+    echo "<tr>";
+    echo "<td>" . $fila->correlativo . "</td>";
+    echo "<td>" . $fila->tipo . "</td>"; 
+    echo "<td>" . $fila->insti. "</td>";
+    echo "<td>" . $fila->dpto . "</td>";
+    echo "<td>" . $fila->nombre . "</td>";
+    echo "<td>" . $fila->marca . "</td>"; 
+ 
+
+    echo "<td>
+    <div class='button-icon-btn'>
+    <button class='btn btn-lightgreen lightgreen-icon-notika btn-reco-mg btn-button-mg' onclick='modificar(" . $fila->id_activo. ")'><i class='notika-icon notika-menus'></i></button>
+    </div>
+    </td>";
+    echo "</tr>";
+
+}
+}
+
+                 echo "</tbody>
+                        </table>";
+
+
+                        }
+}else{
+ echo   "<div class='breadcomb-ctn'>
+  <center>
+    <p> <span class='bread-ntd'>Por favor elija un filtro..</span></p></center>
+</div>";
+}
+                            ?>
                         </div>
                     </div>
                 </div>
@@ -294,6 +525,9 @@ if ($result) {
 		============================================ -->
         <script src="js/notification/bootstrap-growl.min.js"></script>
     <script src="js/notification/notification-active.js"></script>
+     <!-- bootstrap select JS
+		============================================ -->
+        <script src="js/bootstrap-select/bootstrap-select.js"></script>
 </body>
 
 </html>
