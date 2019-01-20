@@ -182,7 +182,7 @@
                           echo "<td class='warning'>".$fila->cantidad."</td>";
                           echo "<td class='danger'>".$fila->preciov."</td>";                        
                           echo '<td class="info">'.$fila->subtotal.'<div class="breadcomb-report">
-									<button type="button" onclick="anadirCarrito('.$fila->id.')" data-toggle="tooltip" data-placement="left" title="Eliminar del carrito." class="btn"><i class="notika-icon notika-close"></i></button>
+									<button type="button" onclick="anadirCarrito('.$fila->id.')" data-toggle="tooltip" data-placement="right" title="Eliminar del carrito." class="btn"><i class="notika-icon notika-close"></i></button>
 								</div></td>';
                           
                           $total=$total+$fila->subtotal;
