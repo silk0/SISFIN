@@ -67,11 +67,42 @@
 </head>
 <script  language=JavaScript> 
 function go(){
-    //validacion respectiva me da hueva
-    var idt=document.getElementById("fech").value;
-    alert(idt);
-    document.form.submit(); 
-}
+
+    //Validaciones
+   if(document.getElementById('tipo').value=="Seleccione"){
+     notify(' Advertencia:','El campo Tipo Activo es obligatorio.','top', 'right', 'any', 'warning');
+       document.getElementById("tipo").focus();
+   }else if(document.getElementById('dpto').value=="Seleccione"){
+        notify(' Advertencia:','El campo Departamento es obligatorio,','top', 'right', 'any', 'warning');
+       document.getElementById("dpto").focus();
+   }else if(document.getElementById('prov').value=="Seleccione"){
+        notify(' Advertencia:','El campo Proveedor es obligatorio','top', 'right', 'any', 'warning');
+       document.getElementById("prov").focus();
+   }else if(document.getElementById('emp').value=="Seleccione"){
+        notify(' Advertencia:','El campo Encargado es obligatorio', 'top', 'right', 'any', 'warning');
+       document.getElementById("emp").focus();
+   }else if(document.getElementById('fech').value==""){
+        notify(' Advertencia:','El campo Fecha de Adquisicion es obligatorio', 'top', 'right', 'any', 'warning');
+       document.getElementById("fech").focus();
+   }else if(document.getElementById('tipo_adq').value=="Seleccione"){
+        notify(' Advertencia:','Seleccione un tipo de Adquisicion', 'top', 'right', 'any', 'warning');
+       document.getElementById("tipo_adq").focus();
+   }else if(document.getElementById('precio').value==""){
+        notify(' Advertencia:','El campo precio es obligatorio', 'top', 'right', 'any', 'warning');
+       document.getElementById("precio").focus();
+   }else if(document.getElementById('marca').value==""){
+        notify(' Advertencia:','El campo Marca es obligatorio', 'top', 'right', 'any', 'warning');
+       document.getElementById("marca").focus();
+   }else if(document.getElementById('correlativo').value==""){
+        notify(' Advertencia:','El campo correlativo es obligatorio', 'top', 'right', 'any', 'warning');
+       document.getElementById("correlativo").focus();
+   }else if(document.getElementById('descrip').value==""){
+        notify(' Advertencia:','El campo Descripción es obligatorio', 'top', 'right', 'any', 'warning');
+       document.getElementById("descrip").focus();
+   }else{
+      document.form.submit();  
+   }   
+} 
 function tabla(){
     document.location.href="listaAF.php"; 
 }
@@ -493,17 +524,29 @@ if($bandera==1){
 $consulta  = "INSERT INTO tactivo VALUES('null','" .$tipo. "','" .$dpto. "','" .$emp. "','" .$prov. "','" .$correlativo. "','" .$fechaBD. "','" .$descrip. "','1','" .$precio. "','" .$marca. "','0','" .$tipo_adquicicion. "')";
     $resultado = $conexion->query($consulta);
       if($resultado){
-          msg("Se agregaron los datos correctamente");
+          msgI("Se agregaron los datos correctamente");
       } else {
-          msg("Error al insertar los datos");
+          msgE("Error al insertar los datos");
       }
 }
 
   
-function msg($texto)
+function msgI($texto)
 {
     echo "<script type='text/javascript'>";
-    echo "alert('$texto');";
+    echo "notify('Exito','$texto','top', 'right', 'any', 'success');";
+    echo "</script>";
+}
+function msgA($texto)
+{
+    echo "<script type='text/javascript'>";
+    echo "notify('Advertencia','$texto','top', 'right', 'any', 'warning');";
+    echo "</script>";
+}
+function msgE($texto)
+{
+    echo "<script type='text/javascript'>";
+    echo "notify('Error','$texto','top', 'right', 'any', 'danger');";
     echo "</script>";
 }
 ?>
