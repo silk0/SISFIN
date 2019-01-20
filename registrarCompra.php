@@ -74,6 +74,16 @@ if ($result) {
 		============================================ -->
     <script src="js/vendor/modernizr-2.8.3.min.js"></script>
     <script>
+
+    function calcular(){
+        
+        var precioco= document.getElementById("precioco").value;
+        var cantidad=document.getElementById("cantidad").value;
+     
+        var subtotal=precioco*cantidad; 
+        document.getElementById("subtotal").value=subtotal;
+    }
+
         function notify(titulo,texto,from, align, icon, type, animIn, animOut){
 		$.growl({
 			icon: icon,
@@ -237,7 +247,8 @@ if ($result) {
                                         <div class="nk-int-st">
                                         <input type="text" name="nombre" id="nombre" class="form-control input-sm" placeholder="Ingrese nombre del producto." value="<?php echo $nombreprod ?>" readonly >
                                         </div>
-                                        <button class='btn btn-lightgreen lightgreen-icon-notika btn-reco-mg btn-button-mg' data-toggle='tooltip' data-placement='bottom' title='Cambiar el producto.' onclick='regresar()'><i class='notika-icon notika-up-arrow'></i></button>
+                                        <button type="button" 
+                                        class='btn btn-lightgreen lightgreen-icon-notika btn-reco-mg btn-button-mg' data-toggle='tooltip' data-placement='bottom' title='Cambiar el producto.' onclick='regresar()'><i class='notika-icon notika-up-arrow'></i></button>
                                     </div>
                                 </div>
                             </div>
@@ -248,7 +259,7 @@ if ($result) {
                                         <div class="nk-int-st">
                                         <input type="text" name="apellido" id="apellido" class="form-control input-sm" placeholder="Ingrese el nombre del proveedor." value="<?php echo $nombreprov ?>" readonly>
                                         </div>
-                                        <button class='btn btn-lightgreen lightgreen-icon-notika btn-reco-mg btn-button-mg' data-toggle='tooltip' data-placement='bottom' title='Cambiar proveedor.' onclick='edit("<?php echo $idR ?>")'><i class='notika-icon notika-up-arrow'></i></button>
+                                        <button type="button" class='btn btn-lightgreen lightgreen-icon-notika btn-reco-mg btn-button-mg' data-toggle='tooltip' data-placement='bottom' title='Cambiar proveedor.' onclick='edit("<?php echo $idR ?>")'><i class='notika-icon notika-up-arrow'></i></button>
                                     </div>
                                 </div>
                             </div>
@@ -267,7 +278,7 @@ if ($result) {
                                     <div class="form-group">
                                         <label>Cantidad:</label>
                                         <div class="nk-int-st">
-                                        <input type="text" name="cantidad" id="cantidad" class="form-control input-sm" placeholder="00" >
+                                        <input type="text" name="cantidad" id="cantidad" class="form-control input-sm" placeholder="00" onkeyup="calcular()" >
                                         </div>
                                     </div>
                                 </div>
@@ -277,7 +288,7 @@ if ($result) {
                                     <div class="form-group">
                                         <label>Subtotal:</label>
                                         <div class="nk-int-st">
-                                        <input type="text" name="subtotal" id="subtotal" class="form-control input-sm" placeholder="00" >
+                                        <input type="text" name="subtotal" id="subtotal" class="form-control input-sm" placeholder="00" onkeyup="calcular()">
                                         </div>
                                     </div>
                                 </div>

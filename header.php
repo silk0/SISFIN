@@ -90,7 +90,7 @@
                             <li class="nav-item nc-al"><a href="#" data-toggle="dropdown" role="button" aria-expanded="false" class="nav-link dropdown-toggle"><span><i class="notika-icon notika-alarm"></i></span><div class="spinner4 spinner-4"></div><div class="ntd-ctn"><span>1</span></div></a>
                                 <div role="menu" class="dropdown-menu message-dd notification-dd animated zoomIn">
                                     <div class="hd-mg-tt">
-                                        <h2>Existencias abajo del mínimo.</h2>
+                                        <h2>Existencias abajo del mínimo o agotadas.</h2>
                                     </div>
                                     <div class="hd-message-info">
                                     <?php 
