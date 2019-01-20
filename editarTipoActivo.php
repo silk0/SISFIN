@@ -163,13 +163,14 @@ function back(){
                             </div>
                             </div>
                             <div class="col-lg-6 col-md-6 col-sm-6 col-xs-12">
-                            <label>Clasificacion</label>
+                            
+                            <label>Institución</label>
                                 <div class="bootstrap-select fm-cmp-mg">
-                                    <select class="selectpicker" data-live-search="true" name="clsi" id="institucion">
+                                    <select class="selectpicker" data-live-search="true" name="clasi" id="clasi">
                                     <option value="Seleccione">Seleccione</option>
                                     <?php
                                     include 'config/conexion.php';
-                                    $result = $conexion->query("select id_clasificacion as id,nombre FROM ttipo_activo");
+                                    $result = $conexion->query("select id_clasificaion as id,nombre FROM tclasificacion");
                                     if ($result) {
                                          while ($fila = $result->fetch_object()) {
                                              if ($fila->id == $idclasR ) {
@@ -186,6 +187,7 @@ function back(){
                                     </select>
                                 </div>
                                 </div>
+                        
                                 <div class="col-lg-10 col-md-10 col-sm-10 col-xs-12">
                                 <div class="form-example-int">
                                     <div class="form-group">
@@ -197,11 +199,12 @@ function back(){
                                 </div>
                                 
                             </div>
+                         
                             
                            <div class="form-example-int mg-t-15">
-                            <button class="btn btn-success notika-btn-success" style="margin-left: 500px;" onclick="go();" >Guardar.</button>
-                            <button type="button" class="btn btn-success notika-btn-success" onclick="tabla();">Cancelar</button>
-                        </div>
+                           <button class="btn btn-success notika-btn-success" style="margin-left: 500px;" onclick="go();" >Guardar</button>
+                            <button type="reset" class="btn btn-warning notika-btn-warning">Restablecer</button>
+                            <button type="button" class="btn btn-warning notika-btn-warning" onclick="back();">Cancelar</button></div>
                         </form>
                     </div>
                 </div>
@@ -288,6 +291,9 @@ function back(){
 		============================================ -->
         <script src="js/notification/bootstrap-growl.min.js"></script>
     <script src="js/notification/notification-active.js"></script>
+      <!-- bootstrap select JS
+		============================================ -->
+    <script src="js/bootstrap-select/bootstrap-select.js"></script>
 </body>
 
 </html>
