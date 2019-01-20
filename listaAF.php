@@ -128,6 +128,33 @@ function notify(titulo,texto,from, align, icon, type, animIn, animOut){
        
        document.location.href="editarAF.php?id="+id;
    }
+   function mostrarDetalle(id,tipA,dep,prov,enc,fechA,tipAc,valA,marc,corr,descripc)
+        {
+         // document.getElementById("baccion2").value=id;
+          document.getElementById("tipo").value=tipA;
+          document.getElementById("dpto").value=dep;
+          document.getElementById("prov").value=prov;
+          document.getElementById("emp").value=enc;
+           document.getElementById("fech").value=fechA;
+           document.getElementById("tipo_adq").value=tipAc;
+         //$("#baccion2").val(id);
+           document.getElementById("precio").value=valA;
+          document.getElementById("marca").value=marc;
+           document.getElementById("correlativo").value=corr;
+           
+           document.getElementById("descrip").value=descripc;
+           
+        //   document.getElementById("observm").value=ob;
+         //$("#nomb").val(nom);
+        //$("#marc").val(marca);
+          //$("#num").val(num);
+          //$("#donad").val(don);
+          //$("#descr").val(des);
+          $("#ModalInfo").modal();
+        //Ya manda todos los datos correcatamente
+          
+          
+        }
    function filtrar(){
           id=document.getElementById("op").value;
     
@@ -269,7 +296,7 @@ if ($result) {
         <button class='btn btn-lightgreen lightgreen-icon-notika btn-reco-mg btn-button-mg' data-toggle='tooltip' data-placement='bottom' title='Modificar activo.'  onclick='modificar(" . $fila->id_activo. ")'><i class='notika-icon notika-menus'></i></button>
         ";
         
-        echo  "<button class='btn btn-info info-icon-notika btn-reco-mg btn-button-mg' data-toggle='tooltip' data-placement='bottom' title='Ver Activo Fijo.' onclick='modify(" . $fila->id_activo. ")'><i class='notika-icon notika-eye'></i></button>";
+        echo  "<button class='btn btn-info info-icon-notika btn-reco-mg btn-button-mg' data-toggle='tooltip' data-placement='bottom' title='Mostrar detalle.' onclick='mostrarDetalle(" . $fila->id_activo. ")'><i class='notika-icon notika-eye'></i></button>";
        
         if($fila->estado==1){
             echo  "<button class='btn btn-danger info-icon-notika btn-reco-mg btn-button-mg' data-toggle='tooltip' data-placement='bottom' title='Hacer una devolucion sobre compra.' onclick='baja(" . $fila->id_activo. ",1)'><i class='notika-icon notika-down-arrow'></i></button>";
@@ -471,6 +498,222 @@ while ($fila = $result->fetch_object()) {
             </div>
         </div>
     </div>
+
+
+
+        <!-- Data Table area End-->
+ <!-- MODAL PARA FIADOR -->
+ <div class="modal animated shake" id="ModalInfo" role="dialog">
+                                    <div class="modal-dialog modal-large">
+                                        <div class="modal-content">
+                                            <div class="modal-header">
+                                                <button type="button" class="close" data-dismiss="modal">&times;</button>
+                                            </div>
+                                            <div class="modal-body">
+                                          
+
+        <h1>Detalles del Activo</h1>
+                        <div class="row">
+                        <div class="col-lg-4 col-md-4 col-sm-4 col-xs-12">
+                            <label>Tipo Activo (falta)</label>
+                                <div class="bootstrap-select fm-cmp-mg">
+                                    <select class="selectpicker" data-live-search="true" name="tipo" id="tipo" onchange="enviar();">
+                                    <option value="Seleccione">Seleccione</option>
+                                    <?php
+                                     include 'config/conexion.php';
+                                     $result = $conexion->query("select id_tipo as id,nombre FROM ttipo_activo");
+                                     if ($result) {
+                                         while ($fila = $result->fetch_object()) {
+                                             echo "<option value='".$fila->id."'>".$fila->nombre."</option>";
+                                            }
+                                        }
+                                        ?> 
+                                    </select>
+                                </div>
+                                </div>
+                            <div class="col-lg-4 col-md-4 col-sm-4 col-xs-12">
+                            <label>Departamento</label>
+                                <div class="bootstrap-select fm-cmp-mg">
+                                    <select class="selectpicker" data-live-search="true" name="dpto" id="dpto" onchange="enviar();">
+                                    <option value="Seleccione">Seleccione</option>
+                                    <?php
+                                     include 'config/conexion.php';
+                                     $result = $conexion->query("SELECT
+                                     tdepartamento.id_departamento as id,
+                                     tdepartamento.nombre,
+                                     tinstitucion.nombre as insti
+                                     FROM
+                                     tdepartamento
+                                     INNER JOIN tinstitucion ON tdepartamento.id_institucion = tinstitucion.id_institucion");
+                                     if ($result) {
+                                         while ($fila = $result->fetch_object()) {
+                                             echo "<option value='".$fila->id."'>".$fila->nombre." - ".$fila->insti."</option>";
+                                            }
+                                        }
+                                        ?>
+                                    </select>
+                                </div>
+                                </div>
+                                <div class="col-lg-4 col-md-4 col-sm-4 col-xs-12">
+                            <label>Proveedor</label>
+                                <div class="bootstrap-select fm-cmp-mg">
+                                    <select class="selectpicker" data-live-search="true" name="prov" id="prov">
+                                    <option value="Seleccione">Seleccione</option>
+                                    <?php
+                                     include 'config/conexion.php';
+                                     $result = $conexion->query("select id_proveedor as id,nombre FROM tproveedor");
+                                     if ($result) {
+                                         while ($fila = $result->fetch_object()) {
+                                             echo "<option value='".$fila->id."'>".$fila->nombre."</option>";
+                                            }
+                                        }
+                                        ?>
+                                    </select>
+                                </div>
+                                </div>
+                              
+                                <div class="col-lg-4 col-md-4 col-sm-4 col-xs-12 mg-t-20">
+                            <label>Encargado</label>
+                                <div class="bootstrap-select fm-cmp-mg">
+                                    <select class="selectpicker" data-live-search="true" name="emp" id="emp">
+                                    <option value="Seleccione">Seleccione</option>
+                                    <?php
+                                     include 'config/conexion.php';
+                                     $result = $conexion->query("select id_empleado as id,nombre,apellido FROM templeados");
+                                     if ($result) {
+                                         while ($fila = $result->fetch_object()) {
+                                             echo "<option value='".$fila->id."'>".$fila->nombre." ".$fila->apellido."</option>";
+                                            }
+                                        }
+                                        ?>
+                                    </select>
+                                </div>
+                                </div>
+                          
+                               
+                            <div class="col-lg-4 col-md-4 col-sm-4 col-xs-12 mg-t-15">
+                                <div class="form-group nk-datapk-ctm" id="data_2">
+                                    <label>Fecha de Adquicición:</label>
+                                    <div class="input-group date nk-int-st">
+                                        <span class="input-group-addon"></span>
+                                        <input type="text" name="fech" id="fech" class="form-control" data-mask="99/99/9999">
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-lg-4 col-md-4 col-sm-4 col-xs-12 mg-t-20">
+                            <label>Tipo de Adquicición:</label>
+                                <div class="bootstrap-select fm-cmp-mg">
+                                    <select class="selectpicker" data-live-search="true" name="tipo_adq" id="tipo_adq">
+                                    <option value="Seleccione">Seleccione</option>
+                                    <?php
+                                             echo "<option value='1'>Nuevo</option>";
+                                             echo "<option value='2'>Usado</option>";
+                                             echo "<option value='3'>Donado</option>";
+                                        
+                                        ?>
+                                    </select>
+                                </div>
+                                </div>
+                                </div>
+
+
+
+                                <div class="row">
+                                <div class="col-lg-3 col-md-3 col-sm-3 col-xs-12 mg-t-20">
+                                <div class="form-example-int">
+                                    <div class="form-group">
+                                        <label>Valor de Activo:</label>
+                                        <div class="nk-int-st">
+                                        <input type="number" class="form-control input-sm" placeholder="Valor del Activo" id="precio" name="precio">
+                                        
+                                    </div>
+                                        
+                                    </div>
+                                    
+                                </div>
+                               
+                            </div>
+                            <div class="col-lg-4 col-md-4 col-sm-4 col-xs-12 mg-t-20">
+                                <div class="form-example-int">
+                                    <div class="form-group">
+                                        <label>Marca:</label>
+                                        <div class="nk-int-st">
+                                        <input type="text" class="form-control input-sm" placeholder="Marca del Activo" id="marca" name="marca">  
+                                    </div>
+                                        
+                                    </div>
+                                    
+                                </div>
+                               
+                            </div>
+                            <div class="col-lg-5 col-md-5 col-sm-5 col-xs-12 mg-t-20">
+                                <div class="form-example-int">
+                                    <div class="form-group">
+                                        <label>Correlativo:</label>
+                                        <div class="nk-int-st">
+                                        <input type="text" class="form-control input-sm" placeholder="Correlativo" id="correlativo" name="correlativo" readonly>
+                                        
+                                    </div>
+                                        
+                                    </div>
+                                    
+                                </div>
+                               
+                            </div>
+             
+                            <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12 mg-t-20">
+                                <div class="form-example-int">
+                                    <div class="form-group">
+                                        <label>Descripción:</label>
+                                        <div class="nk-int-st">
+                                        <input type="text" class="form-control input-sm" placeholder="Ingrese  un correlativo para departamento." id="descrip" name="descrip">
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="col-lg-1 col-md-1 col-sm-1 col-xs-12">
+                               <div class="">
+                            </div>
+                            </div>
+                            </div>
+                            </div>
+                    
+                        
+                        
+                        <!-- FILA PARA DATOS CORTOS -->
+                        
+                         <!-- FIN DE FILA PARA DATOS CORTOS -->
+                      
+                    
+                        <!-- salrios-->
+                    
+                        
+                            
+                        <div class="row">
+                            <div class="col-lg-8 col-md-12 col-sm-12 col-xs-12">
+                                <div class="floating-numner form-rlt-mg">
+                                    <p>Descripción:</p>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
+                                <div class="form-group">
+                                    <div class="nk-int-st">
+                                        <textarea class="form-control" name="descrip" id="descrip" rows="3" placeholder="Escriba aquí la descripción deseada acerca del producto..."></textarea readonly>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                         
+
+
+                                            </div>
+                                            <div class="modal-footer">
+                                                <button type="button" class="btn btn-default" data-dismiss="modal">Cerrar</button>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
     <!-- Data Table area End-->
 
     <!-- Start Footer area-->

@@ -385,17 +385,6 @@ if ($result) {
                     
 
                         </div>
-                    
-                        
-                        
-                        <!-- FILA PARA DATOS CORTOS -->
-                        
-                         <!-- FIN DE FILA PARA DATOS CORTOS -->
-                      
-                    
-                        <!-- salrios-->
-                    
-                        
                             
                         <div class="row">
                             <div class="col-lg-8 col-md-12 col-sm-12 col-xs-12">
