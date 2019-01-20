@@ -129,17 +129,17 @@
         }else{
           if(document.getElementById('tipov').value=="1"){
             // Esto va a ser una cventa al contado
-            document.location.href="realizarVentaContado.php";
+            document.location.href="realizarVentaCredito.php";
           }else{
             // Esta va as er una venta al credito
-            document.lcoation.href="realizarVentaCredito.php";
+            document.location.href="realizarVentaContado.php";
           }
         }
       }
     function anadirCarrito(id){ 
          
         
-              $.ajax({
+      $.ajax({
         data:{"id":id,"op":2},
         url: 'scriptsphp/ajaxCarrito.php',
         type: 'post',
