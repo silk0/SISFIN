@@ -118,7 +118,7 @@ function notify(titulo,texto,from, align, icon, type, animIn, animOut){
 	}
   function modificar(id){
        
-       document.location.href="editarDepartamento.php?id="+id;
+       document.location.href="editarAF.php?id="+id;
    }
    function filtrar(){
           id=document.getElementById("op").value;
