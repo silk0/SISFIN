@@ -17,40 +17,42 @@
                                 </li>
                                 <li><a data-toggle="collapse" data-target="#demoevent" href="#">Empleados</a>
                                     <ul id="demoevent" class="collapse dropdown-header-top">
-                                        <li><a href="inbox.html">Inbox</a></li>
-                                        <li><a href="view-email.html">View Email</a></li>
-                                        <li><a href="compose-email.html">Compose Email</a></li>
+                                        <li><a href="ingresarEmpleado.php">Registrar Empleado</a></li>
+                                        <li><a href="mostrarEmpleados.php">Mostrar Empleados</a></li>
+                                  
                                     </ul>
                                 </li>
                                 <li><a data-toggle="collapse" data-target="#democrou" href="#">Inventario</a>
                                     <ul id="democrou" class="collapse dropdown-header-top">
-                                        <li><a href="animations.html">Animations</a></li>
-                                        <li><a href="google-map.html">Google Map</a></li>
-                                        <li><a href="data-map.html">Data Maps</a></li>
-                                        <li><a href="code-editor.html">Code Editor</a></li>
+                                        <li><a href="ingresarProducto.php">Registrar Productos</a></li>
+                                        <li><a href="inventario.php">Inventario</a></li>
+                                        <li><a href="comprarProductos.php">Comprar</a></li>
+                                        <li><a href="ingresarCategoria.php">Categorias</a></li>
                                         <li><a href="image-cropper.html">Images Cropper</a></li>
                                         <li><a href="wizard.html">Wizard</a></li>
                                     </ul>
                                 </li>
                                 <li><a data-toggle="collapse" data-target="#demolibra" href="#">Proveedores</a>
                                     <ul id="demolibra" class="collapse dropdown-header-top">
-                                        <li><a href="flot-charts.html">Flot Charts</a></li>
-                                        <li><a href="bar-charts.html">Bar Charts</a></li>
-                                        <li><a href="line-charts.html">Line Charts</a></li>
-                                        <li><a href="area-charts.html">Area Charts</a></li>
+                                        <li><a href="ingresarProveedor.php">Registrar Proveedor</a></li>
+                                        <li><a href="mostrarProveedores.php">Mostrar Proveedores</a></li>
+           
                                     </ul>
                                 </li>
                                 <li><a data-toggle="collapse" data-target="#demodepart" href="#">Cuestas por Cobrar</a>
                                     <ul id="demodepart" class="collapse dropdown-header-top">
-                                        <li><a href="venderProductos.php">Ventas</a></li>
+                                        <li><a href="venderProductos.php">Vender</a></li>
                                         <li><a href="listaPlanPago.php">Plan de Pago</a></li>
                                     </ul>
                                 </li>
                                 <li><a data-toggle="collapse" data-target="#demo" href="#">Activo Fijo</a>
                                     <ul id="demo" class="collapse dropdown-header-top">
-                                        <li><a href="form-elements.html">Registrar Activo Fijo</a></li>
-                                        <li><a href="form-components.html">Form Components</a></li>
-                                        <li><a href="form-examples.html">Form Examples</a></li>
+                                        <li><a href="ingresarAF.php">Registrar Activo Fijo</a></li>
+                                        <li><a href="listaAF.php">Consultas de Activos</a></li>
+                                        <li><a href="listaInstituciones.php">Instituciones</a></li>
+                                        <li><a href="ingresarAF.php">Departamentos</a></li>
+                                        <li><a href="listaAF.php">Tipos de Activos</a></li>
+                                        <li><a href="listaInstituciones.php">Clasificación de Activos</a></li>
                                     </ul>
                                 </li>
                                 <li><a data-toggle="collapse" data-target="#Miscellaneousmob" href="#">Estadisticas</a>

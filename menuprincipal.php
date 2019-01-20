@@ -53,7 +53,7 @@
                                 </li>
                                 <li><a href="listaTipoActivo.php">Tipos de Activos</a>
                                 </li>
-                                <li><a href="listaClasificacion.php">Clasificacion de Activos</a>
+                                <li><a href="listaClasificacion.php">Clasificación de Activos</a>
                                 </li>
                                 
                             </ul>
@@ -107,7 +107,7 @@
                                 <li><a href="comprarProductos.php">Comprar</a>
                                 </li>
                                
-                                <li><a href="ingresarCategoria.php">Registrar Categoria</a>
+                                <li><a href="ingresarCategoria.php">Categorias</a>
                                 </li>
                                 <!-- <li><a href="form-components.html">Form Components</a>
                                 </li>
