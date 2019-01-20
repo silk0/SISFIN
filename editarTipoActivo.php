@@ -163,13 +163,13 @@ function back(){
                             </div>
                             </div>
                             <div class="col-lg-6 col-md-6 col-sm-6 col-xs-12">
-                            <label>Institución</label>
+                            <label>Clasificacion</label>
                                 <div class="bootstrap-select fm-cmp-mg">
-                                    <select class="selectpicker" data-live-search="true" name="institucion" id="institucion">
+                                    <select class="selectpicker" data-live-search="true" name="clsi" id="institucion">
                                     <option value="Seleccione">Seleccione</option>
                                     <?php
                                     include 'config/conexion.php';
-                                    $result = $conexion->query("select id_institucion as id,nombre FROM tinstitucion");
+                                    $result = $conexion->query("select id_clasificacion as id,nombre FROM ttipo_activo");
                                     if ($result) {
                                          while ($fila = $result->fetch_object()) {
                                              if ($fila->id == $idclasR ) {
