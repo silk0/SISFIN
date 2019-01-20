@@ -4,7 +4,7 @@
 <head>
     <meta charset="utf-8">
     <meta http-equiv="x-ua-compatible" content="ie=edge">
-    <title>Comprar|Devolver productos | SISFIN</title>
+    <title>Vender|Devolver productos | SISFIN</title>
     <meta name="description" content="">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <!-- favicon
@@ -71,6 +71,32 @@
    
          document.location.href="kardex.php?id="+id;
     }
+    function anadirCarrito(id,stock){
+   
+         alert(id);
+         alert(stock);
+         var cantidadDeseada=document.getElementById(id).value;
+         alert("Cant deseada:"+cantidadDeseada);
+         if(parseInt(cantidadDeseada)>parseInt(stock)){
+            alert("La canrtidad deseada supera a la cantidad disponible.");
+         }else{
+             alert("La canditdad deseada es correcta y va A ser anadida al carrito");
+             //aQUI CVA A IR EL CODIGO AJAX PARA PODER ANADIR AL CARRITO
+              $.ajax({
+        data:{"id":id,"cantidadDeseada":cantidadDeseada,"op":1},
+        url: 'scriptsphp/ajaxCarrito.php',
+        type: 'post',
+        beforeSend: function(){
+            alert("Por favor espere...");
+        },
+        success: function(response){
+            alert(response);
+            
+        }
+    });
+    //Fin de ajax para agregar al carrito
+         }
+    }
     </script>
 </head>
 
@@ -102,7 +128,7 @@
 										<i class="notika-icon notika-windows"></i>
 									</div>
 									<div class="breadcomb-ctn">
-										<h2>Comprar productos</h2>
+										<h2>Vender productos</h2>
 										<p>Datos de <span class="bread-ntd">la compra.</span></p>
 									</div>
 								</div>
@@ -136,6 +162,7 @@
                                         <th>Nombre</th>
                                         <th>Proveedor</th>
                                         <th>Stock</th>
+                                        <th>Cantidad</th>
                                         <th>Opciones</th>                                       
                                     </tr>
                                 </thead>
@@ -157,11 +184,12 @@ if ($result) {
             }
          
         echo "<td>" . $fila->stock . "</td>";
+        echo "<td><input type='number' name='" . $fila->id_producto . "' id='" . $fila->id_producto . "' min='1' max='" . $fila->stock . "'></td>";
         
         echo "<td>
         <div class='button-icon-btn'>
-        <button class='btn btn-info info-icon-notika btn-reco-mg btn-button-mg' data-toggle='tooltip' data-placement='bottom' title='Ver tarjeta kardex.' onclick='kardex(" . $fila->id_producto. ")' ><i class='notika-icon notika-eye'></i></button>
-        <button class='btn btn-lightgreen lightgreen-icon-notika btn-reco-mg btn-button-mg' data-toggle='tooltip' data-placement='bottom' title='Hacer una compra.' onclick='modify(" . $fila->id_producto. ")'><i class='notika-icon notika-up-arrow'></i></button>
+        
+        <button class='btn btn-lightgreen lightgreen-icon-notika btn-reco-mg btn-button-mg' data-toggle='tooltip' data-placement='bottom' title='Anadir al carrito.' onclick='anadirCarrito(" . $fila->id_producto. ",". $fila->stock. ")'><i class='notika-icon notika-credit-card'></i></button>
         <button class='btn btn-lightgreen lightgreen-icon-notika btn-reco-mg btn-button-mg' data-toggle='tooltip' data-placement='bottom' title='Hacer una devolucion sobre compra.' onclick='devo(" . $fila->id_producto. ")'><i class='notika-icon notika-down-arrow'></i></button>
         </div>
         </td>";
@@ -177,6 +205,7 @@ if ($result) {
                                         <th>Nombre</th>
                                         <th>Proveedor</th>
                                         <th>Stock</th>
+                                        <th>Cantidad</th>
                                         <th>Opciones</th>  
                                     </tr>
                                 </tfoot>
