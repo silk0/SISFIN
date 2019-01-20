@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Servidor: 127.0.0.1
--- Tiempo de generación: 19-01-2019 a las 17:40:50
+-- Tiempo de generación: 20-01-2019 a las 03:30:22
 -- Versión del servidor: 10.1.25-MariaDB
 -- Versión de PHP: 7.1.7
 
@@ -67,8 +67,30 @@ CREATE TABLE `tactivo` (
   `fecha_adquisicion` date NOT NULL,
   `descripcion` varchar(200) NOT NULL,
   `estado` varchar(50) NOT NULL,
-  `observaciones` varchar(200) NOT NULL,
-  `tipo_uso` varchar(50) NOT NULL
+  `precio` double NOT NULL,
+  `marca` varchar(50) NOT NULL,
+  `depreciacionacum` double NOT NULL,
+  `tipo_adquicicion` varchar(50) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+--
+-- Volcado de datos para la tabla `tactivo`
+--
+
+INSERT INTO `tactivo` (`id_activo`, `id_tipo`, `id_departamento`, `id_encargado`, `id_proveedor`, `correlativo`, `fecha_adquisicion`, `descripcion`, `estado`, `precio`, `marca`, `depreciacionacum`, `tipo_adquicicion`) VALUES
+(1, 2, 2, 2, 1, '20002 - 30002 - 0001', '0000-00-00', 'sdjksdfkjsdhf', '1', 600, 'skdfhkj', 0, 'Nuevo'),
+(2, 1, 1, 1, 1, '101-201 - 301-401 - 0002', '0000-00-00', 'buena computadora', '1', 600, 'Dell', 0, 'Nuevo');
+
+-- --------------------------------------------------------
+
+--
+-- Estructura de tabla para la tabla `tcarrito`
+--
+
+CREATE TABLE `tcarrito` (
+  `id_carrito` int(11) NOT NULL,
+  `id_producto` int(11) NOT NULL,
+  `cantidad` int(11) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 -- --------------------------------------------------------
@@ -129,8 +151,11 @@ CREATE TABLE `tclasificacion` (
 --
 
 INSERT INTO `tclasificacion` (`id_clasificaion`, `nombre`, `correlativo`, `tiempo_depreciacion`) VALUES
-(1, 'Activo Fijo Intangible', '40001', 3),
-(2, 'Activo Fijo Tangible', '40002', 4);
+(1, 'Mobiliario y Equipo', '301', 2),
+(2, 'Terrenos', '302', 0),
+(3, 'Edificios', '303', 20),
+(4, 'Equipo de Computo', '304', 4),
+(5, 'Equipo de Reparto', '305', 2);
 
 -- --------------------------------------------------------
 
@@ -163,7 +188,8 @@ INSERT INTO `tclientes` (`id_cliente`, `id_cartera`, `nombre`, `apellido`, `dire
 (3, 4, 'Jessica Abigail ', 'Rosales', 'Santo tomas abajo cantos los hernandez, apastepeque San vicente', '12832738-7', '1278-372883-827-8', '2783-7827', 'Remesa', 500, '2389-2898', '7787-8788', 'jessica@gmail.com', 'jksjkfjkdsh'),
 (4, 4, 'Fernando Josue', 'Hernandez Arevalo', 'COl san benito #45 san Isisdro San salavador', '29389829-8', '7281-728738-273-4', '9999-9999', 'Salario', 1500, '2239-8928', '7887-8788', 'fernando97@gmai.com', 'una persona con posibilidad de pagar el credito'),
 (5, 4, 'Maria Azucena', 'Garcia Mata', 'Colonia el manantial #45 SUchitoto', '28298398-9', '7876-767565-777-7', '9999-9999', 'Salario', 600, '2342-2222', '7837-8738', 'MariaAzu@hotmail.com', 'buena condicion de pago'),
-(10, 4, 'Sandra Liseth', 'Arevalo Carranza', 'Colonia la monserrath, san esteban obrajuelo San Otrillo', '12321112-2', '2342-342342-221-1', 'Lic. Contadora', 'Salario', 800, '2332-3232', '7899-8989', 'Sandra@gmail.com', 'el cliente cumple con los requisitos');
+(10, 4, 'Sandra Liseth', 'Arevalo Carranza', 'Colonia la monserrath, san esteban obrajuelo San Otrillo', '12321112-2', '2342-342342-221-1', 'Lic. Contadora', 'Salario', 800, '2332-3232', '7899-8989', 'Sandra@gmail.com', 'el cliente cumple con los requisitos'),
+(11, 4, 'Erick ', 'Ticas', 'apastepeque', '05294607-4', '6534-345566-778-8', 'gyujfgvjhl', 'Salario', 100, '2345-6778', '7342-3124', 'eticas@gmail.com', 'kljh;ljycdykxsdtyikljjhgff');
 
 -- --------------------------------------------------------
 
@@ -221,9 +247,10 @@ CREATE TABLE `tdepartamento` (
 --
 
 INSERT INTO `tdepartamento` (`id_departamento`, `id_institucion`, `nombre`, `correlativo`) VALUES
-(1, 1, 'Departamento de Ventas', '20001'),
-(2, 1, 'Produccion', '20002'),
-(3, 3, 'Departamento de Admon', '20003');
+(1, 1, 'Ventas', '101-201'),
+(2, 1, 'Produccion', '101-202'),
+(3, 1, 'Administracion', '101-203'),
+(4, 2, 'Finanzas', '102-204');
 
 -- --------------------------------------------------------
 
@@ -286,10 +313,8 @@ CREATE TABLE `templeados` (
 INSERT INTO `templeados` (`id_empleado`, `nombre`, `apellido`, `zona`, `dui`, `usuario`, `pass`, `rol`) VALUES
 (1, 'Jose Isamael', 'Hernandez Amaya', 'ventas', '1289283-4', 'nestor', 'hola', ''),
 (2, 'kevin Alexander', 'Jovel Arevalo', 'san sebastian, San V', '23482773-9', 'kevin123', 'holamundo', 'Administrador'),
-(3, 'jhjkh', 'kjhkhkhk', 'hkhkkjh', '87987987-9', 'sdhj3', 'jskdh', 'Vendedor'),
-(4, 'Roberto Enrique', 'Rivas Alfaro', 'san benito', '23234234-3', 'roberto123', 'sjkjljl', 'Vendedor'),
-(5, 'jorge', 'HKNHKH', 'jkhkjhkjh', '80808080-8', 'hkjhkjhkh', 'pepesca', ''),
-(6, '', '', '', '', '', '', 'Seleccione');
+(3, 'Erick Alexander', 'kjhkhkhk', 'hkhkkjh', '87987987-9', 'sdhj3', 'jskdh', ''),
+(4, 'Roberto Enrique', 'Rivas Alfaro', 'san benito', '23234234-3', 'roberto123', 'sjkjljl', 'Vendedor');
 
 -- --------------------------------------------------------
 
@@ -317,7 +342,8 @@ CREATE TABLE `tfiador` (
 
 INSERT INTO `tfiador` (`id_fiador`, `nombre`, `apellido`, `direccion`, `dui`, `nit`, `correo`, `profecion`, `salario`, `telefono`, `celular`) VALUES
 (1, 'kevin', 'jovel', 'san sebas', '2838329', '3989283', 'kevin@gmail.com', 'estudiante', 500, '2233234', '777777'),
-(2, 'Jose de la Cruz', 'Flores Garcia', 'col santa fe pol e casa $34', '298899-9', '289-234232-234-2', 'jose@gmail.com', 'ingeniero de Sistemas', 1600, '23334433', '78773667');
+(2, 'Jose de la Cruz', 'Flores Garcia', 'col santa fe pol e casa $34', '298899-9', '289-234232-234-2', 'jose@gmail.com', 'ingeniero de Sistemas', 1600, '23334433', '78773667'),
+(3, 'Erick Alexander', 'Ticas', 'mjfjsgdxj', '09687644-5', '7643-368907-653-', 'gdj@gmail.com', 'yyyyyyyyyy', 700, '2222-2222', '7777-7777');
 
 -- --------------------------------------------------------
 
@@ -336,12 +362,9 @@ CREATE TABLE `tinstitucion` (
 --
 
 INSERT INTO `tinstitucion` (`id_institucion`, `nombre`, `correlativo`) VALUES
-(1, 'FINSEPROINSEPRO', '10001'),
-(2, 'FUNDASALVA', '10002'),
-(3, 'UES', '10003'),
-(4, 'INGENIO', '10004'),
-(5, 'ACODJAR', '10005'),
-(6, 'FEDECASES', '10006');
+(1, 'Sucursal San Vicente', '101'),
+(2, 'Sucursal San Salvador', '102'),
+(3, 'Sucursal Cojutepeque', '103');
 
 -- --------------------------------------------------------
 
@@ -433,8 +456,8 @@ CREATE TABLE `tproveedor` (
 --
 
 INSERT INTO `tproveedor` (`id_proveedor`, `nombre`, `direccion`, `telefono`, `representante`, `dui`, `nit`, `celular`, `email`) VALUES
-(1, 'SIMAN', 'Blv. santa cruz #42 Santa Tecla, La Libertad', '2342-3212', 'Jose ignacio Martinez Zavala', '83829898-9', '2001-299399-901-0', '7829-9388', 'Jose234@gmail.com'),
-(2, 'CACAO', 'el paso', '2939-9299', 'oscar', '23989898-9', '2817-287987-287-9', '7876-5524', 'oscar@yahoo.com');
+(1, 'SIMmAN', 'Blv. santa cruz #42 Santa Tecla, La Libertad', '2342-3212', 'Jose ignacio Martinez Zavala', '83829898-9', '2001-299399-901-0', '7829-9388', 'Jose234@gmail.com'),
+(2, 'CACAOOPERA ', 'el paso', '2939-9299', 'oscar', '23989898-9', '2817-287987-287-9', '7876-5524', 'oscar@yahoo.com');
 
 -- --------------------------------------------------------
 
@@ -454,15 +477,10 @@ CREATE TABLE `ttipo_activo` (
 --
 
 INSERT INTO `ttipo_activo` (`id_tipo`, `id_clasificacion`, `nombre`, `correlativo`) VALUES
-(1, 1, 'Terrenos', '10001'),
-(2, 2, 'Edificios', '30002'),
-(3, 2, 'Mobiliario y Equipo', '30003'),
-(4, 1, 'Patente', '30004'),
-(5, 1, 'Software', '30005'),
-(6, 2, 'Elemento de Transporte', '30006'),
-(7, 2, 'Maquinaria', '30007'),
-(8, 1, 'Marca', '30008'),
-(9, 1, 'Franquicias', '30009');
+(1, 1, 'Computadora', '301-401'),
+(2, 1, 'Sillas', '301-402'),
+(3, 5, 'Camion', '305-403'),
+(4, 1, 'Mesa', '301-404');
 
 -- --------------------------------------------------------
 
@@ -503,6 +521,13 @@ ALTER TABLE `tactivo`
   ADD KEY `fk_departamento` (`id_departamento`),
   ADD KEY `fk_usuario` (`id_encargado`),
   ADD KEY `fk_proveedor` (`id_proveedor`);
+
+--
+-- Indices de la tabla `tcarrito`
+--
+ALTER TABLE `tcarrito`
+  ADD PRIMARY KEY (`id_carrito`),
+  ADD KEY `fk_productocarrito` (`id_producto`);
 
 --
 -- Indices de la tabla `tcartera`
@@ -654,7 +679,12 @@ ALTER TABLE `kardex`
 -- AUTO_INCREMENT de la tabla `tactivo`
 --
 ALTER TABLE `tactivo`
-  MODIFY `id_activo` int(10) NOT NULL AUTO_INCREMENT;
+  MODIFY `id_activo` int(10) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
+--
+-- AUTO_INCREMENT de la tabla `tcarrito`
+--
+ALTER TABLE `tcarrito`
+  MODIFY `id_carrito` int(11) NOT NULL AUTO_INCREMENT;
 --
 -- AUTO_INCREMENT de la tabla `tcartera`
 --
@@ -669,12 +699,12 @@ ALTER TABLE `tcategoria`
 -- AUTO_INCREMENT de la tabla `tclasificacion`
 --
 ALTER TABLE `tclasificacion`
-  MODIFY `id_clasificaion` int(10) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
+  MODIFY `id_clasificaion` int(10) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
 --
 -- AUTO_INCREMENT de la tabla `tclientes`
 --
 ALTER TABLE `tclientes`
-  MODIFY `id_cliente` int(10) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=11;
+  MODIFY `id_cliente` int(10) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=12;
 --
 -- AUTO_INCREMENT de la tabla `tclientes_fiador`
 --
@@ -689,7 +719,7 @@ ALTER TABLE `tcompras`
 -- AUTO_INCREMENT de la tabla `tdepartamento`
 --
 ALTER TABLE `tdepartamento`
-  MODIFY `id_departamento` int(10) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
+  MODIFY `id_departamento` int(10) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
 --
 -- AUTO_INCREMENT de la tabla `tdevolucion`
 --
@@ -699,17 +729,17 @@ ALTER TABLE `tdevolucion`
 -- AUTO_INCREMENT de la tabla `templeados`
 --
 ALTER TABLE `templeados`
-  MODIFY `id_empleado` int(10) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=7;
+  MODIFY `id_empleado` int(10) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=12;
 --
 -- AUTO_INCREMENT de la tabla `tfiador`
 --
 ALTER TABLE `tfiador`
-  MODIFY `id_fiador` int(10) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
+  MODIFY `id_fiador` int(10) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
 --
 -- AUTO_INCREMENT de la tabla `tinstitucion`
 --
 ALTER TABLE `tinstitucion`
-  MODIFY `id_institucion` int(10) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=7;
+  MODIFY `id_institucion` int(10) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
 --
 -- AUTO_INCREMENT de la tabla `tinventario`
 --
@@ -739,7 +769,7 @@ ALTER TABLE `tproveedor`
 -- AUTO_INCREMENT de la tabla `ttipo_activo`
 --
 ALTER TABLE `ttipo_activo`
-  MODIFY `id_tipo` int(10) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=10;
+  MODIFY `id_tipo` int(10) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
 --
 -- AUTO_INCREMENT de la tabla `tventas`
 --
@@ -763,6 +793,12 @@ ALTER TABLE `tactivo`
   ADD CONSTRAINT `fk_encargado` FOREIGN KEY (`id_encargado`) REFERENCES `templeados` (`id_empleado`),
   ADD CONSTRAINT `fk_proveedor` FOREIGN KEY (`id_proveedor`) REFERENCES `tproveedor` (`id_proveedor`),
   ADD CONSTRAINT `fk_tipo` FOREIGN KEY (`id_tipo`) REFERENCES `ttipo_activo` (`id_tipo`);
+
+--
+-- Filtros para la tabla `tcarrito`
+--
+ALTER TABLE `tcarrito`
+  ADD CONSTRAINT `fk_productocarrito` FOREIGN KEY (`id_producto`) REFERENCES `tproducto` (`id_producto`);
 
 --
 -- Filtros para la tabla `tclientes`
