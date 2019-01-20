@@ -220,7 +220,7 @@ function go(){
                             <h2>Datos del Proveedor</h2>
                             
                         </div>
-                        <form name="form" method="post" action="editarProveedor.php?bandera=1">
+                        <form name="form" method="post" action="../SISFIN/scriptsphp/modificarFiador.php?bandera=3">
                         
                         <input type="hidden" name="baccion" id="baccion" value="<?php echo $idR; ?>">
                         <div class="row">
@@ -418,39 +418,31 @@ function go(){
 
 </html>
 <?php
-include "config/conexion.php";
-$bandera = $_REQUEST['bandera'];
-$baccion  = $_REQUEST["baccion"];
-if ($bandera==1) {
-$nombre     = $_REQUEST['nombre'];
-$telefono   = $_REQUEST['telefono'];
-$direccion  = $_REQUEST['direc'];
-$representante  = $_REQUEST['representante'];
-$dui        = $_REQUEST['dui'];
-$nit        = $_REQUEST['nit'];
-$celular    = $_REQUEST['celular'];
-$email      = $_REQUEST['email'];
-
-
-
-msg($nombre);
-
-    $consulta  = "UPDATE tproveedor set nombre='" . $nombre . "',direccion='" . $direccion . "',telefono='" . $telefono . "',representante='" . $representante . "',dui='" . $dui . "',nit='" . $nit . "',celular='" . $celular . "',email='" . $email . "' where id_proveedor='" . $baccion . "'";
-    $resultado = $conexion->query($consulta);
-    msg("antes if php");
-      if ($resultado) {
-          
-          msg("Se modificaron los datos correctamente");
-      } else {
-          msg("Error al insertar los datos");
-      }
-    }
 
 function msg($texto)
 {
     echo "<script type='text/javascript'>";
     echo "alert('$texto');";
     echo "document.location.href='mostrarProveedores.php';";
+    echo "</script>";
+}
+
+function msgI($texto)
+{
+    echo "<script type='text/javascript'>";
+    echo "notify('Exito','$texto','top', 'right', 'any', 'success');";
+    echo "</script>";
+}
+function msgA($texto)
+{
+    echo "<script type='text/javascript'>";
+    echo "notify('Advertencia','$texto','top', 'right', 'any', 'warning');";
+    echo "</script>";
+}
+function msgE($texto)
+{
+    echo "<script type='text/javascript'>";
+    echo "notify('Error','$texto','top', 'right', 'any', 'danger');";
     echo "</script>";
 }
 ?>
