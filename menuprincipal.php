@@ -106,6 +106,8 @@
                                 </li>
                                 <li><a href="comprarProductos.php">Comprar</a>
                                 </li>
+                                <li><a href="venderProductos.php">Vender</a>
+                                </li>
                                 <li><a href="ingresarCategoria.php">Registrar Categoria</a>
                                 </li>
                                 <!-- <li><a href="form-components.html">Form Components</a>
