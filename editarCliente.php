@@ -16,6 +16,7 @@ if ($result) {
     while ($fila = $result->fetch_object()) {
         $idR               = $fila->id_cliente;
         $nombreR           = $fila->nombre;
+        $idcaertera        = $fila->id_cartera;
         $apellidoR         = $fila->apellido;
         $direccionR        = $fila->direccion;
         $duiR              = $fila->dui;
@@ -286,7 +287,7 @@ function recuperar(id){
 
                         </div>
                         <div class="row">
-                            <div class="col-lg-6 col-md-6 col-sm-6 col-xs-12">
+                            <div class="col-lg-4 col-md-4 col-sm-4 col-xs-12">
                                 <div class="form-example-int mg-t-15">
                                     <div class="form-group">
                                         <label>DUI:</label>
@@ -297,7 +298,7 @@ function recuperar(id){
                                 </div>
                             </div>
 
-                             <div class="col-lg-6 col-md-6 col-sm-6 col-xs-10">
+                             <div class="col-lg-4 col-md-4 col-sm-4 col-xs-10">
                                 <div class="form-example-int mg-t-15">
                                     <div class="form-group">
                                         <label>NIT:</label>
@@ -305,6 +306,28 @@ function recuperar(id){
                                            <input type="text" name="nit" id="nit" class="form-control input-sm" data-mask="9999-999999-999-9" value="<?php echo $nitR;?>">
                                         </div>
                                      </div>                            
+                                </div>
+                            </div>
+                            <div class="col-lg-4 col-md-4 col-sm-4 col-xs-12">
+                                
+                                <label>Cartera</label>
+                                <div class="bootstrap-select fm-cmp-mg">
+                                    <select class="selectpicker" data-live-search="true" name="cartera" id="cartera">
+                                    <option value="Seleccione">Seleccione</option>
+                                    <?php
+                                     include 'config/conexion.php';
+                                     $result = $conexion->query("select id_categoria as id,nombre FROM tcartera");
+                                     if ($result) {
+                                         while ($fila = $result->fetch_object()) {
+                                            if ($fila->id == $idcaertera ) {
+                                                echo '<option value="' . $fila->id. '" selected>' . $fila->nombre . '</opcion>';
+                                            }else {
+                                                echo '<option value="' . $fila->id . '">' . $fila->nombre . '</opcion>';
+                                            }
+                                        }
+                                    }
+                                        ?> 
+										</select>
                                 </div>
                             </div>
                            

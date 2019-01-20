@@ -1,3 +1,14 @@
+<?php
+//Codigo que muestra solo los errores exceptuando los notice.
+error_reporting(E_ALL & ~E_NOTICE);
+session_start();
+if($_SESSION["logueado"] == TRUE) {
+$usuario=$_SESSION["usuario"];
+$nombre = $_SESSION["nombre"];
+$tipo  = $_REQUEST["tipo"];
+$id  = $_REQUEST["id"];
+
+?>
 <script>
      function cargarCarrito(){
         $.ajax({
@@ -103,14 +114,24 @@ if ($result) {
                                                     <img src="img/post/user.png" widht="50" height="50" alt="" />
                                                 </div>
                                                 <div class="hd-mg-ctn">
-                                                    <h3>Kevin777</h3>
-                                                    <p>Kevin Jovel Arevalo Arevalo.</p>
+                                                    <h3><?php echo $usuario?></h3>
+                                                    <p><?php echo $nombre?></p>
+                                                    <?php if($tipo==1){
+                                                       echo "<p>Administrador</p>";
+                                                    }else{
+                                                        echo "<p>Vendedor</p>";
+                                                    } 
+                                                    ?>
+                                                   
+
+                                                    
+                                                    
                                                 </div>
                                             </div>
                                         </a>
                                     </div>
                                     <div class="hd-mg-va">
-                                        <a href="#">Cerrar sesion.</a>
+                                        <a href="logout.php">Cerrar sesion.</a>
                                     </div>
                                 </div>
                             </li>
@@ -194,3 +215,8 @@ if ($result) {
             </div>
         </div>
     </div>
+    <?php 
+} else {
+    header("Location: index.php");
+    }
+?>
