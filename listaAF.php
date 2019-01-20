@@ -128,21 +128,21 @@ function notify(titulo,texto,from, align, icon, type, animIn, animOut){
        
        document.location.href="editarAF.php?id="+id;
    }
-   function mostrarDetalle(id,tipA,dep,prov,enc,fechA,tipAc,valA,marc,corr,descripc)
+   function mostrarDetalle(id,corr)
         {
          // document.getElementById("baccion2").value=id;
-          document.getElementById("tipo").value=tipA;
-          document.getElementById("dpto").value=dep;
-          document.getElementById("prov").value=prov;
-          document.getElementById("emp").value=enc;
-           document.getElementById("fech").value=fechA;
-           document.getElementById("tipo_adq").value=tipAc;
-         //$("#baccion2").val(id);
-           document.getElementById("precio").value=valA;
-          document.getElementById("marca").value=marc;
-           document.getElementById("correlativo").value=corr;
+        //   document.getElementById("tipo").value=tipA;
+        //   document.getElementById("dpto").value=dep;
+        //   document.getElementById("prov").value=prov;
+        //   document.getElementById("emp").value=enc;
+        //    document.getElementById("fech").value=fechA;
+        //    document.getElementById("tipo_adq").value=tipAc;
+        //  //$("#baccion2").val(id);
+        //    document.getElementById("precio").value=valA;
+        //   document.getElementById("marca").value=marc;
+            document.getElementById("correlativo").value=corr;
            
-           document.getElementById("descrip").value=descripc;
+        //    document.getElementById("descrip").value=descripc;
            
         //   document.getElementById("observm").value=ob;
          //$("#nomb").val(nom);
@@ -296,7 +296,7 @@ if ($result) {
         <button class='btn btn-lightgreen lightgreen-icon-notika btn-reco-mg btn-button-mg' data-toggle='tooltip' data-placement='bottom' title='Modificar activo.'  onclick='modificar(" . $fila->id_activo. ")'><i class='notika-icon notika-menus'></i></button>
         ";
         
-        echo  "<button class='btn btn-info info-icon-notika btn-reco-mg btn-button-mg' data-toggle='tooltip' data-placement='bottom' title='Mostrar detalle.' onclick='mostrarDetalle(" . $fila->id_activo. ")'><i class='notika-icon notika-eye'></i></button>";
+        echo  "<button class='btn btn-info info-icon-notika btn-reco-mg btn-button-mg' data-toggle='tooltip' data-placement='bottom' title='Mostrar detalle.' onclick=\"mostrarDetalle('$fila->id_activo','$fila->correlativo')\";><i class='notika-icon notika-eye'></i></button>";
        
         if($fila->estado==1){
             echo  "<button class='btn btn-danger info-icon-notika btn-reco-mg btn-button-mg' data-toggle='tooltip' data-placement='bottom' title='Hacer una devolucion sobre compra.' onclick='baja(" . $fila->id_activo. ",1)'><i class='notika-icon notika-down-arrow'></i></button>";
