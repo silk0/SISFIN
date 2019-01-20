@@ -77,7 +77,7 @@ function go(){
 } 
 
 function baja(id,accion){
-  document.location.href="ListaAF.php?id="+id+"&accion="+accion+"&ide=1";  
+  document.location.href="ListaAF.php?id="+id+"&accion="+accion+"ide=1";  
      
 }
 
@@ -565,13 +565,22 @@ if($accion==1){
 
 $bandera=  $_REQUEST['accion'];
 $bandera2=  $_REQUEST['id'];
-if($bandera=1){
+if($bandera==1){
     $consulta="UPDATE tactivo set estado= '0' WHERE id_activo='".$bandera2."'";
     $resultado=$conexion->query($consulta);
     if($resultado){
-        msgI("Exito");
+        msgI("Exito Dato Desactivado");
     }else{
-        msgE("Error");
+        msgE("Error al Desactivar Dato");
+    }
+
+}else if($bandera==2){
+    $consulta="UPDATE tactivo set estado= '1' WHERE id_activo='".$bandera2."'";
+    $resultado=$conexion->query($consulta);
+    if($resultado){
+        msgI("Exito Dato Activado");
+    }else{
+        msgE("Error al Activar Dato");
     }
 
 }
