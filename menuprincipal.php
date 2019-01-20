@@ -45,7 +45,7 @@
                             <ul class="notika-main-menu-dropdown">
                                 <li><a href="ingresarAF.php">Registrar</a>
                                 </li>
-                                <li><a href="listaAF.php">Lista de Activos</a>
+                                <li><a href="listaAF.php">Consultas de Activos</a>
                                 </li>
                                 <li><a href="listaInstituciones.php">Instituciones</a>
                                 </li>
