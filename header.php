@@ -31,7 +31,7 @@ $id  = $_REQUEST["id"];
             <div class="row">
                 <div class="col-lg-4 col-md-4 col-sm-12 col-xs-12">
                     <div class="logo-area">
-                        <a href="index.php"><img src="img/logo/buho.png" height="42" width="42" alt="" /></a>
+                        <a href="main.php"><img src="img/logo/buho.png" height="42" width="42" alt="" /></a>
                     </div>
                 </div>
                 <div class="col-lg-8 col-md-8 col-sm-12 col-xs-12">
