@@ -11,7 +11,7 @@
 			labels: ["Red", "Blue", "Yellow", "Green"],
 			datasets: [{
 				label: 'Bar Chart',
-				data: [12, 19, 3, 5, 2, 3],
+				data: [12, 5, 3, 5, 2, 3],
 				backgroundColor: [
 					'rgba(255, 99, 132, 0.2)',
 					'rgb(50,205,50, 0.2)',

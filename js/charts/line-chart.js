@@ -14,15 +14,8 @@
 				fill: false,
                 backgroundColor: '#00c292',
 				borderColor: '#00c292',
-				data: [9, 12, 19]
-            }, {
-                label: "My Second dataset",
-				fill: false,
-                backgroundColor: '#fb9678',
-				borderColor: '#fb9678',
-				data: [-12, -3, -4]
-				
-		}]
+				data: [20, 15, 10]
+            }]
 		},
 		options: {
 			responsive: true,

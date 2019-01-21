@@ -153,7 +153,7 @@ $id  = $_REQUEST["id"];
 						<div class="dash-widget-visits"></div>
                         <div class="past-statistic-an">
                             <div class="past-statistic-ctn">
-                                <h3><span class="counter">3,20,000</span></h3>
+                                <h3><span class="counter">20,000</span></h3>
                                 <p>Page Views</p>
                             </div>
                             <div class="past-statistic-graph">
@@ -162,7 +162,7 @@ $id  = $_REQUEST["id"];
                         </div>
                         <div class="past-statistic-an">
                             <div class="past-statistic-ctn">
-                                <h3><span class="counter">1,03,000</span></h3>
+                                <h3><span class="counter">15,000</span></h3>
                                 <p>Total Clicks</p>
                             </div>
                             <div class="past-statistic-graph">
@@ -171,7 +171,7 @@ $id  = $_REQUEST["id"];
                         </div>
                         <div class="past-statistic-an">
                             <div class="past-statistic-ctn">
-                                <h3><span class="counter">24,00,000</span></h3>
+                                <h3><span class="counter">,000</span></h3>
                                 <p>Site Visitors</p>
                             </div>
                             <div class="past-statistic-graph">

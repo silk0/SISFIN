@@ -47,6 +47,8 @@
                                 </li>
                                 <li><a href="listaAF.php">Consultas de Activos</a>
                                 </li>
+                                <li><a href="tablaDepreciacion.php">Depreciación</a>
+                                </li>
                                 <li><a href="listaInstituciones.php">Instituciones</a>
                                 </li>
                                 <li><a href="listaDepartamentos.php">Departamentos</a>
