@@ -495,34 +495,60 @@ include "config/conexion.php";
 $bandera  = $_REQUEST["bandera"];
 
 if($bandera==1){
-    $tipo    = $_REQUEST["tipo"];
-    $dpto     = $_REQUEST["dpto"];
-    $prov     = $_REQUEST["prov"];
-    $emp    = $_REQUEST["emp"];
-    $fech     = $_REQUEST["fech"];
-    $fechaBD = date("Y-m-d", strtotime($fech));
-    $tipo_adq     = $_REQUEST["tipo_adq"];
-    if($tipo_adq==1){
-        $tipo_adquicicion="Nuevo";
-    }else if($tipo_adq==2){
-        $tipo_adquicicion="Usado";
-    }else if($tipo_adq==3){
-        $tipo_adquicicion="Donado";
-    }
-    $precio    = $_REQUEST["precio"];
-    $marca     = $_REQUEST["marca"];
-    $correlativo     = $_REQUEST["correlativo"];
-    $descrip     = $_REQUEST["descrip"];
+    $codigo    = $_REQUEST["codigo"];
+    $vendedor     = $idVendedor;
+    $cliente     = $_REQUEST["cliente"];
+    $pp    = $_REQUEST["pp"];
 
-
-$consulta  = "INSERT INTO tactivo VALUES('null','" .$tipo. "','" .$dpto. "','" .$emp. "','" .$prov. "','" .$correlativo. "','" .$fechaBD. "','" .$descrip. "','1','" .$precio. "','" .$marca. "','0','" .$tipo_adquicicion. "')";
+$consulta  = "INSERT INTO tventas VALUES('null','" .$codigo. "','" .$pp. "','" .$vendedor. "','" .$nuevoTotal. "','0','0','0','Cancelada',now(),now())";
 // msg($consulta);    
 
 $resultado = $conexion->query($consulta);
       if($resultado){
-          msgI("Se agregaron los datos correctamente");
+          msgI("Se agregaron los datos a tabla venta.");
+          
+          //Para eso obtenemos el id de la ultima venta ingresada:
+          include 'config/conexion.php';
+                                     $resultIdVenta = $conexion->query("select id_venta as idv from tventas");
+                                     if ($resultIdVenta) {
+                                         while ($fila = $resultIdVenta->fetch_object()) {
+                                             $idVenta=$fila->idv;
+                                         }
+                                        }
+//Una vez se han agregado los datos a la tabla se va a guardar el pago.
+$consulta  = "INSERT INTO tpago VALUES('null','" .$idVenta. "','" .$nuevoTotal. "',now())";
+// msg($consulta);    
+$resultado = $conexion->query($consulta);
+// 
+
+if($resultado){
+     msgI("Se agregaron los datos a tabla tpago.");
+    //  Una vez se registro el pago, se va a insertar a la tabla detalle venta
+                      $result = $conexion->query("select p.id_producto as id,p.codigo as codigo, p.nombre as nombre, p.precio_venta as preciov, c.cantidad as cantidad,p.precio_venta * c.cantidad as subtotal from tcarrito as c, tproducto as p where c.id_producto=p.id_producto");
+                      if ($result) {
+                          
+                        while ($fila = $result->fetch_object()) {                                                                                        
+                        //  Insertamos a la tabla tdetalle_ventas
+$consulta  = "INSERT INTO tdetalle_venta VALUES('null','" .$idVenta. "','" .$fila->id."','" .$fila->cantidad."','" .$fila->preciov."')";
+// msg($consulta);    
+$resultado = $conexion->query($consulta);
+if($resultado){
+    
+}else{
+    //  msgE("Error:".$consulta);
+    echo $consulta;
+}                          
+                           }                      
+                      }
+
+
+
+
+}else{
+     msgE("Error al insertar los datos en tpago");
+}
       } else {
-          msgE("Error al insertar los datos");
+          msgE("Error al insertar los datos en tventas");
       }
 }
 
