@@ -164,14 +164,14 @@ $resultc = $conexion->query("select id_activo as id from tactivo order by id_act
 
                        if($temp<10){
                         $codigo=sprintf("%004s",$temp+1); 
-                        echo $temp2." - ".$temp1." - ".$codigo;
+                        echo $temp2."-".$temp1."-".$codigo;
                      
                        }else if($temp>=10&&$temp<=99){
                         $codigo=sprintf("%004s",$temp+1); 
-                        echo $temp2." - ".$temp1." - ".$codigo;
+                        echo $temp2."-".$temp1."-".$codigo;
                        }else if($temp>99&&$temp<=999){
                         $codigo=sprintf("%004s",$temp+1); 
-                        echo $temp2." - ".$temp1." - ".$codigo;
+                        echo $temp2."-".$temp1."-".$codigo;
                        }
                         
                         
@@ -210,14 +210,14 @@ $resultc = $conexion->query("select id_activo as id from tactivo order by id_act
   
                          if($temp<10){
                             $codigo=sprintf("%004s",$temp); 
-                          echo $temp2." - ".$temp1." - ".$codigo;
+                          echo $temp2."-".$temp1."-".$codigo;
                        
                          }else if($temp>=10&&$temp<=99){
                           $codigo=sprintf("%004s",$temp+1); 
-                          echo $temp2." - ".$temp1." - ".$codigo;
+                          echo $temp2."-".$temp1."-".$codigo;
                          }else if($temp>99&&$temp<=999){
                           $codigo=sprintf("%004s",$temp+1); 
-                          echo $temp2." - ".$temp1." - ".$codigo;
+                          echo $temp2."-".$temp1."-".$codigo;
                          }
                           
                           

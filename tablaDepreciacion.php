@@ -32,6 +32,9 @@ $id  = $_REQUEST["id"];
     <!-- Bootstrap CSS
 		============================================ -->
     <link rel="stylesheet" href="css/bootstrap.min.css">
+      <!-- bootstrap select CSS
+		============================================ -->
+        <link rel="stylesheet" href="css/bootstrap-select/bootstrap-select.css">
     <!-- font awesome CSS
 		============================================ -->
     <link rel="stylesheet" href="css/font-awesome.min.css">
@@ -168,6 +171,26 @@ function notify(titulo,texto,from, align, icon, type, animIn, animOut){
 	<!-- Breadcomb area Start-->
 	<div class="breadcomb-area">
 		<div class="container">
+        <center>
+        <div class="col-lg-12 col-md-4 col-sm-4 col-xs-12">
+                            <label>Filtrado</label>
+                                <div class="bootstrap-select fm-cmp-mg">
+                                    <select class="selectpicker" data-live-search="true" name="op" id="op" onchange="filtrar()">
+                                    <option value="Seleccione">Seleccione</option>
+                                    <?php
+                                        include 'config/conexion.php';
+                                        $result = $conexion->query("select id_institucion as id,nombre FROM tinstitucion");
+                                        if ($result) {
+                                            while ($fila = $result->fetch_object()) {
+                                                echo "<option value='".$fila->id."'>".$fila->nombre."</option>";
+                                               }
+                                           }
+                                          
+                                        ?>
+                                    </select>
+                                </div>
+                                </div>
+                                </center>
 			<div class="row">
 				<div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
 					<div class="breadcomb-list">
@@ -209,32 +232,51 @@ function notify(titulo,texto,from, align, icon, type, animIn, animOut){
                                     <tr>
                                     
                                         <th>Correlativo</th>
+                                        <th>Departamento</th>
                                         <th>Fecha Adquicición</th> 
                                         <th>valor</th>
-                                        <th>T.Depreciación</th>
                                         <th>Depr.Acum</th>
-                                        <th>Valor en libros</th>
-                                        <th>Opciones</th>
+                                        <th>T.Depreciación</th>
+                                        <th>Valor Libros</th>
+                                
+                                        <th>Detalle</th>
                                        
                                     </tr>
                                 </thead>
                                 <tbody>
                       <?php
 include "config/conexion.php";
-$result = $conexion->query("SELECT * from tclientes ORDER BY id_cliente");
+$result = $conexion->query("SELECT
+tactivo.correlativo,
+tactivo.fecha_adquisicion,
+tactivo.precio,
+tactivo.depreciacionacum,
+tclasificacion.tiempo_depreciacion,
+tinstitucion.id_institucion,
+tinstitucion.nombre,
+tdepartamento.nombre as dpto,
+tactivo.id_activo
+FROM
+tactivo
+INNER JOIN ttipo_activo ON tactivo.id_tipo = ttipo_activo.id_tipo
+INNER JOIN tclasificacion ON ttipo_activo.id_clasificacion = tclasificacion.id_clasificaion
+INNER JOIN tdepartamento ON tactivo.id_departamento = tdepartamento.id_departamento
+INNER JOIN tinstitucion ON tdepartamento.id_institucion = tinstitucion.id_institucion");
 if ($result) {
     while ($fila = $result->fetch_object()) {
         echo "<tr>";
-        echo "<td>" . $fila->nombre . "</td>";
-        echo "<td>" . $fila->apellido . "</td>";
-        echo "<td>" . $fila->profecion . "</td>";  
-        echo "<td>" . $fila->telefono . "</td>";
-        echo "<td>" . $fila->celular . "</td>";
-        echo "<td>" . $fila->correo . "</td>";
+        echo "<td>" . $fila->correlativo . "</td>";
+        echo "<td>" . $fila->dpto . "</td>";
+        echo "<td>" . $fila->fecha_adquisicion . "</td>";  
+        echo "<td>$ " . $fila->precio . "</td>";
+        echo "<td>$ " . $fila->depreciacionacum . "</td>";
+        echo "<td>" . $fila->tiempo_depreciacion . " años</td>";
+        $precioC= $fila->precio - $fila->depreciacionacum; 
+        echo "<td>$ " .$precioC . "</td>";
+       
         echo "<td>
         <div class='button-icon-btn'>
-        <button class='btn btn-info info-icon-notika btn-reco-mg btn-button-mg' onclick=\"edit('$fila->id_cliente','$fila->nombre','$fila->apellido','$fila->dui','$fila->nit','$fila->direccion','$fila->telefono','$fila->celular','$fila->correo','$fila->tipo_ingreso','$fila->profecion','$fila->salario','$fila->observaciones')\";><i class='notika-icon notika-search'></i></button>
-        <button class='btn btn-lightgreen lightgreen-icon-notika btn-reco-mg btn-button-mg' onclick='modify(" . $fila->id_cliente. ")'><i class='notika-icon notika-menus'></i></button>
+        <button class='btn btn-info info-icon-notika btn-reco-mg btn-button-mg' onclick=\"edit('$fila->id_cliente','$fila->nombre','$fila->apellido','$fila->dui','$fila->nit','$fila->direccion','$fila->telefono','$fila->celular','$fila->correo','$fila->tipo_ingreso','$fila->profecion','$fila->salario','$fila->observaciones')\";><i class='notika-icon notika-eye'></i></button>
         </div>
         </td>";
         echo "</tr>";
@@ -483,6 +525,9 @@ if ($result) {
 		============================================ -->
         <script src="js/notification/bootstrap-growl.min.js"></script>
     <script src="js/notification/notification-active.js"></script>
+     <!-- bootstrap select JS
+		============================================ -->
+        <script src="js/bootstrap-select/bootstrap-select.js"></script>
 </body>
 
 </html>

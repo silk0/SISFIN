@@ -8,20 +8,20 @@
 	var basiclinechart = new Chart(ctx, {
 		type: 'line',
 		data: {
-			labels: ["January", "February", "March"],
+			labels: ["2016", "2017", "2018"],
 			datasets: [{
-				label: "My First dataset",
+				label: "Depreciacion activo 101-102-3001-003",
 				fill: false,
                 backgroundColor: '#00c292',
 				borderColor: '#00c292',
-				data: [20, 15, 10]
+				data: [1500, 1000, 500]
             }]
 		},
 		options: {
 			responsive: true,
 			title:{
 				display:true,
-				text:'Basic Line Chart'
+				text:'Depreciación'
 			},
 			tooltips: {
 				mode: 'index',
@@ -36,14 +36,14 @@
 					display: true,
 					scaleLabel: {
 						display: true,
-						labelString: 'Month'
+						labelString: 'Años'
 					}
 				}],
 				yAxes: [{
 					display: true,
 					scaleLabel: {
 						display: true,
-						labelString: 'Value'
+						labelString: 'Valor del Activo'
 					}
 				}]
 			}
