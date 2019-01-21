@@ -164,6 +164,7 @@
                                         <th>Proveedor</th>
                                         <th>Stock</th>
                                         <th>Cantidad</th>
+                                        <th>Precio</th>
                                         <th>Opciones</th>                                       
                                     </tr>
                                 </thead>
@@ -185,6 +186,7 @@ if ($result) {
             }
          
         echo "<td>" . $fila->stock . "</td>";
+        echo "<td>" . $fila->precio_venta . "</td>";
         echo "<td><input type='number' name='" . $fila->id_producto . "' id='" . $fila->id_producto . "' min='1' max='" . $fila->stock . "'></td>";
         
         echo "<td>
@@ -206,6 +208,7 @@ if ($result) {
                                         <th>Nombre</th>
                                         <th>Proveedor</th>
                                         <th>Stock</th>
+                                        <th>Precio</th>
                                         <th>Cantidad</th>
                                         <th>Opciones</th>  
                                     </tr>
