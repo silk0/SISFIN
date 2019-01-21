@@ -94,7 +94,7 @@ function recuperarPlanes(){
         },
         success: function(response){
      
-        //    alert(response);
+            // alert(response);
             $("#selectpp").html(response);
             $('.selectpicker').selectpicker({
                
@@ -169,6 +169,20 @@ function kardex(bandera,id,fechaR,descripcionR,accion,cantidadR,vunitarioR,subto
               document.location.href="Kardex.php?id="+id;
             }
           });
+        }
+        function vaciar(){
+            $.ajax({
+        data:{"id":0,"cantidadDeseada":0,"op":3},
+        url: 'scriptsphp/ajaxCarrito.php',
+        type: 'post',
+        beforeSend: function(){
+            // alert("Por favor espere...");
+        },
+        success: function(response){
+                // alert(response);
+                $("#cantidadCarrito").html(response);            
+        }
+    });
         }
 
 function notify(titulo,texto,from, align, icon, type, animIn, animOut){
@@ -530,7 +544,7 @@ if($bandera==1){
     $cliente     = $_REQUEST["cliente"];
     $pp    = $_REQUEST["pp"];
 
-$consulta  = "INSERT INTO tventas VALUES('null','" .$codigo. "','" .$pp. "','" .$vendedor. "','" .$nuevoTotal. "','0','0','0','Cancelada',now(),now())";
+$consulta  = "INSERT INTO tventas VALUES('null','" .$cliente. "','" .$codigo. "','" .$pp. "','" .$vendedor. "','" .$nuevoTotal. "','0','0','0','Cancelada',now(),now())";
 // msg($consulta);    
 
 $resultado = $conexion->query($consulta);
@@ -602,6 +616,7 @@ if($resultado){
 
                            } //fin de while que recorre todos los productos del carrito                     
                       }//fin de result de consulta para pdoructos del carrito
+                      vaciarCarrito();
 
 
 
@@ -613,7 +628,12 @@ if($resultado){
           msgE("Error al insertar los datos en tventas");
       }
 }
-
+function vaciarCarrito(){
+    echo "<script type='text/javascript'>";
+    // echo "alert('Hola msgk');";
+    echo "vaciar();";
+    echo "</script>";
+}
 function msgK($idR,$cantidad,$precio)
 {
      $subtotal=$cantidad*$precio;

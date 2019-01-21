@@ -176,8 +176,9 @@ $id  = $_REQUEST["id"];
                                         <th>Nombre</th>
                                         <th>Proveedor</th>
                                         <th>Stock</th>
-                                        <th>Cantidad</th>
                                         <th>Precio</th>
+                                        <th>Cantidad</th>
+                                        
                                         <th>Opciones</th>                                       
                                     </tr>
                                 </thead>
