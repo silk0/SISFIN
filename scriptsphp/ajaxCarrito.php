@@ -37,10 +37,21 @@ if ($result->num_rows==0) {
           echo "Error al modificar la cantidad deseada";
       }
     }
-}else{
+}else if($op==2){
     // Va a quitar del carrito
     
     $consulta  = "DELETE from tcarrito where id_producto='" . $id . "'";
+    $resultado = $conexion->query($consulta);
+    if($resultado){
+        $resultCant = $conexion->query("SELECT * from tcarrito");
+        
+         echo "<span>".$resultCant->num_rows."</span>";
+
+    }else{
+        echo "No se pudo eliminar el producto del carrito.";
+    }
+}else{
+     $consulta  = "TRUNCATE TABLE tcarrito";
     $resultado = $conexion->query($consulta);
     if($resultado){
         $resultCant = $conexion->query("SELECT * from tcarrito");
