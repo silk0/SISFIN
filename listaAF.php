@@ -167,6 +167,20 @@ function notify(titulo,texto,from, align, icon, type, animIn, animOut){
           
           
         }
+
+        function mostrarEncargado(encarg,institu,departa)
+        {
+
+        document.getElementById("encargado").value=encarg;
+        document.getElementById("instit").value=institu;
+        document.getElementById("depart").value=departa;
+
+          $("#ModalEncargado").modal();
+        //Ya manda todos los datos correcatamente
+          
+          
+        }
+
    function filtrar(){
           id=document.getElementById("op").value;
     
@@ -379,7 +393,7 @@ while ($fila = $result->fetch_object()) {
 
     echo "<td>
     <div class='button-icon-btn'>";
-    echo  "<button class='btn btn-info info-icon-notika btn-reco-mg btn-button-mg' data-toggle='tooltip' data-placement='bottom' title='Ver Depreciación.' onclick='modify(" . $fila->id_activo. ")'><i class='notika-icon notika-eye'></i></button>";
+    echo  "<button class='btn btn-info info-icon-notika btn-reco-mg btn-button-mg' data-toggle='tooltip' data-placement='bottom' title='Ver.' onclick='mostrar(" . $fila->id_activo. ")'><i class='notika-icon notika-eye'></i></button>";
    echo "</div>
     </td>";
     echo "</tr>";
@@ -432,7 +446,7 @@ while ($fila = $result->fetch_object()) {
 
     echo "<td>
     <div class='button-icon-btn'>";
-    echo  "<button class='btn btn-info info-icon-notika btn-reco-mg btn-button-mg' data-toggle='tooltip' data-placement='bottom' title='Ver Depreciación.' onclick='modify(" . $fila->id_activo. ")'><i class='notika-icon notika-eye'></i></button>";
+    echo  "<button class='btn btn-info info-icon-notika btn-reco-mg btn-button-mg' data-toggle='tooltip' data-placement='bottom' title='Ver Encargado' onclick=\"mostrarEncargado('$fila->emp','$fila->insti','$fila->dpto')\"></i></button>";
    
    echo "</div>
     </td>";
@@ -707,6 +721,83 @@ while ($fila = $result->fetch_object()) {
                                         </div>
                                     </div>
                                 </div>
+
+ <!-- Modal Encargado-->
+
+ <div class="modal animated shake" id="ModalEncargado" role="dialog">
+                                    <div class="modal-dialog modal-large">
+                                        <div class="modal-content">
+                                            <div class="modal-header">
+                                                <button type="button" class="close" data-dismiss="modal">&times;</button>
+                                            </div>
+                                            <div class="modal-body">
+                                          
+
+        <h1>Detalles Encargado</h1>
+                        <div class="row">
+                    
+  
+                             <div class="col-lg-4 col-md-4 col-sm-4 col-xs-12">
+                                <div class="form-example-int">
+                                    <div class="form-group">
+                                        <label>Nombre encargado:</label>
+                                        <div class="nk-int-st">
+                                        <input type="text" class="form-control input-sm" placeholder="Marca del Activo" id="encargado" name="encargado" readonly>  
+                                    </div>
+                                        
+                                    </div>
+
+                                    
+
+                                    
+                                    
+                                </div>
+                               
+                            </div>
+                            <div class="col-lg-4 col-md-4 col-sm-4 col-xs-12">
+                            <div class="form-group">
+                                        <label>Institucion:</label>
+                                        <div class="nk-int-st">
+                                        <input type="text" class="form-control input-sm" placeholder="Marca del Activo" id="instit" name="instit" readonly>  
+                                    </div>
+                                        
+                                    </div>
+                            </div>
+
+                             <div class="col-lg-4 col-md-4 col-sm-4 col-xs-12">
+                            <div class="form-group">
+                                        <label>Departamento:</label>
+                                        <div class="nk-int-st">
+                                        <input type="text" class="form-control input-sm" placeholder="Marca del Activo" id="depart" name="depart" readonly>  
+                                    </div>
+                                        
+                                    </div>
+                            </div>
+             
+                           
+                            </div>
+                    
+                        
+                        
+                        <!-- FILA PARA DATOS CORTOS -->
+                        
+                         <!-- FIN DE FILA PARA DATOS CORTOS -->
+                      
+                    
+                        <!-- salrios-->
+                    
+                         
+
+
+                                            </div>
+                                            <div class="modal-footer">
+                                                <button type="button" class="btn btn-default" data-dismiss="modal">Cerrar</button>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+
+
     <!-- Data Table area End-->
 
     <!-- Start Footer area-->
