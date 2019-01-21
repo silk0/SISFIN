@@ -264,9 +264,9 @@ if ($result) {
         echo "<td>" . $fila->codigo . "</td>";
         echo "<td>" . $fila->fecha . "</td>";
         echo "<td>" . $fila->nombrecli . " ".$fila->apellidocli."</td>";  
-        echo "<td>$ " . $fila->nombreven . " ".$fila->apellidoven."</td>";
-        echo "<td>$ " . $fila->plan . "</td>";
-        echo "<td>" . $fila->estado . " años</td>";
+        echo "<td>" . $fila->nombreven . " ".$fila->apellidoven."</td>";
+        echo "<td>" . $fila->plan . "</td>";
+        echo "<td>" . $fila->estado . "</td>";
        
         echo "<td>
         <div class='button-icon-btn'>
