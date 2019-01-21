@@ -149,7 +149,7 @@ function go(){
    }   
 } 
 function tabla(){
-    document.location.href="listaAF.php"; 
+    document.location.href="mostrarVentas.php"; 
 }
 function enviar(){
         var idt=document.getElementById("tipo").value;
@@ -455,8 +455,8 @@ function notify(titulo,texto,from, align, icon, type, animIn, animOut){
                 </div>
                                 </div>
                            <div class="form-example-int mg-t-15">
-                            <button type="button" class="btn btn-success notika-btn-success"  onclick="go();" >Guardar.</button>
-                            <button type="button" class="btn btn-success notika-btn-success" onclick="tabla();">Cancelar</button>
+                          
+                            <button type="button" class="btn btn-success notika-btn-success" onclick="tabla();">Regresar</button>
                         </div>
                         </form>
                     
