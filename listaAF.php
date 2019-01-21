@@ -140,21 +140,21 @@ function notify(titulo,texto,from, align, icon, type, animIn, animOut){
        
        document.location.href="editarAF.php?id="+id;
    }
-   function mostrarDetalle(id,corr)
+   function mostrarDetalle(id,corr,fechA,descripc,marc,valA,dep)
         {
          // document.getElementById("baccion2").value=id;
-        //   document.getElementById("tipo").value=tipA;
-        //   document.getElementById("dpto").value=dep;
+        //document.getElementById("tipo").value=tipA;
+        document.getElementById("dpto").value=dep;
         //   document.getElementById("prov").value=prov;
         //   document.getElementById("emp").value=enc;
-        //    document.getElementById("fech").value=fechA;
-        //    document.getElementById("tipo_adq").value=tipAc;
+        document.getElementById("fech").value=fechA;
+        //document.getElementById("tipo_adq").value=tipAc;
         //  //$("#baccion2").val(id);
-        //    document.getElementById("precio").value=valA;
-        //   document.getElementById("marca").value=marc;
+        document.getElementById("precio").value=valA;
+           document.getElementById("marca").value=marc;
             document.getElementById("correlativo").value=corr;
            
-        //    document.getElementById("descrip").value=descripc;
+         document.getElementById("descrip").value=descripc;
            
         //   document.getElementById("observm").value=ob;
          //$("#nomb").val(nom);
@@ -285,9 +285,13 @@ tactivo.correlativo,
 tactivo.fecha_adquisicion,
 tactivo.id_activo,
 tactivo.estado,
+tactivo.marca,
+tactivo.precio,
+tdepartamento.nombre as dpto,
 tclasificacion.nombre as clasificacion
 FROM
 tactivo
+INNER JOIN tdepartamento ON tactivo.id_departamento = tdepartamento.id_departamento
 INNER JOIN ttipo_activo ON tactivo.id_tipo = ttipo_activo.id_tipo
 INNER JOIN tclasificacion ON ttipo_activo.id_clasificacion = tclasificacion.id_clasificaion");
 if ($result) {
@@ -308,7 +312,7 @@ if ($result) {
         <button class='btn btn-lightgreen lightgreen-icon-notika btn-reco-mg btn-button-mg' data-toggle='tooltip' data-placement='bottom' title='Modificar activo.'  onclick='modificar(" . $fila->id_activo. ")'><i class='notika-icon notika-menus'></i></button>
         ";
         
-        echo  "<button class='btn btn-info info-icon-notika btn-reco-mg btn-button-mg' data-toggle='tooltip' data-placement='bottom' title='Mostrar detalle.' onclick=\"mostrarDetalle('$fila->id_activo','$fila->correlativo')\";><i class='notika-icon notika-eye'></i></button>";
+        echo  "<button class='btn btn-info info-icon-notika btn-reco-mg btn-button-mg' data-toggle='tooltip' data-placement='bottom' title='Mostrar detalle.' onclick=\"mostrarDetalle('$fila->id_activo','$fila->correlativo','$fila->fecha_adquisicion','$fila->descripcion','$fila->marca','$fila->precio','$fila->nombre')\";><i class='notika-icon notika-eye'></i></button>";
        
         if($fila->estado==1){
             echo  "<button class='btn btn-danger info-icon-notika btn-reco-mg btn-button-mg' data-toggle='tooltip' data-placement='bottom' title='Hacer una devolucion sobre compra.' onclick='baja(" . $fila->id_activo. ",1)'><i class='notika-icon notika-down-arrow'></i></button>";
@@ -650,7 +654,7 @@ while ($fila = $result->fetch_object()) {
                                     <div class="form-group">
                                         <label>Marca:</label>
                                         <div class="nk-int-st">
-                                        <input type="text" class="form-control input-sm" placeholder="Marca del Activo" id="marca" name="marca">  
+                                        <input type="text" class="form-control input-sm" placeholder="Marca del Activo" id="marca" name="marca" readonly>  
                                     </div>
                                         
                                     </div>
@@ -698,24 +702,6 @@ while ($fila = $result->fetch_object()) {
                     
                         <!-- salrios-->
                     
-                        
-                            
-                        <div class="row">
-                            <div class="col-lg-8 col-md-12 col-sm-12 col-xs-12">
-                                <div class="floating-numner form-rlt-mg">
-                                    <p>Descripción:</p>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="row">
-                            <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
-                                <div class="form-group">
-                                    <div class="nk-int-st">
-                                        <textarea class="form-control" name="descrip" id="descrip" rows="3" placeholder="Escriba aquí la descripción deseada acerca del producto..."></textarea readonly>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
                          
 
 
