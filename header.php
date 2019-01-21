@@ -1,8 +1,8 @@
 <?php
 //Codigo que muestra solo los errores exceptuando los notice.
-error_reporting(E_ALL & ~E_NOTICE);
-session_start();
 
+session_start();
+error_reporting(E_ALL & ~E_NOTICE);
 $usuario=$_SESSION["usuario"];
 $nombre = $_SESSION["nombre"];
 $tipo  = $_REQUEST["tipo"];

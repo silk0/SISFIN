@@ -262,9 +262,21 @@ function notify(titulo,texto,from, align, icon, type, animIn, animOut){
                             <div class="col-lg-4 col-md-4 col-sm-4 col-xs-12 mg-t-20">
                                 <div class="form-example-int">
                                     <div class="form-group">
-                                        <label>Marca:</label>
+                                        <label>Vendedor:</label>
                                         <div class="nk-int-st">
-                                        <input type="text" class="form-control input-sm" placeholder="Marca del Activo" id="marca" name="marca">  
+                                        <input type="text" class="form-control input-sm" placeholder="" id="vendedor" name="vendedor" value="<?php echo $nombre?>"> 
+                                    <!-- Consulta para recuperar el id del vendedor -->
+                                         <?php 
+                                                include 'config/conexion.php';
+                                     $result = $conexion->query("select id_empleado from templeados where usuario='".$usuario."'");
+                                     if ($result) {
+                                         while ($fila = $result->fetch_object()) {
+                                            
+                                                $idVendedor=$fila->id_empleado;
+                                            }
+                                        }
+                                            ?>
+                                    <input type="hidden" id="idVendedor" name="idVendedor" value="<?php echo $idVendedor; ?>">   
                                     </div>
                                         
                                     </div>
@@ -272,20 +284,24 @@ function notify(titulo,texto,from, align, icon, type, animIn, animOut){
                                 </div>
                                
                             </div>
-                            <div class="col-lg-5 col-md-5 col-sm-5 col-xs-12 mg-t-20">
-                                <div class="form-example-int">
-                                    <div class="form-group">
-                                        <label>Correlativo:</label>
-                                        <div class="nk-int-st">
-                                        <input type="text" class="form-control input-sm" placeholder="Correlativo" id="correlativo" name="correlativo" readonly>
-                                        
-                                    </div>
-                                        
-                                    </div>
-                                    
+                             <div class="col-lg-5 col-md-5 col-sm-5 col-xs-12 mg-t-20">
+                            <label>Plan de Pago</label>
+                                <div class="bootstrap-select fm-cmp-mg">
+                                    <select class="selectpicker" data-live-search="true" name="pp" id="pp">
+                                    <option value="Seleccione">Seleccione</option>
+                                    <?php
+                                     include 'config/conexion.php';
+                                     $result = $conexion->query("select id_empleado as id,nombre,apellido FROM templeados");
+                                     if ($result) {
+                                         while ($fila = $result->fetch_object()) {
+                                             echo "<option value='".$fila->id."'>".$fila->nombre." ".$fila->apellido."</option>";
+                                            }
+                                        }
+                                        ?>
+                                    </select>
                                 </div>
-                               
-                            </div>
+                                </div>
+                          
              
                             <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12 mg-t-20">
                                 <div class="form-example-int">
@@ -320,29 +336,7 @@ function notify(titulo,texto,from, align, icon, type, animIn, animOut){
                                     </select>
                                 </div>
                                 </div>
-                            <div class="col-lg-4 col-md-4 col-sm-4 col-xs-12">
-                            <label>Departamento</label>
-                                <div class="bootstrap-select fm-cmp-mg">
-                                    <select class="selectpicker" data-live-search="true" name="dpto" id="dpto" onchange="enviar();">
-                                    <option value="Seleccione">Seleccione</option>
-                                    <?php
-                                     include 'config/conexion.php';
-                                     $result = $conexion->query("SELECT
-                                     tdepartamento.id_departamento as id,
-                                     tdepartamento.nombre,
-                                     tinstitucion.nombre as insti
-                                     FROM
-                                     tdepartamento
-                                     INNER JOIN tinstitucion ON tdepartamento.id_institucion = tinstitucion.id_institucion");
-                                     if ($result) {
-                                         while ($fila = $result->fetch_object()) {
-                                             echo "<option value='".$fila->id."'>".$fila->nombre." - ".$fila->insti."</option>";
-                                            }
-                                        }
-                                        ?>
-                                    </select>
-                                </div>
-                                </div>
+                            
                                 <div class="col-lg-4 col-md-4 col-sm-4 col-xs-12">
                             <label>Proveedor</label>
                                 <div class="bootstrap-select fm-cmp-mg">
@@ -361,24 +355,7 @@ function notify(titulo,texto,from, align, icon, type, animIn, animOut){
                                 </div>
                                 </div>
                               
-                                <div class="col-lg-4 col-md-4 col-sm-4 col-xs-12 mg-t-20">
-                            <label>Encargado</label>
-                                <div class="bootstrap-select fm-cmp-mg">
-                                    <select class="selectpicker" data-live-search="true" name="emp" id="emp">
-                                    <option value="Seleccione">Seleccione</option>
-                                    <?php
-                                     include 'config/conexion.php';
-                                     $result = $conexion->query("select id_empleado as id,nombre,apellido FROM templeados");
-                                     if ($result) {
-                                         while ($fila = $result->fetch_object()) {
-                                             echo "<option value='".$fila->id."'>".$fila->nombre." ".$fila->apellido."</option>";
-                                            }
-                                        }
-                                        ?>
-                                    </select>
-                                </div>
-                                </div>
-                          
+                               
                                
                             <div class="col-lg-4 col-md-4 col-sm-4 col-xs-12 mg-t-15">
                                 <div class="form-group nk-datapk-ctm" id="data_2">
@@ -405,7 +382,7 @@ function notify(titulo,texto,from, align, icon, type, animIn, animOut){
                                 </div>
                                 </div>
                            <div class="form-example-int mg-t-15">
-                            <button type="button" class="btn btn-success notika-btn-success" style="margin-left: 500px;" onclick="go();" >Guardar.</button>
+                            <button type="button" class="btn btn-success notika-btn-success"  onclick="go();" >Guardar.</button>
                             <button type="button" class="btn btn-success notika-btn-success" onclick="tabla();">Cancelar</button>
                         </div>
                         </form>
