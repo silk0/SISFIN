@@ -6,8 +6,10 @@ if($_SESSION["logueado"] == TRUE) {
 $usuario=$_SESSION["usuario"];
 $nombre = $_SESSION["nombre"];
 $tipo  = $_REQUEST["tipo"];
-$id  = $_REQUEST["id"];
-
+$ids  = $_REQUEST["id"];
+}else {
+    header("Location:index.php");
+  }
 ?>
 <?php
 $id = $_REQUEST["id"];
@@ -23,7 +25,6 @@ if ($result) {
         $usuarioR          = $fila->usuario;
         $contrasenaR       = $fila->pass;
         $nivelR            = $fila->rol;
-        
        }
 }
 
@@ -140,7 +141,8 @@ function notify(titulo,texto,from, align, icon, type, animIn, animOut){
         });
     }
 function go(){
-
+    var niv=document.getElementById("nit").value;
+    alert(niv);
     //Validaciones
    if(document.getElementById('nombre').value==""){
     //    alert("El campo nombre es obligatorio");
@@ -174,6 +176,10 @@ function go(){
    }else{
       document.form.submit();  
     }   
+}
+function ver(){
+    var niv=document.getElementById("rol").value;
+    alert(niv);
 }
 
 </script> 
@@ -289,6 +295,9 @@ function go(){
                                         <option selected>Vendedor</option>
                               
                                         <?php
+                                    }else{
+                                        echo "<option>Administrador</option>
+                                        <option>Vendedor</option>";
                                     }
                                     ?>
 										</select>
@@ -474,9 +483,4 @@ function msgE($texto)
     echo "notify('Error','$texto','top', 'right', 'any', 'danger');";
     echo "</script>";
 }
-?>
-<?php 
-} else {
-    header("Location: index.php");
-    }
 ?>

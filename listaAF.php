@@ -7,7 +7,9 @@ $usuario=$_SESSION["usuario"];
 $nombre = $_SESSION["nombre"];
 $tipo  = $_REQUEST["tipo"];
 $id  = $_REQUEST["id"];
-
+}else {
+    header("Location:index.php");
+  }
 ?>
 <!doctype html>
 <html class="no-js" lang="">
@@ -823,8 +825,6 @@ if($bandera==1){
     }
 
 }
-
-
 function msgI($texto)
 {
     echo "<script type='text/javascript'>";
@@ -843,9 +843,4 @@ function msgE($texto)
     echo "notify('Error','$texto','top', 'right', 'any', 'danger');";
     echo "</script>";
 }
-?>
-<?php 
-} else {
-    header("Location: index.php");
-    }
 ?>

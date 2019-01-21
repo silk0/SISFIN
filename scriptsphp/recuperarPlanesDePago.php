@@ -14,10 +14,10 @@ $cadena='
                                             $cartera=$fila->cartera;
                                          }
                                         }
-                                     $result = $conexion->query("select id_categoria, nombre FROM tcartera where id_categoria=".$cartera);
+                                     $result = $conexion->query("select id_plan, nombre FROM tcartera where id_cartera=".$cartera);
                                      if ($result) {
                                          while ($fila = $result->fetch_object()) {
-                                             $cadena=$cadena. "<option value='".$fila->id_categoria."'>".$fila->nombre."</option>";
+                                             $cadena=$cadena. "<option value='".$fila->id_plan."'>".$fila->nombre."</option>";
                                             }
                                         }
                                     
