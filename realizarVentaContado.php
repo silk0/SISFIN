@@ -140,7 +140,37 @@ function enviar(){
         }
         });
         }
-} 
+}
+function kardex(bandera,id,fechaR,descripcionR,accion,cantidadR,vunitarioR,subtotalR){
+          // alert(bandera);
+          // alert(id);
+          // alert(fechaR);
+          // alert(descripcionR);
+          // alert(accion);
+          // alert(cantidadR);
+          // alert(vunitarioR);
+          // alert(subtotalR);
+          var parametros={
+            "bandera":bandera,
+            "id" :id,
+            "fechaR" :fechaR,
+            "descripcionR" :descripcionR,
+            "accion" :accion,
+            "cantidadR" :cantidadR,
+            "vunitarioR" :vunitarioR,
+            "subtotalR" :subtotalR
+          };
+          $.ajax({
+            data: parametros,
+            url: "addKardex.php",
+            type:"post",
+            success: function(response){
+              alert(response);
+              document.location.href="Kardex.php?id="+id;
+            }
+          });
+        }
+
 function notify(titulo,texto,from, align, icon, type, animIn, animOut){
         $.growl({
             icon: icon,
@@ -537,9 +567,41 @@ if($resultado){
 }else{
     //  msgE("Error:".$consulta);
     echo $consulta;
-}                          
-                           }                      
-                      }
+}
+
+        // Ahora se va a modificar la exstencia del producto
+        // Obtenemos la cantidad anterior del precio del producto
+        $resultProdStock = $conexion->query("select * from tproducto where id_producto=" . $fila->id);
+        if ($resultProdStock) {
+            while ($filaProdStock = $resultProdStock->fetch_object()) {
+              $cantidadAnterior=$filaProdStock->stock;
+              echo $cantidadAnterior;
+            }
+        }else{
+        //    msgI('Error consulta cantidad anterior.');
+        echo "error en prodstock";
+        }
+        
+        $nstock=$cantidadAnterior-$fila->cantidad;
+        echo "Nuevo stock:".$nstock;
+        $consulta2  = "UPDATE tproducto set stock='" . $nstock . "' where id_producto='" .$fila->id. "'";
+        $resultado2 = $conexion->query($consulta2);
+        if($resultado2){
+            // si viene aqui es porque ya solo falta guardar en kardex
+
+             msgk($fila->id,$fila->cantidad,$fila->preciov);
+        }else{
+        //    msgI('Error actualizando datos');
+           echo $consulta2;
+        }
+        
+        
+
+
+
+
+                           } //fin de while que recorre todos los productos del carrito                     
+                      }//fin de result de consulta para pdoructos del carrito
 
 
 
@@ -552,7 +614,15 @@ if($resultado){
       }
 }
 
-  
+function msgK($idR,$cantidad,$precio)
+{
+     $subtotal=$cantidad*$precio;
+    $fecha2=strftime( "%Y-%m-%d", time());
+    echo "<script type='text/javascript'>";
+    // echo "alert('Hola msgk');";
+    echo "kardex('add','".$idR."','".$fecha2."','Venta de producto.','2','".$cantidad."','".$precio."','".$subtotal."');";
+    echo "</script>";
+}
 function msgI($texto)
 {
     echo "<script type='text/javascript'>";
