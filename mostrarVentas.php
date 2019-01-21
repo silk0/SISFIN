@@ -171,26 +171,26 @@ function notify(titulo,texto,from, align, icon, type, animIn, animOut){
 	<!-- Breadcomb area Start-->
 	<div class="breadcomb-area">
 		<div class="container">
-        <center>
+        <!-- <center>
         <div class="col-lg-12 col-md-4 col-sm-4 col-xs-12">
                             <label>Filtrado</label>
                                 <div class="bootstrap-select fm-cmp-mg">
                                     <select class="selectpicker" data-live-search="true" name="op" id="op" onchange="filtrar()">
                                     <option value="Seleccione">Seleccione</option>
                                     <?php
-                                        include 'config/conexion.php';
-                                        $result = $conexion->query("select id_institucion as id,nombre FROM tinstitucion");
-                                        if ($result) {
-                                            while ($fila = $result->fetch_object()) {
-                                                echo "<option value='".$fila->id."'>".$fila->nombre."</option>";
-                                               }
-                                           }
+                                        // include 'config/conexion.php';
+                                        // $result = $conexion->query("select id_institucion as id,nombre FROM tinstitucion");
+                                        // if ($result) {
+                                        //     while ($fila = $result->fetch_object()) {
+                                        //         echo "<option value='".$fila->id."'>".$fila->nombre."</option>";
+                                        //        }
+                                        //    }
                                           
                                         ?>
                                     </select>
                                 </div>
                                 </div>
-                                </center>
+                                </center> -->
 			<div class="row">
 				<div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
 					<div class="breadcomb-list">
@@ -201,8 +201,8 @@ function notify(titulo,texto,from, align, icon, type, animIn, animOut){
 										<i class="notika-icon notika-form"></i>
 									</div>
 									<div class="breadcomb-ctn">
-										<h2>Depreciación.</h2>
-										<p>Datos de Depreciación de Activo Fijo <span class="bread-ntd"></span></p>
+										<h2>Ventas Registradas.</h2>
+										<p>Datos de Ventas <span class="bread-ntd"></span></p>
 									</div>
 								</div>
 							</div>

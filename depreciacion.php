@@ -228,8 +228,8 @@ function notify(titulo,texto,from, align, icon, type, animIn, animOut){
 										<i class="notika-icon notika-bar-chart"></i>
 									</div>
 									<div class="breadcomb-ctn">
-										<h2>Line Charts</h2>
-										<p>Welcome to Notika <span class="bread-ntd">Admin Template</span></p>
+										<h2>Detalles de depreciación</h2>
+										<p>Depreciación <span class="bread-ntd"> de Activo Fijo</span></p>
 									</div>
 								</div>
 							</div>

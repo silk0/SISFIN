@@ -66,13 +66,7 @@
                                  </li>
                                 <li><a href="listaPlanPago.php">Plan de Pago</a>
                                 </li>
-                                <li><a href="data-map.html">Data Maps</a>
-                                </li>
-                                <li><a href="code-editor.html">Code Editor</a>
-                                </li>
-                                <li><a href="image-cropper.html">Images Cropper</a>
-                                </li>
-                                <li><a href="wizard.html">Wizard</a>
+                                <li><a href="mostrarVentas.php">Mostrar Ventas</a>
                                 </li>
                             </ul>
                         </div>
