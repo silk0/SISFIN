@@ -87,7 +87,7 @@ function recuperarPlanes(){
     }else{
         $.ajax({
         data:{"id":document.getElementById("cliente").value},
-        url: 'scriptsphp/recuperarPlanesDePago.php',
+        url: 'scriptsphp/recuperarPlanesDePagoContado.php',
         type: 'post',
         beforeSend: function(){
         //   notify('Exito','Correlativo Generado','top', 'right', 'any', 'success');
@@ -108,36 +108,12 @@ function recuperarPlanes(){
 function go(){
 
     //Validaciones
-   if(document.getElementById('tipo').value=="Seleccione"){
-     notify(' Advertencia:','El campo Tipo Activo es obligatorio.','top', 'right', 'any', 'warning');
-       document.getElementById("tipo").focus();
-   }else if(document.getElementById('dpto').value=="Seleccione"){
-        notify(' Advertencia:','El campo Departamento es obligatorio,','top', 'right', 'any', 'warning');
-       document.getElementById("dpto").focus();
-   }else if(document.getElementById('prov').value=="Seleccione"){
-        notify(' Advertencia:','El campo Proveedor es obligatorio','top', 'right', 'any', 'warning');
-       document.getElementById("prov").focus();
-   }else if(document.getElementById('emp').value=="Seleccione"){
-        notify(' Advertencia:','El campo Encargado es obligatorio', 'top', 'right', 'any', 'warning');
-       document.getElementById("emp").focus();
-   }else if(document.getElementById('fech').value==""){
-        notify(' Advertencia:','El campo Fecha de Adquisicion es obligatorio', 'top', 'right', 'any', 'warning');
-       document.getElementById("fech").focus();
-   }else if(document.getElementById('tipo_adq').value=="Seleccione"){
-        notify(' Advertencia:','Seleccione un tipo de Adquisicion', 'top', 'right', 'any', 'warning');
-       document.getElementById("tipo_adq").focus();
-   }else if(document.getElementById('precio').value==""){
-        notify(' Advertencia:','El campo precio es obligatorio', 'top', 'right', 'any', 'warning');
-       document.getElementById("precio").focus();
-   }else if(document.getElementById('marca').value==""){
-        notify(' Advertencia:','El campo Marca es obligatorio', 'top', 'right', 'any', 'warning');
-       document.getElementById("marca").focus();
-   }else if(document.getElementById('correlativo').value==""){
-        notify(' Advertencia:','El campo correlativo es obligatorio', 'top', 'right', 'any', 'warning');
-       document.getElementById("correlativo").focus();
-   }else if(document.getElementById('descrip').value==""){
-        notify(' Advertencia:','El campo Descripción es obligatorio', 'top', 'right', 'any', 'warning');
-       document.getElementById("descrip").focus();
+   if(document.getElementById('cliente').value=="Seleccione"){
+     notify(' Advertencia:','El campo Cliente es obligatorio.','top', 'right', 'any', 'warning');
+       document.getElementById("cliente").focus();
+   }else if(document.getElementById('pp').value=="Seleccione"){
+        notify(' Advertencia:','El campo Plan de Pago es obligatorio,','top', 'right', 'any', 'warning');
+       document.getElementById("pp").focus();
    }else{
       document.form.submit();  
    }   
@@ -282,13 +258,12 @@ function notify(titulo,texto,from, align, icon, type, animIn, animOut){
                                                 include 'config/conexion.php';
                                      $result = $conexion->query("SHOW TABLE STATUS LIKE 'tventas'");
                                      if ($result) {
-                                         while ($fila = $result->fetch_object()) {
-                                               
+                                         while ($fila = $result->fetch_object()) {                                               
                                                 $codigoR=str_pad($fila->Auto_increment, 4, "0", STR_PAD_LEFT);
                                             }
                                         }
                                             ?>
-                                        <input type="text" class="form-control input-sm" placeholder="Codigo" id="codigo" name="codigo" value="<?php echo $codigoR;?>">
+                                        <input readonly type="text" class="form-control input-sm" placeholder="Codigo" id="codigo" name="codigo" value="<?php echo $codigoR;?>">
                                         
                                     </div>
                                         
@@ -302,7 +277,7 @@ function notify(titulo,texto,from, align, icon, type, animIn, animOut){
                                     <div class="form-group">
                                         <label>Vendedor:</label>
                                         <div class="nk-int-st">
-                                        <input type="text" class="form-control input-sm" placeholder="" id="vendedor" name="vendedor" value="<?php echo $nombre?>"> 
+                                        <input readonly type="text" class="form-control input-sm" placeholder="" id="vendedor" name="vendedor" value="<?php echo $nombre?>"> 
                                     <!-- Consulta para recuperar el id del vendedor -->
                                          <?php 
                                                 include 'config/conexion.php';
@@ -331,7 +306,7 @@ function notify(titulo,texto,from, align, icon, type, animIn, animOut){
                         <div class="col-lg-6 col-md-6 col-sm-6 col-xs-12">
                             <label>Cliente</label>
                                 <div class="bootstrap-select fm-cmp-mg">
-                                    <select class="selectpicker" data-live-search="true" name="cliente" id="cliente" >
+                                    <select class="selectpicker" data-live-search="true" name="cliente" id="cliente" onchange="recuperarPlanes();">
                                     <option value="Seleccione">Seleccione</option>
                                     <?php
                                      include 'config/conexion.php';
@@ -345,8 +320,10 @@ function notify(titulo,texto,from, align, icon, type, animIn, animOut){
                                     </select>
                                 </div>
                                 </div>
-                                <div class="col-lg-4 col-md-4 col-sm-4 col-xs-12">
-                   
+                                <div class="col-lg-6 col-md-6 col-sm-6 col-xs-12"><label>Plan de Pago</label>
+                                <div id="selectpp">
+
+                                </div>
                                </div>
                             
                                 
@@ -394,8 +371,14 @@ function notify(titulo,texto,from, align, icon, type, animIn, animOut){
                           echo "</tr>";
                            }
                           echo "<tr>";
-                          echo "<th colspan='4' class='danger'>Total:</td>";
-                          echo "<th class='danger'>".$total."</td>";                         
+                          echo "<th colspan='4' class='danger'>Total+Iva+Intereses:</td>";
+                        //   Variables a usar, al ser contado no tomamos en cuenta el interes.
+                        $cero=0;
+                           $intereses=$total*$cero;
+                           $valorIVA=0.13;
+                           $iva=$total*$valorIVA;
+                           $nuevoTotal=number_format(($total+$iva), 2, ".", "");
+                          echo "<th class='danger'>".$nuevoTotal."</td>";                         
                          
                           echo "</tr>";
                       }

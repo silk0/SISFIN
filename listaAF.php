@@ -140,7 +140,7 @@ function notify(titulo,texto,from, align, icon, type, animIn, animOut){
        
        document.location.href="editarAF.php?id="+id;
    }
-   function mostrarDetalle(id,corr,fechA,descripc,marc,valA,dep)
+   function mostrarDetalle(id,corr,fechA,descripc,marc,valA,dep,tipAc)
         {
          // document.getElementById("baccion2").value=id;
         //document.getElementById("tipo").value=tipA;
@@ -148,7 +148,7 @@ function notify(titulo,texto,from, align, icon, type, animIn, animOut){
         //   document.getElementById("prov").value=prov;
         //   document.getElementById("emp").value=enc;
         document.getElementById("fech").value=fechA;
-        //document.getElementById("tipo_adq").value=tipAc;
+        document.getElementById("tipo_adq").value=tipAc;
         //  //$("#baccion2").val(id);
         document.getElementById("precio").value=valA;
            document.getElementById("marca").value=marc;
@@ -287,6 +287,8 @@ tactivo.id_activo,
 tactivo.estado,
 tactivo.marca,
 tactivo.precio,
+tactivo.tipo_adquicicion,
+
 tdepartamento.nombre as dpto,
 tclasificacion.nombre as clasificacion
 FROM
@@ -312,7 +314,7 @@ if ($result) {
         <button class='btn btn-lightgreen lightgreen-icon-notika btn-reco-mg btn-button-mg' data-toggle='tooltip' data-placement='bottom' title='Modificar activo.'  onclick='modificar(" . $fila->id_activo. ")'><i class='notika-icon notika-menus'></i></button>
         ";
         
-        echo  "<button class='btn btn-info info-icon-notika btn-reco-mg btn-button-mg' data-toggle='tooltip' data-placement='bottom' title='Mostrar detalle.' onclick=\"mostrarDetalle('$fila->id_activo','$fila->correlativo','$fila->fecha_adquisicion','$fila->descripcion','$fila->marca','$fila->precio','$fila->nombre')\";><i class='notika-icon notika-eye'></i></button>";
+        echo  "<button class='btn btn-info info-icon-notika btn-reco-mg btn-button-mg' data-toggle='tooltip' data-placement='bottom' title='Mostrar detalle.' onclick=\"mostrarDetalle('$fila->id_activo','$fila->correlativo','$fila->fecha_adquisicion','$fila->descripcion','$fila->marca','$fila->precio','$fila->nombre','$fila->tipo_adquicicion')\";><i class='notika-icon notika-eye'></i></button>";
        
         if($fila->estado==1){
             echo  "<button class='btn btn-danger info-icon-notika btn-reco-mg btn-button-mg' data-toggle='tooltip' data-placement='bottom' title='Hacer una devolucion sobre compra.' onclick='baja(" . $fila->id_activo. ",1)'><i class='notika-icon notika-down-arrow'></i></button>";
@@ -617,18 +619,11 @@ while ($fila = $result->fetch_object()) {
                                 </div>
                             </div>
                             <div class="col-lg-4 col-md-4 col-sm-4 col-xs-12 mg-t-20">
-                            <label>Tipo de Adquicición:</label>
-                                <div class="bootstrap-select fm-cmp-mg">
-                                    <select class="selectpicker" data-live-search="true" name="tipo_adq" id="tipo_adq">
-                                    <option value="Seleccione">Seleccione</option>
-                                    <?php
-                                             echo "<option value='1'>Nuevo</option>";
-                                             echo "<option value='2'>Usado</option>";
-                                             echo "<option value='3'>Donado</option>";
-                                        
-                                        ?>
-                                    </select>
-                                </div>
+                            <label>Tipo de Adquicición</label>
+                                <div class="input-group date nk-int-st">
+                                        <span class="input-group-addon"></span>
+                                        <input type="text" name="tipo_adq" id="tipo_adq" class="form-control">
+                                    </div>
                                 </div>
                                 </div>
 
