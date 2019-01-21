@@ -28,9 +28,10 @@ $salario    = $_REQUEST['salario'];
       $apellido   = $_POST['apellido'];
       $direccion  = $_POST['direc'];
       $dui        = $_POST['dui'];
+  
       $usuario    = $_POST['usuario'];
       $contrasena = $_POST['contrasena'];
-      $nivel      = $_POST['nivel'];
+      $nivel      = $_POST['rol'];
       
       
       $consulta  = "UPDATE templeados set nombre='" . $nombre . "',apellido='" . $apellido . "',zona='" . $direccion . "',dui='" . $dui . "',usuario='" . $usuario . "',pass='" . $contrasena . "',rol='" . $nivel . "' where id_empleado='" . $baccion . "'";

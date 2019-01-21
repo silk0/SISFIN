@@ -6,8 +6,10 @@ if($_SESSION["logueado"] == TRUE) {
 $usuario=$_SESSION["usuario"];
 $nombre = $_SESSION["nombre"];
 $tipo  = $_REQUEST["tipo"];
-$id  = $_REQUEST["id"];
-
+$ids  = $_REQUEST["id"];
+}else {
+    header("Location:index.php");
+  }
 ?><?php
 $id = $_REQUEST["id"];
 include "config/conexion.php";
@@ -591,9 +593,4 @@ function msg($var)
     echo "</script>";
 }
 
-?>
-<?php 
-} else {
-    header("Location: index.php");
-    }
 ?>
