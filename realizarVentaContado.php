@@ -81,6 +81,30 @@ $id  = $_REQUEST["id"];
     <script src="js/vendor/modernizr-2.8.3.min.js"></script>
 </head>
 <script  language=JavaScript> 
+function recuperarPlanes(){ 
+    if(document.getElementById("cliente").value=="Seleccione"){
+        notify('Error:','Debe seleccionar un cliente.','top', 'right', 'any', 'warning');
+    }else{
+        $.ajax({
+        data:{"id":document.getElementById("cliente").value},
+        url: 'scriptsphp/recuperarPlanesDePago.php',
+        type: 'post',
+        beforeSend: function(){
+        //   notify('Exito','Correlativo Generado','top', 'right', 'any', 'success');
+        },
+        success: function(response){
+     
+           alert(response);
+            $("#selectpp").html(response);
+            $('.selectpicker').selectpicker({
+               
+            });
+           
+        }
+    });
+    }
+    
+}
 function go(){
 
     //Validaciones
@@ -220,7 +244,7 @@ function notify(titulo,texto,from, align, icon, type, animIn, animOut){
 									</div>
 									<div class="breadcomb-ctn">
 										<h2>Registro de Venta.</h2>
-										<p> Formulario para Venta al Contado <span class="bread-ntd">.</span></p>
+										<p> Formulario para Venta al Contado &nbsp;&nbsp;<?php echo $fecha=strftime( "%d-%m-%Y", time()); ?> <span class="bread-ntd">.</span></p>
 									</div>
 								</div>
 							</div>
@@ -249,7 +273,7 @@ function notify(titulo,texto,from, align, icon, type, animIn, animOut){
                         <form name="form" method="post" action="">
                         <input type="hidden" name="bandera" id="bandera" value="1">
                                 <div class="row">
-                                <div class="col-lg-3 col-md-3 col-sm-3 col-xs-12 mg-t-20">
+                                <div class="col-lg-4 col-md-4 col-sm-4 col-xs-12 mg-t-20">
                                 <div class="form-example-int">
                                     <div class="form-group">
                                         <label>Codigo Venta:</label>
@@ -273,7 +297,7 @@ function notify(titulo,texto,from, align, icon, type, animIn, animOut){
                                 </div>
                                
                             </div>
-                            <div class="col-lg-4 col-md-4 col-sm-4 col-xs-12 mg-t-20">
+                            <div class="col-lg-8 col-md-8 col-sm-8 col-xs-12 mg-t-20">
                                 <div class="form-example-int">
                                     <div class="form-group">
                                         <label>Vendedor:</label>
@@ -298,14 +322,20 @@ function notify(titulo,texto,from, align, icon, type, animIn, animOut){
                                 </div>
                                
                             </div>
-                             <div class="col-lg-5 col-md-5 col-sm-5 col-xs-12 mg-t-20">
-                            <label>Plan de Pago</label>
+                             
+                          
+             
+                           
+                            </div>
+                              <div class="row">
+                        <div class="col-lg-4 col-md-4 col-sm-4 col-xs-12">
+                            <label>Cliente</label>
                                 <div class="bootstrap-select fm-cmp-mg">
-                                    <select class="selectpicker" data-live-search="true" name="pp" id="pp">
+                                    <select class="selectpicker" data-live-search="true" name="cliente" id="cliente" onchange="recuperarPlanes();">
                                     <option value="Seleccione">Seleccione</option>
                                     <?php
                                      include 'config/conexion.php';
-                                     $result = $conexion->query("select id_empleado as id,nombre,apellido FROM templeados");
+                                     $result = $conexion->query("select id_cliente as id,nombre,apellido FROM tclientes");
                                      if ($result) {
                                          while ($fila = $result->fetch_object()) {
                                              echo "<option value='".$fila->id."'>".$fila->nombre." ".$fila->apellido."</option>";
@@ -315,85 +345,14 @@ function notify(titulo,texto,from, align, icon, type, animIn, animOut){
                                     </select>
                                 </div>
                                 </div>
-                          
-             
-                            <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12 mg-t-20">
-                                <div class="form-example-int">
-                                    <div class="form-group">
-                                        <label>Descripción:</label>
-                                        <div class="nk-int-st">
-                                        <input type="text" class="form-control input-sm" placeholder="Ingrese  un correlativo para departamento." id="descrip" name="descrip">
-                                        </div>
-                                    </div>
+                                <div class="col-lg-4 col-md-4 col-sm-4 col-xs-12"><label>Plan de Pago</label>
+                                <div id="selectpp">
+
                                 </div>
-                                <div class="col-lg-1 col-md-1 col-sm-1 col-xs-12">
-                               <div class="">
-                            </div>
-                            </div>
-                            </div>
-                            </div>
-                              <div class="row">
-                        <div class="col-lg-4 col-md-4 col-sm-4 col-xs-12">
-                            <label>Tipo Activo (falta)</label>
-                                <div class="bootstrap-select fm-cmp-mg">
-                                    <select class="selectpicker" data-live-search="true" name="tipo" id="tipo" onchange="enviar();">
-                                    <option value="Seleccione">Seleccione</option>
-                                    <?php
-                                     include 'config/conexion.php';
-                                     $result = $conexion->query("select id_tipo as id,nombre FROM ttipo_activo");
-                                     if ($result) {
-                                         while ($fila = $result->fetch_object()) {
-                                             echo "<option value='".$fila->id."'>".$fila->nombre."</option>";
-                                            }
-                                        }
-                                        ?> 
-                                    </select>
-                                </div>
-                                </div>
+                               </div>
                             
-                                <div class="col-lg-4 col-md-4 col-sm-4 col-xs-12">
-                            <label>Proveedor</label>
-                                <div class="bootstrap-select fm-cmp-mg">
-                                    <select class="selectpicker" data-live-search="true" name="prov" id="prov">
-                                    <option value="Seleccione">Seleccione</option>
-                                    <?php
-                                     include 'config/conexion.php';
-                                     $result = $conexion->query("select id_proveedor as id,nombre FROM tproveedor");
-                                     if ($result) {
-                                         while ($fila = $result->fetch_object()) {
-                                             echo "<option value='".$fila->id."'>".$fila->nombre."</option>";
-                                            }
-                                        }
-                                        ?>
-                                    </select>
-                                </div>
-                                </div>
-                              
-                               
-                               
-                            <div class="col-lg-4 col-md-4 col-sm-4 col-xs-12 mg-t-15">
-                                <div class="form-group nk-datapk-ctm" id="data_2">
-                                    <label>Fecha de Adquicición:</label>
-                                    <div class="input-group date nk-int-st">
-                                        <span class="input-group-addon"></span>
-                                        <input type="text" name="fech" id="fech" class="form-control" data-mask="99/99/9999">
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="col-lg-4 col-md-4 col-sm-4 col-xs-12 mg-t-20">
-                            <label>Tipo de Adquicición:</label>
-                                <div class="bootstrap-select fm-cmp-mg">
-                                    <select class="selectpicker" data-live-search="true" name="tipo_adq" id="tipo_adq">
-                                    <option value="Seleccione">Seleccione</option>
-                                    <?php
-                                             echo "<option value='1'>Nuevo</option>";
-                                             echo "<option value='2'>Usado</option>";
-                                             echo "<option value='3'>Donado</option>";
-                                        
-                                        ?>
-                                    </select>
-                                </div>
-                                </div>
+                                
+                          
                                 </div>
                            <div class="form-example-int mg-t-15">
                             <button type="button" class="btn btn-success notika-btn-success"  onclick="go();" >Guardar.</button>
