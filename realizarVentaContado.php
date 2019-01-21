@@ -273,7 +273,7 @@ function notify(titulo,texto,from, align, icon, type, animIn, animOut){
                         <form name="form" method="post" action="">
                         <input type="hidden" name="bandera" id="bandera" value="1">
                                 <div class="row">
-                                <div class="col-lg-4 col-md-4 col-sm-4 col-xs-12 mg-t-20">
+                                <div class="col-lg-6 col-md-6 col-sm-6 col-xs-12 mg-t-20">
                                 <div class="form-example-int">
                                     <div class="form-group">
                                         <label>Codigo Venta:</label>
@@ -297,7 +297,7 @@ function notify(titulo,texto,from, align, icon, type, animIn, animOut){
                                 </div>
                                
                             </div>
-                            <div class="col-lg-8 col-md-8 col-sm-8 col-xs-12 mg-t-20">
+                            <div class="col-lg-6 col-md-6 col-sm-6 col-xs-12 mg-t-20">
                                 <div class="form-example-int">
                                     <div class="form-group">
                                         <label>Vendedor:</label>
@@ -328,10 +328,10 @@ function notify(titulo,texto,from, align, icon, type, animIn, animOut){
                            
                             </div>
                               <div class="row">
-                        <div class="col-lg-4 col-md-4 col-sm-4 col-xs-12">
+                        <div class="col-lg-6 col-md-6 col-sm-6 col-xs-12">
                             <label>Cliente</label>
                                 <div class="bootstrap-select fm-cmp-mg">
-                                    <select class="selectpicker" data-live-search="true" name="cliente" id="cliente" onchange="recuperarPlanes();">
+                                    <select class="selectpicker" data-live-search="true" name="cliente" id="cliente" >
                                     <option value="Seleccione">Seleccione</option>
                                     <?php
                                      include 'config/conexion.php';
@@ -345,10 +345,8 @@ function notify(titulo,texto,from, align, icon, type, animIn, animOut){
                                     </select>
                                 </div>
                                 </div>
-                                <div class="col-lg-4 col-md-4 col-sm-4 col-xs-12"><label>Plan de Pago</label>
-                                <div id="selectpp">
-
-                                </div>
+                                <div class="col-lg-4 col-md-4 col-sm-4 col-xs-12">
+                   
                                </div>
                             
                                 
