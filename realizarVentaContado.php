@@ -80,7 +80,7 @@ function recuperarPlanes(){
         },
         success: function(response){
      
-           alert(response);
+        //    alert(response);
             $("#selectpp").html(response);
             $('.selectpicker').selectpicker({
                
@@ -339,6 +339,62 @@ function notify(titulo,texto,from, align, icon, type, animIn, animOut){
                             
                                 
                           
+                                </div>
+                                <div class="row">
+                                         <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
+                    <div class="normal-table-list mg-t-30">
+                        <div class="basic-tb-hd">
+                            <h2>Listado de productos.</h2>
+                            <!-- <p>Use contextual classes (<code>.info, .warning, .success, .danger</code>) to color table rows or individual cells.</p> -->
+                        </div>
+                        <div class="bsc-tbl-cls">
+                            <table class="table table-hover table-striped ">
+                                <thead>
+                                    <tr>
+                                    
+                                    <th class="active">Codigo</th>
+                                    <th class="active">Nombre</th>
+                                    <th class="warning">Cantidad</th>
+                                    <th class="danger">Precio</th>
+                                    <th class="info">Subtotal</th>
+                                    
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    
+                                     <?php
+                      include 'config/conexion.php';
+                      $result = $conexion->query("select p.id_producto as id,p.codigo as codigo, p.nombre as nombre, p.precio_venta as preciov, c.cantidad as cantidad,p.precio_venta * c.cantidad as subtotal from tcarrito as c, tproducto as p where c.id_producto=p.id_producto");
+                      if ($result) {
+                          $total=0;
+                        while ($fila = $result->fetch_object()) {
+                          echo "<tr>";
+                          echo "<td >".$fila->codigo."</td>";
+                          echo "<td>".$fila->nombre."</td>";
+                          echo "<td class='warning'>".$fila->cantidad."</td>";
+                          $nuevoPrecio=number_format($fila->subtotal, 2, ".", "");
+                          echo "<td class='danger'>".$fila->preciov."</td>";                        
+                          echo '<td class="info">'.$nuevoPrecio.'<div class="breadcomb-report">
+									
+								</div></td>';
+                          
+                          $total=$total+$nuevoPrecio;
+                          echo "</tr>";
+                           }
+                          echo "<tr>";
+                          echo "<th colspan='4' class='danger'>Total:</td>";
+                          echo "<th class='danger'>".$total."</td>";                         
+                         
+                          echo "</tr>";
+                      }
+                       ?>
+                                </tbody>
+                            </table><br>
+                        
+                        
+                        </div>
+                    </div>
+                </div>
                                 </div>
                            <div class="form-example-int mg-t-15">
                             <button type="button" class="btn btn-success notika-btn-success"  onclick="go();" >Guardar.</button>
