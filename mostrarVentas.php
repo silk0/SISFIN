@@ -84,22 +84,9 @@ function go(){
     //validacion respectiva me da hueva
         document.form.submit();  
 } 
-function edit(id,nom,ape,dui,nit,direc,tel,cel,email,tipo,prof,sal,ob)
+function verDepre(id)
      {
-         // document.getElementById("baccion2").value=id;
-          document.getElementById("nombrem").value=nom;
-          document.getElementById("apellidom").value=ape;
-          document.getElementById("duim").value=dui;
-          document.getElementById("nitm").value=nit;
-          document.getElementById("direcm").value=direc;
-          document.getElementById("telm").value=tel;
-          document.getElementById("celm").value=cel;
-          document.getElementById("emailm").value=email;
-          document.getElementById("tipom").value=tipo;
-          document.getElementById("profecion").value=prof;
-          document.getElementById("salm").value=sal;
-          document.getElementById("observm").value=ob;
-          $("#ModalInfo").modal();
+        document.location.href="detalleVenta.php?id="+id;  
         }
         function modify(id){
        document.location.href="editarCliente.php?id="+id;
@@ -270,7 +257,7 @@ if ($result) {
        
         echo "<td>
         <div class='button-icon-btn'>
-        <button class='btn btn-info info-icon-notika btn-reco-mg btn-button-mg' onclick=\"verDepre('$fila->id_activo')\";><i class='notika-icon notika-eye'></i></button>
+        <button class='btn btn-info info-icon-notika btn-reco-mg btn-button-mg' onclick=\"verDepre('$fila->id_venta')\";><i class='notika-icon notika-eye'></i></button>
         </div>
         </td>";
         echo "</tr>";
