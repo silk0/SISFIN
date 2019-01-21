@@ -1,4 +1,17 @@
 <?php
+//Codigo que muestra solo los errores exceptuando los notice.
+error_reporting(E_ALL & ~E_NOTICE);
+session_start();
+if($_SESSION["logueado"] == TRUE) {
+$usuario=$_SESSION["usuario"];
+$nombre = $_SESSION["nombre"];
+$tipo  = $_REQUEST["tipo"];
+$ids  = $_REQUEST["id"];
+}else {
+    header("Location:index.php");
+  }
+?>
+<?php
 $id = $_REQUEST["id"];
 include "config/conexion.php";
 $result = $conexion->query("SELECT tcategoria.categoria,tcategoria.id_categoria, tproducto.nombre,id_producto,descripcion,codigo,margen,stock_minimo,tproveedor.nombre as proveedor,tproveedor.id_proveedor FROM tproducto INNER JOIN tproveedor ON tproducto.id_proveedor = tproveedor.id_proveedor INNER JOIN tcategoria ON tproducto.id_categoria = tcategoria.id_categoria where id_producto=" . $id);
