@@ -230,15 +230,12 @@ function notify(titulo,texto,from, align, icon, type, animIn, animOut){
                             <table id="data-table-basic" class="table table-striped">
                                 <thead>
                                     <tr>
-                                    
-                                        <th>Correlativo</th>
-                                        <th>Departamento</th>
-                                        <th>Fecha Adquicición</th> 
-                                        <th>valor</th>
-                                        <th>Depr.Acum</th>
-                                        <th>T.Depreciación</th>
-                                        <th>Valor Libros</th>
-                                
+                                         <th>Codigo</th>
+                                        <th>Fecha</th>
+                                        <th>Cliente</th>
+                                        <th>Vendedor</th> 
+                                        <th>Plan pago</th>
+                                        <th>Estado</th>
                                         <th>Detalle</th>
                                        
                                     </tr>
@@ -247,32 +244,29 @@ function notify(titulo,texto,from, align, icon, type, animIn, animOut){
                       <?php
 include "config/conexion.php";
 $result = $conexion->query("SELECT
-tactivo.correlativo,
-tactivo.fecha_adquisicion,
-tactivo.precio,
-tactivo.depreciacionacum,
-tclasificacion.tiempo_depreciacion,
-tinstitucion.id_institucion,
-tinstitucion.nombre,
-tdepartamento.nombre as dpto,
-tactivo.id_activo
+tventas.id_venta,
+tclientes.nombre as nombrecli,
+tclientes.apellido as apellidocli,
+templeados.nombre as nombreven,
+templeados.apellido as apellidoven,
+tventas.codigo,
+tventas.fecha,
+tplan_pago.nombre AS plan,
+tventas.estado
 FROM
-tactivo
-INNER JOIN ttipo_activo ON tactivo.id_tipo = ttipo_activo.id_tipo
-INNER JOIN tclasificacion ON ttipo_activo.id_clasificacion = tclasificacion.id_clasificaion
-INNER JOIN tdepartamento ON tactivo.id_departamento = tdepartamento.id_departamento
-INNER JOIN tinstitucion ON tdepartamento.id_institucion = tinstitucion.id_institucion");
+templeados
+INNER JOIN tventas ON tventas.id_empleado = templeados.id_empleado
+INNER JOIN tclientes ON tventas.id_cliente = tclientes.id_cliente
+INNER JOIN tplan_pago ON tventas.id_plan = tplan_pago.id_plan");
 if ($result) {
     while ($fila = $result->fetch_object()) {
         echo "<tr>";
-        echo "<td>" . $fila->correlativo . "</td>";
-        echo "<td>" . $fila->dpto . "</td>";
-        echo "<td>" . $fila->fecha_adquisicion . "</td>";  
-        echo "<td>$ " . $fila->precio . "</td>";
-        echo "<td>$ " . $fila->depreciacionacum . "</td>";
-        echo "<td>" . $fila->tiempo_depreciacion . " años</td>";
-        $precioC= $fila->precio - $fila->depreciacionacum; 
-        echo "<td>$ " .$precioC . "</td>";
+        echo "<td>" . $fila->codigo . "</td>";
+        echo "<td>" . $fila->fecha . "</td>";
+        echo "<td>" . $fila->nombrecli . " ".$fila->apellidocli."</td>";  
+        echo "<td>$ " . $fila->nombreven . " ".$fila->apellidoven."</td>";
+        echo "<td>$ " . $fila->plan . "</td>";
+        echo "<td>" . $fila->estado . " años</td>";
        
         echo "<td>
         <div class='button-icon-btn'>
