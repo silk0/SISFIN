@@ -35,6 +35,8 @@
                                 <li><a href="ingresarFiador.php">Registrar Fiador</a>
                                 </li> 
                                 <li><a href="mostrarFiadores.php">Mostrar Fiadores</a>
+                                </li>
+                                <li><a href="listaCC.php">Lista de Clientes por Cartera.</a>
                                 </li> 
                             
                                
