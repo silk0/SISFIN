@@ -139,8 +139,8 @@ function enviar(id){
 										<i class="notika-icon notika-form"></i>
 									</div>
 									<div class="breadcomb-ctn">
-										<h2>Registro de Categoria.</h2>
-										<p>Formulario de categoria <span class="bread-ntd">.</span></p>
+										<h2>Registro de Categorias</h2>
+										<p>Formulario de categorias<span class="bread-ntd">.</span></p>
 									</div>
 								</div>
 							</div>
